@@ -1,3 +1,2 @@
-D:/goldwar/Teamfight_Tactics/Classes filter=lfs diff=lfs merge=lfs -text
-D:/goldwar/Teamfight_Tactics/Resources filter=lfs diff=lfs merge=lfs -text
-D:/goldwar/Teamfight_Tactics/Classes filter=lfs diff=lfs merge=lfs -text
+**/Teamfight_Tactics/Classes filter=lfs diff=lfs merge=lfs -text
+**/Teamfight_Tactics/Resources filter=lfs diff=lfs merge=lfs -text
