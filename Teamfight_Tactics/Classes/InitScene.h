@@ -22,12 +22,12 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __START_SCENE_H__
-#define __START_SCENE_H__
+#ifndef __INIT_SCENE_H__
+#define __INIT_SCENE_H__
 
 #include "cocos2d.h"
 
-class StartScene : public cocos2d::Scene
+class InitScene : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
@@ -36,10 +36,12 @@ public:
 
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
-    void GotoSelectScene(cocos2d::Ref* pSender);
+
     // implement the "static create()" method manually
-    CREATE_FUNC(StartScene);
+    CREATE_FUNC(InitScene);
+private:
+    void GoToStartScene(float dt);
 
 };
 
-#endif // __START_SCENE_H__
+#endif // __INIT_SCENE_H__

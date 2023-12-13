@@ -22,15 +22,14 @@
  THE SOFTWARE.
  ****************************************************************************/
 
+#include "InitScene.h"
 #include "StartScene.h"
-#include "Sources.h"
-#include "SelecScene.h"
 #include "Definition.h"
 USING_NS_CC;
 
-Scene* StartScene::createScene()
+Scene* InitScene::createScene()
 {
-    return StartScene::create();
+    return InitScene::create();
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -41,7 +40,7 @@ static void problemLoading(const char* filename)
 }
 
 // on "init" you need to initialize your instance
-bool StartScene::init()
+bool InitScene::init()
 {
     //////////////////////////////
     // 1. super init first
@@ -56,24 +55,12 @@ bool StartScene::init()
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
     //    you may modify it.
-    int singalHeight = 100;
-    int singalWidth = 200;
-    Sprite* startItemNormal = Sprite::create(startgame_png, Rect(0, 0, singalWidth, singalHeight));
-    Sprite* startItemSelected = Sprite::create(startgame_png, Rect(0, singalHeight, singalWidth, singalHeight));
-    Sprite* startItemDisabled = Sprite::create(startgame_png, Rect(0, singalHeight * 2, singalWidth, singalHeight));
 
-    auto newGame = MenuItemSprite::create(startItemNormal, startItemSelected, startItemDisabled,
-        CC_CALLBACK_1(StartScene::GotoSelectScene, this));
-
-
-    // create menu, it's an autorelease object
-    newGame->setPosition(Vec2(origin.x + visibleSize.width / 2,
-        origin.y + visibleSize.height / 2));
-
+    // add a "close" icon to exit the progress. it's an autorelease object
     auto closeItem = MenuItemImage::create(
         "CloseNormal.png",
         "CloseSelected.png",
-        CC_CALLBACK_1(StartScene::menuCloseCallback, this));
+        CC_CALLBACK_1(InitScene::menuCloseCallback, this));
 
     if (closeItem == nullptr ||
         closeItem->getContentSize().width <= 0 ||
@@ -89,17 +76,11 @@ bool StartScene::init()
     }
 
     // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, newGame,NULL);
+    auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
-
-    auto label = Label::createWithTTF("MADE BY Waiting4Love", "fonts/Marker Felt.ttf", 79);
+    auto label = Label::createWithTTF("MADE BY", "fonts/Marker Felt.ttf", 79);
     if (label == nullptr)
     {
         problemLoading("'fonts/Marker Felt.ttf'");
@@ -108,11 +89,12 @@ bool StartScene::init()
     {
         // position the label on the center of the screen
         label->setPosition(Vec2(origin.x + visibleSize.width / 2,
-            origin.y+60));
+            visibleSize.height / 2 + 200));
 
         // add the label as a child to this layer
         this->addChild(label, 1);
     }
+
 
     // add "HelloWorld" splash screen"
     auto sprite = Sprite::create("backpage.png");
@@ -128,15 +110,26 @@ bool StartScene::init()
         // add the sprite as a child to this layer
         this->addChild(sprite, 0);
     }
-  
 
+    auto sprite2 = Sprite::create("makerlist.png");
+    if (sprite2 == nullptr)
+    {
+		problemLoading("'makerlist.png'");
+	}
+    else
+    {
+		// position the sprite on the center of the screen
+		sprite2->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2));
 
+		// add the sprite as a child to this layer
+		this->addChild(sprite2, 0);
+	}
+    this->scheduleOnce(CC_SCHEDULE_SELECTOR(InitScene::GoToStartScene), DISPLAY_TIME_INIT_SCENE);
     return true;
 }
 
 
-
-void StartScene::menuCloseCallback(Ref* pSender)
+void InitScene::menuCloseCallback(Ref* pSender)
 {
     //Close the cocos2d-x game scene and quit the application
     Director::getInstance()->end();
@@ -149,9 +142,10 @@ void StartScene::menuCloseCallback(Ref* pSender)
 
 }
 
-void StartScene::GotoSelectScene(cocos2d::Ref* pSender)
+void InitScene::GoToStartScene(float dt)
 {
-    auto scene = SelectScene::createScene();
+    auto scene = StartScene::createScene();
+
 	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
 }
 
