@@ -26,6 +26,9 @@
 
 USING_NS_CC;
 
+
+
+
 Scene* HelloWorld::createScene()
 {
     return HelloWorld::create();
