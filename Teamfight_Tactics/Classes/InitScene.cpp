@@ -1,18 +1,18 @@
-﻿/****************************************************************************
+/****************************************************************************
  Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
- 
+
  http://www.cocos2d-x.org
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,13 +22,14 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "HelloWorldScene.h"
-
+#include "InitScene.h"
+#include "StartScene.h"
+#include "Definition.h"
 USING_NS_CC;
 
-Scene* HelloWorld::createScene()
+Scene* InitScene::createScene()
 {
-    return HelloWorld::create();
+    return InitScene::create();
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -39,12 +40,11 @@ static void problemLoading(const char* filename)
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool InitScene::init()
 {
-    myDatabase md;
     //////////////////////////////
     // 1. super init first
-    if ( !Scene::init() )
+    if (!Scene::init())
     {
         return false;
     }
@@ -58,9 +58,9 @@ bool HelloWorld::init()
 
     // add a "close" icon to exit the progress. it's an autorelease object
     auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+        "CloseNormal.png",
+        "CloseSelected.png",
+        CC_CALLBACK_1(InitScene::menuCloseCallback, this));
 
     if (closeItem == nullptr ||
         closeItem->getContentSize().width <= 0 ||
@@ -70,9 +70,9 @@ bool HelloWorld::init()
     }
     else
     {
-        float x = origin.x + visibleSize.width - closeItem->getContentSize().width/2;
-        float y = origin.y + closeItem->getContentSize().height/2;
-        closeItem->setPosition(Vec2(x,y));
+        float x = origin.x + visibleSize.width - closeItem->getContentSize().width / 2;
+        float y = origin.y + closeItem->getContentSize().height / 2;
+        closeItem->setPosition(Vec2(x, y));
     }
 
     // create menu, it's an autorelease object
@@ -80,13 +80,7 @@ bool HelloWorld::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
-
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF("MADE BY", "fonts/Marker Felt.ttf", 79);
     if (label == nullptr)
     {
         problemLoading("'fonts/Marker Felt.ttf'");
@@ -94,12 +88,13 @@ bool HelloWorld::init()
     else
     {
         // position the label on the center of the screen
-        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - label->getContentSize().height));
+        label->setPosition(Vec2(origin.x + visibleSize.width / 2,
+            visibleSize.height / 2 + 200));
 
         // add the label as a child to this layer
         this->addChild(label, 1);
     }
+
 
     // add "HelloWorld" splash screen"
     auto sprite = Sprite::create("backpage.png");
@@ -110,18 +105,31 @@ bool HelloWorld::init()
     else
     {
         // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+        sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
         // add the sprite as a child to this layer
         this->addChild(sprite, 0);
     }
 
+    auto sprite2 = Sprite::create("makerlist.png");
+    if (sprite2 == nullptr)
+    {
+		problemLoading("'makerlist.png'");
+	}
+    else
+    {
+		// position the sprite on the center of the screen
+		sprite2->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2));
 
+		// add the sprite as a child to this layer
+		this->addChild(sprite2, 0);
+	}
+    this->scheduleOnce(CC_SCHEDULE_SELECTOR(InitScene::GoToStartScene), DISPLAY_TIME_INIT_SCENE);
     return true;
 }
 
 
-void HelloWorld::menuCloseCallback(Ref* pSender)
+void InitScene::menuCloseCallback(Ref* pSender)
 {
     //Close the cocos2d-x game scene and quit the application
     Director::getInstance()->end();
@@ -133,3 +141,12 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 
 }
+
+void InitScene::GoToStartScene(float dt)
+{
+    auto scene = StartScene::createScene();
+
+	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
+}
+
+
