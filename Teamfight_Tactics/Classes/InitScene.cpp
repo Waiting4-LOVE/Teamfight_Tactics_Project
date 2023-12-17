@@ -96,7 +96,7 @@ bool InitScene::init()
     }
 
 
-    // add "HelloWorld" splash screen"
+
     auto sprite = Sprite::create("backpage.png");
     if (sprite == nullptr)
     {
