@@ -12,6 +12,7 @@ Vec2 hero::getSpritePosition() {
 	return delegateSprite->getPosition();
 }
 
+
 float hero::calculate_distance(Sprite* d_sprite) {
 	float distance;
 	float my_x, my_y;//用于存我方该英雄的位置坐标
