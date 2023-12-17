@@ -1,6 +1,7 @@
 //本头文件存储的为所有人物参数
 #pragma once
 #include <cocos2d.h>
+#include<string>
 using namespace cocos2d;
 
 

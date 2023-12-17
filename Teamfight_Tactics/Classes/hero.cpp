@@ -8,6 +8,36 @@ hero::hero() {
 
 }
 
+Vec2 hero::getSpritePosition() {
+	return delegateSprite->getPosition();
+}
+
+float hero::calculate_distance(Sprite* d_sprite) {
+	float distance;
+	float my_x, my_y;//用于存我方该英雄的位置坐标
+	float d_x, d_y;
+	my_x = delegateSprite->getPosition().x;
+	my_y = delegateSprite->getPosition().y;
+	d_x = d_sprite->getPosition().x;
+	d_y = d_sprite->getPosition().y;
+	distance = (my_x - d_x) * (my_x - d_x) + (my_y - d_y) * (my_y - d_y);
+	return distance;
+}
+
+Vec2 hero::getEnemyPosition() {
+	float min_distance = 100000;
+	float t;
+	int order = 0;
+	//我们暂用class后的这个对象作为我们要访问的对手的数据库对象，之后建立好玩家类与AI类之后再使用新的对象
+	for (int i = 0;i<database.getnum(); i++) {
+		if ((t=calculate_distance(database.d_sprite[i])) < min_distance) {
+			min_distance = t;
+			order = i;
+		}
+	}
+	return database.getVec2(database.d_sprite[order]);
+}
+
 void hero::health_recover_once(int health_once) {
 	if (HealthPoint + health_once <= max_healthpoint) {
 		HealthPoint += health_once;
@@ -63,10 +93,6 @@ int hero::get_DefencePoint() {
 	return shieldPoint;
 }
 
-Vec2 hero::getSpritePosition() {
-	return delegateSprite->getPosition();
-}
-
 bool hero::dodamage(int attackpoint) {
 	int extra_attack = 0;//如果护盾在一次攻击中被击破，来计算多余出的伤害
 	if (attackpoint < 0) {
@@ -110,8 +136,11 @@ bool hero::skill_release() {
 		return 0;
 }
 
-bool hero::in_attack_range() {
+void hero::equipment_put_on(Sprite* item) {
 
 }
 
+void hero::equipment_take_off(Sprite* item) {
+
+}
 
