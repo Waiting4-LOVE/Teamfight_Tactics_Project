@@ -26,6 +26,9 @@
 
 USING_NS_CC;
 
+
+
+
 Scene* HelloWorld::createScene()
 {
     return HelloWorld::create();
@@ -41,7 +44,6 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-    myDatabase md;
     //////////////////////////////
     // 1. super init first
     if ( !Scene::init() )
