@@ -22,12 +22,12 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __SELECT_SCENE_H__
-#define __SELECT_SCENE_H__
+#ifndef __BATTLE_SCENE_H__
+#define __BATTLE_SCENE_H__
 
 #include "cocos2d.h"
 
-class SelectScene : public cocos2d::Scene
+class BattleScene : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
@@ -37,10 +37,8 @@ public:
     // a selector callback
     //void GotoGamescene(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
-    CREATE_FUNC(SelectScene);
-private:
-    void GotoBattleScene(cocos2d::Ref* pSender);
+    CREATE_FUNC(BattleScene);
 
 };
 
-#endif // __SELECT_SCENE_H__
+#endif // __BATTLE_SCENE_H__

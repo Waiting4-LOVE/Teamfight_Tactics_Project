@@ -1,6 +1,7 @@
 #include "SelecScene.h"
-#include "StartScene.h"
+#include "BattleScene.h"
 #include "Sources.h"
+#include "Definition.h"
 USING_NS_CC;
 cocos2d::Scene* SelectScene::createScene()
 {
@@ -74,11 +75,36 @@ bool SelectScene::init()
     // create menu, it's an autorelease object
     auto menu2 = Menu::create(singleItem, multiItem, NULL);
     menu2->setPosition(Vec2::ZERO);
-
     this->addChild(menu2, 1);
 
+    //test°´Å¥
+    auto testItem = MenuItemImage::create(
+        "test.png",
+        "test.png",
+        CC_CALLBACK_1(SelectScene::GotoBattleScene, this));
+    if (testItem == nullptr ||
+        testItem->getContentSize().width <= 0 ||
+        testItem->getContentSize().height <= 0)
+    {
+        problemLoading("'test.png'");
+    }
+    else
+    {
+        float x = origin.x + visibleSize.width - testItem->getContentSize().width / 2;
+        float y = origin.y + testItem->getContentSize().height / 2;
+        testItem->setPosition(Vec2(x, y));
+    }
+    auto testmenu = Menu::create(testItem, NULL);
+    testmenu->setPosition(Vec2::ZERO);
+    this->addChild(testmenu, 1);
 
     return true;
+}
+
+void SelectScene::GotoBattleScene(cocos2d::Ref* pSender)
+{
+    auto scene = BattleScene::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
 }
 
 void SelectScene::menuCloseCallback(Ref* pSender)
@@ -90,6 +116,4 @@ void SelectScene::menuCloseCallback(Ref* pSender)
 
     //EventCustom customEndEvent("game_scene_close_event");
     //_eventDispatcher->dispatchEvent(&customEndEvent);
-
-
 }
