@@ -48,7 +48,7 @@ bool battleMap::init()
 	总宽度与战斗格相同
 	共9格
 	*/
-	startPoint = { startPoint.x - pieceX / 6,startPoint.y - pieceY * 1.5 };
+	startPoint = { startPoint.x - pieceX / 6,startPoint.y - pieceY * 1.5f };
 	pieceX *= 5.0 / 6;
 	for (int j = 0; j < 9; j++)
 	{
