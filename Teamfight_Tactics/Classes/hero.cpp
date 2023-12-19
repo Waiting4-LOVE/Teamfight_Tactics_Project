@@ -2,8 +2,6 @@
 #include"hero.h"
 #include"const.h"
 #include"battleMap.h"
-int hero::HealthPoint = heroConsts::max_health_point;
-int hero::BluePoint = heroConsts::max_blue_point;
 
 hero::hero() {
 
@@ -149,16 +147,21 @@ void hero::equipment_take_off(Sprite* item) {
 
 }
 
-void hero::moveToTarget() {
+void hero::move(float dt) {
 	Vec2 targetPosition = getEnemyPosition();
 	if (targetPosition.x == 10000 && targetPosition.y == 10000)
 	{
 		return;
 	}
 	float distance = this->getPosition().distance(targetPosition);
-	if (battleMap::countLattice(this->getPosition(), targetPosition) > distance_attack)
+	if (countLattice(this->getPosition(), targetPosition) > distance_attack)
 	{
 		this->setPosition(this->getPosition() + (targetPosition - this->getPosition()) / distance * move_speed);
 
 	}
+}
+
+void hero::attack(float dt)
+{
+
 }
