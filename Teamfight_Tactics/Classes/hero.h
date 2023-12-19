@@ -29,6 +29,7 @@ public:
 	//将每个人的精灵进行存储，在进行攻击时，我方精灵通过遍历对方的精灵对应的坐标，计算我方精灵到对方精灵的距离，找到最短距离的精灵，返回该精灵的坐标，再找到该坐标对应的格子，寻找最短路径，待所有人走到
 	void move(float dt);//寻路
 	void attack(float dt);//攻击
+	bool die();
 protected:
 	int nowTime;//调用schedule定时器后的时间
 	int oldtime;//调用schedule定时器前的时间
@@ -40,6 +41,7 @@ protected:
 	std::pair<int, int> staticLatticeId;//准备时的位置
 	std::pair<int, int> dynamicLatticeId;//战斗时位置
 	/*英雄基本属性*/
+	hero* attackTarget;//攻击目标
 	int fee;//英雄所需费用
 	int ActorType;//英雄类型
 	std::string name;

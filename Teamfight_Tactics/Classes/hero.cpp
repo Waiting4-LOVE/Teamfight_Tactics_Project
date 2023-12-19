@@ -163,5 +163,26 @@ void hero::move(float dt) {
 
 void hero::attack(float dt)
 {
+	if (attackTarget != NULL && !die())
+	{
+		float  distance = sqrt((attackTarget->getPosition().x - getPosition().x)  //获得距离
+			* (attackTarget->getPosition().x - getPosition().x) +
+			(attackTarget->getPosition().y - getPosition().y)
+			* (attackTarget->getPosition().y - getPosition().y));
+		if (distance < distance_attack)                           //小于攻击距离则开始攻击
+		{
+			attackTarget->dodamage(this->add_physics_attack_point);
+			if (attackTarget->die())
+			{
+				attackTarget = NULL;
+			}
+		}
+	}
+}
 
+bool hero::die()
+{
+	if (HealthPoint <= 0)
+		return true;
+	return false;
 }
