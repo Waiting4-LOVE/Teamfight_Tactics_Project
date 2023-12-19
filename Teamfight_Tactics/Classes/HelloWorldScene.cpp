@@ -1,4 +1,4 @@
-﻿/****************************************************************************
+/****************************************************************************
  Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
  
  http://www.cocos2d-x.org
@@ -25,9 +25,6 @@
 #include "HelloWorldScene.h"
 
 USING_NS_CC;
-
-
-
 
 Scene* HelloWorld::createScene()
 {
@@ -104,10 +101,10 @@ bool HelloWorld::init()
     }
 
     // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("backpage.png");
+    auto sprite = Sprite::create("HelloWorld.png");
     if (sprite == nullptr)
     {
-        problemLoading("'backpage.png'");
+        problemLoading("'HelloWorld.png'");
     }
     else
     {
@@ -117,8 +114,6 @@ bool HelloWorld::init()
         // add the sprite as a child to this layer
         this->addChild(sprite, 0);
     }
-
-
     return true;
 }
 
