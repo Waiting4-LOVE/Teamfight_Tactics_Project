@@ -1,29 +1,43 @@
 #include"hero.h"
 #include"const.h"
 
-int hero::HealthPoint = heroConsts::max_health_point;
-int hero::BluePoint = heroConsts::max_blue_point;
+hero* hero::createhero(string picture_name)
+{
+	auto hero=hero::create();
+	auto temp = Sprite::create(picture_name);
+	hero->addChild(temp);
+	hero->autorelease();
+	return hero;
+}
 
 hero::hero() {
 
 }
 
+
+
 Vec2 hero::getSpritePosition() {
-	return delegateSprite->getPosition();
+	return getPosition();
 }
 
 
-float hero::calculate_distance(Sprite* d_sprite) {
+float hero::calculateDistance(Sprite* d_sprite) {
 	float distance;
 	float my_x, my_y;//用于存我方该英雄的位置坐标
 	float d_x, d_y;
-	my_x = delegateSprite->getPosition().x;
-	my_y = delegateSprite->getPosition().y;
+	my_x = getPosition().x;
+	my_y = getPosition().y;
 	d_x = d_sprite->getPosition().x;
 	d_y = d_sprite->getPosition().y;
 	distance = (my_x - d_x) * (my_x - d_x) + (my_y - d_y) * (my_y - d_y);
 	return distance;
 }
+
+Sprite* hero::getEnemy() {
+
+}
+
+
 
 Vec2 hero::getEnemyPosition() {
 	float min_distance = 100000;
@@ -31,7 +45,7 @@ Vec2 hero::getEnemyPosition() {
 	int order = 0;
 	//我们暂用class后的这个对象作为我们要访问的对手的数据库对象，之后建立好玩家类与AI类之后再使用新的对象
 	for (int i = 0;i<database.getnum(); i++) {
-		if ((t=calculate_distance(database.d_sprite[i])) < min_distance) {
+		if ((t=calculateDistance(database.d_sprite[i])) < min_distance) {
 			min_distance = t;
 			order = i;
 		}
@@ -39,16 +53,16 @@ Vec2 hero::getEnemyPosition() {
 	return database.getVec2(database.d_sprite[order]);
 }
 
-void hero::health_recover_once(int health_once) {
-	if (HealthPoint + health_once <= max_healthpoint) {
+void hero::healthRecoverOnce(int health_once) {
+	if (HealthPoint + health_once <= maxHealthPoint) {
 		HealthPoint += health_once;
 	}
 	else {
-		HealthPoint = max_healthpoint;
+		HealthPoint = maxHealthPoint;
 	}
 }
 
-void hero::health_recover(int health_once,int lasting) {
+void hero::healthRecover(int health_once,int lasting) {
 	//this->schedule(CC_SCHEDULE_SELECTOR(hero::health_recover_once), 1.0f);
 	int t;
 	int t1;
@@ -60,7 +74,7 @@ void hero::health_recover(int health_once,int lasting) {
 	while (1) {
 		interval = now.tv_sec - t;
 		if (interval >= 1) {
-			health_recover_once(health_once);
+			healthRecoverOnce(health_once);
 			t = now.tv_sec;
 		}
 		if (now.tv_sec - t1 >= lasting) {
@@ -69,32 +83,32 @@ void hero::health_recover(int health_once,int lasting) {
 	}
 }
 
-void hero::blue_recover_once() {
-	if (BluePoint + blue_once <= max_bluepoint) {
+void hero::blueRecoverOnce() {
+	if (BluePoint + blue_once <= maxBluePoint) {
 		BluePoint += blue_once;
 	}
 	else {
-		BluePoint = max_bluepoint;
+		BluePoint = maxBluePoint;
 	}
 }
 
-void hero::blue_rocover() {
+void hero::blueRocover() {
 
 }
 
-int hero::get_HealthPoint() {
+int hero::getHealthPoint() {
 	return HealthPoint;
 }
 
-int hero::get_BluePoint() {
+int hero::getBluePoint() {
 	return BluePoint;
 }
 
-int hero::get_DefencePoint() {
+int hero::getDefencePoint() {
 	return shieldPoint;
 }
 
-bool hero::dodamage(int attackpoint) {
+bool hero::doDamage(int attackpoint) {
 	int extra_attack = 0;//如果护盾在一次攻击中被击破，来计算多余出的伤害
 	if (attackpoint < 0) {
 
@@ -128,8 +142,8 @@ bool hero::dodamage(int attackpoint) {
 	return true;
 }
 
-bool hero::skill_release() {
-	if (BluePoint == max_bluepoint) {
+bool hero::blueClear() {
+	if (BluePoint == maxBluePoint) {
 		BluePoint = 0;//释放技能后蓝条清零
 		return 1;
 	}
@@ -137,11 +151,15 @@ bool hero::skill_release() {
 		return 0;
 }
 
-void hero::equipment_put_on(Sprite* item) {
+void hero::equipmentPutOn(Sprite* item) {
 
 }
 
-void hero::equipment_take_off(Sprite* item) {
+void hero::equipmentTakeOff(Sprite* item) {
+
+}
+
+void hero::releaseSkill() {
 
 }
 
