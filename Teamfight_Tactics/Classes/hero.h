@@ -4,7 +4,7 @@
 using namespace cocos2d;
 using namespace heroConsts;
 
-class hero:public cocos2d::Node
+class hero :public cocos2d::Node
 {
 private:
 
@@ -19,7 +19,7 @@ public:
 	static int get_DefencePoint();//返回英雄现在的护盾
 	bool dodamage(int attackpoint);//我方收到伤害函数，这包括了我方护盾与血量的减少
 	bool skill_release();//释放技能要求蓝条满，释放技能之后蓝条清空
-	void health_recover(int health_once,int lasting);//回血函数
+	void health_recover(int health_once, int lasting);//回血函数
 	void blue_rocover();//回蓝函数
 	void health_recover_once(int health_once);//回一次血//参数指的是一次回血量
 	void blue_recover_once();//回一次蓝
@@ -27,15 +27,17 @@ public:
 	void equipment_take_off(Sprite* item);//脱下装备函数，取消装备加成
 	//张圣坤的数据库调取对方精灵
 	//将每个人的精灵进行存储，在进行攻击时，我方精灵通过遍历对方的精灵对应的坐标，计算我方精灵到对方精灵的距离，找到最短距离的精灵，返回该精灵的坐标，再找到该坐标对应的格子，寻找最短路径，待所有人走到
-
+	void moveToTarget();//寻路并攻击
 protected:
 	int nowTime;//调用schedule定时器后的时间
 	int oldtime;//调用schedule定时器前的时间
-	
+
 	static const int max_healthpoint;//血条最大值
 	static const int max_bluepoint;//法力值最大值
 	static const int max_shieldpoint;//护盾最大值
 
+	static std::pair<int, int> staticLatticeId;//准备时的位置
+	static std::pair<int, int> dynamicLatticeId;//战斗时位置
 	/*英雄基本属性*/
 	static int fee;//英雄所需费用
 	int ActorType;//英雄类型

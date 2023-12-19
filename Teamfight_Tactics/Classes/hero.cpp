@@ -1,6 +1,7 @@
+#include<queue>
 #include"hero.h"
 #include"const.h"
-
+#include"battleMap.h"
 int hero::HealthPoint = heroConsts::max_health_point;
 int hero::BluePoint = heroConsts::max_blue_point;
 
@@ -29,8 +30,12 @@ Vec2 hero::getEnemyPosition() {
 	float t;
 	int order = 0;
 	//我们暂用class后的这个对象作为我们要访问的对手的数据库对象，之后建立好玩家类与AI类之后再使用新的对象
-	for (int i = 0;i<database.getnum(); i++) {
-		if ((t=calculate_distance(database.d_sprite[i])) < min_distance) {
+	if (database.getnum() == 0)
+	{
+		return { 10000,10000 };
+	}
+	for (int i = 0; i < database.getnum(); i++) {
+		if ((t = calculate_distance(database.d_sprite[i])) < min_distance) {
 			min_distance = t;
 			order = i;
 		}
@@ -47,7 +52,7 @@ void hero::health_recover_once(int health_once) {
 	}
 }
 
-void hero::health_recover(int health_once,int lasting) {
+void hero::health_recover(int health_once, int lasting) {
 	//this->schedule(CC_SCHEDULE_SELECTOR(hero::health_recover_once), 1.0f);
 	int t;
 	int t1;
@@ -113,7 +118,7 @@ bool hero::dodamage(int attackpoint) {
 				return false;
 			}
 			else {
-			    HealthPoint -= attackpoint;
+				HealthPoint -= attackpoint;
 				if (HealthPoint <= 0)
 				{
 					return false;
@@ -144,3 +149,16 @@ void hero::equipment_take_off(Sprite* item) {
 
 }
 
+void hero::moveToTarget() {
+	Vec2 targetPosition = getEnemyPosition();
+	if (targetPosition.x == 10000 && targetPosition.y == 10000)
+	{
+		return;
+	}
+	float distance = this->getPosition().distance(targetPosition);
+	if (battleMap::countLattice(this->getPosition(), targetPosition) > distance_attack)
+	{
+		this->setPosition(this->getPosition() + (targetPosition - this->getPosition()) / distance * move_speed);
+
+	}
+}
