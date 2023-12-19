@@ -14,4 +14,4 @@ public:
 	std::vector<Sprite*>d_sprite;
 private:
 	std::unordered_map<cocos2d::Sprite*, cocos2d::Vec2> heroData;
-}database;
+}static database;

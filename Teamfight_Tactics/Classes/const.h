@@ -9,8 +9,8 @@ namespace heroConsts {
 
 enum heroType
 {
-	at_null=1, at_player, at_ai
-};//英雄类型分为玩家与电脑玩家
+	player_1=1, player_2, player_3,player_4,player_5,player_6,player_7,player_8
+};//英雄所属
 
 const int blue_once = 5;
 const int max_health_point = 100;//设置英雄血量为100
