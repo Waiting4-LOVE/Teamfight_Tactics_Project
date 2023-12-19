@@ -2,7 +2,7 @@
 #define __DEFINITION_H__
 
 #define DISPLAY_TIME_INIT_SCENE 2
-#define TRANSITION_TIME 2
+#define TRANSITION_TIME 0.5
 
 //装备属性，对应值为在数组中的位置
 const int eptNum = 2; //装备总数

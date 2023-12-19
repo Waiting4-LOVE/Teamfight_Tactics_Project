@@ -27,12 +27,12 @@ bool battleMap::init()
 
 	左下角起始位置由计算得出
 	*/
-	float pieceX = visibleSize.width / 25;
+	float pieceX = 861.0f / 1920.0f * visibleSize.width / 15.0f;//六边形宽度的一半
 	float pieceY = pieceX * sqrt(3);
-	Vec2 startPoint = { origin.x + pieceX * 6, origin.y + (visibleSize.height - pieceY * 7) / 2 };//左下点位坐标
+	Vec2 startPoint = { origin.x + (visibleSize.width - pieceX * 13) / 2, origin.y + (visibleSize.height - pieceY * 5) / 2 };//左下点位坐标
 
-	for (int i = 0; i < 7; i++)
-		for (int j = 0; j < 8; j++)
+	for (int i = 0; i < 6; i++)
+		for (int j = 0; j < 7; j++)
 		{
 			if (i % 2 == 0)
 			{
@@ -59,8 +59,8 @@ bool battleMap::init()
 
 int battleMap::countLattice(Vec2 lat1, Vec2 lat2)
 {
-	float deltaX = lat1.x - lat2.x, deltaY = lat1.y - lat2.y;
-	float disSquare = deltaX * deltaX + deltaY * deltaY;
+	float disSquare = lat1.distance(lat2);
+	disSquare *= disSquare;
 	float oneLattice = (battleLattice[0][1].x - battleLattice[0][0].x) * 2 / sqrt(3);
 	for (int i = 1; i <= 10; i++)
 	{
@@ -76,3 +76,20 @@ int battleMap::countLattice(Vec2 lat1, Vec2 lat2)
 同时如果有多个最小步数，则找停下后能达到距离最近的敌方的位置。
 
 */
+
+Vec2 battleMap::stickToLattice(Vec2 pos)
+{
+	Vec2 ans = battleLattice[0][0];
+	for (int i = 0; i < 7; i++)
+		for (int j = 0; j < 3; j++)
+		{
+			if (battleLattice[i][j].distance(pos) < ans.distance(pos) && battleLatticeIsEmpty[i][j])
+				ans = battleLattice[i][j];
+		}
+	for (int j = 0; j < 9; j++)
+	{
+		if (waitLattice[0][j].distance(pos) < ans.distance(pos) && waitLatticeIsEmpty[0][j])
+			ans = battleLattice[0][j];
+	}
+	return ans;
+}
