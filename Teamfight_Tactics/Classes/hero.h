@@ -41,6 +41,8 @@ protected:
 	int maxBluePoint;//法力值最大值
 	int maxShieldPoint;//护盾最大值
 
+	static std::pair<int, int> staticLatticeId;//准备时的位置
+	static std::pair<int, int> dynamicLatticeId;//战斗时位置
 	/*英雄基本属性*/
 	int fee;//英雄所需费用
 	int ActorType;//英雄所属玩家（1、2、3、4、5、6、7、8）
