@@ -57,7 +57,7 @@ bool battleMap::init()
 	}
 }
 
-int battleMap::countLattice(Vec2 lat1, Vec2 lat2)
+int countLattice(Vec2 lat1, Vec2 lat2)
 {
 	float disSquare = lat1.distance(lat2);
 	disSquare *= disSquare;
@@ -77,7 +77,7 @@ int battleMap::countLattice(Vec2 lat1, Vec2 lat2)
 
 */
 
-Vec2 battleMap::stickToLattice(Vec2 pos)
+Vec2 stickToLattice(Vec2 pos)
 {
 	Vec2 ans = battleLattice[0][0];
 	for (int i = 0; i < 7; i++)
