@@ -9,8 +9,8 @@ public:
 	bool init();
 	int countLattice(Vec2 lat1, Vec2 lat2);
 private:
-	Vec2 battleLattice[7][8];
-	Vec2 waitLattice[2][9];
 	bool battleLatticeIsEmpty[7][8];
 	bool waitLatticeIsEmpty[2][9];
 };
+Vec2 battleLattice[7][8];
+Vec2 waitLattice[2][9];
