@@ -26,6 +26,7 @@
 #define __BATTLE_SCENE_H__
 
 #include "cocos2d.h"
+#include "Maplayer.h"
 
 class BattleScene : public cocos2d::Scene
 {
@@ -37,6 +38,9 @@ public:
     // a selector callback
     //void GotoGamescene(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
+    /***********ËùÐè×ÓLayer************/
+    MapLayer* map = MapLayer::createMapLayer();
+    //littleHero* littleHeroLayer = littleHero::createPlayer();
     CREATE_FUNC(BattleScene);
 
 };

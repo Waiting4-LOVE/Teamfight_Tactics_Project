@@ -26,6 +26,7 @@
 #include "Sources.h"
 #include "SelecScene.h"
 #include "Definition.h"
+#include "SettingScene.h"
 USING_NS_CC;
 
 Scene* StartScene::createScene()
@@ -130,6 +131,27 @@ bool StartScene::init()
     }
   
 
+    /*----------------MenuItemImage Setting ÉèÖÃ---------------------*/
+    auto Setting = MenuItemImage::create(
+        "Setting.png",
+        "Setting.png",
+        CC_CALLBACK_1(StartScene::menuSetting, this));
+    if (Setting == nullptr ||
+        Setting->getContentSize().width <= 0 ||
+        Setting->getContentSize().height <= 0)
+    {
+        problemLoading("'Setting.png' and 'Setting.png'");
+    }
+    else
+    {
+        float x = origin.x + visibleSize.width / 2;
+        float y = origin.y + visibleSize.height / 2 - 150;
+        Setting->setPosition(Vec2(x, y));
+    }
+
+    auto menusetting = Menu::create(Setting, nullptr);
+    menusetting->setPosition(Vec2::ZERO);
+    this->addChild(menusetting, 1);
 
     return true;
 }
@@ -153,6 +175,12 @@ void StartScene::GotoSelectScene(cocos2d::Ref* pSender)
 {
     auto scene = SelectScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
+}
+
+void StartScene::menuSetting(cocos2d::Ref* pSender)
+{
+    auto scene = SettingScene::createScene();
+    Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
 }
 
 
