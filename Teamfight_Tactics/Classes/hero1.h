@@ -14,3 +14,17 @@ public:
 	CREATE_FUNC(hero1);
 };
 
+class _2star_hero1 :public hero1
+{
+public:
+	_2star_hero1();
+	static _2star_hero1* createhero();
+	CREATE_FUNC(_2star_hero1);
+};
+
+class _3star_hero1 :public hero1
+{
+	_3star_hero1();
+	static _3star_hero1* createhero();
+	CREATE_FUNC(_3star_hero1);
+};
