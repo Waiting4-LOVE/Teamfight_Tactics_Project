@@ -48,8 +48,6 @@ protected:
 	int maxBluePoint;//法力值最大值
 	int maxShieldPoint;//护盾最大值
 
-	std::pair<int, int> staticLatticeId;//准备时的位置
-	std::pair<int, int> dynamicLatticeId;//战斗时位置
 	/*英雄基本属性*/
 	hero* attackTarget;//攻击目标
 	int fee;//英雄所需费用
@@ -71,8 +69,8 @@ protected:
 	//创建血条蓝条
 	Sprite* bloodFrame = Sprite::create("BloodFrame.jpg");
 	Sprite* blueFrame = Sprite::create("BloodFrame.jpg");
-	ProgressTimer* blood = ProgressTimer::create(Sprite::create("Blood.jpg"));
-	ProgressTimer* blue = ProgressTimer::create(Sprite::create("Mana.png"));
+	ProgressTimer* bloodBar = ProgressTimer::create(Sprite::create("Blood.jpg"));
+	ProgressTimer* blueBar = ProgressTimer::create(Sprite::create("Mana.png"));
 
 	/*装备加成属性*//*这样做的目的是因为装备加成是在基础属性之上进行的，而之后仍要访问基础属性*/
 	int addHealthPoint;//增加的血量

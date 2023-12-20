@@ -12,7 +12,11 @@ hero* hero::createhero(string picture_name)
 }
 
 hero::hero() {
-
+	this->addChild(bloodFrame, 1);
+	this->addChild(bloodBar, 2);
+	this->addChild(blueFrame, 1);
+	this->addChild(blueBar, 2);
+	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
 }
 
 
@@ -197,9 +201,18 @@ void hero::attack(float dt)
 	}
 }
 
-void bloodUpdate(float dt)
+void hero::bloodUpdate(float dt)
 {
+	float heroX = this->getPosition().x, heroY = this->getPosition().y;
+	bloodBar->setPosition(heroX, heroY + oneLattice);
+	bloodFrame->setPosition(heroX, heroY + oneLattice);
+	blueBar->setPosition(heroX, heroY + oneLattice - (bloodFrame->getContentSize().height + blueFrame->getContentSize().height) / 2);
+	blueFrame->setPosition(heroX, heroY + oneLattice - (bloodFrame->getContentSize().height + blueFrame->getContentSize().height) / 2);
 
+	bloodBar->setPercentage(100.0f * HealthPoint / maxHealthPoint);
+	//Blood->setTag(Health);
+	blueBar->setPercentage(100.0f * BluePoint / maxBluePoint);
+	//_Mana->setTag(Mana);
 }
 
 void hero::skill()
@@ -227,7 +240,8 @@ void hero::reset()
 	BluePoint = originBluePoint;
 	HealthPoint = maxHealthPoint;
 	attackTarget = NULL;
-	blood->setPercentage(100.f);
-	this->schedule(CC_SCHEDULE_SELECTOR(attack), 1 / this->speedAttack);
+	bloodBar->setPercentage(100.f);
+	this->schedule(CC_SCHEDULE_SELECTOR(attack), 1.0f / this->speedAttack);
+	this->schedule(CC_SCHEDULE_SELECTOR(move), 1 / 60.0f);
 	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
 }
