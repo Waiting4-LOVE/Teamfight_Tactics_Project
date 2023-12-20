@@ -34,7 +34,7 @@ float hero::calculateDistance(Sprite* d_sprite) {
 	return distance;
 }
 
-Sprite* hero::getEnemy() 
+Sprite* hero::getEnemy()
 {
 
 }
@@ -141,11 +141,13 @@ bool hero::doDamage(int attackpoint) {
 			}
 		}
 	}
+	blueRecoverOnce();
+	skill();
 	return true;
 }
 
 bool hero::blueClear() {
-	if (BluePoint == maxBluePoint) {
+	if (BluePoint >= maxBluePoint) {
 		BluePoint = 0;//释放技能后蓝条清零
 		return 1;
 	}
@@ -174,12 +176,6 @@ void hero::move(float dt) {
 	}
 }
 
-void hero::releaseSkill() {
-
-}
-
-
-
 void hero::attack(float dt)
 {
 	if (attackTarget != NULL && !die())
@@ -190,6 +186,8 @@ void hero::attack(float dt)
 			* (attackTarget->getPosition().y - getPosition().y));
 		if (distance < distanceAttack)                           //小于攻击距离则开始攻击
 		{
+			blueRecoverOnce();
+			skill();
 			attackTarget->doDamage(this->addPhysicsAttackPoint);
 			if (attackTarget->die())
 			{
@@ -199,9 +197,37 @@ void hero::attack(float dt)
 	}
 }
 
+void bloodUpdate(float dt)
+{
+
+}
+
+void hero::skill()
+{
+	if (blueClear() && attackTarget != NULL)
+	{
+		releaseSkill();
+		BluePoint = 0;
+	}
+}
+
 bool hero::die()
 {
 	if (HealthPoint <= 0)
 		return true;
 	return false;
+}
+
+void hero::releaseSkill() {
+
+}
+
+void hero::reset()
+{
+	BluePoint = originBluePoint;
+	HealthPoint = maxHealthPoint;
+	attackTarget = NULL;
+	blood->setPercentage(100.f);
+	this->schedule(CC_SCHEDULE_SELECTOR(attack), 1 / this->speedAttack);
+	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
 }

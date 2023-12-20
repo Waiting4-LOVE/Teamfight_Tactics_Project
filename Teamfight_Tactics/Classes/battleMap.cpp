@@ -10,12 +10,8 @@ battleMap::~battleMap()
 
 }
 
-bool battleMap::init()
+void battleMapinit()
 {
-	if (!Scene::init())
-	{
-		return false;
-	}
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	/*
@@ -27,7 +23,8 @@ bool battleMap::init()
 
 	左下角起始位置由计算得出
 	*/
-	float pieceX = 861.0f / 1920.0f * visibleSize.width / 15.0f;//六边形宽度的一半
+	float pieceX = 861.0f / 1920.0f * visibleSize.width / 15.0f;//六边形宽度（不是边长）的一半
+	oneLattice = pieceX / sqrt(3) * 2;//六边形边长
 	float pieceY = pieceX * sqrt(3);
 	Vec2 startPoint = { origin.x + (visibleSize.width - pieceX * 13) / 2, origin.y + (visibleSize.height - pieceY * 5) / 2 };//左下点位坐标
 
@@ -60,36 +57,30 @@ bool battleMap::init()
 int countLattice(Vec2 lat1, Vec2 lat2)
 {
 	float disSquare = lat1.distance(lat2);
-	disSquare *= disSquare;
-	float oneLattice = (battleLattice[0][1].x - battleLattice[0][0].x) * 2 / sqrt(3);
 	for (int i = 1; i <= 10; i++)
 	{
-		if (oneLattice * i * oneLattice * i >= disSquare)
+		if (oneLattice * i * 2 >= disSquare)//两倍边长作为攻击距离的一格
 			return i;
 	}
 	return 100;
 }
-/*
-寻路方案：
-以自身为中心，向外圈扩展。
-广搜，找出能打到人的情况下走的最少的步数。
-同时如果有多个最小步数，则找停下后能达到距离最近的敌方的位置。
 
-*/
-
-Vec2 stickToLattice(Vec2 pos)
+Vec2 positionToLattice(Vec2 pos)
 {
 	Vec2 ans = battleLattice[0][0];
 	for (int i = 0; i < 7; i++)
 		for (int j = 0; j < 3; j++)
 		{
-			if (battleLattice[i][j].distance(pos) < ans.distance(pos) && battleLatticeIsEmpty[i][j])
+			if (battleLattice[i][j].distance(pos) < ans.distance(pos))
 				ans = battleLattice[i][j];
 		}
 	for (int j = 0; j < 9; j++)
 	{
-		if (waitLattice[0][j].distance(pos) < ans.distance(pos) && waitLatticeIsEmpty[0][j])
+		if (waitLattice[0][j].distance(pos) < ans.distance(pos))
 			ans = battleLattice[0][j];
 	}
+	float minDistance = ans.distance(pos);
+	if (minDistance > oneLattice)//如果已经在格子区域之外（简易判断）
+		return { 10000,10000 };
 	return ans;
 }
