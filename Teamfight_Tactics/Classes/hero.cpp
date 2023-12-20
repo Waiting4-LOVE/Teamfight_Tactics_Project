@@ -1,9 +1,10 @@
 #include"hero.h"
 #include"const.h"
+#include"battleMap.h"
 
 hero* hero::createhero(string picture_name)
 {
-	auto hero=hero::create();
+	auto hero = hero::create();
 	auto temp = Sprite::create(picture_name);
 	hero->addChild(temp);
 	hero->autorelease();
@@ -11,7 +12,11 @@ hero* hero::createhero(string picture_name)
 }
 
 hero::hero() {
-
+	this->addChild(bloodFrame, 1);
+	this->addChild(bloodBar, 2);
+	this->addChild(blueFrame, 1);
+	this->addChild(blueBar, 2);
+	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
 }
 
 
@@ -33,7 +38,8 @@ float hero::calculateDistance(Sprite* d_sprite) {
 	return distance;
 }
 
-Sprite* hero::getEnemy() {
+Sprite* hero::getEnemy()
+{
 
 }
 
@@ -44,8 +50,8 @@ Vec2 hero::getEnemyPosition() {
 	float t;
 	int order = 0;
 	//我们暂用class后的这个对象作为我们要访问的对手的数据库对象，之后建立好玩家类与AI类之后再使用新的对象
-	for (int i = 0;i<database.getnum(); i++) {
-		if ((t=calculateDistance(database.d_sprite[i])) < min_distance) {
+	for (int i = 0; i < database.getnum(); i++) {
+		if ((t = calculateDistance(database.d_sprite[i])) < min_distance) {
 			min_distance = t;
 			order = i;
 		}
@@ -62,7 +68,7 @@ void hero::healthRecoverOnce(int health_once) {
 	}
 }
 
-void hero::healthRecover(int health_once,int lasting) {
+void hero::healthRecover(int health_once, int lasting) {
 	//this->schedule(CC_SCHEDULE_SELECTOR(hero::health_recover_once), 1.0f);
 	int t;
 	int t1;
@@ -128,7 +134,7 @@ bool hero::doDamage(int attackpoint) {
 				return false;
 			}
 			else {
-			    HealthPoint -= attackpoint;
+				HealthPoint -= attackpoint;
 				if (HealthPoint <= 0)
 				{
 					return false;
@@ -139,11 +145,13 @@ bool hero::doDamage(int attackpoint) {
 			}
 		}
 	}
+	blueRecoverOnce();
+	skill();
 	return true;
 }
 
 bool hero::blueClear() {
-	if (BluePoint == maxBluePoint) {
+	if (BluePoint >= maxBluePoint) {
 		BluePoint = 0;//释放技能后蓝条清零
 		return 1;
 	}
@@ -159,7 +167,81 @@ void hero::equipmentTakeOff(Sprite* item) {
 
 }
 
+void hero::move(float dt) {
+	Vec2 targetPosition = getEnemyPosition();
+	if (targetPosition.x == 10000 && targetPosition.y == 10000)
+	{
+		return;
+	}
+	float distance = this->getPosition().distance(targetPosition);
+	if (countLattice(this->getPosition(), targetPosition) > distanceAttack)
+	{
+		this->setPosition(this->getPosition() + (targetPosition - this->getPosition()) / distance * move_speed);
+	}
+}
+
+void hero::attack(float dt)
+{
+	if (attackTarget != NULL && !die())
+	{
+		float  distance = sqrt((attackTarget->getPosition().x - getPosition().x)  //获得距离
+			* (attackTarget->getPosition().x - getPosition().x) +
+			(attackTarget->getPosition().y - getPosition().y)
+			* (attackTarget->getPosition().y - getPosition().y));
+		if (distance < distanceAttack)                           //小于攻击距离则开始攻击
+		{
+			blueRecoverOnce();
+			skill();
+			attackTarget->doDamage(this->addPhysicsAttackPoint);
+			if (attackTarget->die())
+			{
+				attackTarget = NULL;
+			}
+		}
+	}
+}
+
+void hero::bloodUpdate(float dt)
+{
+	float heroX = this->getPosition().x, heroY = this->getPosition().y;
+	bloodBar->setPosition(heroX, heroY + oneLattice);
+	bloodFrame->setPosition(heroX, heroY + oneLattice);
+	blueBar->setPosition(heroX, heroY + oneLattice - (bloodFrame->getContentSize().height + blueFrame->getContentSize().height) / 2);
+	blueFrame->setPosition(heroX, heroY + oneLattice - (bloodFrame->getContentSize().height + blueFrame->getContentSize().height) / 2);
+
+	bloodBar->setPercentage(100.0f * HealthPoint / maxHealthPoint);
+	//Blood->setTag(Health);
+	blueBar->setPercentage(100.0f * BluePoint / maxBluePoint);
+	//_Mana->setTag(Mana);
+}
+
+void hero::skill()
+{
+	if (blueClear() && attackTarget != NULL)
+	{
+		releaseSkill();
+		BluePoint = 0;
+	}
+}
+
+bool hero::die()
+{
+	if (HealthPoint <= 0)
+		return true;
+	return false;
+}
+
 void hero::releaseSkill() {
 
 }
 
+void hero::reset()
+{
+	BluePoint = originBluePoint;
+	HealthPoint = maxHealthPoint;
+	attackTarget = NULL;
+	bloodBar->setPercentage(100.f);
+	this->schedule(CC_SCHEDULE_SELECTOR(attack), 1.0f / this->speedAttack);
+	this->schedule(CC_SCHEDULE_SELECTOR(move), 1 / 60.0f);
+	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
+}

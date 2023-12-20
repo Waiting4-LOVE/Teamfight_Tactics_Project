@@ -2,7 +2,12 @@
 #define __DEFINITION_H__
 
 #define DISPLAY_TIME_INIT_SCENE 2
+<<<<<<< HEAD
 #define TRANSITION_TIME 2
+=======
+#define TRANSITION_TIME 0.5
+
+>>>>>>> master
 //装备属性，对应值为在数组中的位置
 #define eptNum 46 //装备总数
 #define basicEptNum 9 //基础装备
