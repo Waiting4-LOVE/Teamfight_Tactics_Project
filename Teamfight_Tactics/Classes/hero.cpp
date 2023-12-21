@@ -1,7 +1,7 @@
 #include"hero.h"
 #include"const.h"
 #include"battleMap.h"
-
+USING_NS_CC;
 hero* hero::createhero(string picture_name)
 {
 	auto hero = hero::create();

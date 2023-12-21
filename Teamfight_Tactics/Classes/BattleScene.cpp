@@ -1,6 +1,5 @@
 #include "SelecScene.h"
 #include "BattleScene.h"
-#include "littleHero.hpp"
 #include "Sources.h"
 USING_NS_CC;
 cocos2d::Scene* BattleScene::createScene()
@@ -29,16 +28,16 @@ bool BattleScene::init()
 	this->addChild(map, 0);        //地图层
 
 	//精灵
-	littleHero lh;
+	/*littleHero lh;
 	auto littlehero = lh.Create("p1.png", 10);
 	littlehero->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y)); //放到中间位置
-	addChild(littlehero, 0); //加到树中
+	addChild(littlehero, 0); //加到树中*/
 
 	// 创建一个鼠标事件监听器
 	auto mouseListener = EventListenerMouse::create();
 
 	// 设置鼠标按下事件处理
-	auto temp=lh.getPos();
+	//auto temp=lh.getPos();
 
 	// 添加监听器到事件分发器
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
