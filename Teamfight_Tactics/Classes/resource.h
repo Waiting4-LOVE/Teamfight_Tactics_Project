@@ -1,18 +1,18 @@
 /****************************************************************************
  Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
-
+ 
  http://www.cocos2d-x.org
-
+ 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
-
+ 
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
-
+ 
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,30 +22,23 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __BATTLE_SCENE_H__
-#define __BATTLE_SCENE_H__
+//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ generated include file.
+// Used by game.RC
+//
 
-#include "cocos2d.h"
-#include "Maplayer.h"
-#include "LittleHeroLayer.h"
+#define IDS_PROJNAME                100
+#define IDR_TESTJS    100
 
-class BattleScene : public cocos2d::Scene
-{
-public:
-    static cocos2d::Scene* createScene();
+#define ID_FILE_NEW_WINDOW            32771
 
-    virtual bool init();
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    // a selector callback
-    //void GotoGamescene(cocos2d::Ref* pSender);
-    // implement the "static create()" method manually
-    /***********ËùÐè×ÓLayer************/
-    MapLayer* map = MapLayer::createMapLayer();
-    LittleHeroLayer* littleLayer = LittleHeroLayer::createPlayer();
-
-    
-    CREATE_FUNC(BattleScene);
-
-};
-
-#endif // __BATTLE_SCENE_H__
+// Next default values for new objects
+// 
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+#define _APS_NEXT_RESOURCE_VALUE    201
+#define _APS_NEXT_CONTROL_VALUE        1000
+#define _APS_NEXT_SYMED_VALUE        101
+#define _APS_NEXT_COMMAND_VALUE        32775
+#endif
+#endif
