@@ -30,3 +30,25 @@ hero1* hero1::createhero() {
 void hero1::releaseSkill() {
 	
 }
+
+_2star_hero1::_2star_hero1(){
+	//ÌîĞ´¶şĞÇÓ¢ĞÛµÄÊôĞÔ
+}
+
+_2star_hero1* _2star_hero1::createhero(){
+	auto _2star_hero1 = _2star_hero1::create();
+	_2star_hero1->picturename = "";
+	_2star_hero1->picturenum = 0;
+	_2star_hero1->autorelease();
+	return _2star_hero1;
+}
+
+_3star_hero1::_3star_hero1(){
+	//ÌîĞ´ÈıĞÇÓ¢ĞÛµÄÊôĞÔ
+}
+
+_3star_hero1* _3star_hero1::createhero() {
+	auto _3star_hero1 = _3star_hero1::create();
+	_3star_hero1->autorelease();
+	return _3star_hero1;
+}

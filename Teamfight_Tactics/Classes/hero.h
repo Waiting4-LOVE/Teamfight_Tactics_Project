@@ -12,6 +12,9 @@ class hero :public Sprite
 private:
 
 public:
+
+	string picturename;//图片名字
+	int picturenum;//图片数量
 	static hero* createhero(string picture_name);
 	hero();
 	Vec2 getSpritePosition();//Vec2为2维向量，反映的是精灵坐标位置x,y
@@ -40,6 +43,8 @@ public:
 	void reset();
 
 	CREATE_FUNC(hero);
+
+
 protected:
 	int nowTime;//调用schedule定时器后的时间
 	int oldTime;//调用schedule定时器前的时间
