@@ -25,6 +25,7 @@
 #include "InitScene.h"
 #include "StartScene.h"
 #include "Definition.h"
+
 USING_NS_CC;
 
 Scene* InitScene::createScene()
@@ -125,7 +126,9 @@ bool InitScene::init()
 		this->addChild(sprite2, 0);
 	}
     this->scheduleOnce(CC_SCHEDULE_SELECTOR(InitScene::GoToStartScene), DISPLAY_TIME_INIT_SCENE);
+
     return true;
+
 }
 
 

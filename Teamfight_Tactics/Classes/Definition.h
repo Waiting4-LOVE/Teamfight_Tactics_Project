@@ -2,6 +2,7 @@
 #define __DEFINITION_H__
 
 #define DISPLAY_TIME_INIT_SCENE 2
+<<<<<<< HEAD
 #define TRANSITION_TIME 2
 //装备属性，对应值为在数组中的位置
 #define eptNum 46 //装备总数
@@ -38,3 +39,8 @@ static std::string synEptName[synEptNum] = { "无尽之刃","海克斯科技枪刃","朔极之
 "" ,"" ,"" ,"" ,"" };
 
 #endif // __DEFINITION_H__
+=======
+#define TRANSITION_TIME 0.5
+
+#endif // __DEFINITION_H__
+>>>>>>> af6351573f01bec9f59a01fb54c34bb35deaac86

@@ -25,6 +25,7 @@
 #include "AppDelegate.h"
 #include "StartScene.h"
 #include "InitScene.h"
+#include "AudioEngine.h"
 
 // #define USE_AUDIO_ENGINE 1
 
@@ -111,6 +112,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // create a scene. it's an autorelease object
     auto scene = InitScene::createScene();
 
+    static int audioID;
+    audioID = AudioEngine::play2d("startmusic.mp3", true, 1.0f);
     // run
     director->runWithScene(scene);
 
