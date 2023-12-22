@@ -22,25 +22,27 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __START_SCENE_H__
-#define __START_SCENE_H__
+#ifndef __BATTLE_SCENE_H__
+#define __BATTLE_SCENE_H__
 
 #include "cocos2d.h"
+#include "Maplayer.h"
 
-class StartScene : public cocos2d::Scene
+class BattleScene : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
 
     virtual bool init();
-
-    // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
-    void GotoSelectScene(cocos2d::Ref* pSender);
-    void menuSetting(cocos2d::Ref* pSender);
+    // a selector callback
+    //void GotoGamescene(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
-    CREATE_FUNC(StartScene);
+    /***********ËùÐè×ÓLayer************/
+    MapLayer* map = MapLayer::createMapLayer();
+    //littleHero* littleHeroLayer = littleHero::createPlayer();
+    CREATE_FUNC(BattleScene);
 
 };
 
-#endif // __START_SCENE_H__
+#endif // __BATTLE_SCENE_H__

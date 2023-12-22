@@ -34,6 +34,7 @@ public:
 
     virtual bool init();
     void menuCloseCallback(cocos2d::Ref* pSender);
+    void GotoBattleScene(cocos2d::Ref* pSender);
     // a selector callback
     //void GotoGamescene(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
