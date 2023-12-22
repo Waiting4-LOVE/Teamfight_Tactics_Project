@@ -1,9 +1,8 @@
-#ifndef __LITTLE_HERO_SPRITE_HPP__
-#define __LITTLE_HERO_SPRITE_HPP__
-
 #include "cocos2d.h"
 #include <math.h>
-USING_NS_CC;
+#include <string>
+using namespace cocos2d;
+using namespace std;
 
 #define EXP_FOR_LEVEL(level) ((level) * (level) * (level) * 2 / 5 + 2 * (level))
 
@@ -41,6 +40,7 @@ public:
 	inline int getCurBlood() { return this->m_blood; }
 	inline int getCoins() { return this->m_coins; }
 	inline int getExp() { return this->m_exp; }
+	inline int getLevel() { return this->m_level; }	
 	inline Vec2 getCurPos() { return this->m_pos; }
 	inline int getContinueWin() { return this->m_continueWin; }
 	inline int getContinueWiLose() { return this->m_continueLose; }
@@ -56,7 +56,13 @@ public:
 	inline void hurt(const int delBlood) { this->m_blood -= delBlood; } //受到伤害，减少血量
 	inline void addCoins(const int num) { this->m_coins += num; } //增加金币
 	inline void delCoins(const int num) { this->m_coins -= num; } //减少金币
-	inline void addExp(const int exp); //增加经验
+	inline void addExp(const int exp) {
+		this->m_exp += exp;
+		if (this->m_exp > this->m_upExp) {
+			this->m_exp -= this->m_upExp;
+			this->m_level++;
+		} //升级
+	} //增加经验
 	inline bool isDead() { return this->m_blood <= 0; }
 	void win(); //战斗获胜函数
 	void lose(int hurt); //战斗失败函数
@@ -85,6 +91,7 @@ protected:
 	const int m_maxContinueLose = 7; //最多连败7次，便不再计算
 	void countNextUPExp();
 };
-#endif //__LITTLE_HERO_SPRITE_HPP__
+extern littleHero MyLittleHero;
+
 
 extern littleHero h1, h2, h3, h4, h5, h6, h7, h8;
