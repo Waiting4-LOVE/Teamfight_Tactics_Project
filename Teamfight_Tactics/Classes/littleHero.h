@@ -36,7 +36,7 @@ public:
 	inline int getLevel() { return this->m_level; }	
 	inline Vec2 getCurPos() { return this->m_pos; }
 	inline int getContinueWin() { return this->m_continueWin; }
-	inline int getContinueWiLose() { return this->m_continueLose; }
+	inline int getContinueLose() { return this->m_continueLose; }
 	inline int getRound() { return this->m_round; }
 	inline int getBonus(int sort); //·µ»Ø½±Àø½ğ±Ò
 
