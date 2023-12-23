@@ -245,3 +245,50 @@ void hero::reset()
 	this->schedule(CC_SCHEDULE_SELECTOR(move), 1 / 60.0f);
 	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
 }
+/*
+static void onMouseDown(Event* event, bool& isDragging, Vec2& startDragPos)
+{
+	EventMouse* e = dynamic_cast<EventMouse*>(event);
+	if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
+		isDragging = true;
+		startDragPos = Vec2(e->getCursorX(), e->getCursorY());
+	}
+}
+
+static void onMouseMove(Event* event, bool isDragging, Vec2& startDragPos, hero* herocase)
+{
+	EventMouse* e = dynamic_cast<EventMouse*>(event);
+	if (isDragging) {
+		Vec2 currentPos = Vec2(e->getCursorX(), e->getCursorY());
+		Vec2 delta = currentPos - startDragPos;
+		herocase->setPosition(herocase->getPosition() + delta);
+		startDragPos = currentPos;
+	}
+}
+
+static void onMouseUp(Event* event, bool& isDragging, std::pair<int, int> firstLatPos, hero* herocase)
+{
+	isDragging = false;
+	std::pair<int, int> lastLatPos = positionToLattice(herocase->getPosition());
+	if (lastLatPos == (std::pair<int, int>{-1, -1}) || judgeExist(lastLatPos))
+		lastLatPos = firstLatPos;
+	else
+		herocase->setPosition(latticeToPosition(lastLatPos));
+}
+
+void hero::beMoved()
+{
+	bool isDragging = false;
+	Vec2 startDragPos;
+	std::pair<int, int> firstLatPos = this->getLatPos();
+	auto listener = EventListenerMouse::create();
+
+	listener->onMouseDown = CC_CALLBACK_1(onMouseDown, this, std::ref(isDragging), std::ref(startDragPos));
+
+	listener->onMouseMove = CC_CALLBACK_1(onMouseMove, this, isDragging, std::ref(startDragPos), this);
+
+	listener->onMouseUp = CC_CALLBACK_1(onMouseUp, this, std::ref(isDragging), firstLatPos, this);
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+*/

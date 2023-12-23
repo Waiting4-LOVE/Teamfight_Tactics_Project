@@ -41,7 +41,8 @@ public:
 	bool die();
 	virtual void releaseSkill();
 	void reset();
-
+	//void beMoved();
+	pair<int, int> getLatPos()const { return latPos; }
 	CREATE_FUNC(hero);
 
 
@@ -70,7 +71,7 @@ protected:
 	int criticalChance;//暴击率
 	int defencePhysics;//物抗
 	int defenceMagic;//魔抗
-
+	pair<int, int>latPos;//处于哪个格子上
 	//创建血条蓝条
 	Sprite* bloodFrame = Sprite::create("BloodFrame.jpg");
 	Sprite* blueFrame = Sprite::create("BloodFrame.jpg");
