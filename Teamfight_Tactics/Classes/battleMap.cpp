@@ -1,5 +1,9 @@
 #include "battleMap.h"
 USING_NS_CC;
+Vec2 battleLattice[6][7];
+Vec2 waitLattice[2][9];
+
+float oneLattice;
 battleMap::battleMap()
 {
 

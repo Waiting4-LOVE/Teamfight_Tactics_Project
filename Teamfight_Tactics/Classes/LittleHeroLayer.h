@@ -36,6 +36,7 @@ public:
 	 /***********小小英雄移动操作************/
 	//void LittleHeroMoveInMouse();
 	void onMouseDown(Event* event);
+	bool ismoving = false;
 
 	CREATE_FUNC(LittleHeroLayer);
 };

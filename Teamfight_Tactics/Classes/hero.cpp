@@ -16,7 +16,7 @@ hero::hero() {
 	this->addChild(bloodBar, 2);
 	this->addChild(blueFrame, 1);
 	this->addChild(blueBar, 2);
-	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 }
 
 
@@ -40,7 +40,7 @@ float hero::calculateDistance(Sprite* d_sprite) {
 
 Sprite* hero::getEnemy()
 {
-
+	return NULL;
 }
 
 
@@ -245,7 +245,24 @@ void hero::reset()
 	HealthPoint = maxHealthPoint;
 	attackTarget = NULL;
 	bloodBar->setPercentage(100.f);
-	this->schedule(CC_SCHEDULE_SELECTOR(attack), 1.0f / this->speedAttack);
-	this->schedule(CC_SCHEDULE_SELECTOR(move), 1 / 60.0f);
-	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1.0f / this->speedAttack);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::move), 1 / 60.0f);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+}
+
+void hero::set(float x1 = 0, float y1 = 0)  //传入数值，有两种重载形式
+{
+	x = x1;
+	y = y1;
+}
+
+void hero::setPlayer(int player)
+{
+	OfPlayer = player;
+	if (player == 0)
+	{
+
+		//Blood->setSprite(Sprite::create("OurBlood.png"));
+	}
 }

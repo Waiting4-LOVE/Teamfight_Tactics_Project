@@ -1,6 +1,6 @@
+#pragma once
 #include<cocos2d.h>
 #include"HeroFile.h"
-#include"littleHero.h"
 
 
 USING_NS_CC;
@@ -20,8 +20,8 @@ public:
 	void pcShowFightArray();
 	void ChessMove(hero* herocase, littleHero&playerdata, littleHero& AttackPlayer);
 private:
-	void upgrade(littleHero& littlehero);
-	hero* HeroLayer::upgradeChessCreate(int type);
+	//void upgrade(littleHero& littlehero);
+	//hero* HeroLayer::upgradeChessCreate(int type);
 
 	friend class GameScene;
 	float CountDistance(hero* h1, hero* h2);

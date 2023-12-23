@@ -4,7 +4,7 @@ const Point myBloodPos = Point(250, 510);
 const Point myGradesPos = Point(450, 170);
 const Point myGoldPos = Point(1030, 170);
 const Point BuyExpPos = Point(535, 115);
-littleHero MyLittleHero;
+//littleHero MyLittleHero;
 
 LittleHeroLayer* LittleHeroLayer::createPlayer()
 {
@@ -54,6 +54,7 @@ void LittleHeroLayer::BuyExp(Ref* pSender)
 		MyLittleHero.delCoins(4);
 		MyLittleHero.addExp(4);
 		Coins->setString(to_string(MyLittleHero.getCoins()));
+		Grades->setString(to_string(MyLittleHero.getLevel()));
 	}
 	else
 	{
@@ -78,14 +79,21 @@ void LittleHeroLayer::BuyExp(Ref* pSender)
 void LittleHeroLayer::onMouseDown(Event* event)
 {
 	auto mouseEvent = dynamic_cast<cocos2d::EventMouse*>(event);
-	if (mouseEvent->getMouseButton() == cocos2d::EventMouse::MouseButton::BUTTON_RIGHT)
+	if (mouseEvent->getMouseButton() == cocos2d::EventMouse::MouseButton::BUTTON_RIGHT && !ismoving)
 	{
+		
 		auto locationInView = mouseEvent->getLocationInView();
-		auto location = cocos2d::Director::getInstance()->convertToGL(locationInView);
 
 		// 移动精灵到鼠标右键点击的位置
-		myLittleHerosprite->setPosition(location);
-		CCLOG("Right mouse button clicked at (%f, %f)", location.x, location.y);
+		double dis = sqrt(pow(MyLittleHero.m_pos.x - locationInView.x, 2) + pow(MyLittleHero.m_pos.y - locationInView.y, 2));
+		double moveSec = dis / MyLittleHero.m_moveSpeed;
+		auto moveTo = MoveTo::create(moveSec, locationInView);
+		auto callback = CallFunc::create([&]() { ismoving = false; });
+		auto sequence = Sequence::create(moveTo, callback, nullptr);
+		myLittleHerosprite->runAction(sequence);
+		MyLittleHero.updatePos(locationInView);
+		ismoving = true;
+		CCLOG("Right mouse button clicked at (%f, %f,%lf)", locationInView.x, locationInView.y, moveSec);
 	}
 }
 

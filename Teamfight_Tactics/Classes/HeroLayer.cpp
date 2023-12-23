@@ -1,8 +1,13 @@
 #include"HeroLayer.h"
+
+
+littleHero MyLittleHero;
+littleHero player2data;
+
 hero* CreateHero(int type) {
 	switch (type)
 	{
-	case hero1://
+	case 1://
 		return hero1::createhero();
 		break;
 	default:
@@ -39,7 +44,7 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 			temp1->set(10000, 10000);
 		}
 		temp1->setPlayer(temp->getPlayer());
-		temp1->EquipmentChange();
+		//temp1->EquipmentChange();
 		if (ccArrayContainsObject(Array, temp))
 			ccArrayRemoveObject(Array, temp);
 		ccArrayInsertObjectAtIndex(Array, temp1, i);
@@ -112,7 +117,7 @@ void HeroLayer::update(float dt)
 	}
 }
 
-void HeroLayer::upgrade(littleHero& littlehero)
+/*void HeroLayer::upgrade(littleHero& littlehero)
 {
 
 	for (int i = 0; i < 16; i++)
@@ -181,9 +186,9 @@ void HeroLayer::upgrade(littleHero& littlehero)
 		}
 
 	}
-}
+}*/
 
-hero* HeroLayer::upgradeChessCreate(int type)
+/*hero* HeroLayer::upgradeChessCreate(int type)
 {
 	switch (type + 15)
 	{
@@ -191,8 +196,7 @@ hero* HeroLayer::upgradeChessCreate(int type)
 	default:
 		break;
 	}
-
-}
+}*/
 
 
 /*PC_PlayerÏà¹Ø*/

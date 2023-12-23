@@ -1,9 +1,10 @@
+#pragma once
 #include<cocos2d.h>
 #include"const.h"
 #include <string>
 #include"database.h"
-#include"littleHero.h"
-#include"Equipment.h"
+#include "littleHero.h"
+//#include"Equipment.h"
 using namespace cocos2d;
 using namespace heroConsts;
 using namespace std;
@@ -58,7 +59,7 @@ public:
 	void blueRocover();//回蓝函数
 	void healthRecoverOnce(int health_once);//回一次血//参数指的是一次回血量
 	void blueRecoverOnce();//回一次蓝
-	void EquipmentChange();
+	//void EquipmentChange();
 	void equipmentPutOn(Sprite* item);//佩戴装备函数,装备加成
 	void equipmentTakeOff(Sprite* item);//脱下装备函数，取消装备加成
 	//张圣坤的数据库调取对方精灵
