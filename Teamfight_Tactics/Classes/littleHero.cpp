@@ -1,10 +1,8 @@
 #include "littleHero.h"
 
-littleHero h1, h2, h3, h4, h5, h6, h7, h8; //创建八个全局小小英雄
+//littleHero::littleHero() {}
 
-littleHero::littleHero() {}
-
-littleHero::littleHero(std::string picName) : m_picName(picName) {}
+//littleHero::littleHero(std::string picName) : m_picName(picName) {}
 
 void littleHero::addExp(int exp) {
 	this->m_exp += exp;
@@ -20,13 +18,11 @@ MoveTo* littleHero::move(const Vec2 curPos) {
 }
 
 void littleHero::countNextUPExp() {
-	for (int i = 0;; i++) {
-		int k = i + 1;
-		if (this->m_exp >= EXP_FOR_LEVEL(i) && this->m_exp < EXP_FOR_LEVEL(k)) {
-			this->m_level = k;
-			this->m_upExp = EXP_FOR_LEVEL(this->m_level);
-			return;
-		}
+	if (this->m_exp >= EXP_FOR_LEVEL[this->m_level - 1])
+	{
+		this->m_exp -= EXP_FOR_LEVEL[this->m_level - 1];
+		this->m_level++;
+		return;
 	}
 }
 
@@ -34,19 +30,19 @@ int littleHero::getBonus(int sort) {
 	int bonus = 0;
 	//连胜机制下的奖励
 	switch (sort) {
-		case 3:
-		case 4:
-			bonus += 1;
-			break;
-		case 5:
-		case 6:
-			bonus += 2;
-			break;
-		case 7:
-			bonus += 3;
-			break;
-		default:
-			bonus += 0;
+	case 3:
+	case 4:
+		bonus += 1;
+		break;
+	case 5:
+	case 6:
+		bonus += 2;
+		break;
+	case 7:
+		bonus += 3;
+		break;
+	default:
+		bonus += 0;
 	}
 	//利息机制下的奖励
 	int temp = this->m_coins / 10;
@@ -80,4 +76,28 @@ void littleHero::lose(int hurt) {
 	this->addExp(2);
 	//受到伤害
 	this->hurt(hurt);
+}
+
+void littleHero::remain() {
+	this->m_playerArray = ccArrayNew(9); //玩家备战区棋子数组
+	this->m_fightArray = ccArrayNew(15);
+	this->m_maxBlood = 100;
+	this->m_blood = 100;
+	this->m_level = 1;
+	this->m_upExp = this->EXP_FOR_LEVEL[0];
+	this->m_coins = 10;
+	this->m_exp = 0;
+	this->m_round = 0;
+	this->m_continueWin = 0;
+	this->m_continueLose = 0;
+	this->m_occupiedSlot = false;
+	this->m_isPackageOpened = 0;
+	for (int i = 0; i < 12; i++){
+		if (i < 3){
+			for (int j = 0; j < 4; j++){
+				this->m_packageSlot[i][j] = packageSlot(0, 0);
+			}
+		}
+		this->m_slotPoint[i] = Point(0, 0);
+	}
 }
