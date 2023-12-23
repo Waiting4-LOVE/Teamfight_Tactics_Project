@@ -1,3 +1,4 @@
+#pragma once
 #include<cocos2d.h>
 #include"const.h"
 #include"hero.h"

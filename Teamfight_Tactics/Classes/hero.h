@@ -1,8 +1,10 @@
+#pragma once
 #include<cocos2d.h>
 #include"const.h"
 #include <string>
 #include"database.h"
-#include"Equipment.h"
+#include "littleHero.h"
+//#include"Equipment.h"
 using namespace cocos2d;
 using namespace heroConsts;
 using namespace std;
@@ -13,23 +15,51 @@ private:
 
 public:
 
+	ccArray* equipment = ccArrayNew(100);
 	string picturename;//图片名字
 	int picturenum;//图片数量
 	static hero* createhero(string picture_name);
 	hero();
+
+	/*get类函数*/
+
 	Vec2 getSpritePosition();//Vec2为2维向量，反映的是精灵坐标位置x,y
-	float calculateDistance(Sprite* d_sprite);//计算本精灵与敌人距离函数
 	Sprite* getEnemy();
 	Vec2 getEnemyPosition();//返回的是离本精灵最近的敌人的坐标
 	int getHealthPoint();//返回英雄现在的血条
 	int getBluePoint();//返回英雄现在的蓝条
 	int getDefencePoint();//返回英雄现在的护盾
+	Point getTempPosition() { return Point(xtemp, ytemp);}
+	int getType() { return type; }
+	int getCoinsNeeded() { return CoinsNeeded; }
+	int getSoldCoins() { return SoldCoins; }
+	int getPlayer() { return OfPlayer; }           //返回所属玩家
+	int getStar() { return star; }
+	Point getPosition() { return Point(x, y); }
+	float getAttackSpeed() { return speedAttack; }
+	int getAttackDistance() { return distanceAttack; }
+	const cocos2d::Size getContentSize() { return Size(width, height); }   //获得图片长宽
+
+	/*set类型函数*/
+	void setPlayer(int player);
+	void setAttackSpeed(float a) { speedAttack = a; }
+	void setHealth(float a) { HealthPoint = a; }
+	void set(float x1, float y1);
+	void set(Point point) {
+		x = point.x;
+		y = point.y;
+	};
+	void setTempPosition() { xtemp = x; ytemp = y; }
+
+
+	float calculateDistance(Sprite* d_sprite);//计算本精灵与敌人距离函数
 	bool doDamage(int attackpoint);//我方收到伤害函数，这包括了我方护盾与血量的减少
 	bool blueClear();//释放技能要求蓝条满，释放技能之后蓝条清空
 	void healthRecover(int health_once, int lasting);//回血函数
 	void blueRocover();//回蓝函数
 	void healthRecoverOnce(int health_once);//回一次血//参数指的是一次回血量
 	void blueRecoverOnce();//回一次蓝
+	//void EquipmentChange();
 	void equipmentPutOn(Sprite* item);//佩戴装备函数,装备加成
 	void equipmentTakeOff(Sprite* item);//脱下装备函数，取消装备加成
 	//张圣坤的数据库调取对方精灵
@@ -41,23 +71,36 @@ public:
 	bool die();
 	virtual void releaseSkill();
 	void reset();
-	//void beMoved();
-	pair<int, int> getLatPos()const { return latPos; }
+	hero* attackTarget;//攻击目标
+
 	CREATE_FUNC(hero);
 
 
 protected:
 	int nowTime;//调用schedule定时器后的时间
 	int oldTime;//调用schedule定时器前的时间
+	float height = 0;//所带图片的长度和宽度
+	float width = 0;
 
 	int maxHealthPoint;//血条最大值
 	int maxBluePoint;//法力值最大值
 	int maxShieldPoint;//护盾最大值
 
+	float xtemp = x;
+	float ytemp = y;
+
+	float x = 0.f;//真实位置
+	float y = 0.f;
+
+	int type = None;//种类
+	int OfPlayer = 0;//所属玩家
+	int CoinsNeeded = 0;//所需金币
+	int SoldCoins = CoinsNeeded;//卖掉所获金币
+	int star = 1;//星级
+
 	/*英雄基本属性*/
-	hero* attackTarget;//攻击目标
+	
 	int fee;//英雄所需费用
-	int ActorType;//英雄类型
 	std::string name;
 	int HealthPoint;//血条
 	int BluePoint;//当前法力值
@@ -87,6 +130,6 @@ protected:
 	int addCriticalChance;//增加的暴击率
 	int addDefencePhysics;//增加的物抗
 	int addDefenceMagic;//增加的魔抗
-
-	std::vector<int>equipment;//身上所戴装备
+	
+	
 };

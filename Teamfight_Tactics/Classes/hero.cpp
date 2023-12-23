@@ -1,7 +1,7 @@
 #include"hero.h"
 #include"const.h"
 #include"battleMap.h"
-USING_NS_CC;
+
 hero* hero::createhero(string picture_name)
 {
 	auto hero = hero::create();
@@ -16,7 +16,7 @@ hero::hero() {
 	this->addChild(bloodBar, 2);
 	this->addChild(blueFrame, 1);
 	this->addChild(blueBar, 2);
-	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 }
 
 
@@ -40,7 +40,7 @@ float hero::calculateDistance(Sprite* d_sprite) {
 
 Sprite* hero::getEnemy()
 {
-
+	return NULL;
 }
 
 
@@ -226,8 +226,12 @@ void hero::skill()
 
 bool hero::die()
 {
-	if (HealthPoint <= 0)
+	if (HealthPoint <= 0) {
+		ChessExist[MapIntReturn(getPosition()).x][MapIntReturn(getPosition()).y] = 0;
+		setPosition(Point(10000, 10000));
+		set(10000, 10000);
 		return true;
+	}
 	return false;
 }
 
@@ -241,54 +245,24 @@ void hero::reset()
 	HealthPoint = maxHealthPoint;
 	attackTarget = NULL;
 	bloodBar->setPercentage(100.f);
-	this->schedule(CC_SCHEDULE_SELECTOR(attack), 1.0f / this->speedAttack);
-	this->schedule(CC_SCHEDULE_SELECTOR(move), 1 / 60.0f);
-	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1.0f / this->speedAttack);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::move), 1 / 60.0f);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
 }
-/*
-static void onMouseDown(Event* event, bool& isDragging, Vec2& startDragPos)
+
+void hero::set(float x1 = 0, float y1 = 0)  //传入数值，有两种重载形式
 {
-	EventMouse* e = dynamic_cast<EventMouse*>(event);
-	if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
-		isDragging = true;
-		startDragPos = Vec2(e->getCursorX(), e->getCursorY());
+	x = x1;
+	y = y1;
+}
+
+void hero::setPlayer(int player)
+{
+	OfPlayer = player;
+	if (player == 0)
+	{
+
+		//Blood->setSprite(Sprite::create("OurBlood.png"));
 	}
 }
-
-static void onMouseMove(Event* event, bool isDragging, Vec2& startDragPos, hero* herocase)
-{
-	EventMouse* e = dynamic_cast<EventMouse*>(event);
-	if (isDragging) {
-		Vec2 currentPos = Vec2(e->getCursorX(), e->getCursorY());
-		Vec2 delta = currentPos - startDragPos;
-		herocase->setPosition(herocase->getPosition() + delta);
-		startDragPos = currentPos;
-	}
-}
-
-static void onMouseUp(Event* event, bool& isDragging, std::pair<int, int> firstLatPos, hero* herocase)
-{
-	isDragging = false;
-	std::pair<int, int> lastLatPos = positionToLattice(herocase->getPosition());
-	if (lastLatPos == (std::pair<int, int>{-1, -1}) || judgeExist(lastLatPos))
-		lastLatPos = firstLatPos;
-	else
-		herocase->setPosition(latticeToPosition(lastLatPos));
-}
-
-void hero::beMoved()
-{
-	bool isDragging = false;
-	Vec2 startDragPos;
-	std::pair<int, int> firstLatPos = this->getLatPos();
-	auto listener = EventListenerMouse::create();
-
-	listener->onMouseDown = CC_CALLBACK_1(onMouseDown, this, std::ref(isDragging), std::ref(startDragPos));
-
-	listener->onMouseMove = CC_CALLBACK_1(onMouseMove, this, isDragging, std::ref(startDragPos), this);
-
-	listener->onMouseUp = CC_CALLBACK_1(onMouseUp, this, std::ref(isDragging), firstLatPos, this);
-
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-}
-*/
