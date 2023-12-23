@@ -2,7 +2,7 @@
 hero* CreateHero(int type) {
 	switch (type)
 	{
-	case hero1://
+	case 1:
 		return hero1::createhero();
 		break;
 	default:

@@ -16,7 +16,7 @@ hero::hero() {
 	this->addChild(bloodBar, 2);
 	this->addChild(blueFrame, 1);
 	this->addChild(blueBar, 2);
-	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 }
 
 
@@ -245,7 +245,7 @@ void hero::reset()
 	HealthPoint = maxHealthPoint;
 	attackTarget = NULL;
 	bloodBar->setPercentage(100.f);
-	this->schedule(CC_SCHEDULE_SELECTOR(attack), 1.0f / this->speedAttack);
-	this->schedule(CC_SCHEDULE_SELECTOR(move), 1 / 60.0f);
-	this->schedule(CC_SCHEDULE_SELECTOR(bloodUpdate), 1 / 60.0f);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1.0f / this->speedAttack);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::move), 1 / 60.0f);
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 }

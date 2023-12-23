@@ -1,6 +1,5 @@
 #include<cocos2d.h>
 #include"HeroFile.h"
-#include"littleHero.h"
 
 
 USING_NS_CC;
