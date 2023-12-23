@@ -65,22 +65,44 @@ int countLattice(Vec2 lat1, Vec2 lat2)
 	return 100;
 }
 
-Vec2 positionToLattice(Vec2 pos)
+std::pair<int, int> positionToLattice(Vec2 pos)
 {
-	Vec2 ans = battleLattice[0][0];
+	std::pair<int, int> ans = { 0,0 };
 	for (int i = 0; i < 7; i++)
 		for (int j = 0; j < 3; j++)
 		{
-			if (battleLattice[i][j].distance(pos) < ans.distance(pos))
-				ans = battleLattice[i][j];
+			if (battleLattice[i][j].distance(pos) < battleLattice[ans.first][ans.second].distance(pos))
+				ans = { i,j + 1 };//如果是战斗区，则y轴加一，以便与备战区区分
 		}
 	for (int j = 0; j < 9; j++)
 	{
-		if (waitLattice[0][j].distance(pos) < ans.distance(pos))
-			ans = battleLattice[0][j];
+		if (waitLattice[0][j].distance(pos) < battleLattice[ans.first][ans.second].distance(pos))
+			ans = { 0,j };
 	}
-	float minDistance = ans.distance(pos);
+	float minDistance = battleLattice[ans.first][ans.second].distance(pos);
 	if (minDistance > oneLattice)//如果已经在格子区域之外（简易判断）
-		return { 10000,10000 };
+		return { -1,-1 };
 	return ans;
+}
+
+Vec2 latticeToPosition(std::pair<int, int> lat)
+{
+	int x = lat.first, y = lat.second;
+	if (y > 0)
+	{
+		y--;
+		return battleLattice[x][y];
+	}
+	return waitLattice[x][y];
+}
+
+bool judgeExist(std::pair<int, int>lat)
+{
+	int x = lat.first, y = lat.second;
+	if (y > 0)
+	{
+		y--;
+		return battleLatticeExist[x][y];
+	}
+	return waitLatticeExist[x][y];
 }

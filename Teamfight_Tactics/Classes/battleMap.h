@@ -7,11 +7,14 @@ public:
 	battleMap();
 	~battleMap();
 private:
-	bool battleLatticeIsEmpty[6][7];
-	bool waitLatticeIsEmpty[2][9];
+	bool battleLatticeExist[6][7];
+	bool waitLatticeExist[2][9];
 };
 Vec2 battleLattice[6][7];
 Vec2 waitLattice[2][9];
 int countLattice(Vec2 lat1, Vec2 lat2);
-Vec2 positionToLattice(Vec2 pos);
-float oneLattice = (battleLattice[0][1].x - battleLattice[0][0].x) * 2 / sqrt(3);
+std::pair<int, int>positionToLattice(Vec2 pos);
+Vec2 latticeToPosition(std::pair<int, int> lat);
+void battleMapinit();
+float oneLattice;
+bool judgeExist(std::pair<int, int>lat);
