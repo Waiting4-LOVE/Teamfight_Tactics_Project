@@ -226,8 +226,12 @@ void hero::skill()
 
 bool hero::die()
 {
-	if (HealthPoint <= 0)
+	if (HealthPoint <= 0) {
+		ChessExist[MapIntReturn(getPosition()).x][MapIntReturn(getPosition()).y] = 0;
+		setPosition(Point(10000, 10000));
+		set(10000, 10000);
 		return true;
+	}
 	return false;
 }
 

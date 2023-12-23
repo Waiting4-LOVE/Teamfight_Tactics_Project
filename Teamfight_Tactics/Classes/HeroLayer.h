@@ -1,6 +1,7 @@
 #include<cocos2d.h>
 #include"HeroFile.h"
-#include"PlayerData.h"
+#include"littleHero.h"
+
 
 USING_NS_CC;
 using namespace std;
@@ -17,11 +18,12 @@ public:
 
 	void pcShowPlayerArray();
 	void pcShowFightArray();
+	void ChessMove(hero* herocase, littleHero&playerdata, littleHero& AttackPlayer);
 private:
-	void update(PlayerData& playerdata);
-	Hero* GameSprite::updateChessCreate(int type);
+	void upgrade(littleHero& littlehero);
+	hero* HeroLayer::upgradeChessCreate(int type);
 
 	friend class GameScene;
-	float CountDistance(Hero* h1, Hero* h2);
+	float CountDistance(hero* h1, hero* h2);
 	float CountDistance(Point p1, Point p2);
 };
