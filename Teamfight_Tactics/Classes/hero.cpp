@@ -11,8 +11,30 @@ hero* hero::createhero(string picture_name)
 	return hero;
 }
 
-hero::hero() {
-	this->addChild(bloodFrame, 1);
+hero::hero() 
+{
+	picturenum = 0;
+	xtemp = x;
+	ytemp = y;
+
+	bloodBar->setBarChangeRate(Point(1, 0));
+	bloodBar->setType(ProgressTimer::Type::BAR);
+	bloodBar->setMidpoint(Point(0, 1));
+	bloodBar->setScaleX(0.22);
+    bloodBar->setScaleY(0.6);
+	bloodFrame->setScaleX(0.22);
+	bloodFrame->setScaleY(0.6);
+
+	blueBar->setBarChangeRate(Point(1, 0));
+	blueBar->setType(ProgressTimer::Type::BAR);
+	blueBar->setMidpoint(Point(0, 1));
+	blueBar->setScaleX(0.18);
+	blueBar->setScaleY(0.6);
+	blueFrame->setScaleX(0.18);
+	blueFrame->setScaleY(0.6);
+
+	this->scheduleUpdate();
+	//this->addChild(bloodFrame, 1);
 	this->addChild(bloodBar, 2);
 	this->addChild(blueFrame, 1);
 	this->addChild(blueBar, 2);
@@ -203,16 +225,26 @@ void hero::attack(float dt)
 
 void hero::bloodUpdate(float dt)
 {
-	float heroX = this->getPosition().x, heroY = this->getPosition().y;
-	bloodBar->setPosition(heroX, heroY + oneLattice);
+
+	blueBar->setPosition(Vec2(30, 80));
+	blueFrame->setPosition(Vec2(30, 80));
+	bloodBar->setPosition(Vec2(35, 90));
+	bloodFrame->setPosition(Vec2(35, 90));
+	bloodBar->setPercentage(float(HealthPoint) / float(maxHealthPoint) * 100);
+	bloodBar->setTag(HealthPoint);
+	blueBar->setPercentage(float(BluePoint) / float(maxBluePoint) * 100);
+	blueBar->setTag(BluePoint);
+	
+	/*float heroX = this->getPosition().x, heroY = this->getPosition().y;
+	bloodBar->setPosition(ccp(heroX, heroY + oneLattice));
 	bloodFrame->setPosition(heroX, heroY + oneLattice);
 	blueBar->setPosition(heroX, heroY + oneLattice - (bloodFrame->getContentSize().height + blueFrame->getContentSize().height) / 2);
 	blueFrame->setPosition(heroX, heroY + oneLattice - (bloodFrame->getContentSize().height + blueFrame->getContentSize().height) / 2);
 
 	bloodBar->setPercentage(100.0f * HealthPoint / maxHealthPoint);
-	//Blood->setTag(Health);
+	bloodBar->setTag(HealthPoint);
 	blueBar->setPercentage(100.0f * BluePoint / maxBluePoint);
-	//_Mana->setTag(Mana);
+	blueBar->setTag(BluePoint);*/
 }
 
 void hero::skill()
@@ -263,6 +295,6 @@ void hero::setPlayer(int player)
 	if (player == 0)
 	{
 
-		//Blood->setSprite(Sprite::create("OurBlood.png"));
+		//bloodBar->setSprite(Sprite::create("OurBlood.png"));
 	}
 }

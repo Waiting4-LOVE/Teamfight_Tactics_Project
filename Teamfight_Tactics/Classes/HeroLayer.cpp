@@ -1,13 +1,12 @@
 #include"HeroLayer.h"
 
-
 littleHero MyLittleHero;
 littleHero player2data;
 
 hero* CreateHero(int type) {
 	switch (type)
 	{
-	case 1://
+	case Hero1:
 		return hero1::createhero();
 		break;
 	default:
@@ -21,6 +20,7 @@ HeroLayer* HeroLayer::createHeroLayer() {
 	temp->retain();
 	return temp;
 }
+
 void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 	for (int i = 0; i < Array->num; i++) {
 		auto temp = ((hero*)Array->arr[i]);
@@ -54,6 +54,12 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 }
 
 bool HeroLayer::init() {
+	//auto sprite = hero1::createhero();
+
+	auto temp = hero1::createhero();  
+	temp->setPosition(1500, 500);
+	ccArrayAppendObject(MyLittleHero.m_playerArray, temp);
+
 	PlayerArrayInit(MyLittleHero.m_playerArray, 0);
 	PlayerArrayInit(player2data.m_playerArray, 1);      //  电脑玩家信息暂不显示
 	PlayerArrayInit(MyLittleHero.m_fightArray, 0);
@@ -100,8 +106,8 @@ void HeroLayer::ChessMove(hero* herocase, littleHero& playerdata, littleHero& At
 		herocase->set(herocase->getPosition() + (herocase->attackTarget->getPosition() - herocase->getPosition()) / distance * heroConsts::move_speed);  //将新位置传入类中
 	}
 	//连续移动
-}
-*/
+}*/
+
 
 void HeroLayer::update(float dt)
 {

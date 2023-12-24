@@ -116,9 +116,9 @@ protected:
 	int defenceMagic;//魔抗
 
 	//创建血条蓝条
-	Sprite* bloodFrame = Sprite::create("BloodFrame.jpg");
-	Sprite* blueFrame = Sprite::create("BloodFrame.jpg");
-	ProgressTimer* bloodBar = ProgressTimer::create(Sprite::create("Blood.jpg"));
+	Sprite* bloodFrame = Sprite::create("BloodFrame.png");
+	Sprite* blueFrame = Sprite::create("BloodFrame.png");
+	ProgressTimer* bloodBar = ProgressTimer::create(Sprite::create("Blood.png"));
 	ProgressTimer* blueBar = ProgressTimer::create(Sprite::create("Mana.png"));
 
 	/*装备加成属性*//*这样做的目的是因为装备加成是在基础属性之上进行的，而之后仍要访问基础属性*/
