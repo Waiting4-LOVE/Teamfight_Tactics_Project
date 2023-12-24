@@ -1,9 +1,10 @@
+#pragma once
 #include<cocos2d.h>
 #include"const.h"
 #include <string>
 #include"database.h"
-#include"littleHero.h"
-#include"Equipment.h"
+#include "littleHero.h"
+//#include"Equipment.h"
 using namespace cocos2d;
 using namespace heroConsts;
 using namespace std;
@@ -14,7 +15,7 @@ private:
 
 public:
 
-	ccArray* equipment = ccArrayNew(100);
+	ccArray* equipment = ccArrayNew(5);
 	string picturename;//图片名字
 	int picturenum;//图片数量
 	static hero* createhero(string picture_name);
@@ -51,6 +52,13 @@ public:
 	void setTempPosition() { xtemp = x; ytemp = y; }
 
 
+	//创建血条蓝条
+	Sprite* bloodFrame = Sprite::create("BloodFrame.png");
+	Sprite* blueFrame = Sprite::create("BloodFrame.png");
+	ProgressTimer* bloodBar = ProgressTimer::create(Sprite::create("Blood.png"));
+	ProgressTimer* blueBar = ProgressTimer::create(Sprite::create("Mana.png"));
+
+
 	float calculateDistance(Sprite* d_sprite);//计算本精灵与敌人距离函数
 	bool doDamage(int attackpoint);//我方收到伤害函数，这包括了我方护盾与血量的减少
 	bool blueClear();//释放技能要求蓝条满，释放技能之后蓝条清空
@@ -58,7 +66,7 @@ public:
 	void blueRocover();//回蓝函数
 	void healthRecoverOnce(int health_once);//回一次血//参数指的是一次回血量
 	void blueRecoverOnce();//回一次蓝
-	void EquipmentChange();
+	//void EquipmentChange();
 	void equipmentPutOn(Sprite* item);//佩戴装备函数,装备加成
 	void equipmentTakeOff(Sprite* item);//脱下装备函数，取消装备加成
 	//张圣坤的数据库调取对方精灵
@@ -114,11 +122,6 @@ protected:
 	int defencePhysics;//物抗
 	int defenceMagic;//魔抗
 
-	//创建血条蓝条
-	Sprite* bloodFrame = Sprite::create("BloodFrame.jpg");
-	Sprite* blueFrame = Sprite::create("BloodFrame.jpg");
-	ProgressTimer* bloodBar = ProgressTimer::create(Sprite::create("Blood.jpg"));
-	ProgressTimer* blueBar = ProgressTimer::create(Sprite::create("Mana.png"));
 
 	/*装备加成属性*//*这样做的目的是因为装备加成是在基础属性之上进行的，而之后仍要访问基础属性*/
 	int addHealthPoint;//增加的血量

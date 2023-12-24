@@ -1,8 +1,12 @@
 #include"HeroLayer.h"
+
+littleHero MyLittleHero;
+littleHero player2data;
+
 hero* CreateHero(int type) {
 	switch (type)
 	{
-	case 1:
+	case assassinator:
 		return hero1::createhero();
 		break;
 	default:
@@ -16,6 +20,7 @@ HeroLayer* HeroLayer::createHeroLayer() {
 	temp->retain();
 	return temp;
 }
+
 void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 	for (int i = 0; i < Array->num; i++) {
 		auto temp = ((hero*)Array->arr[i]);
@@ -39,7 +44,7 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 			temp1->set(10000, 10000);
 		}
 		temp1->setPlayer(temp->getPlayer());
-		temp1->EquipmentChange();
+		//temp1->EquipmentChange();
 		if (ccArrayContainsObject(Array, temp))
 			ccArrayRemoveObject(Array, temp);
 		ccArrayInsertObjectAtIndex(Array, temp1, i);
@@ -49,6 +54,11 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 }
 
 bool HeroLayer::init() {
+	//auto sprite = hero1::createhero();
+
+	auto temp = hero1::createhero();  
+
+	ccArrayAppendObject(MyLittleHero.m_playerArray, temp);
 	PlayerArrayInit(MyLittleHero.m_playerArray, 0);
 	PlayerArrayInit(player2data.m_playerArray, 1);      //  电脑玩家信息暂不显示
 	PlayerArrayInit(MyLittleHero.m_fightArray, 0);
@@ -95,8 +105,8 @@ void HeroLayer::ChessMove(hero* herocase, littleHero& playerdata, littleHero& At
 		herocase->set(herocase->getPosition() + (herocase->attackTarget->getPosition() - herocase->getPosition()) / distance * heroConsts::move_speed);  //将新位置传入类中
 	}
 	//连续移动
-}
-*/
+}*/
+
 
 void HeroLayer::update(float dt)
 {
@@ -112,7 +122,7 @@ void HeroLayer::update(float dt)
 	}
 }
 
-void HeroLayer::upgrade(littleHero& littlehero)
+/*void HeroLayer::upgrade(littleHero& littlehero)
 {
 
 	for (int i = 0; i < 16; i++)
@@ -181,9 +191,9 @@ void HeroLayer::upgrade(littleHero& littlehero)
 		}
 
 	}
-}
+}*/
 
-hero* HeroLayer::upgradeChessCreate(int type)
+/*hero* HeroLayer::upgradeChessCreate(int type)
 {
 	switch (type + 15)
 	{
@@ -191,8 +201,7 @@ hero* HeroLayer::upgradeChessCreate(int type)
 	default:
 		break;
 	}
-
-}
+}*/
 
 
 /*PC_Player相关*/

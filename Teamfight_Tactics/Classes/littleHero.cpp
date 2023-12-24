@@ -12,18 +12,12 @@ void littleHero::addExp(int exp) {
 	this->m_exp += exp;
 	this->countNextUPExp(); //升级并计算下一级经验值
 }
-MoveTo* littleHero::move(const Vec2 curPos) {
-	double dis = sqrt(pow(this->m_pos.x - curPos.x, 2) + pow(this->m_pos.y - curPos.y, 2)); //计算移动距离
-	double moveSec = dis / this->m_moveSpeed; //得到运动时间
-	auto moveTo = MoveTo::create(moveSec, curPos);
-	this->updatePos(curPos);
-	return moveTo;
-}
+
 
 void littleHero::countNextUPExp() {
-	if (this->m_exp >= EXP_FOR_LEVEL[this->m_level])
+	if (this->m_exp >= EXP_FOR_LEVEL[this->m_level-1])
 	{
-		this->m_exp -= EXP_FOR_LEVEL[this->m_level];
+		this->m_exp -= EXP_FOR_LEVEL[this->m_level-1];
 		this->m_level++;
 		return;
 	}

@@ -11,7 +11,29 @@ hero* hero::createhero(string picture_name)
 	return hero;
 }
 
-hero::hero() {
+hero::hero() 
+{
+	picturenum = 0;
+	xtemp = x;
+	ytemp = y;
+
+	bloodBar->setBarChangeRate(Point(1, 0));
+	bloodBar->setType(ProgressTimer::Type::BAR);
+	bloodBar->setMidpoint(Point(0, 1));
+	bloodBar->setScaleX(0.22);
+    bloodBar->setScaleY(0.6);
+	bloodFrame->setScaleX(0.22);
+	bloodFrame->setScaleY(0.6);
+
+	blueBar->setBarChangeRate(Point(1, 0));
+	blueBar->setType(ProgressTimer::Type::BAR);
+	blueBar->setMidpoint(Point(0, 1));
+	blueBar->setScaleX(0.18);
+	blueBar->setScaleY(0.6);
+	blueFrame->setScaleX(0.18);
+	blueFrame->setScaleY(0.6);
+
+	this->scheduleUpdate();
 	this->addChild(bloodFrame, 1);
 	this->addChild(bloodBar, 2);
 	this->addChild(blueFrame, 1);
@@ -40,7 +62,7 @@ float hero::calculateDistance(Sprite* d_sprite) {
 
 Sprite* hero::getEnemy()
 {
-
+	return NULL;
 }
 
 
@@ -203,6 +225,16 @@ void hero::attack(float dt)
 
 void hero::bloodUpdate(float dt)
 {
+	
+	blueBar->setPosition(Vec2(1000, 500));
+	blueFrame->setPosition(Vec2(1000, 500));
+	bloodBar->setPosition(Vec2(1000, 500));
+	bloodFrame->setPosition(Vec2(1000, 500));
+	bloodBar->setPercentage(float(HealthPoint) / float(maxHealthPoint) * 100);
+	bloodBar->setTag(HealthPoint);
+	blueBar->setPercentage(float(BluePoint) / float(maxBluePoint) * 100);
+	blueBar->setTag(BluePoint);
+	/*
 	float heroX = this->getPosition().x, heroY = this->getPosition().y;
 	bloodBar->setPosition(heroX, heroY + oneLattice);
 	bloodFrame->setPosition(heroX, heroY + oneLattice);
@@ -210,9 +242,9 @@ void hero::bloodUpdate(float dt)
 	blueFrame->setPosition(heroX, heroY + oneLattice - (bloodFrame->getContentSize().height + blueFrame->getContentSize().height) / 2);
 
 	bloodBar->setPercentage(100.0f * HealthPoint / maxHealthPoint);
-	//Blood->setTag(Health);
+	bloodBar->setTag(HealthPoint);
 	blueBar->setPercentage(100.0f * BluePoint / maxBluePoint);
-	//_Mana->setTag(Mana);
+	blueBar->setTag(BluePoint);*/
 }
 
 void hero::skill()
@@ -248,4 +280,21 @@ void hero::reset()
 	this->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1.0f / this->speedAttack);
 	this->schedule(CC_SCHEDULE_SELECTOR(hero::move), 1 / 60.0f);
 	this->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+}
+
+void hero::set(float x1 = 0, float y1 = 0)  //传入数值，有两种重载形式
+{
+	x = x1;
+	y = y1;
+}
+
+void hero::setPlayer(int player)
+{
+	OfPlayer = player;
+	if (player == 0)
+	{
+
+		//bloodBar->setSprite(Sprite::create("OurBlood.png"));
+	}
 }

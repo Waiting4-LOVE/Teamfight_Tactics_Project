@@ -1,3 +1,4 @@
+#pragma once
 #include "cocos2d.h"
 #include"GameData.h"
 #include <math.h>
@@ -60,7 +61,6 @@ public:
 	//CREATE_FUNC(littleHero);
 
 	/*------------------------控制小小英雄移动----------------------*/
-	inline MoveTo* move(const Vec2 curPos); //移动小小英雄状态
 	inline void updatePos(const Vec2& pos) { this->m_pos = pos; } //更新当前位置
 	
 	friend class LittleHeroLayer;
@@ -72,7 +72,7 @@ protected:
 	Vec2 m_pos = this->m_SrcPos; //当前位置
 	int m_maxBlood = 100; //最大血量
 	int m_blood = this->m_maxBlood; //当前血量，初始为100,
-	const int m_moveSpeed = 300; //移动速度
+	const int m_moveSpeed = 500; //移动速度
 	int m_upExp = 10; //升级需要的经验值
 	int m_coins = 100; //金币
 	int m_exp = 0; //经验值
@@ -87,6 +87,4 @@ protected:
 };
 extern littleHero MyLittleHero;
 extern littleHero player2data;
-
-
 
