@@ -32,7 +32,7 @@ bool BattleScene::init()
     this->addChild(heroLayer, 3);   //英雄层
 	// 创建一个鼠标事件监听器
 	auto mouseListener = EventListenerMouse::create();
-
+    mouseListener->onMouseScroll = CC_CALLBACK_1(BattleScene::onMouseScroll, this);
 	// 设置鼠标按下事件处理
 
 	// 添加监听器到事件分发器
@@ -113,11 +113,27 @@ void BattleScene::ChessMoveInMouse()
 
 void BattleScene::onMouseScroll(Event* event)
 {
-	EventMouse* e = (EventMouse*)event;
+    EventMouse* e = (EventMouse*)event;
+    float scrollY = e->getScrollY();
 
-	e->getScrollX();
-	e->getScrollY();
+    // 设定缩放因子，例如每次滚动改变10%的大小
+    const float scaleFactor = 0.1f;
 
+    // 获取当前图层的缩放值
+    float currentScale = this->getScale();
+    CCLOG("cur%f", currentScale);
+    // 根据滚轮方向计算新的缩放值
+    if (scrollY < 0 && currentScale < 1.6) {
+        // 向上滚动放大
+        currentScale *= (1 + scaleFactor);
+    }
+    else if(currentScale-1>1e-6){
+        // 向下滚动缩小
+        currentScale *= (1 - scaleFactor);
+    }
+    CCLOG("now%f", currentScale);
+    // 设置新的缩放值
+    this->setScale(currentScale);
 }
 
 void BattleScene::onMouseMove(Event* event)
