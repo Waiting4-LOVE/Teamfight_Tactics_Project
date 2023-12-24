@@ -1,31 +1,12 @@
 #include "battleMap.h"
 USING_NS_CC;
-Vec2 battleLattice[6][7];
-Vec2 waitLattice[2][9];
-
-float oneLattice;
-battleMap::battleMap()
-{
-
-}
-
-battleMap::~battleMap()
-{
-
-}
 
 void battleMapinit()
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	/*
-	方案
-	横向：
-	25等分。偶数行第7格右边界作为起始点，每两格一个点位，共7个点位；奇数行第6格右侧开始，其余同偶数行（由第0行开始）
-	纵向：
-	每行的点位间距是横向根号3倍。共8行。
-
-	左下角起始位置由计算得出
+	战斗格子位
 	*/
 	float pieceX = 861.0f / 1920.0f * visibleSize.width / 15.0f;//六边形宽度（不是边长）的一半
 	oneLattice = pieceX / sqrt(3) * 2;//六边形边长
@@ -100,7 +81,21 @@ Vec2 latticeToPosition(std::pair<int, int> lat)
 	return waitLattice[x][y];
 }
 
-bool judgeExist(std::pair<int, int>lat)
+void setLatticeExist(std::pair<int, int> lat, int exist)
+{
+	int x = lat.first, y = lat.second;
+	if (y > 0)
+	{
+		y--;
+		battleLatticeExist[x][y] = exist;
+	}
+	else
+	{
+		waitLatticeExist[x][y] = exist;
+	}
+}
+
+bool judgeExist(std::pair<int, int> lat)
 {
 	int x = lat.first, y = lat.second;
 	if (y > 0)
@@ -110,3 +105,9 @@ bool judgeExist(std::pair<int, int>lat)
 	}
 	return waitLatticeExist[x][y];
 }
+
+Vec2 battleLattice[6][7];
+Vec2 waitLattice[2][9];
+float oneLattice;
+bool battleLatticeExist[6][7];
+bool waitLatticeExist[2][9];

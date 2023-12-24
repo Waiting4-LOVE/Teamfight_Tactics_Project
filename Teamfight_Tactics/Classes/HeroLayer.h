@@ -1,7 +1,7 @@
 #pragma once
 #include<cocos2d.h>
 #include"HeroFile.h"
-
+#include"battleMap.h"
 
 USING_NS_CC;
 using namespace std;
