@@ -35,8 +35,6 @@ hero1* hero1::createhero() {
 	//hero1->addChild(hero1->bloodBar, 2);
 	//hero1->picturename = "hero1.png";
 	hero1->addChild(temp);
-	temp->setPosition(1000, 500);
-	hero1->set(1000, 500);
 
 	hero1->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
