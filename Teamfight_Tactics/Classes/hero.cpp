@@ -225,18 +225,18 @@ void hero::attack(float dt)
 
 void hero::bloodUpdate(float dt)
 {
-	
-	blueBar->setPosition(Vec2(1000, 500));
-	blueFrame->setPosition(Vec2(1000, 500));
-	bloodBar->setPosition(Vec2(1000, 500));
-	bloodFrame->setPosition(Vec2(1000, 500));
+
+	blueBar->setPosition(Vec2(30, 80));
+	blueFrame->setPosition(Vec2(30, 80));
+	bloodBar->setPosition(Vec2(35, 90));
+	bloodFrame->setPosition(Vec2(35, 90));
 	bloodBar->setPercentage(float(HealthPoint) / float(maxHealthPoint) * 100);
 	bloodBar->setTag(HealthPoint);
 	blueBar->setPercentage(float(BluePoint) / float(maxBluePoint) * 100);
 	blueBar->setTag(BluePoint);
-	/*
-	float heroX = this->getPosition().x, heroY = this->getPosition().y;
-	bloodBar->setPosition(heroX, heroY + oneLattice);
+	
+	/*float heroX = this->getPosition().x, heroY = this->getPosition().y;
+	bloodBar->setPosition(ccp(heroX, heroY + oneLattice));
 	bloodFrame->setPosition(heroX, heroY + oneLattice);
 	blueBar->setPosition(heroX, heroY + oneLattice - (bloodFrame->getContentSize().height + blueFrame->getContentSize().height) / 2);
 	blueFrame->setPosition(heroX, heroY + oneLattice - (bloodFrame->getContentSize().height + blueFrame->getContentSize().height) / 2);

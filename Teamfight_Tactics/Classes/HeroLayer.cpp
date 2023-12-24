@@ -6,7 +6,7 @@ littleHero player2data;
 hero* CreateHero(int type) {
 	switch (type)
 	{
-	case assassinator:
+	case Hero1:
 		return hero1::createhero();
 		break;
 	default:
@@ -57,8 +57,8 @@ bool HeroLayer::init() {
 	//auto sprite = hero1::createhero();
 
 	auto temp = hero1::createhero();  
-
 	ccArrayAppendObject(MyLittleHero.m_playerArray, temp);
+
 	PlayerArrayInit(MyLittleHero.m_playerArray, 0);
 	PlayerArrayInit(player2data.m_playerArray, 1);      //  电脑玩家信息暂不显示
 	PlayerArrayInit(MyLittleHero.m_fightArray, 0);

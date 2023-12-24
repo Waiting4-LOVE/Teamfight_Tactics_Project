@@ -2,7 +2,7 @@
 
 
 hero1::hero1() {
-	type = assassinator;
+	type = Hero1;
 	maxHealthPoint = 100;
 	maxBluePoint = 100;
 	maxShieldPoint = 100;
@@ -25,18 +25,24 @@ hero1* hero1::createhero() {
 	//auto Hero1 = new hero1();
 	//Hero1->set(100, 100);
 	auto hero1 = hero1::create();
+	auto temp = Sprite::create("hero1.png");
+
 	hero1->bloodBar->setBarChangeRate(Point(1, 0));
 	hero1->bloodBar->setType(ProgressTimer::Type::BAR);
 	hero1->bloodBar->setMidpoint(Point(0, 1));
-	hero1->bloodBar->setScaleX(1);
+	hero1->bloodBar->setScaleX(0.22);
 	hero1->scheduleUpdate();
 	//hero1->addChild(hero1->bloodBar, 2);
 	//hero1->picturename = "hero1.png";
-	auto temp = Sprite::create("hero1.png");
+	hero1->addChild(temp);
 	temp->setPosition(1000, 500);
 	hero1->set(1000, 500);
-	hero1->addChild(temp);
+
 	hero1->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+	
+
+	
 	//hero1->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / hero1->speedAttack);
 	hero1->autorelease();
 	return hero1;

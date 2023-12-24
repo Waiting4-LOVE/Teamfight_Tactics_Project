@@ -2,6 +2,7 @@
 #include<cocos2d.h>
 #include"const.h"
 #include <string>
+#include "RoundTimer.h"
 #include"database.h"
 #include "littleHero.h"
 //#include"Equipment.h"
@@ -12,7 +13,7 @@ using namespace std;
 class hero :public Sprite
 {
 private:
-
+	RoundTimer* test_timer = RoundTimer::create(5);
 public:
 
 	ccArray* equipment = ccArrayNew(5);
