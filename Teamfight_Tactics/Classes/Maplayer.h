@@ -15,7 +15,3 @@ struct IntMap {
 	int x;
 	int y;
 };
-
-IntMap MapIntReturn(Point point);
-extern Point mapPosition[8][10];
-extern bool ChessExist[8][10];

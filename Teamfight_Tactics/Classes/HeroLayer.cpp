@@ -49,7 +49,8 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 			ccArrayRemoveObject(Array, temp);
 		ccArrayInsertObjectAtIndex(Array, temp1, i);
 		this->addChild(temp1);
-		ChessExist[MapIntReturn(temp->getTempPosition()).x][MapIntReturn(temp->getTempPosition()).y] = 1;
+		auto lat = positionToLattice(temp->getPosition());
+		setLatticeExist(lat, 1);//设置占位
 	}
 }
 
@@ -205,14 +206,13 @@ void HeroLayer::update(float dt)
 	}
 }*/
 
-
 /*PC_Player相关*/
 void HeroLayer::pcShowPlayerArray()
 {
 	for (int i = 0; i < player2data.m_playerArray->num; i++)
 	{
-		((hero*)player2data.m_playerArray->arr[i])->setPosition(mapPosition[i][9].x, mapPosition[i][9].y);
-		((hero*)player2data.m_playerArray->arr[i])->set(mapPosition[i][9].x, mapPosition[i][9].y);
+		hero* cur = (hero*)player2data.m_playerArray->arr[i];
+		cur->setPosition(Director::getInstance()->getVisibleOrigin() * 2 + Director::getInstance()->getVisibleSize() - cur->getPosition());
 	}
 }
 void HeroLayer::pcShowFightArray()
@@ -220,32 +220,9 @@ void HeroLayer::pcShowFightArray()
 	/*位置初始化*/
 	for (int i = 0; i < player2data.m_fightArray->num; i++)
 	{
-		if (i >= 0 && i <= 7)
-		{
-			((hero*)player2data.m_fightArray->arr[i])->setPosition(mapPosition[i][5].x, mapPosition[i][5].y);
-			((hero*)player2data.m_fightArray->arr[i])->set(mapPosition[i][5].x, mapPosition[i][5].y);
-			ChessExist[i][5] = 1;
-		}
-		else if (i >= 8 && i <= 15)
-		{
-			((hero*)player2data.m_fightArray->arr[i])->setPosition(mapPosition[i - 8][6].x, mapPosition[i - 8][6].y);
-			((hero*)player2data.m_fightArray->arr[i])->set(mapPosition[i - 8][6].x, mapPosition[i - 8][6].y);
-			ChessExist[i][6] = 1;
-		}
-		else if (i >= 16 && i <= 23)
-		{
-			((hero*)player2data.m_fightArray->arr[i])->setPosition(mapPosition[i - 16][7].x, mapPosition[i - 16][7].y);
-			((hero*)player2data.m_fightArray->arr[i])->set(mapPosition[i - 16][7].x, mapPosition[i - 16][7].y);
-			ChessExist[i][7] = 1;
-		}
-		else if (i >= 24 && i <= 31)
-		{
-			((hero*)player2data.m_fightArray->arr[i])->setPosition(mapPosition[i - 24][8].x, mapPosition[i - 24][8].y);
-			((hero*)player2data.m_fightArray->arr[i])->set(mapPosition[i - 24][8].x, mapPosition[i - 24][8].y);
-			ChessExist[i][8] = 1;
-		}
+		hero* cur = (hero*)player2data.m_fightArray->arr[i];
+		cur->setPosition(Director::getInstance()->getVisibleOrigin() * 2 + Director::getInstance()->getVisibleSize() - cur->getPosition());
 	}
-
 }
 
 
@@ -254,6 +231,7 @@ float HeroLayer::CountDistance(hero* c1, hero* c2)
 	return sqrt(pow((c1->getPosition().x - c2->getPosition().x), 2)
 		+ pow((c1->getPosition().y - c2->getPosition().y), 2));
 }
+
 float HeroLayer::CountDistance(Point p1, Point p2)
 {
 	return sqrt(pow((p1.x - p2.x), 2)
