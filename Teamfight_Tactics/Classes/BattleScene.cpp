@@ -30,6 +30,9 @@ bool BattleScene::init()
 	this->addChild(littleLayer, 1); //小英雄层
 	this->addChild(timer, 2);        //计时器层
     this->addChild(heroLayer, 3);   //英雄层
+
+
+    heroLayer->scheduleUpdate();
 	// 创建一个鼠标事件监听器
 	auto mouseListener = EventListenerMouse::create();
 
@@ -52,6 +55,64 @@ void BattleScene::menuCloseCallback(Ref* pSender)
 
 
 }
+/*
+void BattleScene::addChess(littleHero& littlehero, int playerinfo)
+{
+
+    if (littlehero.haveNewHero)                  //若有新棋子加入
+    {
+        bool flag = 1;
+        auto temp = ((hero*)(littlehero.m_playerArray->arr[littlehero.m_playerArray->num - 1]));
+        if (playerinfo == 0)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+
+                if (ChessExist[i][0 + 9 * playerinfo] == 0)
+                {
+                    littlehero.m_coins -= temp->getCoinsNeeded();
+                    heroLayer->addChild(temp);
+                    temp->setPosition(mapPosition[i][0 + 9 * playerinfo].x, mapPosition[i][0 + 9 * playerinfo].y);
+                    temp->set(mapPosition[i][0 + 9 * playerinfo].x, mapPosition[i][0 + 9 * playerinfo].y);
+                    temp->setTempPosition();
+                    temp->retain();
+                    littlehero.haveNewHero = 0;
+                    //temp->setPlayer(0);
+                    temp->setPlayer(playerinfo);
+                    littlehero.heronumber[temp->getType()]++;     //记录其棋子升级信息
+                    ChessExist[i][0 + 9 * playerinfo] = 1;        //添加成功
+                    flag = 0;
+                    littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
+                    flag = 0;
+                    break;
+
+                }
+            }
+        }
+        else
+        {
+            littlehero.m_coins -= temp->getCoinsNeeded();
+            heroLayer->addChild(temp);
+            temp->setPosition(10000, 10000);
+            temp->set(10000, 10000);
+            temp->setPlayer(playerinfo);
+            littlehero.heronumber[temp->getType()]++;
+            littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
+            flag = 0;
+            littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
+            flag = 0;
+        }
+        if (flag)
+        {
+            ccArrayRemoveObject(littlehero.m_playerArray, temp);   //添加失败
+            littlehero.haveNewHero = 0;
+
+        }
+    }
+}*/
+
+
+
 
 void BattleScene::update(float dt)
 {
@@ -63,7 +124,7 @@ void BattleScene::update(float dt)
 		addChess(player2data, 1);
 		pc_player.pcJudgeMoneyUsage();*/
 	}
-
+    heroLayer->scheduleUpdate();
 	/*addChess(player1data, 0);
 	addChess(player2data, 1);*/
 

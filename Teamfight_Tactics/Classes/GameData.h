@@ -59,7 +59,8 @@ extern GameData* global_data;
 enum ChessType
 {
 	None = -1,
-	Hero1
+	Hero1,
+	Hero2
 	//2ÐÇÓ¢ÐÛ
 
 	//3ÐÇÓ¢ÐÛ

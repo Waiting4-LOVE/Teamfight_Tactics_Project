@@ -17,7 +17,7 @@ public:
 	void update(float dt);
 	void pcShowPlayerArray();
 	void pcShowFightArray();
-	//void ChessMove(hero* herocase, littleHero&playerdata, littleHero& AttackPlayer);
+	void ChessMove(hero* herocase, littleHero&playerdata, littleHero& AttackPlayer);
 
 private:
 	//void upgrade(littleHero& littlehero);

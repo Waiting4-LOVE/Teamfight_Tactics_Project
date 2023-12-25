@@ -13,8 +13,8 @@ hero1::hero1() {
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 10;
 	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 225;
+	speedAttack = 0.5;
+	distanceAttack =3;
 	blueAttack = maxBluePoint;
 	criticalChance = 0.05;
 	defencePhysics = 5;
@@ -31,6 +31,11 @@ hero1* hero1::createhero() {
 	hero1->bloodBar->setType(ProgressTimer::Type::BAR);
 	hero1->bloodBar->setMidpoint(Point(0, 1));
 	hero1->bloodBar->setScaleX(0.22);
+	hero1->blueBar->setBarChangeRate(Point(1, 0));
+	hero1->blueBar->setType(ProgressTimer::Type::BAR);
+	hero1->blueBar->setMidpoint(Point(0, 1));
+	hero1->blueBar->setScaleX(0.22);
+
 	hero1->scheduleUpdate();
 	//hero1->addChild(hero1->bloodBar, 2);
 	//hero1->picturename = "hero1.png";
@@ -41,7 +46,7 @@ hero1* hero1::createhero() {
 	
 
 	
-	//hero1->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / hero1->speedAttack);
+	hero1->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1.0f / hero1->speedAttack);
 	hero1->autorelease();
 	return hero1;
 }

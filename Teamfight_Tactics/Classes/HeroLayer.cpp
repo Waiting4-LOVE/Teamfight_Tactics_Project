@@ -9,6 +9,9 @@ hero* CreateHero(int type) {
 	case Hero1:
 		return hero1::createhero();
 		break;
+	case Hero2:
+		return hero2::createhero();
+		break;
 	default:
 		break;
 	}
@@ -56,20 +59,26 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 
 bool HeroLayer::init() {
 	//auto sprite = hero1::createhero();
-
+	battleMapinit();
 	auto temp = hero1::createhero();  
-	temp->set(1000, 500);
+	temp->set(1000,500);
 	temp->setTempPosition();
-	ccArrayAppendObject(MyLittleHero.m_playerArray, temp);
+	auto temp1 = hero2::createhero();
+	temp1->set(1280, 800);
+	temp1->setTempPosition();
+
+	ccArrayAppendObject(MyLittleHero.m_fightArray, temp);
+	ccArrayAppendObject(player2data.m_fightArray, temp1);
 
 	PlayerArrayInit(MyLittleHero.m_playerArray, 0);
-	PlayerArrayInit(player2data.m_playerArray, 1);      //  电脑玩家信息暂不显示
+	PlayerArrayInit(player2data.m_playerArray, 0);      //  电脑玩家信息暂不显示
 	PlayerArrayInit(MyLittleHero.m_fightArray, 0);
-	PlayerArrayInit(player2data.m_fightArray, 1);
+	PlayerArrayInit(player2data.m_fightArray, 0);
+
 	return true;
 }
 
-/*
+
 void HeroLayer::ChessMove(hero* herocase, littleHero& playerdata, littleHero& AttackPlayer)
 {
 	Point a(0, 0);
@@ -108,7 +117,7 @@ void HeroLayer::ChessMove(hero* herocase, littleHero& playerdata, littleHero& At
 		herocase->set(herocase->getPosition() + (herocase->attackTarget->getPosition() - herocase->getPosition()) / distance * heroConsts::move_speed);  //将新位置传入类中
 	}
 	//连续移动
-}*/
+}
 
 
 void HeroLayer::update(float dt)
@@ -116,12 +125,12 @@ void HeroLayer::update(float dt)
 	for (int i = 0; i < MyLittleHero.m_fightArray->num; i++)
 	{
 		((hero*)(MyLittleHero.m_fightArray->arr[i]))->die();
-		//ChessMove((hero*)(MyLittleHero.m_fightArray->arr[i]), MyLittleHero, player2data);
+		ChessMove((hero*)(MyLittleHero.m_fightArray->arr[i]), MyLittleHero, player2data);
 	}
 	for (int i = 0; i < player2data.m_fightArray->num; i++)
 	{
 		((hero*)(player2data.m_fightArray->arr[i]))->die();
-		//ChessMove((hero*)(player2data.m_fightArray->arr[i]), player2data, MyLittleHero);
+		ChessMove((hero*)(player2data.m_fightArray->arr[i]), player2data, MyLittleHero);
 	}
 }
 
