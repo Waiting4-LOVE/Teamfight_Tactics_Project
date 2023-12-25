@@ -226,10 +226,10 @@ void hero::attack(float dt)
 void hero::bloodUpdate(float dt)
 {
 
-	blueBar->setPosition(Vec2(0, this->_contentSize.height + 5));
-	blueFrame->setPosition(Vec2(0, this->_contentSize.height + 5));
-	bloodBar->setPosition(Vec2(0, this->_contentSize.height + 15));
-	bloodFrame->setPosition(Vec2(0, this->_contentSize.height + 15));
+	blueBar->setPosition(Vec2(0, this->_contentSize.height + 50));
+	blueFrame->setPosition(Vec2(0, this->_contentSize.height + 50));
+	bloodBar->setPosition(Vec2(0, this->_contentSize.height + 60));
+	bloodFrame->setPosition(Vec2(0, this->_contentSize.height + 60));
 	bloodBar->setPercentage(float(HealthPoint) / float(maxHealthPoint) * 100);
 	bloodBar->setTag(HealthPoint);
 	blueBar->setPercentage(float(BluePoint) / float(maxBluePoint) * 100);
@@ -259,7 +259,8 @@ void hero::skill()
 bool hero::die()
 {
 	if (HealthPoint <= 0) {
-		ChessExist[MapIntReturn(getPosition()).x][MapIntReturn(getPosition()).y] = 0;
+		setLatticeExist(positionToLattice(getPosition()), 0);
+		//ChessExist[MapIntReturn(getPosition()).x][MapIntReturn(getPosition()).y] = 0;
 		setPosition(Point(10000, 10000));
 		set(10000, 10000);
 		return true;
@@ -297,4 +298,21 @@ void hero::setPlayer(int player)
 
 		//bloodBar->setSprite(Sprite::create("OurBlood.png"));
 	}
+}
+
+void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
+{
+	Sprite* bullet = Sprite::create(picturename);
+	this->addChild(bullet);
+	bullet->setPosition(40, 30);
+
+	auto move = MoveBy::create(1.f, deltaPos);
+	auto back = MoveTo::create(0.f, Vec2(40, 30));
+	auto appear = FadeIn::create(0.f);
+	auto disappear = FadeOut::create(0.f);
+
+	auto actionTo = Sequence::createWithTwoActions(appear, move);
+	auto actionBack = Sequence::createWithTwoActions(disappear, back);
+	auto all = Sequence::createWithTwoActions(actionTo, actionBack);
+	bullet->runAction(Repeat::create(all, 1));
 }

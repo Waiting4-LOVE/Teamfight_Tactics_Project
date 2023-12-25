@@ -26,7 +26,7 @@ hero1* hero1::createhero() {
 	//Hero1->set(100, 100);
 	auto hero1 = hero1::create();
 	auto temp = Sprite::create("hero1.png");
-
+	temp->setScale(2.5);
 	hero1->bloodBar->setBarChangeRate(Point(1, 0));
 	hero1->bloodBar->setType(ProgressTimer::Type::BAR);
 	hero1->bloodBar->setMidpoint(Point(0, 1));

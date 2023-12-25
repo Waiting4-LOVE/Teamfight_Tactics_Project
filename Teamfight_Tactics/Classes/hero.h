@@ -78,6 +78,7 @@ public:
 	void skill();//放技能
 	bool die();
 	virtual void releaseSkill();
+	void hero::shootbullet(string picturename, Point deltaPos, hero* mychess);
 	void reset();
 	hero* attackTarget;//攻击目标
 
