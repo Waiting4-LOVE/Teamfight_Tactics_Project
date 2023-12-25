@@ -27,8 +27,12 @@
 
 #include "cocos2d.h"
 #include "Maplayer.h"
+#include "RoundTimer.h"
 #include "LittleHeroLayer.h"
-
+#include "GameData.h"
+#include "HeroLayer.h"
+#include "helpAndSetLayer.h"
+#include "ShopLayer.h"
 class BattleScene : public cocos2d::Scene
 {
 public:
@@ -39,11 +43,50 @@ public:
     // a selector callback
     //void GotoGamescene(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
+
+private:
+    /**********计时器及Update**************/
+    RoundTimer* timer = RoundTimer::create(10);
+    void update(float dt);
+    void TurnInfoInit();
+
+
+    //备战期鼠标移动函数
+    void ChessMoveInMouse();
+    void onMouseScroll(Event* event);
+    void onMouseMove(Event* event);
+    void onMouseUp(Event* event);
+    void onMouseDown(Event* event);
+    void GameStartMouseInit();
+    //Point MapJudge(Point point);//判断鼠标是否在地图内
+    int MouseToChess = -1;//鼠标指向的棋子
+
+    //整合函数
+    bool FindMouseTarget(ccArray* Array, EventMouse* e);
+    //void SoldChess(Chess* temp, ccArray* Array, PlayerData& playerdata);
+
+    void BattleScene::addChess(littleHero& littlehero, int playerinfo);
+
+
+    void Win();  //判断打斗结束
+   /* void JudgeWin(PlayerData& playerdata, int sum[]);
+    void WinRetain(ccArray* Array);
+
+    void ToFightArray(Chess* chess, PlayerData& playerdata);
+    void ToPlayerArray(Chess* chess, PlayerData& playerdata);*/
     /***********所需子Layer************/
     MapLayer* map = MapLayer::createMapLayer();
     LittleHeroLayer* littleLayer = LittleHeroLayer::createPlayer();
+    HeroLayer* heroLayer = HeroLayer::createHeroLayer();
+    helpAndSetLayer* hsLayer = helpAndSetLayer::createLayer();
+    ShopLayer* shopLayer = ShopLayer::createShopLayer();
 
-    
+    int turn = 0;
+    /*装备系统*/
+   /* Package* layerPackage = Package::createPackage();
+    bool EquipSearchChess(const float EquipX, const float EquipY, const int EquipIndex);
+    int MouseSelectedEquip = -1;*/
+
     CREATE_FUNC(BattleScene);
 
 };

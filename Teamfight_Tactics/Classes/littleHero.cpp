@@ -1,26 +1,22 @@
 #include "littleHero.h"
 
+//littleHero::littleHero() :m_maxBlood(100), m_moveSpeed(300), m_coins(0), m_exp(0), m_level(1), m_upExp(100),m_SrcPos(Vec2(505, 305)) {}
+
+//littleHero::littleHero(std::string picName) : m_blood(100), m_moveSpeed(300), m_coins(0), m_exp(0), m_level(1), m_upExp(100), m_picName(picName) {}
+
 //littleHero::littleHero() {}
 
 //littleHero::littleHero(std::string picName) : m_picName(picName) {}
 
-void littleHero::addExp(int exp) {
+void littleHero::addExp(const int exp) {
 	this->m_exp += exp;
 	this->countNextUPExp(); //升级并计算下一级经验值
 }
 
-MoveTo* littleHero::move(const Vec2 curPos) {
-	double dis = sqrt(pow(this->m_pos.x - curPos.x, 2) + pow(this->m_pos.y - curPos.y, 2)); //计算移动距离
-	double moveSec = dis / this->m_moveSpeed; //得到运动时间
-	auto moveTo = MoveTo::create(moveSec, curPos);
-	this->updatePos(curPos);
-	return moveTo;
-}
-
 void littleHero::countNextUPExp() {
-	if (this->m_exp >= EXP_FOR_LEVEL[this->m_level - 1])
+	if (this->m_exp >= EXP_FOR_LEVEL[this->m_level-1])
 	{
-		this->m_exp -= EXP_FOR_LEVEL[this->m_level - 1];
+		this->m_exp -= EXP_FOR_LEVEL[this->m_level-1];
 		this->m_level++;
 		return;
 	}
@@ -76,28 +72,4 @@ void littleHero::lose(int hurt) {
 	this->addExp(2);
 	//受到伤害
 	this->hurt(hurt);
-}
-
-void littleHero::remain() {
-	this->m_playerArray = ccArrayNew(9); //玩家备战区棋子数组
-	this->m_fightArray = ccArrayNew(15);
-	this->m_maxBlood = 100;
-	this->m_blood = 100;
-	this->m_level = 1;
-	this->m_upExp = this->EXP_FOR_LEVEL[0];
-	this->m_coins = 10;
-	this->m_exp = 0;
-	this->m_round = 0;
-	this->m_continueWin = 0;
-	this->m_continueLose = 0;
-	this->m_occupiedSlot = false;
-	this->m_isPackageOpened = 0;
-	for (int i = 0; i < 12; i++){
-		if (i < 3){
-			for (int j = 0; j < 4; j++){
-				this->m_packageSlot[i][j] = packageSlot(0, 0);
-			}
-		}
-		this->m_slotPoint[i] = Point(0, 0);
-	}
 }

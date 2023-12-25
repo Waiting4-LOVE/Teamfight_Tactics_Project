@@ -61,6 +61,7 @@ enum ChessType
 	None = -1,
 	
 	//2ÐÇÓ¢ÐÛ
+	Hero1,
 
 	//3ÐÇÓ¢ÐÛ
 	
