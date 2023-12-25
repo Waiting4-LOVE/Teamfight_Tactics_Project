@@ -11,7 +11,7 @@ hero* hero::createhero(string picture_name)
 	return hero;
 }
 
-hero::hero() 
+hero::hero()
 {
 	picturenum = 0;
 	xtemp = x;
@@ -21,7 +21,7 @@ hero::hero()
 	bloodBar->setType(ProgressTimer::Type::BAR);
 	bloodBar->setMidpoint(Point(0, 1));
 	bloodBar->setScaleX(0.22);
-    bloodBar->setScaleY(0.6);
+	bloodBar->setScaleY(0.6);
 	bloodFrame->setScaleX(0.22);
 	bloodFrame->setScaleY(0.6);
 
@@ -34,7 +34,7 @@ hero::hero()
 	blueFrame->setScaleY(0.6);
 
 	this->scheduleUpdate();
-	//this->addChild(bloodFrame, 1);
+	this->addChild(bloodFrame, 1);
 	this->addChild(bloodBar, 2);
 	this->addChild(blueFrame, 1);
 	this->addChild(blueBar, 2);
@@ -234,7 +234,7 @@ void hero::bloodUpdate(float dt)
 	bloodBar->setTag(HealthPoint);
 	blueBar->setPercentage(float(BluePoint) / float(maxBluePoint) * 100);
 	blueBar->setTag(BluePoint);
-	
+
 	/*float heroX = this->getPosition().x, heroY = this->getPosition().y;
 	bloodBar->setPosition(ccp(heroX, heroY + oneLattice));
 	bloodFrame->setPosition(heroX, heroY + oneLattice);
@@ -259,7 +259,7 @@ void hero::skill()
 bool hero::die()
 {
 	if (HealthPoint <= 0) {
-		ChessExist[MapIntReturn(getPosition()).x][MapIntReturn(getPosition()).y] = 0;
+		setLatticeExist(positionToLattice(getPosition()), 0);
 		setPosition(Point(10000, 10000));
 		set(10000, 10000);
 		return true;
