@@ -11,7 +11,7 @@ hero* hero::createhero(string picture_name)
 	return hero;
 }
 
-hero::hero()
+hero::hero() 
 {
 	picturenum = 0;
 	xtemp = x;
@@ -21,7 +21,7 @@ hero::hero()
 	bloodBar->setType(ProgressTimer::Type::BAR);
 	bloodBar->setMidpoint(Point(0, 1));
 	bloodBar->setScaleX(0.22);
-	bloodBar->setScaleY(0.6);
+    bloodBar->setScaleY(0.6);
 	bloodFrame->setScaleX(0.22);
 	bloodFrame->setScaleY(0.6);
 
@@ -226,15 +226,15 @@ void hero::attack(float dt)
 void hero::bloodUpdate(float dt)
 {
 
-	blueBar->setPosition(Vec2(30, 80));
-	blueFrame->setPosition(Vec2(30, 80));
-	bloodBar->setPosition(Vec2(35, 90));
-	bloodFrame->setPosition(Vec2(35, 90));
+	blueBar->setPosition(Vec2(0, this->_contentSize.height + 50));
+	blueFrame->setPosition(Vec2(0, this->_contentSize.height + 50));
+	bloodBar->setPosition(Vec2(0, this->_contentSize.height + 60));
+	bloodFrame->setPosition(Vec2(0, this->_contentSize.height + 60));
 	bloodBar->setPercentage(float(HealthPoint) / float(maxHealthPoint) * 100);
 	bloodBar->setTag(HealthPoint);
 	blueBar->setPercentage(float(BluePoint) / float(maxBluePoint) * 100);
 	blueBar->setTag(BluePoint);
-
+	
 	/*float heroX = this->getPosition().x, heroY = this->getPosition().y;
 	bloodBar->setPosition(ccp(heroX, heroY + oneLattice));
 	bloodFrame->setPosition(heroX, heroY + oneLattice);
@@ -260,6 +260,7 @@ bool hero::die()
 {
 	if (HealthPoint <= 0) {
 		setLatticeExist(positionToLattice(getPosition()), 0);
+		//ChessExist[MapIntReturn(getPosition()).x][MapIntReturn(getPosition()).y] = 0;
 		setPosition(Point(10000, 10000));
 		set(10000, 10000);
 		return true;
@@ -297,4 +298,21 @@ void hero::setPlayer(int player)
 
 		//bloodBar->setSprite(Sprite::create("OurBlood.png"));
 	}
+}
+
+void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
+{
+	Sprite* bullet = Sprite::create(picturename);
+	this->addChild(bullet);
+	bullet->setPosition(40, 30);
+
+	auto move = MoveBy::create(1.f, deltaPos);
+	auto back = MoveTo::create(0.f, Vec2(40, 30));
+	auto appear = FadeIn::create(0.f);
+	auto disappear = FadeOut::create(0.f);
+
+	auto actionTo = Sequence::createWithTwoActions(appear, move);
+	auto actionBack = Sequence::createWithTwoActions(disappear, back);
+	auto all = Sequence::createWithTwoActions(actionTo, actionBack);
+	bullet->runAction(Repeat::create(all, 1));
 }

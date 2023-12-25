@@ -56,9 +56,9 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 
 bool HeroLayer::init() {
 	//auto sprite = hero1::createhero();
-
+	battleMapinit();
 	auto temp = hero1::createhero();  
-	temp->set(1500, 500);
+	temp->set(battleLattice[0][0]);
 	temp->setTempPosition();
 	ccArrayAppendObject(MyLittleHero.m_playerArray, temp);
 
