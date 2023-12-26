@@ -37,7 +37,7 @@ bool BattleScene::init()
 	auto mouseListener = EventListenerMouse::create();
 
 	// 设置鼠标按下事件处理
-
+	scheduleUpdate();
 	// 添加监听器到事件分发器
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 	return true;
@@ -124,11 +124,11 @@ void BattleScene::update(float dt)
 		addChess(player2data, 1);
 		pc_player.pcJudgeMoneyUsage();*/
 	}
-    heroLayer->scheduleUpdate();
+    //heroLayer->scheduleUpdate();
 	/*addChess(player1data, 0);
 	addChess(player2data, 1);*/
 
-	//ChessMoveInMouse();
+	ChessMoveInMouse();
 	/*if (timer->pTime < -1e-2)
 	{
 		if (PC_ShowFlag)
@@ -191,7 +191,7 @@ void BattleScene::onMouseMove(Event* event)
 	}*/
 	if (MouseToChess != -1)
 	{
-		if (timer->pTime < 0.25f && MouseToChess < MyLittleHero.m_fightArray->num)//战斗时不能移动战斗区棋子
+		if (timer->pTime < 0.01f && MouseToChess < MyLittleHero.m_fightArray->num)//战斗时不能移动战斗区棋子
 		{
 			auto temp = (hero*)(MyLittleHero.m_fightArray->arr[MouseToChess]);
 			temp->setPosition(temp->getTempPosition());
@@ -240,11 +240,11 @@ void BattleScene::onMouseUp(Event* event)
 			else
 			{
 				pair<int, int>lat = positionToLattice(temp->getPosition());
-				if (lat.first == 0)   //战斗区移到备战席
+				if (lat.first == 0)   //战斗区移到战斗区 
 				{
 					ArrayToArray(temp, MyLittleHero.m_fightArray, MyLittleHero.m_fightArray);
 				}
-				else if (lat.first > 0 && timer->pTime > 0.25)  //战斗区移到战斗区 
+				else if (lat.first > 0 && timer->pTime > 0.01f)  //战斗区移到备战席
 				{
 					ArrayToArray(temp, MyLittleHero.m_fightArray, MyLittleHero.m_playerArray);
 				}
@@ -270,7 +270,7 @@ void BattleScene::onMouseUp(Event* event)
 				{
 					ArrayToArray(temp, MyLittleHero.m_playerArray, MyLittleHero.m_fightArray);
 				}
-				else if (lat.first > 0 && timer->pTime > 0.25f)   //备战席移到战斗区
+				else if (lat.first > 0 && timer->pTime > 0.01f)   //备战席移到战斗区
 				{
 					if (MyLittleHero.m_fightArray->num < MyLittleHero.getLevel())
 					{
@@ -337,7 +337,7 @@ bool BattleScene::FindMouseTarget(ccArray* Array, EventMouse* e)
 	{
 		temp = MyLittleHero.m_fightArray->num;
 	}
-	if (timer->pTime > 0.25 || temp == 0)//非战斗期间或者移动备战席时可移动
+	if (timer->pTime > 0.01f || temp == 0)//非战斗期间或者移动备战席时可移动
 	{
 		Vec2 mousePos(e->getCursorX(), e->getCursorY());
 		for (int i = 0; i < Array->num; i++)
@@ -383,7 +383,7 @@ void BattleScene::ArrayToArray(hero* chess, ccArray* arrayFrom, ccArray* arrayTo
 	chess->setTempPosition();
 	if (arrayFrom != arrayTo)//两者不一样则需要调整
 	{
-		ccArrayRemoveObject(arrayTo, chess);
-		ccArrayAppendObject(arrayFrom, chess);
+		ccArrayRemoveObject(arrayFrom, chess);
+		ccArrayAppendObject(arrayTo, chess);
 	}
 }

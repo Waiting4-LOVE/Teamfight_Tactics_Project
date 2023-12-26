@@ -43,7 +43,7 @@ public:
 	// implement the "static create()" method manually
 private:
 	/**********¼ÆÊ±Æ÷¼°Update**************/
-	RoundTimer* timer = RoundTimer::create(10);
+	RoundTimer* timer = RoundTimer::create(1000);
 	void update(float dt);
 	void TurnInfoInit();
 

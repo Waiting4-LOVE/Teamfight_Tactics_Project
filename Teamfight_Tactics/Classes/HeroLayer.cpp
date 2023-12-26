@@ -102,19 +102,19 @@ bool HeroLayer::init() {
 	battleMapinit();
 
 	auto temp = master::createhero();  
-	temp->set(1000,500);
+	temp->set(waitLattice[1][0]);
 	temp->setTempPosition();
 
 	auto temp1 = darkKnight::createhero();
-	temp1->set(1280, 800);
+	temp1->set(battleLattice[5][0]);
 	temp1->setTempPosition();
 
 	auto temp2 = cannedPig::createhero();
-	temp2->set(1000, 900);
+	temp2->set(battleLattice[5][6]);
 	temp2->setTempPosition();
 
 	auto temp3 = flyDragon::createhero();
-	temp3->set(1200, 400);
+	temp3->set(battleLattice[0][6]);
 	temp3->setTempPosition();
 
 	auto temp4 = ghost::createhero();

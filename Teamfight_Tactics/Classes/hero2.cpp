@@ -21,10 +21,10 @@ darkKnight::darkKnight() {
 	defenceMagic = 5;
 }
 
-hero2* hero2::createhero() {
+darkKnight* darkKnight::createhero() {
 	//auto Hero1 = new hero1();
 	//Hero1->set(100, 100);
-	auto hero2 = hero2::create();
+	auto hero2 = darkKnight::create();
 	auto temp = Sprite::create("hero2.png");
 	temp->setScale(0.22);
 	hero2->bloodBar->setBarChangeRate(Point(1, 0));
@@ -43,28 +43,28 @@ hero2* hero2::createhero() {
 }
 
 
-void hero2::releaseSkill() {
+void darkKnight::releaseSkill() {
 
 }
 
-_2star_hero2::_2star_hero2() {
+_2star_darkKnight::_2star_darkKnight() {
 	//ÌîĞ´¶şĞÇÓ¢ĞÛµÄÊôĞÔ
 }
 
-_2star_hero2* _2star_hero2::createhero() {
-	auto _2star_hero2 = _2star_hero2::create();
+_2star_darkKnight* _2star_darkKnight::createhero() {
+	auto _2star_hero2 = _2star_darkKnight::create();
 	_2star_hero2->picturename = "";
 	_2star_hero2->picturenum = 0;
 	_2star_hero2->autorelease();
 	return _2star_hero2;
 }
 
-_3star_hero2::_3star_hero2() {
+_3star_darkKnight::_3star_darkKnight() {
 	//ÌîĞ´ÈıĞÇÓ¢ĞÛµÄÊôĞÔ
 }
 
-_3star_hero2* _3star_hero2::createhero() {
-	auto _3star_hero2 = _3star_hero2::create();
+_3star_darkKnight* _3star_darkKnight::createhero() {
+	auto _3star_hero2 = _3star_darkKnight::create();
 	_3star_hero2->autorelease();
 	return _3star_hero2;
 }
