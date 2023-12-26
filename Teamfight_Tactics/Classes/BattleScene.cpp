@@ -21,15 +21,25 @@ bool BattleScene::init()
 	{
 		return false;
 	}
-
+    TurnInfoInit();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	/***********所需子Layer************/
 	this->addChild(map, 0);        //地图层
+    this->addChild(HSlayer, 1);   //返回按钮
 	this->addChild(littleLayer, 1); //小英雄层
 	this->addChild(timer, 2);        //计时器层
-    this->addChild(heroLayer, 3);   //英雄层
+    this->addChild(shopLayer, 3);   //商店层
+    this->addChild(heroLayer, 4);   //英雄层
+
+
+
+    /**********计时器及Update**************/
+    this->scheduleUpdate();
+    littleLayer->scheduleUpdate();
+    shopLayer->scheduleUpdate();
+    heroLayer->scheduleUpdate();
 	// 创建一个鼠标事件监听器
 	auto mouseListener = EventListenerMouse::create();
 
@@ -64,8 +74,8 @@ void BattleScene::update(float dt)
 		pc_player.pcJudgeMoneyUsage();*/
 	}
 
-	/*addChess(player1data, 0);
-	addChess(player2data, 1);*/
+	addChess(MyLittleHero, 0);
+	//addChess(player2data, 1);
 
 	//ChessMoveInMouse();
 	/*if (timer->pTime < -1e-2)
@@ -91,8 +101,8 @@ void BattleScene::update(float dt)
 void BattleScene::TurnInfoInit()
 {
 	global_data->ChangeGameTurn();
-	auto turn_label = Label::createWithTTF("TURN", "fonts/Marker Felt.ttf", 24);
-	turn_label->setPosition(200, 800);
+	auto turn_label = Label::createWithTTF("TURN", "fonts/Marker Felt.ttf", 64);
+	turn_label->setPosition(200, 900);
 	this->addChild(turn_label, 2);
 	char* mTurn = new char[8];
 	sprintf(mTurn, "Turn %02d", global_data->game_turn);
@@ -297,5 +307,58 @@ void BattleScene::onMouseDown(Event* event)
         if (FindMouseTarget(player1data.FightArray, e) == 1)       //在战斗区寻找目标
             FindMouseTarget(player1data.PlayerArray, e);  //寻找不到则在备战区寻找
     }*/
+}
+
+void BattleScene::addChess(littleHero& littlehero, int playerinfo)
+{
+    if (littlehero.haveNewHero)                  //若有新棋子加入
+    {
+        bool flag = 1;
+        auto temp = (hero*)(littlehero.m_playerArray->arr[littlehero.m_playerArray->num - 1]);
+        if (playerinfo == 0)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+
+                if (waitLatticeExist[0 + playerinfo][i] == 0)//若备战区有空位
+                {
+                    littlehero.delCoins(littlehero.Used[0].money);
+                    temp->set(waitLattice[0 + playerinfo][i]);
+                    temp->setTempPosition();
+                    temp->setPosition(temp->getTempPosition());
+                    heroLayer->addChild(temp);
+                    temp->retain();
+                    littlehero.haveNewHero = 0;
+                    temp->setPlayer(playerinfo);
+                    littlehero.heronumber[temp->getType()]++;     //记录其棋子升级信息
+                    setLatticeExist({ 0 + playerinfo,i }, 1);//设置占位
+                    flag = 0;
+                    littlehero.haveNewHero = 0;
+                    flag = 0;
+                    break;
+
+                }
+            }
+        }
+        else
+        {
+            littlehero.delCoins(temp->getCoinsNeeded());
+            heroLayer->addChild(temp);
+            temp->setPosition(10000, 10000);
+            temp->set(10000, 10000);
+            temp->setPlayer(playerinfo);
+            littlehero.heronumber[temp->getType()]++;
+            littlehero.haveNewHero = 0;
+            flag = 0;
+            littlehero.haveNewHero = 0;
+            flag = 0;
+        }
+        if (flag)
+        {
+            ccArrayRemoveObject(littlehero.m_playerArray, temp);   //添加失败
+            littlehero.haveNewHero = 0;
+
+        }
+    }
 }
 

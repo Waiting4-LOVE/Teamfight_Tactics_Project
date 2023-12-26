@@ -81,12 +81,12 @@ Vec2 latticeToPosition(std::pair<int, int> lat)
 	return waitLattice[x][y];
 }
 
-void setLatticeExist(std::pair<int, int> lat, int exist)
+void setLatticeExist(std::pair<int, int> lat, int exist)//战斗区为1-3，敌方为4-6
 {
 	int x = lat.first, y = lat.second;
-	if (y > 0)
+	if (x > 0)
 	{
-		y--;
+		x--;
 		battleLatticeExist[x][y] = exist;
 	}
 	else
@@ -109,5 +109,5 @@ bool judgeExist(std::pair<int, int> lat)
 Vec2 battleLattice[6][7];
 Vec2 waitLattice[2][9];
 float oneLattice;
-bool battleLatticeExist[6][7];
-bool waitLatticeExist[2][9];
+bool battleLatticeExist[6][7];//1-3己方4-6对方
+bool waitLatticeExist[2][9];//0己方1对方

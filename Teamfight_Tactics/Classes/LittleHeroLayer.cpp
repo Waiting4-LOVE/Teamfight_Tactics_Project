@@ -45,6 +45,33 @@ bool LittleHeroLayer::init()
 
 void LittleHeroLayer::update(float dt)
 {
+	/*------------------------Player1(己方)------------------------*/
+
+	/*------------------------血条------------------*/
+	/*MyLittleHeroBlood->setPercentage(player1data.HealthValue);
+	player1Blood->setTag(player1data.HealthValue);
+	Hyut->setString(to_string(player1data.HealthValue));*/
+
+	/*------------------------金钱------------------*/
+	Coins->setString(to_string(MyLittleHero.getCoins())); //临时记录
+
+	//player1Experience->setPercentage(player1data.ExperienceValue * 100 / player1data.NextNeedExp);
+	//暂时不用Grades->setString("Lv. " + to_string(player1data.Grade));
+
+
+
+	/*------------------------Player1(对方)------------------------*/
+
+	/*------------------------血条------------------*/
+	/*player2Blood->setPercentage(player2data.HealthValue);
+	player2Blood->setTag(player2data.HealthValue);
+	Hyut2->setString(to_string(player2data.HealthValue));*/
+
+	/*------------------------金钱------------------*/
+	//不用Coins2->setString("Coins: " + to_string(player2data.Gold)); //临时记录
+
+	//不用player2Experience->setPercentage(player2data.ExperienceValue * 100 / player2data.NextNeedExp);
+	//Grades2->setString("Lv. " + to_string(player2data.Grade));
 }
 
 void LittleHeroLayer::BuyExp(Ref* pSender)
@@ -58,14 +85,12 @@ void LittleHeroLayer::BuyExp(Ref* pSender)
 	}
 	else
 	{
-		this->removeChild(buyexp);
 		auto label = Label::createWithTTF("Not enough money!", "fonts/Marker Felt.ttf", 36);
 		this->addChild(label);
 		label->setTextColor(Color4B::WHITE);
 		label->setPosition(800, 400);
 		auto move = FadeOut::create(2.0f);
 		label->runAction(move);
-		
 	}
 }
 
