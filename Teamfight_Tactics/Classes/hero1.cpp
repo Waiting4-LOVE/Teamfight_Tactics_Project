@@ -3,12 +3,12 @@
 
 hero1::hero1() {
 	type = Hero1;
-	maxHealthPoint = 100;
+	maxHealthPoint = 1000;
 	maxBluePoint = 100;
 	maxShieldPoint = 100;
 	fee = 2;
 	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
+	HealthPoint = 1000;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 10;

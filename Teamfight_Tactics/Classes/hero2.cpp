@@ -1,7 +1,7 @@
 #include"hero2.h"
 
 
-hero2::hero2() {
+darkKnight::darkKnight() {
 	type = Hero2;
 	maxHealthPoint = 100;
 	maxBluePoint = 100;
