@@ -15,10 +15,10 @@ public:
 	void PlayerArrayInit(ccArray* Array, int playerinfo);
 	virtual bool init();
 	void update(float dt);
-
 	void pcShowPlayerArray();
 	void pcShowFightArray();
 	void ChessMove(hero* herocase, littleHero&playerdata, littleHero& AttackPlayer);
+
 private:
 	//void upgrade(littleHero& littlehero);
 	//hero* HeroLayer::upgradeChessCreate(int type);

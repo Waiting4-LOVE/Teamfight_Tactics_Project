@@ -65,6 +65,8 @@ public:
 	
 	friend class LittleHeroLayer;
 	friend class HeroLayer;
+	friend class HeroPile;
+	friend class BattleScene;
 
 protected:
 	bool haveNewHero = false; //判断是否有新棋子

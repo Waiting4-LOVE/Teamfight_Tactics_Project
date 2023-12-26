@@ -15,3 +15,4 @@ struct IntMap {
 	int x;
 	int y;
 };
+
