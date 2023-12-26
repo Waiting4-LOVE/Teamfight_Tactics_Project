@@ -181,12 +181,29 @@ bool hero::blueClear() {
 		return 0;
 }
 
-void hero::equipmentPutOn(Sprite* item) {
-
+void hero::EquipmentChange() {
+	for (int i = 0; i < equipment->num; i++)
+	{
+		auto equ = (Equipment*)equipment->arr[i];
+		this->EquipToChess(equ);
+	}
 }
 
-void hero::equipmentTakeOff(Sprite* item) {
+void hero::EquipToChess(Equipment* equ)
+{
+	this->maxHealthPoint += equ->getaddHealthLimit();
+	HealthPoint = maxHealthPoint;
 
+	this->speedAttack += equ->getaddAttackSpeed();
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / this->speedAttack);
+
+	this->physicsAttackPoint += equ->getaddDamage();
+	this->distanceAttack += equ->getaddAttackDistance();
+	this->defencePhysics += equ->getaddPhysicalArmor();
+	this->defenceMagic += equ->getaddMagicalArmor();
+	this->maxBluePoint += equ->getaddBlueLimit();
+	this->magicPoint += equ->getaddMagic();
+	this->criticalChance += equ->getcriticalHit();
 }
 
 
