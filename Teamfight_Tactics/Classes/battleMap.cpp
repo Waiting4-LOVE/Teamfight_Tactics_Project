@@ -82,7 +82,7 @@ Vec2 latticeToPosition(std::pair<int, int> lat)
 	return waitLattice[x][y];
 }
 
-void setLatticeExist(std::pair<int, int> lat, int exist)
+void setLatticeExist(std::pair<int, int> lat, int exist)//战斗区为1-3，敌方为4-6
 {
 	int x = lat.first, y = lat.second;
 	if (x > 0)

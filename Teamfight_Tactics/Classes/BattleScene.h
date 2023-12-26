@@ -31,6 +31,8 @@
 #include "LittleHeroLayer.h"
 #include "GameData.h"
 #include "HeroLayer.h"
+#include "ShopLayer.h"
+#include "helpAndSetLayer.h"
 class BattleScene : public cocos2d::Scene
 {
 public:

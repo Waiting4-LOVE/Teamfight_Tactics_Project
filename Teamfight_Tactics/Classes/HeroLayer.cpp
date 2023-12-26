@@ -238,6 +238,14 @@ void HeroLayer::update(float dt)
 		((hero*)(MyLittleHero.m_fightArray->arr[i]))->die();
 		ChessMove((hero*)(MyLittleHero.m_fightArray->arr[i]), MyLittleHero, player2data);
 	}
+	/*if (MyLittleHero.haveNewHero)
+	{
+		MyLittleHero.haveNewHero = false;
+		auto temp = (hero*)(MyLittleHero.m_playerArray->arr[MyLittleHero.m_playerArray->num - 1]);
+		temp->setPosition(temp->getTempPosition());
+		CCLOG("%f,%f", temp->getTempPosition().x, temp->getTempPosition().y);
+		this->addChild(temp);
+	}*/
 	for (int i = 0; i < player2data.m_fightArray->num; i++)
 	{
 		((hero*)(player2data.m_fightArray->arr[i]))->die();
