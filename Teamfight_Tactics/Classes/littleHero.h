@@ -19,13 +19,12 @@ class littleHero :public Sprite {
 public:
 	//inline littleHero();
 	//inline littleHero(std::string picName);
-	bool haveNewHero = false; //判断是否有新棋子
 	littleHero* m_attackTarget = nullptr; //攻击对象指针
 	ccArray* m_playerArray = ccArrayNew(9); //玩家备战区的棋子数组
 	ccArray* m_fightArray = ccArrayNew(15); //玩家战斗区的棋子数组
 	int heronumber[ChessNumber] = {};
 	int EXP_FOR_LEVEL[10] = { 2,2,6,10,20,36,48,84,76,80 };//每级升级所需经验值
-	chessInfo Used[5];
+	//chessInfo Used[5];
 
 	/*----------------------装备信息---------------------*/
 	ccArray* m_equipment = ccArrayNew(10); //装备数组
@@ -33,7 +32,7 @@ public:
 	int m_occupiedSlot = 0;
 	bool m_isPackageOpened = false;
 	packageSlot m_packageSlot[3][4] = {};
-	Point m_slotPoint[12] = {};
+	Point slotPoint[12] = {};
 
 	/*------------------------get类----------------------*/
 	inline int getCurBlood() { return this->m_blood; }
@@ -42,7 +41,7 @@ public:
 	inline int getLevel() { return this->m_level; }	
 	inline Vec2 getCurPos() { return this->m_pos; }
 	inline int getContinueWin() { return this->m_continueWin; }
-	inline int getContinueLose() { return this->m_continueLose; }
+	inline int getContinueWiLose() { return this->m_continueLose; }
 	inline int getRound() { return this->m_round; }
 	inline int getBonus(int sort); //返回奖励金币
 
@@ -68,6 +67,7 @@ public:
 	friend class HeroLayer;
 
 protected:
+	bool haveNewHero = false; //判断是否有新棋子
 	Vec2 m_SrcPos = Vec2(505, 305); //初始位置
 	Vec2 m_pos = this->m_SrcPos; //当前位置
 	int m_maxBlood = 100; //最大血量

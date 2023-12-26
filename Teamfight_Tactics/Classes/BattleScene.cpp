@@ -8,11 +8,11 @@ cocos2d::Scene* BattleScene::createScene()
 {
 	return BattleScene::create();
 }
-//static void problemLoading(const char* filename)
-//{
-//	printf("Error while loading: %s\n", filename);
-//	printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
-//}
+static void problemLoading(const char* filename)
+{
+	printf("Error while loading: %s\n", filename);
+	printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
+}
 bool BattleScene::init()
 {
 	//////////////////////////////
@@ -30,8 +30,7 @@ bool BattleScene::init()
 	this->addChild(littleLayer, 1); //小英雄层
 	this->addChild(timer, 2);        //计时器层
     this->addChild(heroLayer, 3);   //英雄层
-    this->addChild(hsLayer, 4); //返回选择层，后续需要实现，点击按钮后视为放弃比赛
-    //this->addChild(shopLayer, 5);
+    this->addChild(hsLayer, 4);
 	// 创建一个鼠标事件监听器
 	auto mouseListener = EventListenerMouse::create();
 

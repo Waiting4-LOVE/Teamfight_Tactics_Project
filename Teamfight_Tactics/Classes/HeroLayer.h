@@ -1,7 +1,7 @@
 #pragma once
 #include<cocos2d.h>
 #include"HeroFile.h"
-
+#include"battleMap.h"
 
 USING_NS_CC;
 using namespace std;
@@ -15,10 +15,10 @@ public:
 	void PlayerArrayInit(ccArray* Array, int playerinfo);
 	virtual bool init();
 	void update(float dt);
-
 	void pcShowPlayerArray();
 	void pcShowFightArray();
-	void ChessMove(hero* herocase, littleHero&playerdata, littleHero& AttackPlayer);
+	//void ChessMove(hero* herocase, littleHero&playerdata, littleHero& AttackPlayer);
+
 private:
 	//void upgrade(littleHero& littlehero);
 	//hero* HeroLayer::upgradeChessCreate(int type);

@@ -8,10 +8,11 @@
 
 //littleHero::littleHero(std::string picName) : m_picName(picName) {}
 
-void littleHero::addExp(const int exp) {
+void littleHero::addExp(int exp) {
 	this->m_exp += exp;
 	this->countNextUPExp(); //升级并计算下一级经验值
 }
+
 
 void littleHero::countNextUPExp() {
 	if (this->m_exp >= EXP_FOR_LEVEL[this->m_level-1])
@@ -21,6 +22,7 @@ void littleHero::countNextUPExp() {
 		return;
 	}
 }
+
 
 int littleHero::getBonus(int sort) {
 	int bonus = 0;

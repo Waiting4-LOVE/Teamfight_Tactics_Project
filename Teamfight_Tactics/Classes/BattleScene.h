@@ -32,7 +32,7 @@
 #include "GameData.h"
 #include "HeroLayer.h"
 #include "helpAndSetLayer.h"
-#include "ShopLayer.h"
+
 class BattleScene : public cocos2d::Scene
 {
 public:
@@ -79,7 +79,6 @@ private:
     LittleHeroLayer* littleLayer = LittleHeroLayer::createPlayer();
     HeroLayer* heroLayer = HeroLayer::createHeroLayer();
     helpAndSetLayer* hsLayer = helpAndSetLayer::createLayer();
-    ShopLayer* shopLayer = ShopLayer::createShopLayer();
 
     int turn = 0;
     /*装备系统*/
