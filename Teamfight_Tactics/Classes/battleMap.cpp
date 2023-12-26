@@ -73,9 +73,9 @@ std::pair<int, int> positionToLattice(Vec2 pos)
 Vec2 latticeToPosition(std::pair<int, int> lat)
 {
 	int x = lat.first, y = lat.second;
-	if (y > 0)
+	if (x > 0)
 	{
-		y--;
+		x--;
 		return battleLattice[x][y];
 	}
 	return waitLattice[x][y];
@@ -84,9 +84,9 @@ Vec2 latticeToPosition(std::pair<int, int> lat)
 void setLatticeExist(std::pair<int, int> lat, int exist)
 {
 	int x = lat.first, y = lat.second;
-	if (y > 0)
+	if (x > 0)
 	{
-		y--;
+		x--;
 		battleLatticeExist[x][y] = exist;
 	}
 	else
