@@ -78,7 +78,8 @@ private:
 	MapLayer* map = MapLayer::createMapLayer();
 	LittleHeroLayer* littleLayer = LittleHeroLayer::createPlayer();
 	HeroLayer* heroLayer = HeroLayer::createHeroLayer();
-
+	ShopLayer* shopLayer = ShopLayer::createShopLayer();
+	helpAndSetLayer* HSlayer = helpAndSetLayer::createLayer();
 	int turn = 0;
 	/*装备系统*/
    /* Package* layerPackage = Package::createPackage();

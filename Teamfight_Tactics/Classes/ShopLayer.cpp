@@ -4,7 +4,7 @@ USING_NS_CC;
 hero* ShopLayer::heroCreate(int ct) {
     switch (ct) {
     case 0:
-        return hero1::createhero();
+        return knight::createhero();
     }
 }
 ShopLayer* ShopLayer::createShopLayer()

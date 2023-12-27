@@ -53,19 +53,26 @@ int countLattice(Vec2 lat1, Vec2 lat2)
 
 std::pair<int, int> positionToLattice(Vec2 pos)
 {
-	std::pair<int, int> ans = { 0,0 };
+	float minDistance = 10000.0f;
+	std::pair<int, int> ans = { 1,0 };
 	for (int i = 0; i < 3; i++)
 		for (int j = 0; j < 7; j++)
 		{
-			if (battleLattice[i][j].distance(pos) < battleLattice[ans.first][ans.second].distance(pos))
-				ans = { i + 1,j };//如果是战斗区，则x加一，以便与备战区区分
+			if (battleLattice[i][j].distance(pos) < minDistance)
+			{
+				ans = { i + 1 ,j };
+				minDistance = battleLattice[i][j].distance(pos);
+			}
+			//如果是战斗区，则x加一，以便与备战区区分
 		}
 	for (int j = 0; j < 9; j++)
 	{
-		if (waitLattice[0][j].distance(pos) < battleLattice[ans.first][ans.second].distance(pos))
-			ans = { 0,j };
+		if (waitLattice[0][j].distance(pos) < minDistance)
+		{
+			ans = { 0 ,j };
+			minDistance = waitLattice[0][j].distance(pos);
+		}
 	}
-	float minDistance = battleLattice[ans.first][ans.second].distance(pos);
 	if (minDistance > oneLattice)//如果已经在格子区域之外（简易判断）
 		return { -1,-1 };
 	return ans;
@@ -99,9 +106,9 @@ void setLatticeExist(std::pair<int, int> lat, int exist)//战斗区为1-3，敌方为4-6
 bool judgeExist(std::pair<int, int> lat)
 {
 	int x = lat.first, y = lat.second;
-	if (y > 0)
+	if (x > 0)
 	{
-		y--;
+		x--;
 		return battleLatticeExist[x][y];
 	}
 	return waitLatticeExist[x][y];

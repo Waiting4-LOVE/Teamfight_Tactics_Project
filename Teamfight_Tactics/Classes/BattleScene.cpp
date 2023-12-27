@@ -21,25 +21,25 @@ bool BattleScene::init()
 	{
 		return false;
 	}
-    TurnInfoInit();
+	TurnInfoInit();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	/***********所需子Layer************/
 	this->addChild(map, 0);        //地图层
-    this->addChild(HSlayer, 1);   //返回按钮
+	this->addChild(HSlayer, 1);   //返回按钮
 	this->addChild(littleLayer, 1); //小英雄层
 	this->addChild(timer, 2);        //计时器层
-    this->addChild(shopLayer, 3);   //商店层
-    this->addChild(heroLayer, 4);   //英雄层
+	this->addChild(shopLayer, 3);   //商店层
+	this->addChild(heroLayer, 4);   //英雄层
 
 
 
-    /**********计时器及Update**************/
-    this->scheduleUpdate();
-    littleLayer->scheduleUpdate();
-    shopLayer->scheduleUpdate();
-    heroLayer->scheduleUpdate();
+	/**********计时器及Update**************/
+	this->scheduleUpdate();
+	littleLayer->scheduleUpdate();
+	shopLayer->scheduleUpdate();
+	heroLayer->scheduleUpdate();
 	// 创建一个鼠标事件监听器
 	auto mouseListener = EventListenerMouse::create();
 
@@ -66,56 +66,56 @@ void BattleScene::menuCloseCallback(Ref* pSender)
 void BattleScene::addChess(littleHero& littlehero, int playerinfo)
 {
 
-    if (littlehero.haveNewHero)                  //若有新棋子加入
-    {
-        bool flag = 1;
-        auto temp = ((hero*)(littlehero.m_playerArray->arr[littlehero.m_playerArray->num - 1]));
-        if (playerinfo == 0)
-        {
-            for (int i = 0; i < 8; i++)
-            {
+	if (littlehero.haveNewHero)                  //若有新棋子加入
+	{
+		bool flag = 1;
+		auto temp = ((hero*)(littlehero.m_playerArray->arr[littlehero.m_playerArray->num - 1]));
+		if (playerinfo == 0)
+		{
+			for (int i = 0; i < 8; i++)
+			{
 
-                if (ChessExist[i][0 + 9 * playerinfo] == 0)
-                {
-                    littlehero.m_coins -= temp->getCoinsNeeded();
-                    heroLayer->addChild(temp);
-                    temp->setPosition(mapPosition[i][0 + 9 * playerinfo].x, mapPosition[i][0 + 9 * playerinfo].y);
-                    temp->set(mapPosition[i][0 + 9 * playerinfo].x, mapPosition[i][0 + 9 * playerinfo].y);
-                    temp->setTempPosition();
-                    temp->retain();
-                    littlehero.haveNewHero = 0;
-                    //temp->setPlayer(0);
-                    temp->setPlayer(playerinfo);
-                    littlehero.heronumber[temp->getType()]++;     //记录其棋子升级信息
-                    ChessExist[i][0 + 9 * playerinfo] = 1;        //添加成功
-                    flag = 0;
-                    littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
-                    flag = 0;
-                    break;
+				if (ChessExist[i][0 + 9 * playerinfo] == 0)
+				{
+					littlehero.m_coins -= temp->getCoinsNeeded();
+					heroLayer->addChild(temp);
+					temp->setPosition(mapPosition[i][0 + 9 * playerinfo].x, mapPosition[i][0 + 9 * playerinfo].y);
+					temp->set(mapPosition[i][0 + 9 * playerinfo].x, mapPosition[i][0 + 9 * playerinfo].y);
+					temp->setTempPosition();
+					temp->retain();
+					littlehero.haveNewHero = 0;
+					//temp->setPlayer(0);
+					temp->setPlayer(playerinfo);
+					littlehero.heronumber[temp->getType()]++;     //记录其棋子升级信息
+					ChessExist[i][0 + 9 * playerinfo] = 1;        //添加成功
+					flag = 0;
+					littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
+					flag = 0;
+					break;
 
-                }
-            }
-        }
-        else
-        {
-            littlehero.m_coins -= temp->getCoinsNeeded();
-            heroLayer->addChild(temp);
-            temp->setPosition(10000, 10000);
-            temp->set(10000, 10000);
-            temp->setPlayer(playerinfo);
-            littlehero.heronumber[temp->getType()]++;
-            littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
-            flag = 0;
-            littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
-            flag = 0;
-        }
-        if (flag)
-        {
-            ccArrayRemoveObject(littlehero.m_playerArray, temp);   //添加失败
-            littlehero.haveNewHero = 0;
+				}
+			}
+		}
+		else
+		{
+			littlehero.m_coins -= temp->getCoinsNeeded();
+			heroLayer->addChild(temp);
+			temp->setPosition(10000, 10000);
+			temp->set(10000, 10000);
+			temp->setPlayer(playerinfo);
+			littlehero.heronumber[temp->getType()]++;
+			littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
+			flag = 0;
+			littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
+			flag = 0;
+		}
+		if (flag)
+		{
+			ccArrayRemoveObject(littlehero.m_playerArray, temp);   //添加失败
+			littlehero.haveNewHero = 0;
 
-        }
-    }
+		}
+	}
 }*/
 
 
@@ -170,6 +170,7 @@ void BattleScene::TurnInfoInit()
 
 void BattleScene::ChessMoveInMouse()
 {
+	CCLOG("%d %d %d", MyLittleHero.getLevel(), MyLittleHero.m_fightArray->num, MyLittleHero.m_playerArray->num);
 	auto MouseListener = EventListenerMouse::create();
 	MouseListener = EventListenerMouse::create();
 	MouseListener->onMouseMove = CC_CALLBACK_1(BattleScene::onMouseMove, this);
@@ -208,9 +209,18 @@ void BattleScene::onMouseMove(Event* event)
 		}
 		else         //小于FightNumber为战斗区，大于FightNumber为备战区
 		{
-			auto temp = (hero*)(MyLittleHero.m_fightArray->arr[MouseToChess]);
-			temp->setPosition(e->getCursorX(), e->getCursorY());
-			temp->set(e->getCursorX(), e->getCursorY());  //移动之
+			if (MouseToChess >= MyLittleHero.m_fightArray->num)
+			{
+				auto temp = (hero*)(MyLittleHero.m_playerArray->arr[MouseToChess - MyLittleHero.m_fightArray->num]);
+				temp->setPosition(e->getCursorX(), e->getCursorY());
+				temp->set(e->getCursorX(), e->getCursorY());  //移动之
+			}
+			else if (MouseToChess >= 0)
+			{
+				auto temp = (hero*)(MyLittleHero.m_fightArray->arr[MouseToChess]);
+				temp->setPosition(e->getCursorX(), e->getCursorY());
+				temp->set(e->getCursorX(), e->getCursorY());  //移动之
+			}
 		}
 	}
 	//等ly、zyh写完
@@ -218,6 +228,7 @@ void BattleScene::onMouseMove(Event* event)
 
 void BattleScene::onMouseUp(Event* event)
 {
+	//CCLOG("%d %d %d", MyLittleHero.getLevel(), MyLittleHero.m_fightArray->num, MyLittleHero.m_playerArray->num);
 	EventMouse* e = (EventMouse*)event;
 	if (e->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT)
 	{
@@ -247,11 +258,11 @@ void BattleScene::onMouseUp(Event* event)
 			else
 			{
 				pair<int, int>lat = positionToLattice(temp->getPosition());
-				if (lat.first == 0)   //战斗区移到战斗区 
+				if (lat.first > 0 && timer->pTime > 0.01f)   //战斗区移到战斗区 
 				{
 					ArrayToArray(temp, MyLittleHero.m_fightArray, MyLittleHero.m_fightArray);
 				}
-				else if (lat.first > 0 && timer->pTime > 0.01f)  //战斗区移到备战席
+				else if (lat.first == 0 && timer->pTime > 0.01f)  //战斗区移到备战席
 				{
 					ArrayToArray(temp, MyLittleHero.m_fightArray, MyLittleHero.m_playerArray);
 				}
@@ -269,26 +280,27 @@ void BattleScene::onMouseUp(Event* event)
 			{
 				temp->setPosition(temp->getTempPosition());
 				temp->set(temp->getTempPosition());
+				//CCLOG("重合了");
 			}
 			else
 			{
 				pair<int, int>lat = positionToLattice(temp->getPosition());
 				if (lat.first == 0)   //备战席移到备战席
 				{
-					ArrayToArray(temp, MyLittleHero.m_playerArray, MyLittleHero.m_fightArray);
+					ArrayToArray(temp, MyLittleHero.m_playerArray, MyLittleHero.m_playerArray);
 				}
 				else if (lat.first > 0 && timer->pTime > 0.01f)   //备战席移到战斗区
 				{
 					if (MyLittleHero.m_fightArray->num < MyLittleHero.getLevel())
 					{
-						ArrayToArray(temp, MyLittleHero.m_fightArray, MyLittleHero.m_fightArray);
+						ArrayToArray(temp, MyLittleHero.m_playerArray, MyLittleHero.m_fightArray);
 					}
 					else
 					{
 						temp->setPosition(temp->getTempPosition());
 						temp->set(temp->getTempPosition());
-						auto label = Label::createWithTTF("战斗区人数已满", "fonts/Marker Felt.ttf", 36);
-						this->addChild(label);
+						auto label = Label::createWithTTF("full", "fonts/Marker Felt.ttf", 36);
+						this->addChild(label,9);
 						label->setTextColor(Color4B::WHITE);
 						label->setPosition(800, 400);
 						auto fadeout = FadeOut::create(2.0f);
@@ -305,6 +317,7 @@ void BattleScene::onMouseUp(Event* event)
 		MouseToChess = -1;                   //取消选取
 
 	}
+	//CCLOG("%d %d %d", MyLittleHero.getLevel(), MyLittleHero.m_fightArray->num, MyLittleHero.m_playerArray->num);
 }
 
 void BattleScene::onMouseDown(Event* event)
@@ -381,55 +394,55 @@ void BattleScene::soldHero(hero* temp, ccArray* Array, littleHero& playerdata)//
 
 void BattleScene::addChess(littleHero& littlehero, int playerinfo)
 {
-    if (littlehero.haveNewHero)                  //若有新棋子加入
-    {
-        bool flag = 1;
-        auto temp = (hero*)(littlehero.m_playerArray->arr[littlehero.m_playerArray->num - 1]);
-        if (playerinfo == 0)
-        {
-            for (int i = 0; i < 9; i++)
-            {
+	if (littlehero.haveNewHero)                  //若有新棋子加入
+	{
+		bool flag = 1;
+		auto temp = (hero*)(littlehero.m_playerArray->arr[littlehero.m_playerArray->num - 1]);
+		if (playerinfo == 0)
+		{
+			for (int i = 0; i < 9; i++)
+			{
 
-                if (waitLatticeExist[0 + playerinfo][i] == 0)//若备战区有空位
-                {
-                    littlehero.delCoins(littlehero.Used[0].money);
-                    temp->set(waitLattice[0 + playerinfo][i]);
-                    temp->setTempPosition();
-                    temp->setPosition(temp->getTempPosition());
-                    heroLayer->addChild(temp);
-                    temp->retain();
-                    littlehero.haveNewHero = 0;
-                    temp->setPlayer(playerinfo);
-                    littlehero.heronumber[temp->getType()]++;     //记录其棋子升级信息
-                    setLatticeExist({ 0 + playerinfo,i }, 1);//设置占位
-                    flag = 0;
-                    littlehero.haveNewHero = 0;
-                    flag = 0;
-                    break;
+				if (waitLatticeExist[0 + playerinfo][i] == 0)//若备战区有空位
+				{
+					littlehero.delCoins(littlehero.Used[0].money);
+					temp->set(waitLattice[0 + playerinfo][i]);
+					temp->setTempPosition();
+					temp->setPosition(temp->getTempPosition());
+					heroLayer->addChild(temp);
+					temp->retain();
+					littlehero.haveNewHero = 0;
+					temp->setPlayer(playerinfo);
+					littlehero.heronumber[temp->getType()]++;     //记录其棋子升级信息
+					setLatticeExist({ 0 + playerinfo,i }, 1);//设置占位
+					flag = 0;
+					littlehero.haveNewHero = 0;
+					flag = 0;
+					break;
 
-                }
-            }
-        }
-        else
-        {
-            littlehero.delCoins(temp->getCoinsNeeded());
-            heroLayer->addChild(temp);
-            temp->setPosition(10000, 10000);
-            temp->set(10000, 10000);
-            temp->setPlayer(playerinfo);
-            littlehero.heronumber[temp->getType()]++;
-            littlehero.haveNewHero = 0;
-            flag = 0;
-            littlehero.haveNewHero = 0;
-            flag = 0;
-        }
-        if (flag)
-        {
-            ccArrayRemoveObject(littlehero.m_playerArray, temp);   //添加失败
-            littlehero.haveNewHero = 0;
+				}
+			}
+		}
+		else
+		{
+			littlehero.delCoins(temp->getCoinsNeeded());
+			heroLayer->addChild(temp);
+			temp->setPosition(10000, 10000);
+			temp->set(10000, 10000);
+			temp->setPlayer(playerinfo);
+			littlehero.heronumber[temp->getType()]++;
+			littlehero.haveNewHero = 0;
+			flag = 0;
+			littlehero.haveNewHero = 0;
+			flag = 0;
+		}
+		if (flag)
+		{
+			ccArrayRemoveObject(littlehero.m_playerArray, temp);   //添加失败
+			littlehero.haveNewHero = 0;
 
-        }
-    }
+		}
+	}
 }
 
 void BattleScene::ArrayToArray(hero* chess, ccArray* arrayFrom, ccArray* arrayTo)//备战席/战斗区 From to To的改变
@@ -437,7 +450,7 @@ void BattleScene::ArrayToArray(hero* chess, ccArray* arrayFrom, ccArray* arrayTo
 	pair<int, int>lat = positionToLattice(chess->getPosition());//现在格子
 	pair<int, int>beforeLat = positionToLattice(chess->getTempPosition());//原格子
 	chess->setPosition(latticeToPosition(lat));//放到最近的位置上
-	chess->set(latticeToPosition(beforeLat));
+	chess->set(latticeToPosition(lat));
 	setLatticeExist(lat, 1);//填充现在格子
 	setLatticeExist(beforeLat, 0);//将原格子放空
 	chess->setTempPosition();
