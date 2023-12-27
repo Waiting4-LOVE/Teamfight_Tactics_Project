@@ -166,7 +166,7 @@ int PC_Player::pcJudgeMoneyUsage() {
 
 bool PC_Player::CheckHeroUpgrade() {
 	for (int i = 0; i < ChessNumber; i++) {
-		if (player2data.chessnumber[i] > 0) {
+		if (player2data.heronumber[i] > 0) {
 			//找到存在的棋子种类
 			for (int j = 0; j < 5; j++) {
 				//判断是否存在可升星棋子或其子棋子（后半句为判断三星）

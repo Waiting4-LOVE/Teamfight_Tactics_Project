@@ -13,7 +13,7 @@ wildBoar::wildBoar() {
 	physicsAttackPoint = 10;
 	magicPoint = 0;
 	speedAttack = 0.7f;
-	distanceAttack = 225;
+	distanceAttack = 5;
 	blueAttack = maxBluePoint;
 	criticalChance = 0.05;
 	defencePhysics = 5;
@@ -38,7 +38,7 @@ wildBoar* wildBoar::createhero() {
 	wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
 
-	//wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / wildBoar->speedAttack);
+	wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / wildBoar->speedAttack);
 	wildBoar->autorelease();
 	return wildBoar;
 }

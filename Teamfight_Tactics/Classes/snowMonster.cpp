@@ -13,7 +13,7 @@ snowMonster::snowMonster() {
 	physicsAttackPoint = 10;
 	magicPoint = 0;
 	speedAttack = 0.7f;
-	distanceAttack = 225;
+	distanceAttack = 5;
 	blueAttack = maxBluePoint;
 	criticalChance = 0.05;
 	defencePhysics = 5;
@@ -38,7 +38,7 @@ snowMonster* snowMonster::createhero() {
 	snowMonster->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
 
-	//snowMonster->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / snowMonster->speedAttack);
+	snowMonster->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / snowMonster->speedAttack);
 	snowMonster->autorelease();
 	return snowMonster;
 }

@@ -62,12 +62,15 @@ void BattleScene::menuCloseCallback(Ref* pSender)
 
 
 }
+/*
+void BattleScene::addChess(littleHero& littlehero, int playerinfo)
+{
 
 void BattleScene::GotoSelectScene(cocos2d::Ref* pSender)
 {
 	auto scene = SelectScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
-}
+}*/
 
 void BattleScene::update(float dt)
 {
@@ -79,6 +82,9 @@ void BattleScene::update(float dt)
 		addChess(player2data, 1);
 		pc_player.pcJudgeMoneyUsage();*/
 	}
+    heroLayer->scheduleUpdate();
+	/*addChess(player1data, 0);
+	addChess(player2data, 1);*/
 
 	addChess(MyLittleHero, 0);
 	//addChess(player2data, 1);

@@ -13,7 +13,7 @@ cannedPig::cannedPig() {
 	physicsAttackPoint = 10;
 	magicPoint = 0;
 	speedAttack = 0.7f;
-	distanceAttack = 225;
+	distanceAttack = 15;
 	blueAttack = maxBluePoint;
 	criticalChance = 0.05;
 	defencePhysics = 5;
@@ -37,7 +37,7 @@ cannedPig* cannedPig::createhero() {
 
 	cannedPig->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
-	//cannedPig->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / cannedPig->speedAttack);
+	cannedPig->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / cannedPig->speedAttack);
 	cannedPig->autorelease();
 	return cannedPig;
 }

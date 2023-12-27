@@ -13,7 +13,7 @@ iceFire::iceFire() {
 	physicsAttackPoint = 10;
 	magicPoint = 0;
 	speedAttack = 0.7f;
-	distanceAttack = 225;
+	distanceAttack = 10;
 	blueAttack = maxBluePoint;
 	criticalChance = 0.05;
 	defencePhysics = 5;
@@ -37,7 +37,7 @@ iceFire* iceFire::createhero() {
 
 	iceFire->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
-	//iceFire->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / iceFire->speedAttack);
+	iceFire->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / iceFire->speedAttack);
 	iceFire->autorelease();
 	return iceFire;
 }

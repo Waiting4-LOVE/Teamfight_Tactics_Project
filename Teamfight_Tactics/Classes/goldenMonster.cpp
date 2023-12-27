@@ -13,7 +13,7 @@ goldenMonster::goldenMonster() {
 	physicsAttackPoint = 10;
 	magicPoint = 0;
 	speedAttack = 0.7f;
-	distanceAttack = 225;
+	distanceAttack = 2;
 	blueAttack = maxBluePoint;
 	criticalChance = 0.05;
 	defencePhysics = 5;
@@ -37,7 +37,7 @@ goldenMonster* goldenMonster::createhero() {
 
 	goldenMonster->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
-	//goldenMonster->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / goldenMonster->speedAttack);
+	goldenMonster->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / goldenMonster->speedAttack);
 	goldenMonster->autorelease();
 	return goldenMonster;
 }

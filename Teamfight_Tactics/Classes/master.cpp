@@ -38,7 +38,7 @@ master* master::createhero() {
 	master->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
 
-	//master->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / master->speedAttack);
+	master->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / master->speedAttack);
 	master->autorelease();
 	return master;
 }

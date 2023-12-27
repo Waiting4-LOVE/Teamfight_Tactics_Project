@@ -11,7 +11,7 @@ bool MapLayer::init()
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	auto sprite = Sprite::create("battlemapunclick.png");
+	auto sprite = Sprite::create("battlemap.png");
 	// 获取窗口的大小
 
 	// 计算缩放比例，使图片填满整个窗口

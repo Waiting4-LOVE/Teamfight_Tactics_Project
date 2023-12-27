@@ -25,7 +25,7 @@ darkKnight* darkKnight::createhero() {
 	//darkKnight->set(100, 100);
 	auto darkKnight = darkKnight::create();
 	auto temp = Sprite::create("darkKnight.png");
-	temp->setScale(2.5);
+	temp->setScale(0.22);
 	darkKnight->bloodBar->setBarChangeRate(Point(1, 0));
 	darkKnight->bloodBar->setType(ProgressTimer::Type::BAR);
 	darkKnight->bloodBar->setMidpoint(Point(0, 1));
@@ -37,7 +37,7 @@ darkKnight* darkKnight::createhero() {
 
 	darkKnight->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
-	//darkKnight->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / darkKnight->speedAttack);
+	darkKnight->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / darkKnight->speedAttack);
 	darkKnight->autorelease();
 	return darkKnight;
 }

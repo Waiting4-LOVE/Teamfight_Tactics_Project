@@ -1,4 +1,4 @@
-#include "knight.h"
+#include"knight.h"
 
 knight::knight() {
 	type = Knight;
@@ -13,7 +13,7 @@ knight::knight() {
 	physicsAttackPoint = 10;
 	magicPoint = 0;
 	speedAttack = 0.7f;
-	distanceAttack = 225;
+	distanceAttack = 2;
 	blueAttack = maxBluePoint;
 	criticalChance = 0.05;
 	defencePhysics = 5;
@@ -21,8 +21,8 @@ knight::knight() {
 }
 
 knight* knight::createhero() {
-	//auto Hero1 = new hero1();
-	//Hero1->set(100, 100);
+	//auto knight = new knight();
+	//knight->set(100, 100);
 	auto knight = knight::create();
 	auto temp = Sprite::create("knight.png");
 	temp->setScale(2.5);
@@ -31,16 +31,14 @@ knight* knight::createhero() {
 	knight->bloodBar->setMidpoint(Point(0, 1));
 	knight->bloodBar->setScaleX(0.22);
 	knight->scheduleUpdate();
-	//knight->addChild(knight->bloodBar, 2);
-	//knight->picturename = "knight.png";
+	//knight->addChild(pitman->bloodBar, 2);
+	//knight->picturename = "pitman.png";
 	knight->addChild(temp);
 
 	knight->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
 
-
-
-	//knight->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / knight->speedAttack);
+	knight->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / knight->speedAttack);
 	knight->autorelease();
 	return knight;
 }

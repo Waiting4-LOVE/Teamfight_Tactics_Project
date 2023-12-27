@@ -2,18 +2,18 @@
 
 gargomon::gargomon() {
 	type = Gargomon;
-	maxHealthPoint = 100;
+	maxHealthPoint = 10000;
 	maxBluePoint = 100;
 	maxShieldPoint = 100;
 	fee = 2;
 	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
+	HealthPoint = 10000;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 10;
 	magicPoint = 0;
 	speedAttack = 0.7f;
-	distanceAttack = 225;
+	distanceAttack = 3;
 	blueAttack = maxBluePoint;
 	criticalChance = 0.05;
 	defencePhysics = 5;
@@ -37,7 +37,7 @@ gargomon* gargomon::createhero() {
 
 	gargomon->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
-	//gargomon->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / gargomon->speedAttack);
+	gargomon->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / gargomon->speedAttack);
 	gargomon->autorelease();
 	return gargomon;
 }
