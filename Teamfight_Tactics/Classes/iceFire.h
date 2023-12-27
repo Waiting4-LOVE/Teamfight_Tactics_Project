@@ -25,6 +25,7 @@ public:
 
 class _3star_iceFire :public iceFire
 {
+public:
 	_3star_iceFire();
 	static _3star_iceFire* createhero();
 	CREATE_FUNC(_3star_iceFire);

@@ -25,6 +25,7 @@ public:
 
 class _3star_pitman :public pitman
 {
+public:
 	_3star_pitman();
 	static _3star_pitman* createhero();
 	CREATE_FUNC(_3star_pitman);

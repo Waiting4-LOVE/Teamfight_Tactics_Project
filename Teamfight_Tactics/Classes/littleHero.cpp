@@ -8,7 +8,7 @@
 
 //littleHero::littleHero(std::string picName) : m_picName(picName) {}
 
-void littleHero::addExp(int exp) {
+void littleHero::addExp(const int exp) {
 	this->m_exp += exp;
 	this->countNextUPExp(); //升级并计算下一级经验值
 }

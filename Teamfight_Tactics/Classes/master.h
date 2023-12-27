@@ -25,6 +25,7 @@ public:
 
 class _3star_master :public master
 {
+public:
 	_3star_master();
 	static _3star_master* createhero();
 	CREATE_FUNC(_3star_master);

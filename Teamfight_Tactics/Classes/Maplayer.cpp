@@ -30,7 +30,7 @@ bool MapLayer::init()
 	return true;
 }
 
-IntMap MapIntReturn(Point point)
+/*IntMap MapIntReturn(Point point)
 {
 	for (int i = 0; i < 8; i++)
 	{
@@ -43,11 +43,9 @@ IntMap MapIntReturn(Point point)
 	}
 	return IntMap(-1, -1);
 }
-int a[65];
+int a[65];*/
 
 void MapLayer::update(float dt)
 {
 
 }
-Point mapPosition[8][10];
-bool ChessExist[8][10] = {};

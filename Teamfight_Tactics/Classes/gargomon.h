@@ -25,6 +25,7 @@ public:
 
 class _3star_gargomon :public gargomon
 {
+public:
 	_3star_gargomon();
 	static _3star_gargomon* createhero();
 	CREATE_FUNC(_3star_gargomon);

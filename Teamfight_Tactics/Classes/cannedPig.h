@@ -25,6 +25,7 @@ public:
 
 class _3star_cannedPig :public cannedPig
 {
+public:
 	_3star_cannedPig();
 	static _3star_cannedPig* createhero();
 	CREATE_FUNC(_3star_cannedPig);

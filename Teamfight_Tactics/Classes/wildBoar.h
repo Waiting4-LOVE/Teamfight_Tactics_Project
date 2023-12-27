@@ -25,6 +25,7 @@ public:
 
 class _3star_wildBoar :public wildBoar
 {
+public:
 	_3star_wildBoar();
 	static _3star_wildBoar* createhero();
 	CREATE_FUNC(_3star_wildBoar);

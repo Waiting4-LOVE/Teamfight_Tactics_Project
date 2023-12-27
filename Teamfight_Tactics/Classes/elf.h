@@ -25,6 +25,7 @@ public:
 
 class _3star_elf :public elf
 {
+public:
 	_3star_elf();
 	static _3star_elf* createhero();
 	CREATE_FUNC(_3star_elf);

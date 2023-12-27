@@ -3,16 +3,144 @@
 littleHero MyLittleHero;
 littleHero player2data;
 
-hero* CreateHero(int type) {
-	switch (type)
-	{
-	case Hero1:
-		return hero1::createhero();
-		break;
-	default:
-		break;
+hero* CreateHero(int ct) {
+	switch (ct) {
+		case Knight:
+			return knight::createhero();
+			break;
+		case CannedPig:
+			return cannedPig::createhero();
+			break;
+		case DarkKnight:
+			return darkKnight::createhero();
+			break;
+		case Elf:
+			return elf::createhero();
+			break;
+		case FlyDragon:
+			return flyDragon::createhero();
+			break;
+		case Gargomon:
+			return gargomon::createhero();
+			break;
+		case Ghost:
+			return ghost::createhero();
+			break;
+		case GoldenMonster:
+			return goldenMonster::createhero();
+			break;
+		case IceFire:
+			return iceFire::createhero();
+			break;
+		case Master:
+			return master::createhero();
+			break;
+		case Pitman:
+			return pitman::createhero();
+			break;
+		case Ranger:
+			return ranger::createhero();
+			break;
+		case Snowman:
+			return snowman::createhero();
+			break;
+		case SnowMonster:
+			return snowMonster::createhero();
+			break;
+		case WildBoar:
+			return wildBoar::createhero();
+			break;
+		case _2star_Knight:
+			return _2star_knight::createhero();
+			break;
+		case _2star_CannedPig:
+			return _2star_cannedPig::createhero();
+			break;
+		case _2star_DarkKnight:
+			return _2star_darkKnight::createhero();
+			break;
+		case _2star_Elf:
+			return _2star_elf::createhero();
+			break;
+		case _2star_FlyDragon:
+			return _2star_flyDragon::createhero();
+			break;
+		case _2star_Gargomon:
+			return _2star_gargomon::createhero();
+			break;
+		case _2star_Ghost:
+			return _2star_ghost::createhero();
+			break;
+		case _2star_GoldenMonster:
+			return _2star_goldenMonster::createhero();
+			break;
+		case _2star_IceFire:
+			return _2star_iceFire::createhero();
+			break;
+		case _2star_Master:
+			return _2star_master::createhero();
+			break;
+		case _2star_Pitman:
+			return _2star_pitman::createhero();
+			break;
+		case _2star_Ranger:
+			return _2star_ranger::createhero();
+			break;
+		case _2star_Snowman:
+			return _2star_snowman::createhero();
+			break;
+		case _2star_SnowMonster:
+			return _2star_snowMonster::createhero();
+			break;
+		case _2star_WildBoar:
+			return _2star_wildBoar::createhero();
+			break;
+		case _3star_Knight:
+			return _3star_knight::createhero();
+			break;
+		case _3star_CannedPig:
+			return _3star_cannedPig::createhero();
+			break;
+		case _3star_DarkKnight:
+			return _3star_darkKnight::createhero();
+			break;
+		case _3star_Elf:
+			return _3star_elf::createhero();
+			break;
+		case _3star_FlyDragon:
+			return _3star_flyDragon::createhero();
+			break;
+		case _3star_Gargomon:
+			return _3star_gargomon::createhero();
+			break;
+		case _3star_Ghost:
+			return _3star_ghost::createhero();
+			break;
+		case _3star_GoldenMonster:
+			return _3star_goldenMonster::createhero();
+			break;
+		case _3star_IceFire:
+			return _3star_iceFire::createhero();
+			break;
+		case _3star_Master:
+			return _3star_master::createhero();
+			break;
+		case _3star_Pitman:
+			return _3star_pitman::createhero();
+			break;
+		case _3star_Ranger:
+			return _3star_ranger::createhero();
+			break;
+		case _3star_Snowman:
+			return _3star_snowman::createhero();
+			break;
+		case _3star_SnowMonster:
+			return _3star_snowMonster::createhero();
+			break;
+		case _3star_WildBoar:
+			return _3star_wildBoar::createhero();
+			break;
 	}
-
 }
 
 HeroLayer* HeroLayer::createHeroLayer() {
@@ -57,7 +185,7 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 bool HeroLayer::init() {
 	//auto sprite = hero1::createhero();
 	battleMapinit();
-	auto temp = hero1::createhero();  
+	auto temp = hero1::createhero();
 	temp->set(battleLattice[0][0]);
 	temp->setTempPosition();
 	ccArrayAppendObject(MyLittleHero.m_playerArray, temp);
@@ -118,6 +246,14 @@ void HeroLayer::update(float dt)
 		((hero*)(MyLittleHero.m_fightArray->arr[i]))->die();
 		//ChessMove((hero*)(MyLittleHero.m_fightArray->arr[i]), MyLittleHero, player2data);
 	}
+	/*if (MyLittleHero.haveNewHero)
+	{
+		MyLittleHero.haveNewHero = false;
+		auto temp = (hero*)(MyLittleHero.m_playerArray->arr[MyLittleHero.m_playerArray->num - 1]);
+		temp->setPosition(temp->getTempPosition());
+		CCLOG("%f,%f", temp->getTempPosition().x, temp->getTempPosition().y);
+		this->addChild(temp);
+	}*/
 	for (int i = 0; i < player2data.m_fightArray->num; i++)
 	{
 		((hero*)(player2data.m_fightArray->arr[i]))->die();

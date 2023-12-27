@@ -30,7 +30,7 @@ void helpAndSetLayer::backToMenu(cocos2d::Ref* pSender) {
     //MyLittleHero.remain();
     for (int i = 0; i < 8; i++){
         for (int j = 0; j < 10; j++){
-            ChessExist[i][j] = 0;
+            //ChessExist[i][j] = 0;徐陈皓：还要修改，推出后算作小小英雄死亡
         }
     }
     _director->replaceScene(SelectScene::createScene());
