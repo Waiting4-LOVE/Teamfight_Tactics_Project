@@ -28,10 +28,10 @@ hero::hero()
 	blueBar->setBarChangeRate(Point(1, 0));
 	blueBar->setType(ProgressTimer::Type::BAR);
 	blueBar->setMidpoint(Point(0, 1));
-	blueBar->setScaleX(0.18);
-	blueBar->setScaleY(0.6);
-	blueFrame->setScaleX(0.18);
-	blueFrame->setScaleY(0.6);
+	blueBar->setScaleX(0.22);
+	blueBar->setScaleY(0.3);
+	blueFrame->setScaleX(0.22);
+	blueFrame->setScaleY(0.3);
 
 	this->scheduleUpdate();
 	this->addChild(bloodFrame, 1);
@@ -181,26 +181,31 @@ bool hero::blueClear() {
 		return 0;
 }
 
-void hero::equipmentPutOn(Sprite* item) {
-
-}
-
-void hero::equipmentTakeOff(Sprite* item) {
-
-}
-
-void hero::move(float dt) {
-	Vec2 targetPosition = getEnemyPosition();
-	if (targetPosition.x == 10000 && targetPosition.y == 10000)
+void hero::EquipmentChange() {
+	for (int i = 0; i < equipment->num; i++)
 	{
-		return;
-	}
-	float distance = this->getPosition().distance(targetPosition);
-	if (countLattice(this->getPosition(), targetPosition) > distanceAttack)
-	{
-		this->setPosition(this->getPosition() + (targetPosition - this->getPosition()) / distance * move_speed);
+		auto equ = (Equipment*)equipment->arr[i];
+		this->EquipToChess(equ);
 	}
 }
+
+void hero::EquipToChess(Equipment* equ)
+{
+	this->maxHealthPoint += equ->getaddHealthLimit();
+	HealthPoint = maxHealthPoint;
+
+	this->speedAttack += equ->getaddAttackSpeed();
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / this->speedAttack);
+
+	this->physicsAttackPoint += equ->getaddDamage();
+	this->distanceAttack += equ->getaddAttackDistance();
+	this->defencePhysics += equ->getaddPhysicalArmor();
+	this->defenceMagic += equ->getaddMagicalArmor();
+	this->maxBluePoint += equ->getaddBlueLimit();
+	this->magicPoint += equ->getaddMagic();
+	this->criticalChance += equ->getcriticalHit();
+}
+
 
 void hero::attack(float dt)
 {
@@ -210,11 +215,12 @@ void hero::attack(float dt)
 			* (attackTarget->getPosition().x - getPosition().x) +
 			(attackTarget->getPosition().y - getPosition().y)
 			* (attackTarget->getPosition().y - getPosition().y));
-		if (distance < distanceAttack)                           //小于攻击距离则开始攻击
+		if (distance < distanceAttack*oneLattice*2)                           //小于攻击距离则开始攻击
 		{
+			isMove = 0;
+			shootbullet("1.png", attackTarget->getPosition() - this->getPosition(), this);
 			blueRecoverOnce();
 			skill();
-			attackTarget->doDamage(this->addPhysicsAttackPoint);
 			if (attackTarget->die())
 			{
 				attackTarget = NULL;
@@ -235,16 +241,6 @@ void hero::bloodUpdate(float dt)
 	blueBar->setPercentage(float(BluePoint) / float(maxBluePoint) * 100);
 	blueBar->setTag(BluePoint);
 	
-	/*float heroX = this->getPosition().x, heroY = this->getPosition().y;
-	bloodBar->setPosition(ccp(heroX, heroY + oneLattice));
-	bloodFrame->setPosition(heroX, heroY + oneLattice);
-	blueBar->setPosition(heroX, heroY + oneLattice - (bloodFrame->getContentSize().height + blueFrame->getContentSize().height) / 2);
-	blueFrame->setPosition(heroX, heroY + oneLattice - (bloodFrame->getContentSize().height + blueFrame->getContentSize().height) / 2);
-
-	bloodBar->setPercentage(100.0f * HealthPoint / maxHealthPoint);
-	bloodBar->setTag(HealthPoint);
-	blueBar->setPercentage(100.0f * BluePoint / maxBluePoint);
-	blueBar->setTag(BluePoint);*/
 }
 
 void hero::skill()
@@ -279,7 +275,6 @@ void hero::reset()
 	attackTarget = NULL;
 	bloodBar->setPercentage(100.f);
 	this->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1.0f / this->speedAttack);
-	this->schedule(CC_SCHEDULE_SELECTOR(hero::move), 1 / 60.0f);
 	this->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
 }
@@ -304,6 +299,7 @@ void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
 {
 	Sprite* bullet = Sprite::create(picturename);
 	this->addChild(bullet);
+	bullet->setScale(0.22);
 	bullet->setPosition(40, 30);
 
 	auto move = MoveBy::create(1.f, deltaPos);
@@ -315,4 +311,5 @@ void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
 	auto actionBack = Sequence::createWithTwoActions(disappear, back);
 	auto all = Sequence::createWithTwoActions(actionTo, actionBack);
 	bullet->runAction(Repeat::create(all, 1));
+	attackTarget->doDamage(this->physicsAttackPoint);
 }

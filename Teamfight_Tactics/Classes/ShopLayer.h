@@ -3,9 +3,8 @@
 #include "cocos2d.h"
 #include "Sources.h"
 #include "littleHero.h"
-#include "hero.h"
-#include "hero1.h"
 #include "battleMap.h"
+#include"HeroFile.h"
 using namespace cocos2d::extension;	
 
 

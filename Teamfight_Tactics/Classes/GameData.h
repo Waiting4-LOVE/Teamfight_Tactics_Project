@@ -7,7 +7,7 @@ USING_NS_CC;
 
 //µØÍ¼£º64*36
 #define ChessNumber 35
-#define OriginalChess 8
+#define OriginalChess 15
 class GameData : Scene
 {
 public:
@@ -58,12 +58,20 @@ extern GameData* global_data;
 
 enum ChessType
 {
-	None = -1,
-	Hero1 
+	None = -1,Knight,CannedPig,DarkKnight,
+	Elf,FlyDragon,Gargomon,Ghost,GoldenMonster,
+	IceFire,Master,Pitman,Ranger,Snowman,SnowMonster,
+	WildBoar,
 	//2ÐÇÓ¢ÐÛ
-
+	_2star_Knight, _2star_CannedPig, _2star_DarkKnight, _2star_Elf,
+	_2star_FlyDragon, _2star_Gargomon, _2star_Ghost, _2star_GoldenMonster, _2star_IceFire,
+	_2star_Master, _2star_Pitman, _2star_Ranger, _2star_Snowman, _2star_SnowMonster,
+	_2star_WildBoar,
 	//3ÐÇÓ¢ÐÛ
-	
+	_3star_Knight, _3star_CannedPig, _3star_DarkKnight, _3star_Elf,
+	_3star_FlyDragon, _3star_Gargomon, _3star_Ghost, _3star_GoldenMonster, _3star_IceFire,
+	_3star_Master, _3star_Pitman, _3star_Ranger, _3star_Snowman, _3star_SnowMonster,
+	_3star_WildBoar
 };
 
 extern const int PB[10][5];

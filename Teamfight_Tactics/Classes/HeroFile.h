@@ -1,3 +1,18 @@
 //该头文件内包含了15个英雄的头文件
 #pragma once
 #include"hero1.h"
+#include"cannedPig.h"
+#include"darkKnight.h"
+#include"elf.h"
+#include"flyDragon.h"
+#include"gargomon.h"
+#include"ghost.h"
+#include"goldenMonster.h"
+#include"iceFire.h"
+#include"knight.h"
+#include"master.h"
+#include"pitman.h"
+#include"ranger.h"
+#include"snowman.h"
+#include"snowMonster.h"
+#include"wildBoar.h"

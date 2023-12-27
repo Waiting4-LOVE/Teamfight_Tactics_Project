@@ -23,7 +23,7 @@ public:
 	littleHero* m_attackTarget = nullptr; //攻击对象指针
 	ccArray* m_playerArray = ccArrayNew(9); //玩家备战区的棋子数组
 	ccArray* m_fightArray = ccArrayNew(15); //玩家战斗区的棋子数组
-	int heronumber[ChessNumber] = {};
+	int chessnumber[ChessNumber] = {};
 	int EXP_FOR_LEVEL[10] = { 2,2,6,10,20,36,48,84,76,80 };//每级升级所需经验值
 	chessInfo Used[5];
 
@@ -80,6 +80,9 @@ public:
 	
 	friend class LittleHeroLayer;
 	friend class HeroLayer;
+	friend class PC_Player;
+	friend class helpAndSetLayer;
+	friend class ShopLayer;
 
 protected:
 	
