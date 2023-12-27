@@ -17,6 +17,15 @@ LittleHeroLayer* LittleHeroLayer::createPlayer()
 
 bool LittleHeroLayer::init()
 {
+	MyLittleHerobloodBar->setBarChangeRate(Point(1, 0));
+	MyLittleHerobloodBar->setType(ProgressTimer::Type::BAR);
+	MyLittleHerobloodBar->setMidpoint(Point(0, 1));
+	MyLittleHerobloodBar->setScaleX(0.22);
+	MyLittleHerobloodBar->setScaleY(0.6);
+	bloodFrame->setScaleX(0.22);
+	bloodFrame->setScaleY(0.6);
+	myLittleHerosprite->addChild(bloodFrame, 1);
+	myLittleHerosprite->addChild(MyLittleHerobloodBar, 2);
 	/*------------------------买经验------------------*/
 	if (MyLittleHero.getCoins() >= 4)
 	{
@@ -34,8 +43,24 @@ bool LittleHeroLayer::init()
 
 
 	/*------------------------小小英雄移动------------------*/
+	myLittleHerosprite->setPosition(MyLittleHero.getCurPos()); //设置精灵的位置
 	this->addChild(myLittleHerosprite); //加到树中
-	 // 设置鼠标事件监听器
+
+	/*------------------------小小英雄待机动画------------------*/
+	Animation* animation = Animation::create();
+	for (int i = 1; i <= 9; ++i) {
+		char frameName[20];
+		sprintf(frameName, "EGG%d.png", i);
+		animation->addSpriteFrameWithFile(frameName);
+	}
+	animation->setDelayPerUnit(0.08f);  // 设置每帧的播放时间
+	animation->setRestoreOriginalFrame(true);
+	Animate* animate = Animate::create(animation);
+	RepeatForever* repeat = RepeatForever::create(animate);
+	myLittleHerosprite->runAction(repeat);
+
+
+	// 设置鼠标事件监听器
 	auto mouseListener = cocos2d::EventListenerMouse::create();
 	mouseListener->onMouseDown = CC_CALLBACK_1(LittleHeroLayer::onMouseDown, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
@@ -48,9 +73,11 @@ void LittleHeroLayer::update(float dt)
 	/*------------------------Player1(己方)------------------------*/
 
 	/*------------------------血条------------------*/
-	/*MyLittleHeroBlood->setPercentage(player1data.HealthValue);
-	player1Blood->setTag(player1data.HealthValue);
-	Hyut->setString(to_string(player1data.HealthValue));*/
+	MyLittleHerobloodBar->setPosition(Vec2(50, this->_contentSize.height +100));
+	bloodFrame->setPosition(Vec2(50, this->_contentSize.height + 100));
+	MyLittleHerobloodBar->setPercentage(float(MyLittleHero.getCurBlood()) / 100 * 100);
+	MyLittleHerobloodBar->setTag(MyLittleHero.getCurBlood());
+	//Hyut->setString(to_string(MyLittleHero.getCurBlood()));
 
 	/*------------------------金钱------------------*/
 	Coins->setString(to_string(MyLittleHero.getCoins())); //临时记录

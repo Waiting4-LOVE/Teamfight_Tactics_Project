@@ -40,6 +40,7 @@ public:
 
     virtual bool init();
     void menuCloseCallback(cocos2d::Ref* pSender);
+    void GotoSelectScene(cocos2d::Ref* pSender);
     // a selector callback
     //void GotoGamescene(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
@@ -69,9 +70,9 @@ private:
 
 
     void Win();  //判断打斗结束
-   /* void JudgeWin(PlayerData& playerdata, int sum[]);
+   void JudgeWin(littleHero& littlehero, int sum[]);
     void WinRetain(ccArray* Array);
-
+    /*
     void ToFightArray(Chess* chess, PlayerData& playerdata);
     void ToPlayerArray(Chess* chess, PlayerData& playerdata);*/
     /***********所需子Layer************/
