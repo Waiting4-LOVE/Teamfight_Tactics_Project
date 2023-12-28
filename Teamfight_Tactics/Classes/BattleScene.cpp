@@ -170,7 +170,7 @@ void BattleScene::TurnInfoInit()
 
 void BattleScene::ChessMoveInMouse()
 {
-	CCLOG("%d %d %d", MyLittleHero.getLevel(), MyLittleHero.m_fightArray->num, MyLittleHero.m_playerArray->num);
+	//CCLOG("%d %d %d", MyLittleHero.getLevel(), MyLittleHero.m_fightArray->num, MyLittleHero.m_playerArray->num);
 	auto MouseListener = EventListenerMouse::create();
 	MouseListener = EventListenerMouse::create();
 	MouseListener->onMouseMove = CC_CALLBACK_1(BattleScene::onMouseMove, this);

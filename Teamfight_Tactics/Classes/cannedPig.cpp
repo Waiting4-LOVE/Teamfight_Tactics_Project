@@ -2,22 +2,22 @@
 
 cannedPig::cannedPig() {
 	type = CannedPig;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 700;
+	maxBluePoint = 105;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 4;
+	name = "CannedPig";
+	HealthPoint = 700;//初始血量为最大血量
+	BluePoint = 30;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 15;
+	physicsAttackPoint = 45;
+	magicPoint = 100;
+	speedAttack = 0.75f;
+	distanceAttack = 3;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25f;
+	defencePhysics = 30;
+	defenceMagic = 30;
 }
 
 cannedPig* cannedPig::createhero() {
@@ -49,6 +49,23 @@ void cannedPig::releaseSkill() {
 
 _2star_cannedPig::_2star_cannedPig() {
 	//填写二星英雄的属性
+	type = CannedPig;
+	maxHealthPoint = 1260;
+	maxBluePoint = 105;
+	maxShieldPoint = 100;
+	fee = 4;
+	name = "CannedPig";
+	HealthPoint = 700;//初始血量为最大血量
+	BluePoint = 30;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 68;
+	magicPoint = 100;
+	speedAttack = 0.75f;
+	distanceAttack = 3;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25f;
+	defencePhysics = 30;
+	defenceMagic = 30;
 }
 
 _2star_cannedPig* _2star_cannedPig::createhero() {
@@ -61,6 +78,23 @@ _2star_cannedPig* _2star_cannedPig::createhero() {
 
 _3star_cannedPig::_3star_cannedPig() {
 	//填写三星英雄的属性
+	type = CannedPig;
+	maxHealthPoint = 2268;
+	maxBluePoint = 105;
+	maxShieldPoint = 100;
+	fee = 4;
+	name = "CannedPig";
+	HealthPoint = 700;//初始血量为最大血量
+	BluePoint = 30;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 101;
+	magicPoint = 100;
+	speedAttack = 0.75f;
+	distanceAttack = 3;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25f;
+	defencePhysics = 30;
+	defenceMagic = 30;
 }
 
 _3star_cannedPig* _3star_cannedPig::createhero() {

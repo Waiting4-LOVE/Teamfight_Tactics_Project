@@ -2,22 +2,22 @@
 
 wildBoar::wildBoar() {
 	type = WildBoar;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 750;
+	maxBluePoint = 90;
 	maxShieldPoint = 100;
 	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	name = "WildBoar";
+	HealthPoint = 750;//初始血量为最大血量
+	BluePoint = 40;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
+	physicsAttackPoint = 55;
+	magicPoint = 100;
 	speedAttack = 0.7f;
-	distanceAttack = 5;
+	distanceAttack = 1;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 45;
+	defenceMagic = 45;
 }
 
 wildBoar* wildBoar::createhero() {
@@ -50,6 +50,23 @@ void wildBoar::releaseSkill() {
 
 _2star_wildBoar::_2star_wildBoar() {
 	//填写二星英雄的属性
+	type = WildBoar;
+	maxHealthPoint = 1350;
+	maxBluePoint = 90;
+	maxShieldPoint = 100;
+	fee = 2;
+	name = "WildBoar";
+	HealthPoint = 750;//初始血量为最大血量
+	BluePoint = 40;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 83;
+	magicPoint = 100;
+	speedAttack = 0.7f;
+	distanceAttack = 1;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 45;
+	defenceMagic = 45;
 }
 
 _2star_wildBoar* _2star_wildBoar::createhero() {
@@ -62,6 +79,23 @@ _2star_wildBoar* _2star_wildBoar::createhero() {
 
 _3star_wildBoar::_3star_wildBoar() {
 	//填写三星英雄的属性
+	type = WildBoar;
+	maxHealthPoint = 2430;
+	maxBluePoint = 90;
+	maxShieldPoint = 100;
+	fee = 2;
+	name = "WildBoar";
+	HealthPoint = 750;//初始血量为最大血量
+	BluePoint = 40;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 124;
+	magicPoint = 100;
+	speedAttack = 0.7f;
+	distanceAttack = 1;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 45;
+	defenceMagic = 45;
 }
 
 _3star_wildBoar* _3star_wildBoar::createhero() {

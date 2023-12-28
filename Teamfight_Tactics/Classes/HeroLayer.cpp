@@ -99,8 +99,8 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 bool HeroLayer::init() {
 	//auto sprite = hero1::createhero();
 	/*初始化的内容，后续需要放到其他位置*/
-	battleMapinit();
-	/*
+	
+	
 	auto temp = master::createhero();  
 	temp->set(waitLattice[1][0]);
 	temp->setTempPosition();
@@ -177,7 +177,7 @@ bool HeroLayer::init() {
 	ccArrayAppendObject(player2data.m_fightArray, temp1);
 	ccArrayAppendObject(player2data.m_fightArray, temp2);
 	ccArrayAppendObject(player2data.m_fightArray, temp5);
-	*/
+	
 
 
 

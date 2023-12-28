@@ -3,22 +3,22 @@
 
 elf::elf() {
 	type = Elf;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 700;
+	maxBluePoint = 75;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 3;
+	name = "Elf";
+	HealthPoint = 700;//初始血量为最大血量
+	BluePoint = 25;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
+	physicsAttackPoint = 40;
+	magicPoint = 100;
+	speedAttack = 0.75f;
 	distanceAttack = 3;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 20;
+	defenceMagic = 20;
 }
 
 elf* elf::createhero() {
@@ -50,6 +50,23 @@ void elf::releaseSkill() {
 
 _2star_elf::_2star_elf() {
 	//填写二星英雄的属性
+	type = Elf;
+	maxHealthPoint = 1260;
+	maxBluePoint = 75;
+	maxShieldPoint = 100;
+	fee = 3;
+	name = "Elf";
+	HealthPoint = 700;//初始血量为最大血量
+	BluePoint = 25;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 60;
+	magicPoint = 100;
+	speedAttack = 0.75f;
+	distanceAttack = 3;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 20;
+	defenceMagic = 20;
 }
 
 _2star_elf* _2star_elf::createhero() {
@@ -62,6 +79,23 @@ _2star_elf* _2star_elf::createhero() {
 
 _3star_elf::_3star_elf() {
 	//填写三星英雄的属性
+	type = Elf;
+	maxHealthPoint = 2268;
+	maxBluePoint = 75;
+	maxShieldPoint = 100;
+	fee = 3;
+	name = "Elf";
+	HealthPoint = 700;//初始血量为最大血量
+	BluePoint = 25;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 90;
+	magicPoint = 100;
+	speedAttack = 0.75f;
+	distanceAttack = 3;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 20;
+	defenceMagic = 20;
 }
 
 _3star_elf* _3star_elf::createhero() {

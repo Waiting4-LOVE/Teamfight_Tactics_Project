@@ -2,22 +2,22 @@
 
 ghost::ghost() {
 	type = Ghost;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
-	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	maxHealthPoint = 1100;
+	maxBluePoint = 150;
+	maxShieldPoint = 70;
+	fee = 5;
+	name = "Ghost";
+	HealthPoint = 1100;//初始血量为最大血量
+	BluePoint = 70;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 3;
+	physicsAttackPoint = 70;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 1;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 70;
+	defenceMagic = 70;
 }
 
 ghost* ghost::createhero() {
@@ -49,6 +49,23 @@ void ghost::releaseSkill() {
 
 _2star_ghost::_2star_ghost() {
 	//填写二星英雄的属性
+	type = Ghost;
+	maxHealthPoint = 1980;
+	maxBluePoint = 150;
+	maxShieldPoint = 70;
+	fee = 5;
+	name = "Ghost";
+	HealthPoint = 1100;//初始血量为最大血量
+	BluePoint = 70;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 105;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 1;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 70;
+	defenceMagic = 70;
 }
 
 _2star_ghost* _2star_ghost::createhero() {
@@ -61,6 +78,23 @@ _2star_ghost* _2star_ghost::createhero() {
 
 _3star_ghost::_3star_ghost() {
 	//填写三星英雄的属性
+	type = Ghost;
+	maxHealthPoint = 3564;
+	maxBluePoint = 150;
+	maxShieldPoint = 70;
+	fee = 5;
+	name = "Ghost";
+	HealthPoint = 1100;//初始血量为最大血量
+	BluePoint = 70;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 158;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 1;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 70;
+	defenceMagic = 70;
 }
 
 _3star_ghost* _3star_ghost::createhero() {

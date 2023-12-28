@@ -30,7 +30,7 @@ public:
 	int getHealthPoint();//返回英雄现在的血条
 	int getBluePoint();//返回英雄现在的蓝条
 	int getDefencePoint();//返回英雄现在的护盾
-	Point getTempPosition() { return Point(xtemp, ytemp);}
+	Point getTempPosition() { return Point(xtemp, ytemp); }
 	int getType() { return type; }
 	int getCoinsNeeded() { return CoinsNeeded; }
 	int getSoldCoins() { return SoldCoins; }
@@ -61,7 +61,8 @@ public:
 
 
 	float calculateDistance(Sprite* d_sprite);//计算本精灵与敌人距离函数
-	bool doDamage(int attackpoint);//我方收到伤害函数，这包括了我方护盾与血量的减少
+	void onDamageReceived(int damage, int type);
+	bool doDamage(int damage, int type = 0, bool damageVisible = 0);//我方收到伤害函数，这包括了我方护盾与血量的减少
 	bool blueClear();//释放技能要求蓝条满，释放技能之后蓝条清空
 	void healthRecover(int health_once, int lasting);//回血函数
 	void blueRocover();//回蓝函数
@@ -80,7 +81,7 @@ public:
 	void hero::shootbullet(string picturename, Point deltaPos, hero* mychess);
 	void reset();
 	bool isMove = 0;
-	hero* attackTarget=nullptr;//攻击目标
+	hero* attackTarget = nullptr;//攻击目标
 
 	CREATE_FUNC(hero);
 
@@ -108,7 +109,7 @@ protected:
 	int star = 1;//星级
 
 	/*英雄基本属性*/
-	
+
 	int fee;//英雄所需费用
 	std::string name;
 	int HealthPoint;//血条
@@ -134,6 +135,6 @@ protected:
 	int addCriticalChance;//增加的暴击率
 	int addDefencePhysics;//增加的物抗
 	int addDefenceMagic;//增加的魔抗
-	
-	
+
+
 };

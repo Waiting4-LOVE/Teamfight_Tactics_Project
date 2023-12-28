@@ -2,22 +2,22 @@
 
 gargomon::gargomon() {
 	type = Gargomon;
-	maxHealthPoint = 10000;
-	maxBluePoint = 100;
+	maxHealthPoint = 1050;
+	maxBluePoint = 110;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100000;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 5;
+	name = "Gargomon";
+	HealthPoint = 1050;//初始血量为最大血量
+	BluePoint = 60;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 3;
+	physicsAttackPoint = 88;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 1;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 60;
+	defenceMagic = 60;
 }
 
 gargomon* gargomon::createhero() {
@@ -49,6 +49,23 @@ void gargomon::releaseSkill() {
 
 _2star_gargomon::_2star_gargomon() {
 	//填写二星英雄的属性
+	type = Gargomon;
+	maxHealthPoint = 1890;
+	maxBluePoint = 110;
+	maxShieldPoint = 100;
+	fee = 5;
+	name = "Gargomon";
+	HealthPoint = 1050;//初始血量为最大血量
+	BluePoint = 60;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 132;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 1;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 60;
+	defenceMagic = 60;
 }
 
 _2star_gargomon* _2star_gargomon::createhero() {
@@ -61,6 +78,23 @@ _2star_gargomon* _2star_gargomon::createhero() {
 
 _3star_gargomon::_3star_gargomon() {
 	//填写三星英雄的属性
+	type = Gargomon;
+	maxHealthPoint = 3402;
+	maxBluePoint = 110;
+	maxShieldPoint = 100;
+	fee = 5;
+	name = "Gargomon";
+	HealthPoint = 1050;//初始血量为最大血量
+	BluePoint = 60;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 198;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 1;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 60;
+	defenceMagic = 60;
 }
 
 _3star_gargomon* _3star_gargomon::createhero() {

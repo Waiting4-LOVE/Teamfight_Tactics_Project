@@ -2,22 +2,22 @@
 
 goldenMonster::goldenMonster() {
 	type = GoldenMonster;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 750;
+	maxBluePoint = 60;
 	maxShieldPoint = 100;
 	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
+	name = "GoldenMonster";
+	HealthPoint = 750;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 2;
+	physicsAttackPoint = 55;
+	magicPoint = 100;
+	speedAttack = 0.6f;
+	distanceAttack = 1;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 45;
+	defenceMagic = 45;
 }
 
 goldenMonster* goldenMonster::createhero() {
@@ -49,6 +49,23 @@ void goldenMonster::releaseSkill() {
 
 _2star_goldenMonster::_2star_goldenMonster() {
 	//填写二星英雄的属性
+	type = GoldenMonster;
+	maxHealthPoint = 1350;
+	maxBluePoint = 60;
+	maxShieldPoint = 100;
+	fee = 2;
+	name = "GoldenMonster";
+	HealthPoint = 750;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 83;
+	magicPoint = 100;
+	speedAttack = 0.6f;
+	distanceAttack = 1;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 45;
+	defenceMagic = 45;
 }
 
 _2star_goldenMonster* _2star_goldenMonster::createhero() {
@@ -61,6 +78,23 @@ _2star_goldenMonster* _2star_goldenMonster::createhero() {
 
 _3star_goldenMonster::_3star_goldenMonster() {
 	//填写三星英雄的属性
+	type = GoldenMonster;
+	maxHealthPoint = 2430;
+	maxBluePoint = 60;
+	maxShieldPoint = 100;
+	fee = 2;
+	name = "GoldenMonster";
+	HealthPoint = 750;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 124;
+	magicPoint = 100;
+	speedAttack = 0.6f;
+	distanceAttack = 1;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 45;
+	defenceMagic = 45;
 }
 
 _3star_goldenMonster* _3star_goldenMonster::createhero() {

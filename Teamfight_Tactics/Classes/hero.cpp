@@ -11,7 +11,7 @@ hero* hero::createhero(string picture_name)
 	return hero;
 }
 
-hero::hero() 
+hero::hero()
 {
 	picturenum = 0;
 	xtemp = x;
@@ -21,7 +21,7 @@ hero::hero()
 	bloodBar->setType(ProgressTimer::Type::BAR);
 	bloodBar->setMidpoint(Point(0, 1));
 	bloodBar->setScaleX(0.22);
-    bloodBar->setScaleY(0.6);
+	bloodBar->setScaleY(0.6);
 	bloodFrame->setScaleX(0.22);
 	bloodFrame->setScaleY(0.6);
 
@@ -136,37 +136,63 @@ int hero::getDefencePoint() {
 	return shieldPoint;
 }
 
-bool hero::doDamage(int attackpoint) {
-	int extra_attack = 0;//如果护盾在一次攻击中被击破，来计算多余出的伤害
-	if (attackpoint < 0) {
+void hero::onDamageReceived(int damage, int type)
+{
+	auto damageText = Label::createWithTTF(std::to_string(damage), "fonts/arial.ttf", 16);
+
+	// 根据伤害类型设置颜色
+	switch (type)
+	{
+	case 0:
+		damageText->setColor(Color3B::RED);
+		break;
+
+	case 1:
+		damageText->setColor(Color3B::MAGENTA);
+		break;
+
+		// 添加其他伤害类型的颜色设置
+
+	default:
+		break;
+	}
+
+	damageText->setPosition(10, 0);
+	this->addChild(damageText);
+
+	// 创建动作序列
+	auto moveAction = MoveBy::create(1.0f, Vec2(0, 25)); // 持续2秒上升50像素
+	auto fadeOutAction = FadeOut::create(1.0f); // 持续2秒渐隐
+
+	// 动作完成后回调销毁节点
+	auto removeAction = CallFunc::create([damageText]() {
+		damageText->removeFromParentAndCleanup(true);
+		});
+
+	// 顺序执行动作序列
+	auto sequence = Sequence::create(moveAction, fadeOutAction, removeAction, nullptr);
+
+	damageText->runAction(sequence);
+}
+
+bool hero::doDamage(int damage, int type, bool damageVisible) {
+	if (damage > 0.001f)
+	{
+		float postDiscountDamage = 0.f;
+		if (type == 0)
+		{
+			postDiscountDamage = damage / (1.0f + defencePhysics / 100.0f);
+			HealthPoint = max(HealthPoint - postDiscountDamage, 0.f);
+		}
+		else if (type == 1)
+		{
+			postDiscountDamage = damage / (1.0f + defenceMagic / 100.0f);
+			HealthPoint = max(HealthPoint - postDiscountDamage, 0.f);
+		}
+		if (damageVisible)onDamageReceived((int)postDiscountDamage, type);
 
 	}
-	else {
-		//如果此时角色护盾值大于0
-		if (shieldPoint > 0) {
-			shieldPoint -= attackpoint;
-			if (shieldPoint < 0) {
-				extra_attack = -shieldPoint;
-				shieldPoint = 0;
-			}
-		}
-		else {
-			HealthPoint -= extra_attack;
-			if (HealthPoint <= 0) {
-				return false;
-			}
-			else {
-				HealthPoint -= attackpoint;
-				if (HealthPoint <= 0)
-				{
-					return false;
-				}
-				else {
-					HealthPoint -= attackpoint;
-				}
-			}
-		}
-	}
+
 	blueRecoverOnce();
 	skill();
 	return true;
@@ -198,7 +224,7 @@ void hero::attack(float dt)
 			* (attackTarget->getPosition().x - getPosition().x) +
 			(attackTarget->getPosition().y - getPosition().y)
 			* (attackTarget->getPosition().y - getPosition().y));
-		if (distance < distanceAttack*oneLattice*2)                           //小于攻击距离则开始攻击
+		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
 			shootbullet("1.png", attackTarget->getPosition() - this->getPosition(), this);
@@ -214,7 +240,6 @@ void hero::attack(float dt)
 
 void hero::bloodUpdate(float dt)
 {
-
 	blueBar->setPosition(Vec2(0, this->_contentSize.height + 50));
 	blueFrame->setPosition(Vec2(0, this->_contentSize.height + 50));
 	bloodBar->setPosition(Vec2(0, this->_contentSize.height + 60));
@@ -223,7 +248,7 @@ void hero::bloodUpdate(float dt)
 	bloodBar->setTag(HealthPoint);
 	blueBar->setPercentage(float(BluePoint) / float(maxBluePoint) * 100);
 	blueBar->setTag(BluePoint);
-	
+
 }
 
 void hero::skill()

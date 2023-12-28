@@ -2,22 +2,22 @@
 
 master::master() {
 	type = Master;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
-	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
+	maxHealthPoint = 650;
+	maxBluePoint = 40;
+	maxShieldPoint = 0;
+	fee = 3;
+	name = "Master";
+	HealthPoint = 650;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
+	physicsAttackPoint = 40;
+	magicPoint = 100;
 	speedAttack = 0.7f;
-	distanceAttack = 225;
+	distanceAttack = 3;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 20;
+	defenceMagic = 20;
 }
 
 master* master::createhero() {
@@ -50,6 +50,23 @@ void master::releaseSkill() {
 
 _2star_master::_2star_master() {
 	//填写二星英雄的属性
+	type = Master;
+	maxHealthPoint = 1170;
+	maxBluePoint = 40;
+	maxShieldPoint = 0;
+	fee = 3;
+	name = "Master";
+	HealthPoint = 650;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 60;
+	magicPoint = 100;
+	speedAttack = 0.7f;
+	distanceAttack = 3;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 20;
+	defenceMagic = 20;
 }
 
 _2star_master* _2star_master::createhero() {
@@ -62,6 +79,23 @@ _2star_master* _2star_master::createhero() {
 
 _3star_master::_3star_master() {
 	//填写三星英雄的属性
+	type = Master;
+	maxHealthPoint = 2106;
+	maxBluePoint = 40;
+	maxShieldPoint = 0;
+	fee = 3;
+	name = "Master";
+	HealthPoint = 650;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 90;
+	magicPoint = 100;
+	speedAttack = 0.7f;
+	distanceAttack = 3;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 20;
+	defenceMagic = 20;
 }
 
 _3star_master* _3star_master::createhero() {
