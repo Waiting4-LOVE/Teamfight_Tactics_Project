@@ -26,6 +26,7 @@ public:
 
 class _3star_snowman :public snowman
 {
+public:
 	_3star_snowman();
 	static _3star_snowman* createhero();
 	CREATE_FUNC(_3star_snowman);

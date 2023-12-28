@@ -276,6 +276,7 @@ void hero::reset()
 	attackTarget = NULL;
 	bloodBar->setPercentage(100.f);
 	this->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1.0f / this->speedAttack);
+	this->scheduleUpdate();
 	this->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
 }

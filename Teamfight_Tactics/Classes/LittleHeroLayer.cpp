@@ -17,6 +17,15 @@ LittleHeroLayer* LittleHeroLayer::createPlayer()
 
 bool LittleHeroLayer::init()
 {
+	MyLittleHerobloodBar->setBarChangeRate(Point(1, 0));
+	MyLittleHerobloodBar->setType(ProgressTimer::Type::BAR);
+	MyLittleHerobloodBar->setMidpoint(Point(0, 1));
+	MyLittleHerobloodBar->setScaleX(0.22);
+	MyLittleHerobloodBar->setScaleY(0.6);
+	bloodFrame->setScaleX(0.22);
+	bloodFrame->setScaleY(0.6);
+	myLittleHerosprite->addChild(bloodFrame, 1);
+	myLittleHerosprite->addChild(MyLittleHerobloodBar, 2);
 	/*------------------------买经验------------------*/
 	if (MyLittleHero.getCoins() >= 4)
 	{
@@ -34,8 +43,24 @@ bool LittleHeroLayer::init()
 
 
 	/*------------------------小小英雄移动------------------*/
+	myLittleHerosprite->setPosition(MyLittleHero.getCurPos()); //设置精灵的位置
 	this->addChild(myLittleHerosprite); //加到树中
-	 // 设置鼠标事件监听器
+
+	/*------------------------小小英雄待机动画------------------*/
+	Animation* animation = Animation::create();
+	for (int i = 1; i <= 9; ++i) {
+		char frameName[20];
+		sprintf(frameName, "EGG%d.png", i);
+		animation->addSpriteFrameWithFile(frameName);
+	}
+	animation->setDelayPerUnit(0.08f);  // 设置每帧的播放时间
+	animation->setRestoreOriginalFrame(true);
+	Animate* animate = Animate::create(animation);
+	RepeatForever* repeat = RepeatForever::create(animate);
+	myLittleHerosprite->runAction(repeat);
+
+
+	// 设置鼠标事件监听器
 	auto mouseListener = cocos2d::EventListenerMouse::create();
 	mouseListener->onMouseDown = CC_CALLBACK_1(LittleHeroLayer::onMouseDown, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
@@ -45,6 +70,35 @@ bool LittleHeroLayer::init()
 
 void LittleHeroLayer::update(float dt)
 {
+	/*------------------------Player1(己方)------------------------*/
+
+	/*------------------------血条------------------*/
+	MyLittleHerobloodBar->setPosition(Vec2(50, this->_contentSize.height +100));
+	bloodFrame->setPosition(Vec2(50, this->_contentSize.height + 100));
+	MyLittleHerobloodBar->setPercentage(float(MyLittleHero.getCurBlood()) / 100 * 100);
+	MyLittleHerobloodBar->setTag(MyLittleHero.getCurBlood());
+	//Hyut->setString(to_string(MyLittleHero.getCurBlood()));
+
+	/*------------------------金钱------------------*/
+	Coins->setString(to_string(MyLittleHero.getCoins())); //临时记录
+
+	//player1Experience->setPercentage(player1data.ExperienceValue * 100 / player1data.NextNeedExp);
+	//暂时不用Grades->setString("Lv. " + to_string(player1data.Grade));
+
+
+
+	/*------------------------Player1(对方)------------------------*/
+
+	/*------------------------血条------------------*/
+	/*player2Blood->setPercentage(player2data.HealthValue);
+	player2Blood->setTag(player2data.HealthValue);
+	Hyut2->setString(to_string(player2data.HealthValue));*/
+
+	/*------------------------金钱------------------*/
+	//不用Coins2->setString("Coins: " + to_string(player2data.Gold)); //临时记录
+
+	//不用player2Experience->setPercentage(player2data.ExperienceValue * 100 / player2data.NextNeedExp);
+	//Grades2->setString("Lv. " + to_string(player2data.Grade));
 }
 
 void LittleHeroLayer::BuyExp(Ref* pSender)
@@ -58,14 +112,12 @@ void LittleHeroLayer::BuyExp(Ref* pSender)
 	}
 	else
 	{
-		this->removeChild(buyexp);
 		auto label = Label::createWithTTF("Not enough money!", "fonts/Marker Felt.ttf", 36);
 		this->addChild(label);
 		label->setTextColor(Color4B::WHITE);
 		label->setPosition(800, 400);
 		auto move = FadeOut::create(2.0f);
 		label->runAction(move);
-		
 	}
 }
 

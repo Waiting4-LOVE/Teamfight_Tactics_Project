@@ -21,7 +21,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-
+#pragma once
 #ifndef __BATTLE_SCENE_H__
 #define __BATTLE_SCENE_H__
 
@@ -31,59 +31,68 @@
 #include "LittleHeroLayer.h"
 #include "GameData.h"
 #include "HeroLayer.h"
+#include "ShopLayer.h"
+#include "helpAndSetLayer.h"
+#include "PC_Player.h"
 class BattleScene : public cocos2d::Scene
 {
 public:
-    static cocos2d::Scene* createScene();
+	static cocos2d::Scene* createScene();
 
     virtual bool init();
     void menuCloseCallback(cocos2d::Ref* pSender);
+    void GotoSelectScene(cocos2d::Ref* pSender);
     // a selector callback
     //void GotoGamescene(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
 
 private:
-    /**********计时器及Update**************/
-    RoundTimer* timer = RoundTimer::create(10);
-    void update(float dt);
-    void TurnInfoInit();
+	/**********计时器及Update**************/
+	RoundTimer* timer = RoundTimer::create(5);
+	void update(float dt);
+	void TurnInfoInit();
 
 
-    //备战期鼠标移动函数
-    void ChessMoveInMouse();
-    void onMouseScroll(Event* event);
-    void onMouseMove(Event* event);
-    void onMouseUp(Event* event);
-    void onMouseDown(Event* event);
-    void GameStartMouseInit();
-    //Point MapJudge(Point point);//判断鼠标是否在地图内
-    int MouseToChess = -1;//鼠标指向的棋子
+	//备战期鼠标移动函数
+	void ChessMoveInMouse();
+	void onMouseScroll(Event* event);
+	void onMouseMove(Event* event);
+	void onMouseUp(Event* event);
+	void onMouseDown(Event* event);
+	void GameStartMouseInit();
+	//Point MapJudge(Point point);//判断鼠标是否在地图内
+	int MouseToChess = -1;//鼠标指向的棋子
 
-    //整合函数
-    bool FindMouseTarget(ccArray* Array, EventMouse* e);
-    //void SoldChess(Chess* temp, ccArray* Array, PlayerData& playerdata);
+	//整合函数
+	bool FindMouseTarget(ccArray* Array, EventMouse* e);
+	void soldHero(hero* temp, ccArray* Array, littleHero& playerdata);
 
-    void BattleScene::addChess(littleHero& littlehero, int playerinfo);
+	void BattleScene::addChess(littleHero& littlehero, int playerinfo);
 
 
-    void Win();  //判断打斗结束
-   /* void JudgeWin(PlayerData& playerdata, int sum[]);
-    void WinRetain(ccArray* Array);
-
-    void ToFightArray(Chess* chess, PlayerData& playerdata);
-    void ToPlayerArray(Chess* chess, PlayerData& playerdata);*/
-    /***********所需子Layer************/
-    MapLayer* map = MapLayer::createMapLayer();
-    LittleHeroLayer* littleLayer = LittleHeroLayer::createPlayer();
-    HeroLayer* heroLayer = HeroLayer::createHeroLayer();
-
-    int turn = 0;
-    /*装备系统*/
+	void Win();  //判断打斗结束
+   void JudgeWin(littleHero& littlehero, int sum[]);
+	 void WinRetain(ccArray* Array);
+    /*
+	 void ToFightArray(Chess* chess, PlayerData& playerdata);
+	 */
+	 /***********所需子Layer************/
+	void BattleScene::ArrayToArray(hero* chess, ccArray* arrayFrom, ccArray* arrayTo);
+	MapLayer* map = MapLayer::createMapLayer();
+	LittleHeroLayer* littleLayer = LittleHeroLayer::createPlayer();
+	HeroLayer* heroLayer = HeroLayer::createHeroLayer();
+	ShopLayer* shopLayer = ShopLayer::createShopLayer();
+	helpAndSetLayer* HSlayer = helpAndSetLayer::createLayer();
+	int turn = 0;
+	/*装备系统*/
    /* Package* layerPackage = Package::createPackage();
-    bool EquipSearchChess(const float EquipX, const float EquipY, const int EquipIndex);
-    int MouseSelectedEquip = -1;*/
+	bool EquipSearchChess(const float EquipX, const float EquipY, const int EquipIndex);
+	int MouseSelectedEquip = -1;*/
 
-    CREATE_FUNC(BattleScene);
+	/***********电脑玩家相关************/
+	bool PC_ShowFlag = 1;
+
+	CREATE_FUNC(BattleScene);
 
 };
 

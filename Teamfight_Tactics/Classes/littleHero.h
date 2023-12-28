@@ -19,12 +19,25 @@ class littleHero :public Sprite {
 public:
 	//inline littleHero();
 	//inline littleHero(std::string picName);
+	bool haveNewHero = false; //判断是否有新棋子
 	littleHero* m_attackTarget = nullptr; //攻击对象指针
 	ccArray* m_playerArray = ccArrayNew(9); //玩家备战区的棋子数组
 	ccArray* m_fightArray = ccArrayNew(15); //玩家战斗区的棋子数组
-	int heronumber[ChessNumber] = {};
+	int chessnumber[ChessNumber] = {};
 	int EXP_FOR_LEVEL[10] = { 2,2,6,10,20,36,48,84,76,80 };//每级升级所需经验值
-	//chessInfo Used[5];
+	chessInfo Used[5];
+
+	
+
+
+	/*----------------------显示---------------------*/
+	string picturename;   //图片名字
+	int picturenum;       //图片张数
+	void LHAnimation(string picturename, const int picturenum, Sprite* sprite, Point location, const float speed, const int loop);
+	
+	//Sprite* bloodFrame = Sprite::create("BloodFrame.png");
+	//ProgressTimer* bloodBar = ProgressTimer::create(Sprite::create("Blood.png"));
+	//void bloodUpdate(float dt);
 
 	/*----------------------装备信息---------------------*/
 	ccArray* m_equipment = ccArrayNew(10); //装备数组
@@ -52,24 +65,29 @@ public:
 	inline void setSrcPos() { this->m_pos = this->m_SrcPos; } //返回初始位置
 	//inline void setPicture(const std::string picName) { this->m_picName = picName; } //设置图片文件，换皮肤
 	inline void hurt(const int delBlood) { this->m_blood -= delBlood; } //受到伤害，减少血量
-	inline void addCoins(const int num) { this->m_coins += num; } //增加金币
-	inline void delCoins(const int num) { this->m_coins -= num; } //减少金币
+	bool CoinsIsChange = false;
+	inline void addCoins(const int num) { this->m_coins += num; CoinsIsChange = true; } //增加金币
+	inline void delCoins(const int num) { this->m_coins -= num; CoinsIsChange = true;} //减少金币
 	inline void addExp(const int exp); //增加经验
 	inline bool isDead() { return this->m_blood <= 0; }
 	void win(); //战斗获胜函数
 	void lose(int hurt); //战斗失败函数
-	//CREATE_FUNC(littleHero);
+	void reset(); //重置函数	
+	CREATE_FUNC(littleHero);
 
 	/*------------------------控制小小英雄移动----------------------*/
 	inline void updatePos(const Vec2& pos) { this->m_pos = pos; } //更新当前位置
 	
 	friend class LittleHeroLayer;
 	friend class HeroLayer;
+	friend class PC_Player;
+	friend class helpAndSetLayer;
+	friend class ShopLayer;
 	friend class HeroPile;
 	friend class BattleScene;
 
 protected:
-	bool haveNewHero = false; //判断是否有新棋子
+	
 	Vec2 m_SrcPos = Vec2(505, 305); //初始位置
 	Vec2 m_pos = this->m_SrcPos; //当前位置
 	int m_maxBlood = 100; //最大血量

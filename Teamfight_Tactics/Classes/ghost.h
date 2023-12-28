@@ -26,6 +26,7 @@ public:
 
 class _3star_ghost :public ghost
 {
+public:
 	_3star_ghost();
 	static _3star_ghost* createhero();
 	CREATE_FUNC(_3star_ghost);

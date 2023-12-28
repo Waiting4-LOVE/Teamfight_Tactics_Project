@@ -8,7 +8,7 @@
 
 //littleHero::littleHero(std::string picName) : m_picName(picName) {}
 
-void littleHero::addExp(int exp) {
+void littleHero::addExp(const int exp) {
 	this->m_exp += exp;
 	this->countNextUPExp(); //升级并计算下一级经验值
 }
@@ -21,6 +21,30 @@ void littleHero::countNextUPExp() {
 		this->m_level++;
 		return;
 	}
+}
+
+
+
+
+void littleHero::LHAnimation(string picturename, const int picturenum, Sprite* sprite, Point location, const float speed, const int loop)
+{
+	Animation* animation = Animation::create();
+
+	const char* picname = picturename.c_str();
+
+	for (int i = 1; i <= picturenum; i++) {
+		char key[32];
+		sprintf(key, picname, i);
+		animation->addSpriteFrameWithFile(key);
+	}
+
+	animation->setDelayPerUnit(speed); //设定速度
+	animation->setRestoreOriginalFrame(true);
+	animation->setLoops(loop); //loop=-1,循环
+	auto action = Animate::create(animation);
+	action->setTag(-2);
+	//sp->runAction(animate);
+	sprite->runAction(action);
 }
 
 
@@ -74,4 +98,29 @@ void littleHero::lose(int hurt) {
 	this->addExp(2);
 	//受到伤害
 	this->hurt(hurt);
+}
+
+void littleHero::reset()
+{
+	m_playerArray = ccArrayNew(100);   //玩家备战区的棋子数组
+	m_fightArray = ccArrayNew(100);
+	m_maxBlood = 100;   //生命值上限
+	m_blood = m_maxBlood; //生命值
+	m_level = 1; //玩家等级
+	m_exp= 0;   //经验值
+	m_coins = 10;  //金币
+	/*occupied_slot = 0;
+	is_package_opened = 0;
+	for (int i = 0; i < 12; i++)
+	{
+		if (i < 3)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				packageSlot[i][j] = PackageSlot(0, 0);
+
+			}
+		}
+		slotPoint[i] = Point(0, 0);
+	}*/
 }

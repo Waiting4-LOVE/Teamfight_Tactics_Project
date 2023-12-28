@@ -26,6 +26,7 @@ public:
 
 class _3star_knight :public knight
 {
+public:
 	_3star_knight();
 	static _3star_knight* createhero();
 	CREATE_FUNC(_3star_knight);

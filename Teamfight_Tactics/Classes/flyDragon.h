@@ -26,6 +26,7 @@ public:
 
 class _3star_flyDragon :public flyDragon
 {
+public:
 	_3star_flyDragon();
 	static _3star_flyDragon* createhero();
 	CREATE_FUNC(_3star_flyDragon);
