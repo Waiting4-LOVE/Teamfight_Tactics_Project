@@ -34,10 +34,7 @@ knight* knight::createhero() {
 	//knight->addChild(pitman->bloodBar, 2);
 	//knight->picturename = "pitman.png";
 	knight->addChild(temp);
-
 	knight->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
-
-
 	knight->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / knight->speedAttack);
 	knight->autorelease();
 	return knight;

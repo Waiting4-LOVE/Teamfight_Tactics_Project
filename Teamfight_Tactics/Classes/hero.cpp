@@ -256,7 +256,6 @@ bool hero::die()
 {
 	if (HealthPoint <= 0) {
 		setLatticeExist(positionToLattice(getPosition()), 0);
-		//ChessExist[MapIntReturn(getPosition()).x][MapIntReturn(getPosition()).y] = 0;
 		setPosition(Point(10000, 10000));
 		set(10000, 10000);
 		return true;
@@ -275,6 +274,7 @@ void hero::reset()
 	attackTarget = NULL;
 	bloodBar->setPercentage(100.f);
 	this->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1.0f / this->speedAttack);
+	this->scheduleUpdate();
 	this->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 
 }

@@ -7,7 +7,7 @@ gargomon::gargomon() {
 	maxShieldPoint = 100;
 	fee = 2;
 	name = "yao yao don't know";
-	HealthPoint = 10000;//初始血量为最大血量
+	HealthPoint = 100000;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 10;

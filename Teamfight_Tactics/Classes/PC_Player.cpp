@@ -155,7 +155,9 @@ int PC_Player::pcJudgeMoneyUsage() {
 	flag = this->CheckGoldInterest();
 	//买高费棋子
 	if (!saveMoney) {
-		if (flag) flag = this->CheckHighFeeHero();
+		//如果不省钱
+		if (!flag) flag = this->CheckHighFeeHero(); //不靠近利息点，则买高费
+		//如果上一步买了高费英雄，则不刷新商店
 		if (flag && player2data.getCoins() >= 2) {
 			player2data.delCoins(2);
 			this->refresh(player2data);
@@ -166,19 +168,19 @@ int PC_Player::pcJudgeMoneyUsage() {
 
 bool PC_Player::CheckHeroUpgrade() {
 	for (int i = 0; i < ChessNumber; i++) {
-		if (player2data.heronumber[i] > 0) {
+		if (player2data.chessnumber[i] > 0) {
 			//找到存在的棋子种类
 			for (int j = 0; j < 5; j++) {
 				//判断是否存在可升星棋子或其子棋子（后半句为判断三星）
 				if (player2data.Used[j].address == i ||
 					(player2data.Used[j].address > OriginalChess &&
 						i == player2data.Used[j].address - OriginalChess)) {
-					if (this->pcBuyHero(j)) return 0; //买棋子
+					if (this->pcBuyHero(j)) return false; //买棋子
 				}
 			}
 		}
 	}
-	return 1;
+	return true;
 }
 
 bool PC_Player::CheckFightArrLimit() {
@@ -195,11 +197,11 @@ bool PC_Player::CheckFightArrLimit() {
 			}
 		}
 		if (tempAddress != -1) {
-			if (this->pcBuyHero(tempAddress)) return 0; //购买英雄
+			if (this->pcBuyHero(tempAddress)) return false; //购买英雄
 		}
-		else return 1; //无法购买
+		else return true; //无法购买
 	}
-	return 1;
+	return true;
 }
 
 void PC_Player::CheckBuyExp() {
@@ -216,12 +218,12 @@ void PC_Player::CheckBuyExp() {
 	}
 }
 
-int PC_Player::CheckGoldInterest() {
-	//返回1表示需要进行存钱
-	if (player2data.m_coins < 10) return 1;
-	else if (player2data.m_coins > 25 && player2data.m_coins < 30) return 1;
-	else if (player2data.m_coins > 45 && player2data.m_coins < 50) return 1;
-	else return 0;
+bool PC_Player::CheckGoldInterest() {
+	//返回true表示需要进行存钱
+	if (player2data.m_coins > 5 && player2data.m_coins < 10) return true;
+	else if (player2data.m_coins > 25 && player2data.m_coins < 30) return true;
+	else if (player2data.m_coins > 45 && player2data.m_coins < 50) return true;
+	else return false;
 }
 
 bool PC_Player::CheckHighFeeHero() {
@@ -234,24 +236,25 @@ bool PC_Player::CheckHighFeeHero() {
 	}
 	if (tempCoin >= 3) {
 		//三费卡
-		if (this->pcBuyHero(tempAddress)) return 0;
+		if (this->pcBuyHero(tempAddress)) return false;
 	}
+	return true;
 }
 
-bool PC_Player::pcBuyHero(int j) {
+bool PC_Player::pcBuyHero(int selected) {
 	if (player2data.m_fightArray->num + player2data.m_playerArray->num <= player2data.m_level + 9) {
 		//保证不超过备战区的最大容量
-		if (player2data.m_coins >= player2data.Used[j].money && player2data.Used[j].buy == false) {
+		if (player2data.m_coins >= player2data.Used[selected].money && player2data.Used[selected].buy == false) {
 			//金币充足就购买
-			auto temp = heroCreate(player2data.Used[j].address);
+			auto temp = heroCreate(player2data.Used[selected].address);
 			ccArrayAppendObject(player2data.m_playerArray, temp);
 			player2data.haveNewHero = true;
-			player2data.Used[j].buy = true;
-			return 1;
+			player2data.Used[selected].buy = true;
+			return true;
 		}
-		else return 0;
+		else return false;
 	}
-	return 1;
+	return true;
 }
 
 void PC_Player::pcCreateBattleArray() {
