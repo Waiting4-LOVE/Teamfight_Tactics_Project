@@ -10,6 +10,7 @@ class pitman :public hero
 {
 public:
 	pitman();
+	void attack(float dt);
 	static pitman* createhero();
 	void releaseSkill();
 	CREATE_FUNC(pitman);

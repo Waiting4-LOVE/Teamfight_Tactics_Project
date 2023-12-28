@@ -10,6 +10,7 @@ class snowman :public hero
 {
 public:
 	snowman();
+	void attack(float dt);
 	static snowman* createhero();
 	void releaseSkill();
 	CREATE_FUNC(snowman);

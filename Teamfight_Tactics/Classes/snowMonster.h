@@ -10,6 +10,7 @@ class snowMonster :public hero
 {
 public:
 	snowMonster();
+	void attack(float dt);
 	static snowMonster* createhero();
 	void releaseSkill();
 	CREATE_FUNC(snowMonster);

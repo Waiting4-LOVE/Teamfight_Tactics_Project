@@ -18,6 +18,7 @@ goldenMonster::goldenMonster() {
 	criticalChance = 0.05;
 	defencePhysics = 5;
 	defenceMagic = 5;
+	star = 1;
 }
 
 goldenMonster* goldenMonster::createhero() {
@@ -42,6 +43,27 @@ goldenMonster* goldenMonster::createhero() {
 	return goldenMonster;
 }
 
+void goldenMonster::attack(float dt)
+{
+	if (attackTarget != NULL && !die())
+	{
+		float  distance = sqrt((attackTarget->getPosition().x - getPosition().x)  //获得距离
+			* (attackTarget->getPosition().x - getPosition().x) +
+			(attackTarget->getPosition().y - getPosition().y)
+			* (attackTarget->getPosition().y - getPosition().y));
+		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
+		{
+			isMove = 0;
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			blueRecoverOnce();
+			skill();
+			if (attackTarget->die())
+			{
+				attackTarget = NULL;
+			}
+		}
+	}
+}
 
 void goldenMonster::releaseSkill() {
 

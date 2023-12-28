@@ -6,6 +6,7 @@
 #include"database.h"
 #include "littleHero.h"
 #include"equipmentFile.h"
+#include"battleMap.h"
 
 using namespace cocos2d;
 using namespace heroConsts;
@@ -59,7 +60,7 @@ public:
 	Sprite* blueFrame = Sprite::create("BloodFrame.png");
 	ProgressTimer* bloodBar = ProgressTimer::create(Sprite::create("Blood.png"));
 	ProgressTimer* blueBar = ProgressTimer::create(Sprite::create("Mana.png"));
-
+	Label* Star = Label::createWithTTF(to_string(star), "fonts/arial.ttf", 24);
 
 	float calculateDistance(Sprite* d_sprite);//计算本精灵与敌人距离函数
 	bool doDamage(int attackpoint);//我方收到伤害函数，这包括了我方护盾与血量的减少
@@ -70,7 +71,7 @@ public:
 	void blueRecoverOnce();//回一次蓝
 	void EquipmentChange();
 	void hero::EquipToChess(Equipment* equ);
-	void attack(float dt);//攻击
+	virtual void attack(float dt);//攻击
 	void bloodUpdate(float dt);//更新英雄头上血条蓝条等信息
 	void skill();//放技能
 	bool die();

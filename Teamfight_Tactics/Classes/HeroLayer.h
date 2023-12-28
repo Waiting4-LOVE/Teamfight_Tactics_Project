@@ -20,8 +20,8 @@ public:
 	void ChessMove(hero* herocase, littleHero&playerdata, littleHero& AttackPlayer);
 
 private:
-	//void upgrade(littleHero& littlehero);
-	//hero* HeroLayer::upgradeChessCreate(int type);
+	void upgrade(littleHero& littlehero);
+	hero* HeroLayer::upgradeChessCreate(int type);
 
 	friend class GameScene;
 	float CountDistance(hero* h1, hero* h2);

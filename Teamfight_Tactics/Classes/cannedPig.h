@@ -10,6 +10,7 @@ class cannedPig :public hero
 {
 public:
 	cannedPig();
+	void attack(float dt);
 	static cannedPig* createhero();
 	void releaseSkill();
 	CREATE_FUNC(cannedPig);
