@@ -26,6 +26,17 @@ bool LittleHeroLayer::init()
 	bloodFrame->setScaleY(0.6);
 	myLittleHerosprite->addChild(bloodFrame, 1);
 	myLittleHerosprite->addChild(MyLittleHerobloodBar, 2);
+
+	player2HerobloodBar->setBarChangeRate(Point(1, 0));
+	player2HerobloodBar->setType(ProgressTimer::Type::BAR);
+	player2HerobloodBar->setMidpoint(Point(0, 1));
+	player2HerobloodBar->setScaleX(0.22);
+	player2HerobloodBar->setScaleY(0.6);
+	bloodFrame2->setScaleX(0.22);
+	bloodFrame2->setScaleY(0.6);
+	player2LittleHerosprite->addChild(bloodFrame2, 1);
+	player2LittleHerosprite->addChild(player2HerobloodBar, 2);
+
 	/*------------------------买经验------------------*/
 	if (MyLittleHero.getCoins() >= 4)
 	{
@@ -46,6 +57,9 @@ bool LittleHeroLayer::init()
 	myLittleHerosprite->setPosition(MyLittleHero.getCurPos()); //设置精灵的位置
 	this->addChild(myLittleHerosprite); //加到树中
 
+	player2LittleHerosprite->setPosition(1519,949); //设置精灵的位置
+	this->addChild(player2LittleHerosprite); //加到树
+
 	/*------------------------小小英雄待机动画------------------*/
 	Animation* animation = Animation::create();
 	for (int i = 1; i <= 9; ++i) {
@@ -58,6 +72,21 @@ bool LittleHeroLayer::init()
 	Animate* animate = Animate::create(animation);
 	RepeatForever* repeat = RepeatForever::create(animate);
 	myLittleHerosprite->runAction(repeat);
+
+	Animation* animation2 = Animation::create();
+	for (int i = 1; i <= 9; ++i) {
+		char frameName[20];
+		sprintf(frameName, "EGG%d.png", i);
+		animation2->addSpriteFrameWithFile(frameName);
+	}
+	animation2->setDelayPerUnit(0.08f);  // 设置每帧的播放时间
+	animation2->setRestoreOriginalFrame(true);
+	Animate* animate2 = Animate::create(animation2);
+	RepeatForever* repeat2 = RepeatForever::create(animate2);
+	player2LittleHerosprite->runAction(repeat2);
+	
+
+
 
 
 	// 设置鼠标事件监听器
@@ -90,9 +119,11 @@ void LittleHeroLayer::update(float dt)
 	/*------------------------Player1(对方)------------------------*/
 
 	/*------------------------血条------------------*/
-	/*player2Blood->setPercentage(player2data.HealthValue);
-	player2Blood->setTag(player2data.HealthValue);
-	Hyut2->setString(to_string(player2data.HealthValue));*/
+	player2HerobloodBar->setPosition(Vec2(50, this->_contentSize.height + 100));
+	bloodFrame2->setPosition(Vec2(50, this->_contentSize.height + 100));
+	player2HerobloodBar->setPercentage(player2data.getCurBlood());
+	player2HerobloodBar->setTag(player2data.getCurBlood());
+	//Hyut2->setString(to_string(player2data.HealthValue));
 
 	/*------------------------金钱------------------*/
 	//不用Coins2->setString("Coins: " + to_string(player2data.Gold)); //临时记录

@@ -24,9 +24,16 @@ void littleHero::countNextUPExp() {
 }
 
 
+/*littleHero* littleHero::createLH(string picture_name)
+{
+	auto temp = Sprite::create(picture_name);
+	auto lh = new littleHero();
+	lh->LHAnimation(picture_name, 9, lh, 0.08f, -1);
+	lh->addChild(temp);
+	return lh;
+}*/
 
-
-void littleHero::LHAnimation(string picturename, const int picturenum, Sprite* sprite, Point location, const float speed, const int loop)
+void littleHero::LHAnimation(string picturename, const int picturenum, Sprite* sprite,const float speed, const int loop)
 {
 	Animation* animation = Animation::create();
 

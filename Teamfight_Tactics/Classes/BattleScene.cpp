@@ -77,7 +77,7 @@ void BattleScene::update(float dt)
 		addChess(player2data, 1);
 		pc_player.pcJudgeMoneyUsage();
 	}
-	heroLayer->scheduleUpdate();
+	heroLayer->unscheduleUpdate();
 
 	addChess(MyLittleHero, 0);
 	addChess(player2data, 1);
@@ -427,7 +427,6 @@ void BattleScene::Win()
 	{
 		if (sum[1] == 0)//我赢
 		{
-
 			MyLittleHero.win();
 			player2data.lose(2 + 2 * sum[0]);
 		}
@@ -444,25 +443,26 @@ void BattleScene::Win()
 		WinRetain(player2data.m_fightArray);
 
 		heroLayer->unscheduleUpdate();
-
+		/*MyLittleHero.addCoins(5);
+		player2data.addCoins(5);*/
 		//装备栏移除(未实现)
 
 		if (MyLittleHero.getCurBlood() > 0 && player2data.getCurBlood() > 0)
 		{
-			auto newScene = BattleScene::createScene();
-			Director::getInstance()->pushScene(newScene);
+			_director->replaceScene(TransitionFade::create(1/8.0f, BattleScene::createScene()));
 		}
 
 		else
 		{
 			string name = MyLittleHero.getCurBlood() <= 0 ? "You Lose!" : "You Win!";
 			auto label = Label::createWithTTF(name, "fonts/Marker Felt.ttf", 78);
+			this->addChild(label);
 			label->setTextColor(Color4B::WHITE);
-			label->setPosition(800, 400);
+			label->setPosition(800, 500);
 			auto move = FadeOut::create(5.0f);
 			label->runAction(move);
-			this->addChild(label);
 			this->unscheduleUpdate();
+
 			MyLittleHero.reset();
 			player2data.reset();
 			for (int i = 0; i < 6; i++)
@@ -479,10 +479,9 @@ void BattleScene::Win()
 					waitLatticeExist[i][j] = 0;
 				}
 			}
-			auto newScene = BattleScene::createScene();
-			Director::getInstance()->pushScene(newScene);
+			_director->replaceScene(TransitionFade::create(1 / 8.0f, SelectScene::createScene()));
 		}
-
+		heroLayer->unscheduleUpdate();
 	}
 
 }
