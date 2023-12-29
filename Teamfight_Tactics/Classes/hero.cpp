@@ -324,11 +324,11 @@ void hero::setPlayer(int player)
 void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
 {
 	Sprite* bullet = Sprite::create(picturename);
-	this->addChild(bullet);
+	this->getParent()->addChild(bullet);
 	bullet->setScale(1);
-	bullet->setPosition(40, 30);
+	bullet->setPosition(this->getPosition());
 
-	float moveTime = sqrt(deltaPos.dot(deltaPos)) / 300;//子弹移动时间
+	float moveTime = sqrt(deltaPos.dot(deltaPos)) / 400;//子弹移动时间
 	auto move = MoveBy::create(moveTime, deltaPos);
 	auto back = MoveTo::create(0.f, Vec2(40, 30));
 	auto appear = FadeIn::create(0.f);

@@ -16,7 +16,7 @@ const int blue_once = 10;
 const int max_health_point = 100;//设置英雄血量为100
 const int max_blue_point = 100;//设置英雄蓝条为100
 const int max_defence_point = 100;//设置英雄护盾值为100
-const int move_speed = 1;//棋盘上所有英雄的移动速度，1/60s走的路程
+const float move_speed = 1.5;//棋盘上所有英雄的移动速度，1/60s走的路程
 
 
 
