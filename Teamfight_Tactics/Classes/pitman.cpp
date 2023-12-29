@@ -71,6 +71,24 @@ void pitman::releaseSkill() {
 }
 
 _2star_pitman::_2star_pitman() {
+	type = _2star_Pitman;
+	maxHealthPoint = 100;
+	maxBluePoint = 100;
+	maxShieldPoint = 100;
+	fee = 2;
+	name = "yao yao don't know";
+	HealthPoint = 100000;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 10;
+	magicPoint = 0;
+	speedAttack = 0.7f;
+	distanceAttack = 2;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.05;
+	defencePhysics = 5;
+	defenceMagic = 5;
+	star = 2;
 	//填写二星英雄的属性
 }
 
@@ -83,6 +101,24 @@ _2star_pitman* _2star_pitman::createhero() {
 }
 
 _3star_pitman::_3star_pitman() {
+	type = _3star_Pitman;
+	maxHealthPoint = 100;
+	maxBluePoint = 100;
+	maxShieldPoint = 100;
+	fee = 2;
+	name = "yao yao don't know";
+	HealthPoint = 100000;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 10;
+	magicPoint = 0;
+	speedAttack = 0.7f;
+	distanceAttack = 2;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.05;
+	defencePhysics = 5;
+	defenceMagic = 5;
+	star = 3;
 	//填写三星英雄的属性
 }
 

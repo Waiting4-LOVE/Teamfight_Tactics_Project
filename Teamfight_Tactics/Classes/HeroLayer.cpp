@@ -52,94 +52,94 @@ hero* CreateHero(int type) {
 		return snowMonster::createhero();
 		break;
 	case _2star_DarkKnight:
-		return darkKnight::createhero();
+		return _2star_darkKnight::createhero();
 		break;
 	case _2star_Master:
-		return master::createhero();
+		return _2star_master::createhero();
 		break;
 	case _2star_CannedPig:
-		return cannedPig::createhero();
+		return _2star_cannedPig::createhero();
 		break;
 	case _2star_FlyDragon:
-		return flyDragon::createhero();
+		return _2star_flyDragon::createhero();
 		break;
 	case _2star_Ghost:
-		return ghost::createhero();
+		return _2star_ghost::createhero();
 		break;
 	case _2star_Gargomon:
-		return gargomon::createhero();
+		return _2star_gargomon::createhero();
 		break;
 	case _2star_GoldenMonster:
-		return goldenMonster::createhero();
+		return _2star_goldenMonster::createhero();
 		break;
 	case _2star_IceFire:
-		return iceFire::createhero();
+		return _2star_iceFire::createhero();
 		break;
 	case _2star_Knight:
-		return knight::createhero();
+		return _2star_knight::createhero();
 		break;
 	case _2star_Pitman:
-		return pitman::createhero();
+		return _2star_pitman::createhero();
 		break;
 	case _2star_Ranger:
-		return ranger::createhero();
+		return _2star_ranger::createhero();
 		break;
 	case _2star_Snowman:
-		return snowman::createhero();
+		return _2star_snowman::createhero();
 		break;
 	case _2star_Elf:
-		return elf::createhero();
+		return _2star_elf::createhero();
 		break;
 	case _2star_WildBoar:
-		return wildBoar::createhero();
+		return _2star_wildBoar::createhero();
 		break;
 	case _2star_SnowMonster:
-		return snowMonster::createhero();
+		return _2star_snowMonster::createhero();
 		break;
 	case _3star_DarkKnight:
-		return darkKnight::createhero();
+		return _3star_darkKnight::createhero();
 		break;
 	case _3star_Master:
-		return master::createhero();
+		return _3star_master::createhero();
 		break;
 	case _3star_CannedPig:
-		return cannedPig::createhero();
+		return _3star_cannedPig::createhero();
 		break;
 	case _3star_FlyDragon:
-		return flyDragon::createhero();
+		return _3star_flyDragon::createhero();
 		break;
 	case _3star_Ghost:
-		return ghost::createhero();
+		return _3star_ghost::createhero();
 		break;
 	case _3star_Gargomon:
-		return gargomon::createhero();
+		return _3star_gargomon::createhero();
 		break;
 	case _3star_GoldenMonster:
-		return goldenMonster::createhero();
+		return _3star_goldenMonster::createhero();
 		break;
 	case _3star_IceFire:
-		return iceFire::createhero();
+		return _3star_iceFire::createhero();
 		break;
 	case _3star_Knight:
-		return knight::createhero();
+		return _3star_knight::createhero();
 		break;
 	case _3star_Pitman:
-		return pitman::createhero();
+		return _3star_pitman::createhero();
 		break;
 	case _3star_Ranger:
-		return ranger::createhero();
+		return _3star_ranger::createhero();
 		break;
 	case _3star_Snowman:
-		return snowman::createhero();
+		return _3star_snowman::createhero();
 		break;
 	case _3star_Elf:
-		return elf::createhero();
+		return _3star_elf::createhero();
 		break;
 	case _3star_WildBoar:
-		return wildBoar::createhero();
+		return _3star_wildBoar::createhero();
 		break;
 	case _3star_SnowMonster:
-		return snowMonster::createhero();
+		return _3star_snowMonster::createhero();
 		break;
 	default:
 		break;
@@ -355,12 +355,12 @@ void HeroLayer::update(float dt)
 void HeroLayer::upgrade(littleHero& littlehero)
 {
 
-	for (int i = 0; i < 16; i++)
+	for (int i = 0; i < 30; i++)
 	{
 		hero* temp[3] = { NULL,NULL,NULL };
 		ccArray* tempArray[3] = {};
 		int s = 0;  //三个待升级棋子
-		if (littlehero.chessnumber[i] >= 3 && i < 16)
+		if (littlehero.chessnumber[i] >= 3 && i < 30)
 		{
 			for (int j = 0; j < littlehero.m_playerArray->num; j++)
 			{
@@ -399,11 +399,11 @@ void HeroLayer::upgrade(littleHero& littlehero)
 				&& temp[0]->getType() == i && temp[1]->getType() == i && temp[2]->getType() == i)  //防止Bug
 			{
 				auto upgrade_chess = upgradeChessCreate(i);
-
 				littlehero.chessnumber[i] -= 3;
 				for (int k = 0; k < 3; k++)
 				{
 					ccArrayAppendArray(upgrade_chess->equipment, temp[k]->equipment);
+
 					temp[k]->retain();          //不retain在release下无法运行
 					temp[k]->removeFromParent();
 					if (ccArrayContainsObject(tempArray[k], temp[k]))
@@ -424,97 +424,97 @@ void HeroLayer::upgrade(littleHero& littlehero)
 
 hero* HeroLayer::upgradeChessCreate(int type)
 {
-	switch (type + 16)
+	switch (type + 15)
 	{
 	case _2star_DarkKnight:
-		return darkKnight::createhero();
+		return _2star_darkKnight::createhero();
 		break;
 	case _2star_Master:
-		return master::createhero();
+		return _2star_master::createhero();
 		break;
 	case _2star_CannedPig:
-		return cannedPig::createhero();
+		return _2star_cannedPig::createhero();
 		break;
 	case _2star_FlyDragon:
-		return flyDragon::createhero();
+		return _2star_flyDragon::createhero();
 		break;
 	case _2star_Ghost:
-		return ghost::createhero();
+		return _2star_ghost::createhero();
 		break;
 	case _2star_Gargomon:
-		return gargomon::createhero();
+		return _2star_gargomon::createhero();
 		break;
 	case _2star_GoldenMonster:
-		return goldenMonster::createhero();
+		return _2star_goldenMonster::createhero();
 		break;
 	case _2star_IceFire:
-		return iceFire::createhero();
+		return _2star_iceFire::createhero();
 		break;
 	case _2star_Knight:
-		return knight::createhero();
+		return _2star_knight::createhero();
 		break;
 	case _2star_Pitman:
-		return pitman::createhero();
+		return _2star_pitman::createhero();
 		break;
 	case _2star_Ranger:
-		return ranger::createhero();
+		return _2star_ranger::createhero();
 		break;
 	case _2star_Snowman:
-		return snowman::createhero();
+		return _2star_snowman::createhero();
 		break;
 	case _2star_Elf:
-		return elf::createhero();
+		return _2star_elf::createhero();
 		break;
 	case _2star_WildBoar:
-		return wildBoar::createhero();
+		return _2star_wildBoar::createhero();
 		break;
 	case _2star_SnowMonster:
-		return snowMonster::createhero();
+		return _2star_snowMonster::createhero();
 		break;
 	case _3star_DarkKnight:
-		return darkKnight::createhero();
+		return _3star_darkKnight::createhero();
 		break;
 	case _3star_Master:
-		return master::createhero();
+		return _3star_master::createhero();
 		break;
 	case _3star_CannedPig:
-		return cannedPig::createhero();
+		return _3star_cannedPig::createhero();
 		break;
 	case _3star_FlyDragon:
-		return flyDragon::createhero();
+		return _3star_flyDragon::createhero();
 		break;
 	case _3star_Ghost:
-		return ghost::createhero();
+		return _3star_ghost::createhero();
 		break;
 	case _3star_Gargomon:
-		return gargomon::createhero();
+		return _3star_gargomon::createhero();
 		break;
 	case _3star_GoldenMonster:
-		return goldenMonster::createhero();
+		return _3star_goldenMonster::createhero();
 		break;
 	case _3star_IceFire:
-		return iceFire::createhero();
+		return _3star_iceFire::createhero();
 		break;
 	case _3star_Knight:
-		return knight::createhero();
+		return _3star_knight::createhero();
 		break;
 	case _3star_Pitman:
-		return pitman::createhero();
+		return _3star_pitman::createhero();
 		break;
 	case _3star_Ranger:
-		return ranger::createhero();
+		return _3star_ranger::createhero();
 		break;
 	case _3star_Snowman:
-		return snowman::createhero();
+		return _3star_snowman::createhero();
 		break;
 	case _3star_Elf:
-		return elf::createhero();
+		return _3star_elf::createhero();
 		break;
 	case _3star_WildBoar:
-		return wildBoar::createhero();
+		return _3star_wildBoar::createhero();
 		break;
 	case _3star_SnowMonster:
-		return snowMonster::createhero();
+		return _3star_snowMonster::createhero();
 		break;
 		//二星与三星英雄
 

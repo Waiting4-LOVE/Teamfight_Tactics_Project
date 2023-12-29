@@ -71,11 +71,30 @@ void snowman::releaseSkill() {
 }
 
 _2star_snowman::_2star_snowman() {
+	type = _2star_Snowman;
+	maxHealthPoint = 100;
+	maxBluePoint = 100;
+	maxShieldPoint = 100;
+	fee = 2;
+	name = "yao yao don't know";
+	HealthPoint = 100;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 10;
+	magicPoint = 0;
+	speedAttack = 0.7f;
+	distanceAttack = 2;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.05;
+	defencePhysics = 5;
+	defenceMagic = 5;
+	star = 2;
 	//填写二星英雄的属性
 }
 
 _2star_snowman* _2star_snowman::createhero() {
 	auto _2star_snowman = _2star_snowman::create();
+	auto temp = Sprite::create("snowman.png");
 	_2star_snowman->picturename = "";
 	_2star_snowman->picturenum = 0;
 	_2star_snowman->autorelease();
@@ -83,6 +102,24 @@ _2star_snowman* _2star_snowman::createhero() {
 }
 
 _3star_snowman::_3star_snowman() {
+	type = _3star_Snowman;
+	maxHealthPoint = 100;
+	maxBluePoint = 100;
+	maxShieldPoint = 100;
+	fee = 2;
+	name = "yao yao don't know";
+	HealthPoint = 100;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 10;
+	magicPoint = 0;
+	speedAttack = 0.7f;
+	distanceAttack = 2;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.05;
+	defencePhysics = 5;
+	defenceMagic = 5;
+	star = 3;
 	//填写三星英雄的属性
 }
 

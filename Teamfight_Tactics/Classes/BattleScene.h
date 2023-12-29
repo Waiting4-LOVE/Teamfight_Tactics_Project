@@ -48,7 +48,7 @@ public:
 
 private:
 	/**********¼ÆÊ±Æ÷¼°Update**************/
-	RoundTimer* timer = RoundTimer::create(5);
+	RoundTimer* timer = RoundTimer::create(10000);
 	void update(float dt);
 	void TurnInfoInit();
 
