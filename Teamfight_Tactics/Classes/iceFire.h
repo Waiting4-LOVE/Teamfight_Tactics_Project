@@ -10,6 +10,7 @@ class iceFire :public hero
 {
 public:
 	iceFire();
+	void attack(float dt);
 	static iceFire* createhero();
 	void releaseSkill();
 	CREATE_FUNC(iceFire);

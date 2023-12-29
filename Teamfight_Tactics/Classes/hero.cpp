@@ -1,6 +1,6 @@
 #include"hero.h"
 #include"const.h"
-#include"battleMap.h"
+
 
 hero* hero::createhero(string picture_name)
 {
@@ -33,6 +33,7 @@ hero::hero()
 	blueFrame->setScaleX(0.22);
 	blueFrame->setScaleY(0.3);
 
+	this->addChild(Star, 1);
 	this->scheduleUpdate();
 	this->addChild(bloodFrame, 1);
 	this->addChild(bloodBar, 2);
@@ -207,12 +208,29 @@ bool hero::blueClear() {
 		return 0;
 }
 
-void hero::equipmentPutOn(Sprite* item) {
-
+void hero::EquipmentChange() {
+	for (int i = 0; i < equipment->num; i++)
+	{
+		auto equ = (Equipment*)equipment->arr[i];
+		this->EquipToChess(equ);
+	}
 }
 
-void hero::equipmentTakeOff(Sprite* item) {
+void hero::EquipToChess(Equipment* equ)
+{
+	this->maxHealthPoint += equ->getaddHealthLimit();
+	HealthPoint = maxHealthPoint;
 
+	this->speedAttack += equ->getaddAttackSpeed();
+	this->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / this->speedAttack);
+
+	this->physicsAttackPoint += equ->getaddDamage();
+	this->distanceAttack += equ->getaddAttackDistance();
+	this->defencePhysics += equ->getaddPhysicalArmor();
+	this->defenceMagic += equ->getaddMagicalArmor();
+	this->maxBluePoint += equ->getaddBlueLimit();
+	this->magicPoint += equ->getaddMagic();
+	this->criticalChance += equ->getcriticalHit();
 }
 
 
@@ -227,7 +245,7 @@ void hero::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("1.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -248,7 +266,8 @@ void hero::bloodUpdate(float dt)
 	bloodBar->setTag(HealthPoint);
 	blueBar->setPercentage(float(BluePoint) / float(maxBluePoint) * 100);
 	blueBar->setTag(BluePoint);
-
+	Star->setPosition(Vec2(85, 50));
+	Star->setString(to_string(star));
 }
 
 void hero::skill()
@@ -306,7 +325,7 @@ void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
 {
 	Sprite* bullet = Sprite::create(picturename);
 	this->addChild(bullet);
-	bullet->setScale(0.22);
+	bullet->setScale(1);
 	bullet->setPosition(40, 30);
 
 	auto move = MoveBy::create(1.f, deltaPos);

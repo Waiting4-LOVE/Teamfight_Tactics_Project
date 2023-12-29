@@ -10,6 +10,7 @@ class goldenMonster :public hero
 {
 public:
 	goldenMonster();
+	void attack(float dt);
 	static goldenMonster* createhero();
 	void releaseSkill();
 	CREATE_FUNC(goldenMonster);

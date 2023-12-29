@@ -5,7 +5,9 @@
 #include "RoundTimer.h"
 #include"database.h"
 #include "littleHero.h"
-//#include"Equipment.h"
+#include"equipmentFile.h"
+#include"battleMap.h"
+
 using namespace cocos2d;
 using namespace heroConsts;
 using namespace std;
@@ -64,7 +66,7 @@ public:
 	Sprite* blueFrame = Sprite::create("BloodFrame.png");
 	ProgressTimer* bloodBar = ProgressTimer::create(Sprite::create("Blood.png"));
 	ProgressTimer* blueBar = ProgressTimer::create(Sprite::create("Mana.png"));
-
+	Label* Star = Label::createWithTTF(to_string(star), "fonts/arial.ttf", 24);
 
 	float calculateDistance(Sprite* d_sprite);//计算本精灵与敌人距离函数
 	void onDamageReceived(int damage, int type);
@@ -74,12 +76,9 @@ public:
 	void blueRocover();//回蓝函数
 	void healthRecoverOnce(int health_once);//回一次血//参数指的是一次回血量
 	void blueRecoverOnce();//回一次蓝
-	//void EquipmentChange();
-	void equipmentPutOn(Sprite* item);//佩戴装备函数,装备加成
-	void equipmentTakeOff(Sprite* item);//脱下装备函数，取消装备加成
-	//张圣坤的数据库调取对方精灵
-	//将每个人的精灵进行存储，在进行攻击时，我方精灵通过遍历对方的精灵对应的坐标，计算我方精灵到对方精灵的距离，找到最短距离的精灵，返回该精灵的坐标，再找到该坐标对应的格子，寻找最短路径，待所有人走到
-	void attack(float dt);//攻击
+	void EquipmentChange();
+	void hero::EquipToChess(Equipment* equ);
+	virtual void attack(float dt);//攻击
 	void bloodUpdate(float dt);//更新英雄头上血条蓝条等信息
 	void skill();//放技能
 	bool die();
