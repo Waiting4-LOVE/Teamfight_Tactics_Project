@@ -18,6 +18,7 @@ flyDragon::flyDragon() {
 	criticalChance = 0.25;
 	defencePhysics = 30;
 	defenceMagic = 30;
+	star = 1;
 }
 
 flyDragon* flyDragon::createhero() {
@@ -87,6 +88,7 @@ _2star_flyDragon::_2star_flyDragon() {
 	criticalChance = 0.25;
 	defencePhysics = 30;
 	defenceMagic = 30;
+	star = 2;
 }
 
 _2star_flyDragon* _2star_flyDragon::createhero() {
@@ -116,6 +118,7 @@ _3star_flyDragon::_3star_flyDragon() {
 	criticalChance = 0.25;
 	defencePhysics = 30;
 	defenceMagic = 30;
+	star = 3;
 }
 
 _3star_flyDragon* _3star_flyDragon::createhero() {

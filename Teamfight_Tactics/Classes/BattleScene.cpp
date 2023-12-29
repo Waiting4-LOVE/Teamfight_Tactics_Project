@@ -212,7 +212,21 @@ void BattleScene::showInfo(hero* chess)//显示英雄信息
 	heroPicture = Sprite::create(chess->picturename);
 	infoFrame->addChild(heroPicture, 1);
 	heroPicture->setPosition(90, 300);
-	CCLOG("%s", chess->getname().c_str());
+	//CCLOG("%s", chess->getname().c_str());
+	if (heroStar != NULL)
+	{
+		heroStar->removeFromParent();
+		heroStar->release();
+	}
+	if(chess->getHeroStar() == 1)
+		heroStar = Sprite::create("1star.png");
+	else if(chess->getHeroStar()==2)
+		heroStar = Sprite::create("2star.png");
+	else 
+		heroStar = Sprite::create("3star.png");
+	heroStar->setScale(0.15f);
+	infoFrame->addChild(heroStar, 1);
+	heroStar->setPosition(30, 300);
 }
 
 void BattleScene::hideInfo()//隐藏英雄信息

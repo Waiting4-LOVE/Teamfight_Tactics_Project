@@ -43,9 +43,10 @@ public:
 	int getAttackDistance() { return distanceAttack; }
 	int getPhysicalAttack() { return physicsAttackPoint; }
 	int getMagicalPoint() { return magicPoint; }
-	int getCriticalChance() {return criticalChance;}//±©»÷ÂÊ
+	int getCriticalChance() { return criticalChance; }//±©»÷ÂÊ
 	int getDefencePhysics() { return defencePhysics; }//Îï¿¹
 	int getDefenceMagic() { return defenceMagic; }//Ä§¿¹//Ä§¿¹
+	int getHeroStar() { return star; }
 	string getname() { return name; }
 	const cocos2d::Size getContentSize() { return Size(width, height); }   //»ñµÃÍ¼Æ¬³¤¿í
 

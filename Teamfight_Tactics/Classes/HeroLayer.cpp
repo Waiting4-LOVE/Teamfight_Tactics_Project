@@ -189,12 +189,12 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 bool HeroLayer::init() {
 	//auto sprite = hero1::createhero();
 	/*初始化的内容，后续需要放到其他位置*/
-	
-	
-	auto temp = master::createhero();  
-	temp->set(waitLattice[1][0]);
-	temp->setTempPosition();
 
+
+	auto temp = master::createhero();
+	temp->set(battleLattice[1][6]);
+	temp->setTempPosition();
+/*
 	auto temp1 = darkKnight::createhero();
 	temp1->set(battleLattice[5][0]);
 	temp1->setTempPosition();
@@ -209,12 +209,12 @@ bool HeroLayer::init() {
 
 	auto temp4 = ghost::createhero();
 	temp4->set(800, 400);
-	temp4->setTempPosition();
+	temp4->setTempPosition();*/
 
-	auto temp5 = gargomon::createhero();
-	temp5->set(800, 800);
+	auto temp5 = elf::createhero();
+	temp5->set(battleLattice[5][0]);
 	temp5->setTempPosition();
-
+	/*
 	auto temp6 = elf::createhero();
 	temp6->set(1000, 500);
 	temp6->setTempPosition();
@@ -249,9 +249,10 @@ bool HeroLayer::init() {
 
 	auto temp14 = wildBoar::createhero();
 	temp14->set(800, 800);
-	temp14->setTempPosition();
-	
+	temp14->setTempPosition();*/
+
 	ccArrayAppendObject(MyLittleHero.m_fightArray, temp);
+	/*
 	ccArrayAppendObject(MyLittleHero.m_fightArray, temp3);
 	ccArrayAppendObject(MyLittleHero.m_fightArray, temp4);
 	//ccArrayAppendObject(MyLittleHero.m_fightArray, temp6);
@@ -265,9 +266,9 @@ bool HeroLayer::init() {
 	ccArrayAppendObject(player2data.m_fightArray, temp7);
 	ccArrayAppendObject(player2data.m_fightArray, temp8);
 	ccArrayAppendObject(player2data.m_fightArray, temp1);
-	ccArrayAppendObject(player2data.m_fightArray, temp2);
+	ccArrayAppendObject(player2data.m_fightArray, temp2);*/
 	ccArrayAppendObject(player2data.m_fightArray, temp5);
-	
+
 
 
 
@@ -312,7 +313,7 @@ void HeroLayer::ChessMove(hero* herocase, littleHero& playerdata, littleHero& At
 	{
 		return;
 	}
-	if (distance >= herocase->getAttackDistance() * oneLattice && !herocase->attackTarget->die())    //距离大于射程且目标没死则移动
+	if (distance >= herocase->getAttackDistance() * oneLattice * 2 && !herocase->attackTarget->die())    //距离大于射程且目标没死则移动
 	{
 		herocase->setPosition(herocase->getPosition() + (herocase->attackTarget->getPosition() - herocase->getPosition()) / distance * heroConsts::move_speed);
 		herocase->set(herocase->getPosition() + (herocase->attackTarget->getPosition() - herocase->getPosition()) / distance * heroConsts::move_speed);  //将新位置传入类中

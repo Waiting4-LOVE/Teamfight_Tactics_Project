@@ -19,6 +19,7 @@ elf::elf() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 1;
 }
 
 elf* elf::createhero() {
@@ -88,6 +89,7 @@ _2star_elf::_2star_elf() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 2;
 }
 
 _2star_elf* _2star_elf::createhero() {
@@ -117,6 +119,7 @@ _3star_elf::_3star_elf() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 3;
 }
 
 _3star_elf* _3star_elf::createhero() {

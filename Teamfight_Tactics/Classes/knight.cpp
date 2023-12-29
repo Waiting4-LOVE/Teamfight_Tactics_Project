@@ -18,6 +18,7 @@ knight::knight() {
 	criticalChance = 0.25;
 	defencePhysics = 40;
 	defenceMagic = 40;
+	star = 1;
 }
 
 knight* knight::createhero() {
@@ -88,6 +89,7 @@ _2star_knight::_2star_knight() {
 	criticalChance = 0.25;
 	defencePhysics = 40;
 	defenceMagic = 40;
+	star = 2;
 }
 
 _2star_knight* _2star_knight::createhero() {
@@ -117,6 +119,7 @@ _3star_knight::_3star_knight() {
 	criticalChance = 0.25;
 	defencePhysics = 40;
 	defenceMagic = 40;
+	star = 3;
 }
 
 _3star_knight* _3star_knight::createhero() {

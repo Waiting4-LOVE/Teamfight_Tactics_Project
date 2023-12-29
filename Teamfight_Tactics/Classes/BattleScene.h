@@ -48,7 +48,8 @@ private:
 	RoundTimer* timer = RoundTimer::create(1000);
 	Sprite* infoFrame = Sprite::create("infoFrame.png");
 	Label* heroInfo = Label::createWithTTF("", "fonts/arial.ttf", 22);//”¢–€–≈œ¢
-	Sprite* heroPicture=NULL;
+	Sprite* heroPicture = NULL;
+	Sprite* heroStar = NULL;
 	bool infoIsShow = 0;
 	void update(float dt);
 	void TurnInfoInit();

@@ -18,6 +18,7 @@ snowman::snowman() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 1;
 }
 
 snowman* snowman::createhero() {
@@ -88,6 +89,7 @@ _2star_snowman::_2star_snowman() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 2;
 }
 
 _2star_snowman* _2star_snowman::createhero() {
@@ -117,6 +119,7 @@ _3star_snowman::_3star_snowman() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 3;
 }
 
 _3star_snowman* _3star_snowman::createhero() {

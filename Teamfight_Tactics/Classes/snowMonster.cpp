@@ -18,6 +18,7 @@ snowMonster::snowMonster() {
 	criticalChance = 0.25;
 	defencePhysics = 60;
 	defenceMagic = 60;
+	star = 1;
 }
 
 snowMonster* snowMonster::createhero() {
@@ -88,6 +89,7 @@ _2star_snowMonster::_2star_snowMonster() {
 	criticalChance = 0.25;
 	defencePhysics = 60;
 	defenceMagic = 60;
+	star = 2;
 }
 
 _2star_snowMonster* _2star_snowMonster::createhero() {
@@ -117,6 +119,7 @@ _3star_snowMonster::_3star_snowMonster() {
 	criticalChance = 0.25;
 	defencePhysics = 60;
 	defenceMagic = 60;
+	star = 3;
 }
 
 _3star_snowMonster* _3star_snowMonster::createhero() {

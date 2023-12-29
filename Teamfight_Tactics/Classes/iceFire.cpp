@@ -18,6 +18,7 @@ iceFire::iceFire() {
 	criticalChance = 0.25;
 	defencePhysics = 40;
 	defenceMagic = 40;
+	star = 1;
 }
 
 iceFire* iceFire::createhero() {
@@ -87,6 +88,7 @@ _2star_iceFire::_2star_iceFire() {
 	criticalChance = 0.25;
 	defencePhysics = 40;
 	defenceMagic = 40;
+	star = 2;
 }
 
 _2star_iceFire* _2star_iceFire::createhero() {
@@ -116,6 +118,7 @@ _3star_iceFire::_3star_iceFire() {
 	criticalChance = 0.25;
 	defencePhysics = 40;
 	defenceMagic = 40;
+	star = 3;
 }
 
 _3star_iceFire* _3star_iceFire::createhero() {

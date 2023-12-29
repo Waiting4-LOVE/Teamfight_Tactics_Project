@@ -18,6 +18,7 @@ wildBoar::wildBoar() {
 	criticalChance = 0.25;
 	defencePhysics = 45;
 	defenceMagic = 45;
+	star = 1;
 }
 
 wildBoar* wildBoar::createhero() {
@@ -88,6 +89,7 @@ _2star_wildBoar::_2star_wildBoar() {
 	criticalChance = 0.25;
 	defencePhysics = 45;
 	defenceMagic = 45;
+	star = 2;
 }
 
 _2star_wildBoar* _2star_wildBoar::createhero() {
@@ -117,6 +119,7 @@ _3star_wildBoar::_3star_wildBoar() {
 	criticalChance = 0.25;
 	defencePhysics = 45;
 	defenceMagic = 45;
+	star = 3;
 }
 
 _3star_wildBoar* _3star_wildBoar::createhero() {

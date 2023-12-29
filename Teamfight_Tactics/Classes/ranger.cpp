@@ -18,6 +18,7 @@ ranger::ranger() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 1;
 }
 
 ranger* ranger::createhero() {
@@ -88,6 +89,7 @@ _2star_ranger::_2star_ranger() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 2;
 }
 
 _2star_ranger* _2star_ranger::createhero() {
@@ -117,6 +119,7 @@ _3star_ranger::_3star_ranger() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 3;
 }
 
 _3star_ranger* _3star_ranger::createhero() {

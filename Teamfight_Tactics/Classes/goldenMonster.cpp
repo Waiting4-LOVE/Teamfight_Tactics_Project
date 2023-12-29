@@ -18,6 +18,7 @@ goldenMonster::goldenMonster() {
 	criticalChance = 0.25;
 	defencePhysics = 45;
 	defenceMagic = 45;
+	star = 1;
 }
 
 goldenMonster* goldenMonster::createhero() {
@@ -87,6 +88,7 @@ _2star_goldenMonster::_2star_goldenMonster() {
 	criticalChance = 0.25;
 	defencePhysics = 45;
 	defenceMagic = 45;
+	star = 2;
 }
 
 _2star_goldenMonster* _2star_goldenMonster::createhero() {
@@ -116,6 +118,7 @@ _3star_goldenMonster::_3star_goldenMonster() {
 	criticalChance = 0.25;
 	defencePhysics = 45;
 	defenceMagic = 45;
+	star = 3;
 }
 
 _3star_goldenMonster* _3star_goldenMonster::createhero() {

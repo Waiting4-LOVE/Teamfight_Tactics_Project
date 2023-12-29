@@ -18,6 +18,7 @@ cannedPig::cannedPig() {
 	criticalChance = 0.25f;
 	defencePhysics = 30;
 	defenceMagic = 30;
+	star = 1;
 }
 
 cannedPig* cannedPig::createhero() {
@@ -87,6 +88,7 @@ _2star_cannedPig::_2star_cannedPig() {
 	criticalChance = 0.25f;
 	defencePhysics = 30;
 	defenceMagic = 30;
+	star = 2;
 }
 
 _2star_cannedPig* _2star_cannedPig::createhero() {
@@ -116,6 +118,7 @@ _3star_cannedPig::_3star_cannedPig() {
 	criticalChance = 0.25f;
 	defencePhysics = 30;
 	defenceMagic = 30;
+	star = 3;
 }
 
 _3star_cannedPig* _3star_cannedPig::createhero() {

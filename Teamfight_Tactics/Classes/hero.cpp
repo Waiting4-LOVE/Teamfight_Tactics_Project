@@ -328,7 +328,8 @@ void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
 	bullet->setScale(1);
 	bullet->setPosition(40, 30);
 
-	auto move = MoveBy::create(1.f, deltaPos);
+	float moveTime = sqrt(deltaPos.dot(deltaPos)) / 300;//子弹移动时间
+	auto move = MoveBy::create(moveTime, deltaPos);
 	auto back = MoveTo::create(0.f, Vec2(40, 30));
 	auto appear = FadeIn::create(0.f);
 	auto disappear = FadeOut::create(0.f);
@@ -337,5 +338,6 @@ void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
 	auto actionBack = Sequence::createWithTwoActions(disappear, back);
 	auto all = Sequence::createWithTwoActions(actionTo, actionBack);
 	bullet->runAction(Repeat::create(all, 1));
-	attackTarget->doDamage(this->physicsAttackPoint);
+	this->runAction(Sequence::create(DelayTime::create(moveTime), CallFunc::create([this]() {attackTarget->doDamage(this->physicsAttackPoint); }), nullptr));
+	//attackTarget->doDamage(this->physicsAttackPoint);
 }

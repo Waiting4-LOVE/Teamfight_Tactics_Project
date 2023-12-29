@@ -18,6 +18,7 @@ pitman::pitman() {
 	criticalChance = 0.25;
 	defencePhysics = 15;
 	defenceMagic = 15;
+	star = 1;
 }
 
 pitman* pitman::createhero() {
@@ -88,6 +89,7 @@ _2star_pitman::_2star_pitman() {
 	criticalChance = 0.25;
 	defencePhysics = 15;
 	defenceMagic = 15;
+	star = 2;
 }
 
 _2star_pitman* _2star_pitman::createhero() {
@@ -117,6 +119,7 @@ _3star_pitman::_3star_pitman() {
 	criticalChance = 0.25;
 	defencePhysics = 15;
 	defenceMagic = 15;
+	star = 3;
 }
 
 _3star_pitman* _3star_pitman::createhero() {

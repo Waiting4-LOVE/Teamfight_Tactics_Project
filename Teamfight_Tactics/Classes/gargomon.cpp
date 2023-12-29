@@ -18,6 +18,7 @@ gargomon::gargomon() {
 	criticalChance = 0.25;
 	defencePhysics = 60;
 	defenceMagic = 60;
+	star = 1;
 }
 
 gargomon* gargomon::createhero() {
@@ -87,6 +88,7 @@ _2star_gargomon::_2star_gargomon() {
 	criticalChance = 0.25;
 	defencePhysics = 60;
 	defenceMagic = 60;
+	star = 2;
 }
 
 _2star_gargomon* _2star_gargomon::createhero() {
@@ -116,6 +118,7 @@ _3star_gargomon::_3star_gargomon() {
 	criticalChance = 0.25;
 	defencePhysics = 60;
 	defenceMagic = 60;
+	star = 3;
 }
 
 _3star_gargomon* _3star_gargomon::createhero() {

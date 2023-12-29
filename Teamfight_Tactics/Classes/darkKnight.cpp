@@ -18,6 +18,7 @@ darkKnight::darkKnight() {
 	criticalChance = 0.25;
 	defencePhysics = 55;
 	defenceMagic = 55;
+	star = 1;
 }
 
 darkKnight* darkKnight::createhero() {
@@ -87,6 +88,7 @@ _2star_darkKnight::_2star_darkKnight() {
 	criticalChance = 0.25;
 	defencePhysics = 55;
 	defenceMagic = 55;
+	star = 2;
 }
 
 _2star_darkKnight* _2star_darkKnight::createhero() {
@@ -116,6 +118,7 @@ _3star_darkKnight::_3star_darkKnight() {
 	criticalChance = 0.25;
 	defencePhysics = 55;
 	defenceMagic = 55;
+	star = 3;
 }
 
 _3star_darkKnight* _3star_darkKnight::createhero() {

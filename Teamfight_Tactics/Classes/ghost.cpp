@@ -18,6 +18,7 @@ ghost::ghost() {
 	criticalChance = 0.25;
 	defencePhysics = 70;
 	defenceMagic = 70;
+	star = 1;
 }
 
 ghost* ghost::createhero() {
@@ -87,6 +88,7 @@ _2star_ghost::_2star_ghost() {
 	criticalChance = 0.25;
 	defencePhysics = 70;
 	defenceMagic = 70;
+	star = 2;
 }
 
 _2star_ghost* _2star_ghost::createhero() {
@@ -116,6 +118,7 @@ _3star_ghost::_3star_ghost() {
 	criticalChance = 0.25;
 	defencePhysics = 70;
 	defenceMagic = 70;
+	star = 3;
 }
 
 _3star_ghost* _3star_ghost::createhero() {

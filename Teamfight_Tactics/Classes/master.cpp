@@ -18,6 +18,7 @@ master::master() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 1;
 }
 
 master* master::createhero() {
@@ -88,6 +89,7 @@ _2star_master::_2star_master() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 2;
 }
 
 _2star_master* _2star_master::createhero() {
@@ -117,6 +119,7 @@ _3star_master::_3star_master() {
 	criticalChance = 0.25;
 	defencePhysics = 20;
 	defenceMagic = 20;
+	star = 3;
 }
 
 _3star_master* _3star_master::createhero() {
