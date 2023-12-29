@@ -94,8 +94,9 @@ _2star_ranger::_2star_ranger() {
 
 _2star_ranger* _2star_ranger::createhero() {
 	auto _2star_ranger = _2star_ranger::create();
-	_2star_ranger->picturename = "";
-	_2star_ranger->picturenum = 0;
+	auto temp = Sprite::create("ranger.png");
+	temp->setScale(2.5);
+	_2star_ranger->addChild(temp);
 	_2star_ranger->autorelease();
 	return _2star_ranger;
 }
@@ -124,6 +125,9 @@ _3star_ranger::_3star_ranger() {
 
 _3star_ranger* _3star_ranger::createhero() {
 	auto _3star_ranger = _3star_ranger::create();
+	auto temp = Sprite::create("ranger.png");
+	temp->setScale(2.5);
+	_3star_ranger->addChild(temp);
 	_3star_ranger->autorelease();
 	return _3star_ranger;
 }

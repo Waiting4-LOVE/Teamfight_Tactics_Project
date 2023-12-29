@@ -94,8 +94,9 @@ _2star_pitman::_2star_pitman() {
 
 _2star_pitman* _2star_pitman::createhero() {
 	auto _2star_pitman = _2star_pitman::create();
-	_2star_pitman->picturename = "";
-	_2star_pitman->picturenum = 0;
+	auto temp = Sprite::create("pitman.png");
+	temp->setScale(2.5);
+	_2star_pitman->addChild(temp);
 	_2star_pitman->autorelease();
 	return _2star_pitman;
 }
@@ -124,6 +125,9 @@ _3star_pitman::_3star_pitman() {
 
 _3star_pitman* _3star_pitman::createhero() {
 	auto _3star_pitman = _3star_pitman::create();
+	auto temp = Sprite::create("pitman.png");
+	temp->setScale(2.5);
+	_3star_pitman->addChild(temp);
 	_3star_pitman->autorelease();
 	return _3star_pitman;
 }

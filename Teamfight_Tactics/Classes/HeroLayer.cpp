@@ -403,7 +403,7 @@ void HeroLayer::upgrade(littleHero& littlehero)
 				for (int k = 0; k < 3; k++)
 				{
 					ccArrayAppendArray(upgrade_chess->equipment, temp[k]->equipment);
-
+					setLatticeExist(positionToLattice(temp[k]->getTempPosition()), 0);
 					temp[k]->retain();          //不retain在release下无法运行
 					temp[k]->removeFromParent();
 					if (ccArrayContainsObject(tempArray[k], temp[k]))

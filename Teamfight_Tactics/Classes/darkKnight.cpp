@@ -75,8 +75,9 @@ _2star_darkKnight::_2star_darkKnight() {
 
 _2star_darkKnight* _2star_darkKnight::createhero() {
 	auto _2star_darkKnight = _2star_darkKnight::create();
-	_2star_darkKnight->picturename = "";
-	_2star_darkKnight->picturenum = 0;
+	auto temp = Sprite::create("darkKnight.png");
+	temp->setScale(0.22);
+	_2star_darkKnight->addChild(temp);
 	_2star_darkKnight->autorelease();
 	return _2star_darkKnight;
 }
@@ -87,6 +88,9 @@ _3star_darkKnight::_3star_darkKnight() {
 
 _3star_darkKnight* _3star_darkKnight::createhero() {
 	auto _3star_darkKnight = _3star_darkKnight::create();
+	auto temp = Sprite::create("darkKnight.png");
+	temp->setScale(0.22);
+	_3star_darkKnight->addChild(temp);
 	_3star_darkKnight->autorelease();
 	return _3star_darkKnight;
 }

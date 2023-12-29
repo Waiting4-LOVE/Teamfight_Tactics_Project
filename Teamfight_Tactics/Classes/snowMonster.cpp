@@ -94,8 +94,9 @@ _2star_snowMonster::_2star_snowMonster() {
 
 _2star_snowMonster* _2star_snowMonster::createhero() {
 	auto _2star_snowMonster = _2star_snowMonster::create();
-	_2star_snowMonster->picturename = "";
-	_2star_snowMonster->picturenum = 0;
+	auto temp = Sprite::create("snowMonster.png");
+	temp->setScale(2.5);
+	_2star_snowMonster->addChild(temp);
 	_2star_snowMonster->autorelease();
 	return _2star_snowMonster;
 }
@@ -124,6 +125,9 @@ _3star_snowMonster::_3star_snowMonster() {
 
 _3star_snowMonster* _3star_snowMonster::createhero() {
 	auto _3star_snowMonster = _3star_snowMonster::create();
+	auto temp = Sprite::create("snowMonster.png");
+	temp->setScale(2.5);
+	_3star_snowMonster->addChild(temp);
 	_3star_snowMonster->autorelease();
 	return _3star_snowMonster;
 }

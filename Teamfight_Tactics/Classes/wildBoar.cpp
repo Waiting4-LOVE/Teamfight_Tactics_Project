@@ -35,10 +35,7 @@ wildBoar* wildBoar::createhero() {
 	//wildBoar->addChild(wildBoar->bloodBar, 2);
 	//wildBoar->picturename = "wildBoarpng";
 	wildBoar->addChild(temp);
-
 	wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
-
-
 	wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / wildBoar->speedAttack);
 	wildBoar->autorelease();
 	return wildBoar;
@@ -94,7 +91,9 @@ _2star_wildBoar::_2star_wildBoar() {
 
 _2star_wildBoar* _2star_wildBoar::createhero() {
 	auto _2star_wildBoar = _2star_wildBoar::create();
-	_2star_wildBoar->picturename = "wildBoar.png";
+	auto temp = Sprite::create("wildBoar.png");
+	temp->setScale(2.5);
+	_2star_wildBoar->addChild(temp);
 	_2star_wildBoar->autorelease();
 	return _2star_wildBoar;
 }
@@ -123,7 +122,9 @@ _3star_wildBoar::_3star_wildBoar() {
 
 _3star_wildBoar* _3star_wildBoar::createhero() {
 	auto _3star_wildBoar = _3star_wildBoar::create();
-	_3star_wildBoar->picturename = "wildBoar.png";
+	auto temp = Sprite::create("wildBoar.png");
+	temp->setScale(2.5);
+	_3star_wildBoar->addChild(temp);
 	_3star_wildBoar->autorelease();
 	return _3star_wildBoar;
 }

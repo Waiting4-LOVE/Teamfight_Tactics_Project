@@ -95,8 +95,8 @@ _2star_snowman::_2star_snowman() {
 _2star_snowman* _2star_snowman::createhero() {
 	auto _2star_snowman = _2star_snowman::create();
 	auto temp = Sprite::create("snowman.png");
-	_2star_snowman->picturename = "";
-	_2star_snowman->picturenum = 0;
+	temp->setScale(2.5);
+	_2star_snowman->addChild(temp);
 	_2star_snowman->autorelease();
 	return _2star_snowman;
 }
@@ -125,6 +125,9 @@ _3star_snowman::_3star_snowman() {
 
 _3star_snowman* _3star_snowman::createhero() {
 	auto _3star_snowman = _3star_snowman::create();
+	auto temp = Sprite::create("snowman.png");
+	temp->setScale(2.5);
+	_3star_snowman->addChild(temp);
 	_3star_snowman->autorelease();
 	return _3star_snowman;
 }
