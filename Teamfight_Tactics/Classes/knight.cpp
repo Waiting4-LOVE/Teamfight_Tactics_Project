@@ -32,7 +32,7 @@ knight* knight::createhero() {
 	knight->bloodBar->setScaleX(0.22);
 	knight->scheduleUpdate();
 	//knight->addChild(pitman->bloodBar, 2);
-	//knight->picturename = "pitman.png";
+	knight->picturename = "knight.png";
 	knight->addChild(temp);
 
 	knight->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

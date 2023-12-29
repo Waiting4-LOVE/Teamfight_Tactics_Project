@@ -39,6 +39,12 @@ public:
 	Point getPosition() { return Point(x, y); }
 	float getAttackSpeed() { return speedAttack; }
 	int getAttackDistance() { return distanceAttack; }
+	int getPhysicalAttack() { return physicsAttackPoint; }
+	int getMagicalPoint() { return magicPoint; }
+	int getCriticalChance() {return criticalChance;}//暴击率
+	int getDefencePhysics() { return defencePhysics; }//物抗
+	int getDefenceMagic() { return defenceMagic; }//魔抗//魔抗
+	string getname() { return name; }
 	const cocos2d::Size getContentSize() { return Size(width, height); }   //获得图片长宽
 
 	/*set类型函数*/

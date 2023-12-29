@@ -50,7 +50,7 @@ void flyDragon::releaseSkill() {
 _2star_flyDragon::_2star_flyDragon() {
 	//ÌîĞ´¶şĞÇÓ¢ĞÛµÄÊôĞÔ
 	type = FlyDragon;
-	maxHealthPoint = 1260
+	maxHealthPoint = 1260;
 	maxBluePoint = 30;
 	maxShieldPoint = 100;
 	fee = 4;

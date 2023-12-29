@@ -24,6 +24,14 @@ bool BattleScene::init()
 	TurnInfoInit();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	//信息框初始化
+	infoFrame->setAnchorPoint(Vec2(0, 0.5));
+	infoFrame->setScale(1.5);
+	infoFrame->setPosition(10000, 10000);
+	infoFrame->addChild(heroInfo, 1);
+	heroInfo->setPosition(82, -7);
+	heroInfo->setColor(Color3B::WHITE);
+	heroInfo->setAnchorPoint(Vec2(0, 0));
 
 	/***********所需子Layer************/
 	this->addChild(map, 0);        //地图层
@@ -33,6 +41,7 @@ bool BattleScene::init()
 	this->addChild(shopLayer, 3);   //商店层
 	this->addChild(heroLayer, 4);   //英雄层
 
+	this->addChild(infoFrame, 100);//信息层
 
 
 	/**********计时器及Update**************/
@@ -189,6 +198,28 @@ void BattleScene::onMouseScroll(Event* event)
 
 }
 
+void BattleScene::showInfo(hero* chess)//显示英雄信息
+{
+	infoFrame->setPosition(Vec2(0, 540));
+	string heroInformation = StringUtils::format("%s\n%d\n%d\n%d\n%d\n%.2f\n%d\n%d\n%d\n%d\n", chess->getname().c_str(), chess->getHealthPoint(), chess->getBluePoint(), chess->getPhysicalAttack(), chess->getMagicalPoint(), chess->getAttackSpeed(), chess->getAttackDistance(), chess->getCriticalChance() * 100, chess->getDefencePhysics(), chess->getDefenceMagic());
+	heroInfo->setString(heroInformation);
+	
+	if (heroPicture != NULL)
+	{
+		heroPicture->removeFromParent();
+		heroPicture->release();
+	}
+	heroPicture = Sprite::create(chess->picturename);
+	infoFrame->addChild(heroPicture, 1);
+	heroPicture->setPosition(90, 300);
+	CCLOG("%s", chess->getname().c_str());
+}
+
+void BattleScene::hideInfo()//隐藏英雄信息
+{
+	infoFrame->setPosition(Vec2(10000, 10000));
+}
+
 void BattleScene::onMouseMove(Event* event)
 {
 	EventMouse* e = (EventMouse*)event;
@@ -300,7 +331,7 @@ void BattleScene::onMouseUp(Event* event)
 						temp->setPosition(temp->getTempPosition());
 						temp->set(temp->getTempPosition());
 						auto label = Label::createWithTTF("full", "fonts/Marker Felt.ttf", 36);
-						this->addChild(label,9);
+						this->addChild(label, 9);
 						label->setTextColor(Color4B::WHITE);
 						label->setPosition(800, 400);
 						auto fadeout = FadeOut::create(2.0f);
@@ -347,6 +378,23 @@ void BattleScene::onMouseDown(Event* event)
 	{
 		if (FindMouseTarget(MyLittleHero.m_fightArray, e))       //在战斗区寻找目标
 			FindMouseTarget(MyLittleHero.m_playerArray, e);  //寻找不到则在备战区寻找
+	}
+	if (MouseToChess >= 0&&!infoIsShow)
+	{
+		if (MouseToChess >= MyLittleHero.m_fightArray->num)
+		{
+			showInfo((hero*)MyLittleHero.m_playerArray->arr[MouseToChess - MyLittleHero.m_fightArray->num]);
+		}
+		else
+		{
+			showInfo((hero*)MyLittleHero.m_fightArray->arr[MouseToChess]);
+		}
+		infoIsShow = 1;
+	}
+	else if(MouseToChess < 0 && infoIsShow)
+	{
+		hideInfo();
+		infoIsShow = 0;
 	}
 }
 
