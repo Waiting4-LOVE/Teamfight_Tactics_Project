@@ -203,7 +203,7 @@ void BattleScene::showInfo(hero* chess)//显示英雄信息
 	infoFrame->setPosition(Vec2(0, 540));
 	string heroInformation = StringUtils::format("%s\n%d\n%d\n%d\n%d\n%.2f\n%d\n%d\n%d\n%d\n", chess->getname().c_str(), chess->getHealthPoint(), chess->getBluePoint(), chess->getPhysicalAttack(), chess->getMagicalPoint(), chess->getAttackSpeed(), chess->getAttackDistance(), chess->getCriticalChance() * 100, chess->getDefencePhysics(), chess->getDefenceMagic());
 	heroInfo->setString(heroInformation);
-	
+
 	if (heroPicture != NULL)
 	{
 		heroPicture->removeFromParent();
@@ -218,11 +218,11 @@ void BattleScene::showInfo(hero* chess)//显示英雄信息
 		heroStar->removeFromParent();
 		heroStar->release();
 	}
-	if(chess->getHeroStar() == 1)
+	if (chess->getHeroStar() == 1)
 		heroStar = Sprite::create("1star.png");
-	else if(chess->getHeroStar()==2)
+	else if (chess->getHeroStar() == 2)
 		heroStar = Sprite::create("2star.png");
-	else 
+	else
 		heroStar = Sprite::create("3star.png");
 	heroStar->setScale(0.15f);
 	infoFrame->addChild(heroStar, 1);
@@ -393,7 +393,7 @@ void BattleScene::onMouseDown(Event* event)
 		if (FindMouseTarget(MyLittleHero.m_fightArray, e))       //在战斗区寻找目标
 			FindMouseTarget(MyLittleHero.m_playerArray, e);  //寻找不到则在备战区寻找
 	}
-	if (MouseToChess >= 0&&!infoIsShow)
+	if (MouseToChess >= 0 && infoIsShow != MouseToChess)
 	{
 		if (MouseToChess >= MyLittleHero.m_fightArray->num)
 		{
@@ -403,12 +403,12 @@ void BattleScene::onMouseDown(Event* event)
 		{
 			showInfo((hero*)MyLittleHero.m_fightArray->arr[MouseToChess]);
 		}
-		infoIsShow = 1;
+		infoIsShow = MouseToChess;
 	}
-	else if(MouseToChess < 0 && infoIsShow)
+	else if (MouseToChess < 0 && infoIsShow)
 	{
 		hideInfo();
-		infoIsShow = 0;
+		infoIsShow = 1000;
 	}
 }
 

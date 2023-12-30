@@ -50,7 +50,7 @@ private:
 	Label* heroInfo = Label::createWithTTF("", "fonts/arial.ttf", 22);//”¢–€–≈œ¢
 	Sprite* heroPicture = NULL;
 	Sprite* heroStar = NULL;
-	bool infoIsShow = 0;
+	int infoIsShow = 1000;
 	void update(float dt);
 	void TurnInfoInit();
 
