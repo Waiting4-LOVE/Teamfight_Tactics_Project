@@ -73,13 +73,13 @@ void master::releaseSkill() {
 
 _2star_master::_2star_master() {
 	//填写二星英雄的属性
-	type = Master;
+	type = _2star_Master;
 	maxHealthPoint = 1170;
 	maxBluePoint = 40;
 	maxShieldPoint = 0;
 	fee = 3;
 	name = "Master";
-	HealthPoint = 650;//初始血量为最大血量
+	HealthPoint = 1170;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 60;
@@ -95,21 +95,34 @@ _2star_master::_2star_master() {
 
 _2star_master* _2star_master::createhero() {
 	auto _2star_master = _2star_master::create();
-	_2star_master->picturename = "";
-	_2star_master->picturenum = 0;
+	auto temp = Sprite::create("master.png");
+	temp->setScale(2.5);
+	_2star_master->bloodBar->setBarChangeRate(Point(1, 0));
+	_2star_master->bloodBar->setType(ProgressTimer::Type::BAR);
+	_2star_master->bloodBar->setMidpoint(Point(0, 1));
+	_2star_master->bloodBar->setScaleX(0.22);
+	_2star_master->scheduleUpdate();
+	//master->addChild(master->bloodBar, 2);
+	_2star_master->picturename = "master.png";
+	_2star_master->addChild(temp);
+
+	_2star_master->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+
+	_2star_master->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _2star_master->speedAttack);
 	_2star_master->autorelease();
 	return _2star_master;
 }
 
 _3star_master::_3star_master() {
 	//填写三星英雄的属性
-	type = Master;
+	type = _3star_Master;
 	maxHealthPoint = 2106;
 	maxBluePoint = 40;
 	maxShieldPoint = 0;
 	fee = 3;
 	name = "Master";
-	HealthPoint = 650;//初始血量为最大血量
+	HealthPoint = 2106;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 90;
@@ -125,6 +138,21 @@ _3star_master::_3star_master() {
 
 _3star_master* _3star_master::createhero() {
 	auto _3star_master = _3star_master::create();
+	auto temp = Sprite::create("master.png");
+	temp->setScale(2.5);
+	_3star_master->bloodBar->setBarChangeRate(Point(1, 0));
+	_3star_master->bloodBar->setType(ProgressTimer::Type::BAR);
+	_3star_master->bloodBar->setMidpoint(Point(0, 1));
+	_3star_master->bloodBar->setScaleX(0.22);
+	_3star_master->scheduleUpdate();
+	//master->addChild(master->bloodBar, 2);
+	_3star_master->picturename = "master.png";
+	_3star_master->addChild(temp);
+
+	_3star_master->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+
+	_3star_master->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _3star_master->speedAttack);
 	_3star_master->autorelease();
 	return _3star_master;
 }

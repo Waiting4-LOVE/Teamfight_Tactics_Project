@@ -73,13 +73,13 @@ void ranger::releaseSkill() {
 
 _2star_ranger::_2star_ranger() {
 	//填写二星英雄的属性
-	type = Ranger;
+	type = _2star_Ranger;
 	maxHealthPoint = 1080;
 	maxBluePoint = 30;
 	maxShieldPoint = 0;
 	fee = 2;
 	name = "Ranger";
-	HealthPoint = 600;//初始血量为最大血量
+	HealthPoint = 1080;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 83;
@@ -95,21 +95,34 @@ _2star_ranger::_2star_ranger() {
 
 _2star_ranger* _2star_ranger::createhero() {
 	auto _2star_ranger = _2star_ranger::create();
-	_2star_ranger->picturename = "";
-	_2star_ranger->picturenum = 0;
+	auto temp = Sprite::create("ranger.png");
+	temp->setScale(2.5);
+	_2star_ranger->bloodBar->setBarChangeRate(Point(1, 0));
+	_2star_ranger->bloodBar->setType(ProgressTimer::Type::BAR);
+	_2star_ranger->bloodBar->setMidpoint(Point(0, 1));
+	_2star_ranger->bloodBar->setScaleX(0.22);
+	_2star_ranger->scheduleUpdate();
+	//ranger->addChild(hero1->bloodBar, 2);
+	_2star_ranger->picturename = "ranger.png";
+	_2star_ranger->addChild(temp);
+
+	_2star_ranger->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+
+	_2star_ranger->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _2star_ranger->speedAttack);
 	_2star_ranger->autorelease();
 	return _2star_ranger;
 }
 
 _3star_ranger::_3star_ranger() {
 	//填写三星英雄的属性
-	type = Ranger;
+	type = _3star_Ranger;
 	maxHealthPoint = 1944;
 	maxBluePoint = 30;
 	maxShieldPoint = 0;
 	fee = 2;
 	name = "Ranger";
-	HealthPoint = 600;//初始血量为最大血量
+	HealthPoint = 1944;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 124;
@@ -125,6 +138,21 @@ _3star_ranger::_3star_ranger() {
 
 _3star_ranger* _3star_ranger::createhero() {
 	auto _3star_ranger = _3star_ranger::create();
+	auto temp = Sprite::create("ranger.png");
+	temp->setScale(2.5);
+	_3star_ranger->bloodBar->setBarChangeRate(Point(1, 0));
+	_3star_ranger->bloodBar->setType(ProgressTimer::Type::BAR);
+	_3star_ranger->bloodBar->setMidpoint(Point(0, 1));
+	_3star_ranger->bloodBar->setScaleX(0.22);
+	_3star_ranger->scheduleUpdate();
+	//ranger->addChild(hero1->bloodBar, 2);
+	_3star_ranger->picturename = "ranger.png";
+	_3star_ranger->addChild(temp);
+
+	_3star_ranger->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+
+	_3star_ranger->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _3star_ranger->speedAttack);
 	_3star_ranger->autorelease();
 	return _3star_ranger;
 }

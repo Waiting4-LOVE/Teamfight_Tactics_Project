@@ -72,13 +72,13 @@ void goldenMonster::releaseSkill() {
 
 _2star_goldenMonster::_2star_goldenMonster() {
 	//填写二星英雄的属性
-	type = GoldenMonster;
+	type = _2star_GoldenMonster;
 	maxHealthPoint = 1350;
 	maxBluePoint = 60;
 	maxShieldPoint = 100;
 	fee = 2;
 	name = "GoldenMonster";
-	HealthPoint = 750;//初始血量为最大血量
+	HealthPoint = 1350;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 83;
@@ -94,21 +94,33 @@ _2star_goldenMonster::_2star_goldenMonster() {
 
 _2star_goldenMonster* _2star_goldenMonster::createhero() {
 	auto _2star_goldenMonster = _2star_goldenMonster::create();
-	_2star_goldenMonster->picturename = "";
-	_2star_goldenMonster->picturenum = 0;
+	auto temp = Sprite::create("goldenMonster.png");
+	temp->setScale(2.5);
+	_2star_goldenMonster->bloodBar->setBarChangeRate(Point(1, 0));
+	_2star_goldenMonster->bloodBar->setType(ProgressTimer::Type::BAR);
+	_2star_goldenMonster->bloodBar->setMidpoint(Point(0, 1));
+	_2star_goldenMonster->bloodBar->setScaleX(0.22);
+	_2star_goldenMonster->scheduleUpdate();
+	//goldenMonster->addChild(goldenMonster->bloodBar, 2);
+	_2star_goldenMonster->picturename = "goldenMonster.png";
+	_2star_goldenMonster->addChild(temp);
+
+	_2star_goldenMonster->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+	_2star_goldenMonster->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _2star_goldenMonster->speedAttack);
 	_2star_goldenMonster->autorelease();
 	return _2star_goldenMonster;
 }
 
 _3star_goldenMonster::_3star_goldenMonster() {
 	//填写三星英雄的属性
-	type = GoldenMonster;
+	type = _3star_GoldenMonster;
 	maxHealthPoint = 2430;
 	maxBluePoint = 60;
 	maxShieldPoint = 100;
 	fee = 2;
 	name = "GoldenMonster";
-	HealthPoint = 750;//初始血量为最大血量
+	HealthPoint = 2430;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 124;
@@ -124,6 +136,20 @@ _3star_goldenMonster::_3star_goldenMonster() {
 
 _3star_goldenMonster* _3star_goldenMonster::createhero() {
 	auto _3star_goldenMonster = _3star_goldenMonster::create();
+	auto temp = Sprite::create("goldenMonster.png");
+	temp->setScale(2.5);
+	_3star_goldenMonster->bloodBar->setBarChangeRate(Point(1, 0));
+	_3star_goldenMonster->bloodBar->setType(ProgressTimer::Type::BAR);
+	_3star_goldenMonster->bloodBar->setMidpoint(Point(0, 1));
+	_3star_goldenMonster->bloodBar->setScaleX(0.22);
+	_3star_goldenMonster->scheduleUpdate();
+	//goldenMonster->addChild(goldenMonster->bloodBar, 2);
+	_3star_goldenMonster->picturename = "goldenMonster.png";
+	_3star_goldenMonster->addChild(temp);
+
+	_3star_goldenMonster->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+	_3star_goldenMonster->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _3star_goldenMonster->speedAttack);
 	_3star_goldenMonster->autorelease();
 	return _3star_goldenMonster;
 }

@@ -79,6 +79,7 @@ void BattleScene::update(float dt)
 {
 	if (timer->pTime > 1e-6)
 	{
+		
 		heroLayer->upgrade(MyLittleHero);             //监测是否可升级
 		heroLayer->upgrade(player2data);
 		addChess(MyLittleHero, 0);
@@ -86,10 +87,9 @@ void BattleScene::update(float dt)
 		pc_player.pcJudgeMoneyUsage();
 	}
 	heroLayer->unscheduleUpdate();
-
 	addChess(MyLittleHero, 0);
 	addChess(player2data, 1);
-
+	
 	ChessMoveInMouse();
 	if (timer->pTime < -1e-2)
 	{
@@ -504,8 +504,7 @@ void BattleScene::Win()
 		WinRetain(player2data.m_fightArray);
 
 		heroLayer->unscheduleUpdate();
-		/*MyLittleHero.addCoins(5);
-		player2data.addCoins(5);*/
+
 		//装备栏移除(未实现)
 
 		if (MyLittleHero.getCurBlood() > 0 && player2data.getCurBlood() > 0)

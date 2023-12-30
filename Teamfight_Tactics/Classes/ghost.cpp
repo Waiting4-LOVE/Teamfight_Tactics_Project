@@ -72,13 +72,13 @@ void ghost::releaseSkill() {
 
 _2star_ghost::_2star_ghost() {
 	//填写二星英雄的属性
-	type = Ghost;
+	type = _2star_Ghost;
 	maxHealthPoint = 1980;
 	maxBluePoint = 150;
 	maxShieldPoint = 70;
 	fee = 5;
 	name = "Ghost";
-	HealthPoint = 1100;//初始血量为最大血量
+	HealthPoint = 1980;//初始血量为最大血量
 	BluePoint = 70;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 105;
@@ -94,21 +94,33 @@ _2star_ghost::_2star_ghost() {
 
 _2star_ghost* _2star_ghost::createhero() {
 	auto _2star_ghost = _2star_ghost::create();
-	_2star_ghost->picturename = "";
-	_2star_ghost->picturenum = 0;
+	auto temp = Sprite::create("ghost.png");
+	temp->setScale(2.5);
+	_2star_ghost->bloodBar->setBarChangeRate(Point(1, 0));
+	_2star_ghost->bloodBar->setType(ProgressTimer::Type::BAR);
+	_2star_ghost->bloodBar->setMidpoint(Point(0, 1));
+	_2star_ghost->bloodBar->setScaleX(0.22);
+	_2star_ghost->scheduleUpdate();
+	//ghost->addChild(ghost->bloodBar, 2);
+	_2star_ghost->picturename = "ghost.png";
+	_2star_ghost->addChild(temp);
+
+	_2star_ghost->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+	_2star_ghost->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _2star_ghost->speedAttack);
 	_2star_ghost->autorelease();
 	return _2star_ghost;
 }
 
 _3star_ghost::_3star_ghost() {
 	//填写三星英雄的属性
-	type = Ghost;
+	type = _3star_Ghost;
 	maxHealthPoint = 3564;
 	maxBluePoint = 150;
 	maxShieldPoint = 70;
 	fee = 5;
 	name = "Ghost";
-	HealthPoint = 1100;//初始血量为最大血量
+	HealthPoint = 3564;//初始血量为最大血量
 	BluePoint = 70;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 158;
@@ -124,6 +136,20 @@ _3star_ghost::_3star_ghost() {
 
 _3star_ghost* _3star_ghost::createhero() {
 	auto _3star_ghost = _3star_ghost::create();
+	auto temp = Sprite::create("ghost.png");
+	temp->setScale(2.5);
+	_3star_ghost->bloodBar->setBarChangeRate(Point(1, 0));
+	_3star_ghost->bloodBar->setType(ProgressTimer::Type::BAR);
+	_3star_ghost->bloodBar->setMidpoint(Point(0, 1));
+	_3star_ghost->bloodBar->setScaleX(0.22);
+	_3star_ghost->scheduleUpdate();
+	//ghost->addChild(ghost->bloodBar, 2);
+	_3star_ghost->picturename = "ghost.png";
+	_3star_ghost->addChild(temp);
+
+	_3star_ghost->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+	_3star_ghost->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _3star_ghost->speedAttack);
 	_3star_ghost->autorelease();
 	return _3star_ghost;
 }

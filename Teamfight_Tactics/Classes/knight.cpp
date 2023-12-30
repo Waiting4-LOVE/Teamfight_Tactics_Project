@@ -70,13 +70,13 @@ void knight::releaseSkill() {
 
 _2star_knight::_2star_knight() {
 	//填写二星英雄的属性
-	type = Knight;
+	type = _2star_Knight;
 	maxHealthPoint = 1170;
 	maxBluePoint = 140;
 	maxShieldPoint = 0;
 	fee = 1;
 	name = "Knight";
-	HealthPoint = 650;//初始血量为最大血量
+	HealthPoint = 1170;//初始血量为最大血量
 	BluePoint = 50;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 83;
@@ -92,21 +92,31 @@ _2star_knight::_2star_knight() {
 
 _2star_knight* _2star_knight::createhero() {
 	auto _2star_knight = _2star_knight::create();
-	_2star_knight->picturename = "";
-	_2star_knight->picturenum = 0;
+	auto temp = Sprite::create("knight.png");
+	temp->setScale(2.5);
+	_2star_knight->bloodBar->setBarChangeRate(Point(1, 0));
+	_2star_knight->bloodBar->setType(ProgressTimer::Type::BAR);
+	_2star_knight->bloodBar->setMidpoint(Point(0, 1));
+	_2star_knight->bloodBar->setScaleX(0.22);
+	_2star_knight->scheduleUpdate();
+	//knight->addChild(pitman->bloodBar, 2);
+	_2star_knight->picturename = "knight.png";
+	_2star_knight->addChild(temp);
+	_2star_knight->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+	_2star_knight->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _2star_knight->speedAttack);
 	_2star_knight->autorelease();
 	return _2star_knight;
 }
 
 _3star_knight::_3star_knight() {
 	//填写三星英雄的属性
-	type = Knight;
+	type = _3star_Knight;
 	maxHealthPoint = 2106;
 	maxBluePoint = 140;
 	maxShieldPoint = 0;
 	fee = 1;
 	name = "Knight";
-	HealthPoint = 650;//初始血量为最大血量
+	HealthPoint = 2106;//初始血量为最大血量
 	BluePoint = 50;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 124;
@@ -122,6 +132,18 @@ _3star_knight::_3star_knight() {
 
 _3star_knight* _3star_knight::createhero() {
 	auto _3star_knight = _3star_knight::create();
+	auto temp = Sprite::create("knight.png");
+	temp->setScale(2.5);
+	_3star_knight->bloodBar->setBarChangeRate(Point(1, 0));
+	_3star_knight->bloodBar->setType(ProgressTimer::Type::BAR);
+	_3star_knight->bloodBar->setMidpoint(Point(0, 1));
+	_3star_knight->bloodBar->setScaleX(0.22);
+	_3star_knight->scheduleUpdate();
+	//knight->addChild(pitman->bloodBar, 2);
+	_3star_knight->picturename = "knight.png";
+	_3star_knight->addChild(temp);
+	_3star_knight->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+	_3star_knight->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _3star_knight->speedAttack);
 	_3star_knight->autorelease();
 	return _3star_knight;
 }

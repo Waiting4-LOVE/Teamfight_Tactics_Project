@@ -71,6 +71,11 @@ std::pair<int, int> positionToLattice(Vec2 pos)
 			ans = { 0 ,j };
 			minDistance = waitLattice[0][j].distance(pos);
 		}
+		else if (waitLattice[1][j].distance(pos) < minDistance)
+		{
+			ans = { 1 ,j };
+			minDistance = waitLattice[1][j].distance(pos);
+		}
 	}
 	if (minDistance > oneLattice)//如果已经在格子区域之外（简易判断）
 		return { -1,-1 };
