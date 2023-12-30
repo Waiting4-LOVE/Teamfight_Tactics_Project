@@ -34,12 +34,9 @@ wildBoar* wildBoar::createhero() {
 	wildBoar->bloodBar->setScaleX(0.22);
 	wildBoar->scheduleUpdate();
 	//wildBoar->addChild(wildBoar->bloodBar, 2);
-	wildBoar->picturename = "wildBoar.png";
+	wildBoar->picturename = "wildBoarpng";
 	wildBoar->addChild(temp);
-
 	wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
-
-
 	wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / wildBoar->speedAttack);
 	wildBoar->autorelease();
 	return wildBoar;
@@ -73,7 +70,7 @@ void wildBoar::releaseSkill() {
 
 _2star_wildBoar::_2star_wildBoar() {
 	//ÌîĞ´¶şĞÇÓ¢ĞÛµÄÊôĞÔ
-	type = WildBoar;
+	type = _2star_WildBoar;
 	maxHealthPoint = 1350;
 	maxBluePoint = 90;
 	maxShieldPoint = 100;
@@ -95,15 +92,16 @@ _2star_wildBoar::_2star_wildBoar() {
 
 _2star_wildBoar* _2star_wildBoar::createhero() {
 	auto _2star_wildBoar = _2star_wildBoar::create();
-	_2star_wildBoar->picturename = "";
-	_2star_wildBoar->picturenum = 0;
+	auto temp = Sprite::create("wildBoar.png");
+	temp->setScale(2.5);
+	_2star_wildBoar->addChild(temp);
 	_2star_wildBoar->autorelease();
 	return _2star_wildBoar;
 }
 
 _3star_wildBoar::_3star_wildBoar() {
 	//ÌîĞ´ÈıĞÇÓ¢ĞÛµÄÊôĞÔ
-	type = WildBoar;
+	type = _3star_WildBoar;
 	maxHealthPoint = 2430;
 	maxBluePoint = 90;
 	maxShieldPoint = 100;
@@ -125,6 +123,9 @@ _3star_wildBoar::_3star_wildBoar() {
 
 _3star_wildBoar* _3star_wildBoar::createhero() {
 	auto _3star_wildBoar = _3star_wildBoar::create();
+	auto temp = Sprite::create("wildBoar.png");
+	temp->setScale(2.5);
+	_3star_wildBoar->addChild(temp);
 	_3star_wildBoar->autorelease();
 	return _3star_wildBoar;
 }

@@ -2,24 +2,23 @@
 
 pitman::pitman() {
 	type = Pitman;
-	maxHealthPoint = 450;
-	maxBluePoint = 60;
+	maxHealthPoint = 100;
+	maxBluePoint = 100;
 	maxShieldPoint = 100;
-	fee = 1;
-	name = "Pitman";
-	HealthPoint = 450;//初始血量为最大血量
-	BluePoint = 15;//初始蓝量为0
+	fee = 2;
+	name = "yao yao don't know";
+	HealthPoint = 100000;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 48;
-	magicPoint = 100;
+	physicsAttackPoint = 10;
+	magicPoint = 0;
 	speedAttack = 0.7f;
-	distanceAttack = 3;
+	distanceAttack = 2;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.25;
-	defencePhysics = 15;
-	defenceMagic = 15;
+	criticalChance = 0.05;
+	defencePhysics = 5;
+	defenceMagic = 5;
 	star = 1;
-	CoinsNeeded = 1;
 }
 
 pitman* pitman::createhero() {
@@ -34,7 +33,7 @@ pitman* pitman::createhero() {
 	pitman->bloodBar->setScaleX(0.22);
 	pitman->scheduleUpdate();
 	//pitman->addChild(pitman->bloodBar, 2);
-	pitman->picturename = "pitman.png";
+	//pitman->picturename = "pitman.png";
 	pitman->addChild(temp);
 
 	pitman->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -72,59 +71,63 @@ void pitman::releaseSkill() {
 }
 
 _2star_pitman::_2star_pitman() {
-	//填写二星英雄的属性
-	type = Pitman;
-	maxHealthPoint = 810;
-	maxBluePoint = 60;
+	type = _2star_Pitman;
+	maxHealthPoint = 100;
+	maxBluePoint = 100;
 	maxShieldPoint = 100;
-	fee = 1;
-	name = "Pitman";
-	HealthPoint = 450;//初始血量为最大血量
-	BluePoint = 15;//初始蓝量为0
+	fee = 2;
+	name = "yao yao don't know";
+	HealthPoint = 100000;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 72;
-	magicPoint = 100;
+	physicsAttackPoint = 10;
+	magicPoint = 0;
 	speedAttack = 0.7f;
-	distanceAttack = 3;
+	distanceAttack = 2;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.25;
-	defencePhysics = 15;
-	defenceMagic = 15;
+	criticalChance = 0.05;
+	defencePhysics = 5;
+	defenceMagic = 5;
 	star = 2;
+	//填写二星英雄的属性
 }
 
 _2star_pitman* _2star_pitman::createhero() {
 	auto _2star_pitman = _2star_pitman::create();
-	_2star_pitman->picturename = "";
-	_2star_pitman->picturenum = 0;
+	auto temp = Sprite::create("pitman.png");
+	temp->setScale(2.5);
+	_2star_pitman->addChild(temp);
 	_2star_pitman->autorelease();
 	return _2star_pitman;
 }
 
 _3star_pitman::_3star_pitman() {
-	//填写三星英雄的属性
-	type = Pitman;
-	maxHealthPoint = 1458;
-	maxBluePoint = 60;
+	type = _3star_Pitman;
+	maxHealthPoint = 100;
+	maxBluePoint = 100;
 	maxShieldPoint = 100;
-	fee = 1;
-	name = "Pitman";
-	HealthPoint = 450;//初始血量为最大血量
-	BluePoint = 15;//初始蓝量为0
+	fee = 2;
+	name = "yao yao don't know";
+	HealthPoint = 100000;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 108;
-	magicPoint = 100;
+	physicsAttackPoint = 10;
+	magicPoint = 0;
 	speedAttack = 0.7f;
-	distanceAttack = 3;
+	distanceAttack = 2;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.25;
-	defencePhysics = 15;
-	defenceMagic = 15;
+	criticalChance = 0.05;
+	defencePhysics = 5;
+	defenceMagic = 5;
 	star = 3;
+	//填写三星英雄的属性
 }
 
 _3star_pitman* _3star_pitman::createhero() {
 	auto _3star_pitman = _3star_pitman::create();
+	auto temp = Sprite::create("pitman.png");
+	temp->setScale(2.5);
+	_3star_pitman->addChild(temp);
 	_3star_pitman->autorelease();
 	return _3star_pitman;
 }

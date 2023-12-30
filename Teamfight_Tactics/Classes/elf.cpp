@@ -3,24 +3,23 @@
 
 elf::elf() {
 	type = Elf;
-	maxHealthPoint = 700;
-	maxBluePoint = 75;
+	maxHealthPoint = 100;
+	maxBluePoint = 100;
 	maxShieldPoint = 100;
-	fee = 3;
-	name = "Elf";
-	HealthPoint = 700;//初始血量为最大血量
-	BluePoint = 25;//初始蓝量为0
+	fee = 2;
+	name = "yao yao don't know";
+	HealthPoint = 100;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 40;
-	magicPoint = 100;
-	speedAttack = 0.75f;
+	physicsAttackPoint = 10;
+	magicPoint = 0;
+	speedAttack = 0.7f;
 	distanceAttack = 3;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.25;
-	defencePhysics = 20;
-	defenceMagic = 20;
+	criticalChance = 0.05;
+	defencePhysics = 5;
+	defenceMagic = 5;
 	star = 1;
-	CoinsNeeded = 3;
 }
 
 elf* elf::createhero() {
@@ -35,7 +34,7 @@ elf* elf::createhero() {
 	elf->bloodBar->setScaleX(0.22);
 	elf->scheduleUpdate();
 	//elf->addChild(elf->bloodBar, 2);
-	elf->picturename = "elf.png";
+	//elf->picturename = "elf.png";
 	elf->addChild(temp);
 
 	elf->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -73,58 +72,26 @@ void elf::releaseSkill() {
 
 _2star_elf::_2star_elf() {
 	//填写二星英雄的属性
-	type = Elf;
-	maxHealthPoint = 1260;
-	maxBluePoint = 75;
-	maxShieldPoint = 100;
-	fee = 3;
-	name = "Elf";
-	HealthPoint = 700;//初始血量为最大血量
-	BluePoint = 25;//初始蓝量为0
-	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 60;
-	magicPoint = 100;
-	speedAttack = 0.75f;
-	distanceAttack = 3;
-	blueAttack = maxBluePoint;
-	criticalChance = 0.25;
-	defencePhysics = 20;
-	defenceMagic = 20;
-	star = 2;
 }
 
 _2star_elf* _2star_elf::createhero() {
 	auto _2star_elf = _2star_elf::create();
-	_2star_elf->picturename = "";
-	_2star_elf->picturenum = 0;
+	auto temp = Sprite::create("elf.png");
+	temp->setScale(2.5);
+	_2star_elf->addChild(temp);
 	_2star_elf->autorelease();
 	return _2star_elf;
 }
 
 _3star_elf::_3star_elf() {
 	//填写三星英雄的属性
-	type = Elf;
-	maxHealthPoint = 2268;
-	maxBluePoint = 75;
-	maxShieldPoint = 100;
-	fee = 3;
-	name = "Elf";
-	HealthPoint = 700;//初始血量为最大血量
-	BluePoint = 25;//初始蓝量为0
-	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 90;
-	magicPoint = 100;
-	speedAttack = 0.75f;
-	distanceAttack = 3;
-	blueAttack = maxBluePoint;
-	criticalChance = 0.25;
-	defencePhysics = 20;
-	defenceMagic = 20;
-	star = 3;
 }
 
 _3star_elf* _3star_elf::createhero() {
 	auto _3star_elf = _3star_elf::create();
+	auto temp = Sprite::create("elf.png");
+	temp->setScale(2.5);
+	_3star_elf->addChild(temp);
 	_3star_elf->autorelease();
 	return _3star_elf;
 }

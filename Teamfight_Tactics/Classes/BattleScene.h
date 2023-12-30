@@ -48,7 +48,7 @@ public:
 
 private:
 	/**********计时器及Update**************/
-	RoundTimer* timer = RoundTimer::create(10);
+	RoundTimer* timer = RoundTimer::create(10000);
 	Sprite* infoFrame = Sprite::create("infoFrame.png");
 	Label* heroInfo = Label::createWithTTF("", "fonts/arial.ttf", 22);//英雄信息
 	Sprite* heroPicture = NULL;
@@ -74,7 +74,7 @@ private:
 	bool FindMouseTarget(ccArray* Array, EventMouse* e);
 	void soldHero(hero* temp, ccArray* Array, littleHero& playerdata);
 
-	void addChess(littleHero& littlehero, int playerinfo);
+	void BattleScene::addChess(littleHero& littlehero, int playerinfo);
 
 
 	void Win();  //判断打斗结束

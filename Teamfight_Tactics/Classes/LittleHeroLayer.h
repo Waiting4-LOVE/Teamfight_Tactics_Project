@@ -15,10 +15,7 @@ public:
 	virtual bool init();
 	void update(float dt);
 	void BuyExp(Ref* pSender);
-
 	Sprite* myLittleHerosprite = Sprite::create("EGG1.png");
-	Sprite* player2LittleHerosprite = Sprite::create("EGG1.png");
-
 	Label* Coins = Label::createWithTTF(to_string(MyLittleHero.getCoins()), "fonts/Marker Felt.ttf", 22);  //临时记录
 	Label* Grades = Label::createWithTTF(to_string(MyLittleHero.getLevel()), "fonts/Marker Felt.ttf", 22);  //临时记录
 	Label* Hyut = Label::createWithTTF(to_string(MyLittleHero.getCurBlood()), "fonts/Marker Felt.ttf", 24);
@@ -26,10 +23,6 @@ public:
 
 	Sprite* bloodFrame = Sprite::create("BloodFrame.png");
 	ProgressTimer* MyLittleHerobloodBar = ProgressTimer::create(Sprite::create("Blood.png"));
-
-	Sprite* bloodFrame2 = Sprite::create("BloodFrame.png");
-	ProgressTimer* player2HerobloodBar = ProgressTimer::create(Sprite::create("Blood.png"));
-
 
 	MenuItemImage* BuyExpItem = MenuItemImage::create("BuyExp.png", "BuyExp.png",
 		CC_CALLBACK_1(LittleHeroLayer::BuyExp, this));

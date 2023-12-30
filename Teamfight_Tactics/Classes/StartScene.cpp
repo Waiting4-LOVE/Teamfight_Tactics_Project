@@ -100,7 +100,7 @@ bool StartScene::init()
 
 	// add a label shows "Hello World"
 	// create and initialize a label
-
+	battleMapinit();
 	auto label = Label::createWithTTF("MADE BY Waiting4Love", "fonts/Marker Felt.ttf", 79);
 	if (label == nullptr)
 	{

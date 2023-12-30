@@ -72,7 +72,7 @@ void cannedPig::releaseSkill() {
 
 _2star_cannedPig::_2star_cannedPig() {
 	//ÌîĞ´¶şĞÇÓ¢ĞÛµÄÊôĞÔ
-	type = CannedPig;
+	type = _2star_CannedPig;
 	maxHealthPoint = 1260;
 	maxBluePoint = 105;
 	maxShieldPoint = 100;
@@ -94,15 +94,16 @@ _2star_cannedPig::_2star_cannedPig() {
 
 _2star_cannedPig* _2star_cannedPig::createhero() {
 	auto _2star_cannedPig = _2star_cannedPig::create();
-	_2star_cannedPig->picturename = "";
-	_2star_cannedPig->picturenum = 0;
+	auto temp = Sprite::create("cannedPig.png");
+	temp->setScale(2.5);
+	_2star_cannedPig->addChild(temp);
 	_2star_cannedPig->autorelease();
 	return _2star_cannedPig;
 }
 
 _3star_cannedPig::_3star_cannedPig() {
 	//ÌîĞ´ÈıĞÇÓ¢ĞÛµÄÊôĞÔ
-	type = CannedPig;
+	type = _3star_CannedPig;
 	maxHealthPoint = 2268;
 	maxBluePoint = 105;
 	maxShieldPoint = 100;
@@ -124,6 +125,9 @@ _3star_cannedPig::_3star_cannedPig() {
 
 _3star_cannedPig* _3star_cannedPig::createhero() {
 	auto _3star_cannedPig = _3star_cannedPig::create();
+	auto temp = Sprite::create("cannedPig.png");
+	temp->setScale(2.5);
+	_3star_cannedPig->addChild(temp);
 	_3star_cannedPig->autorelease();
 	return _3star_cannedPig;
 }

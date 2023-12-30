@@ -18,10 +18,12 @@ public:
 	void pcShowPlayerArray();
 	void pcShowFightArray();
 	void ChessMove(hero* herocase, littleHero&playerdata, littleHero& AttackPlayer);
+
+private:
 	void upgrade(littleHero& littlehero);
 	hero* HeroLayer::upgradeChessCreate(int type);
-private:
-	friend class GameScene;
+
+	friend class BattleScene;
 	float CountDistance(hero* h1, hero* h2);
 	float CountDistance(Point p1, Point p2);
 };

@@ -12,7 +12,7 @@ enum heroType
 	player_1=1, player_2, player_3,player_4,player_5,player_6,player_7,player_8
 };//英雄所属
 
-const int blue_once = 10;
+const int blue_once = 5;
 const int max_health_point = 100;//设置英雄血量为100
 const int max_blue_point = 100;//设置英雄蓝条为100
 const int max_defence_point = 100;//设置英雄护盾值为100

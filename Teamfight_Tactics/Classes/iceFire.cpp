@@ -2,24 +2,23 @@
 
 iceFire::iceFire() {
 	type = IceFire;
-	maxHealthPoint = 800;
-	maxBluePoint = 75;
+	maxHealthPoint = 100;
+	maxBluePoint = 100;
 	maxShieldPoint = 100;
-	fee = 5;
-	name = "IceFire";
-	HealthPoint = 800;//初始血量为最大血量
-	BluePoint = 30;//初始蓝量为0
+	fee = 2;
+	name = "yao yao don't know";
+	HealthPoint = 100;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 45;
-	magicPoint = 100;
-	speedAttack = 0.8f;
-	distanceAttack = 3;
+	physicsAttackPoint = 10;
+	magicPoint = 0;
+	speedAttack = 0.7f;
+	distanceAttack = 10;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.25;
-	defencePhysics = 40;
-	defenceMagic = 40;
+	criticalChance = 0.05;
+	defencePhysics = 5;
+	defenceMagic = 5;
 	star = 1;
-	CoinsNeeded = 5;
 }
 
 iceFire* iceFire::createhero() {
@@ -34,7 +33,7 @@ iceFire* iceFire::createhero() {
 	iceFire->bloodBar->setScaleX(0.22);
 	iceFire->scheduleUpdate();
 	//iceFire->addChild(iceFire->bloodBar, 2);
-	iceFire->picturename = "iceFire.png";
+	//iceFire->picturename = "iceFire.png";
 	iceFire->addChild(temp);
 
 	iceFire->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -72,58 +71,26 @@ void iceFire::releaseSkill() {
 
 _2star_iceFire::_2star_iceFire() {
 	//填写二星英雄的属性
-	type = IceFire;
-	maxHealthPoint = 1440;
-	maxBluePoint = 75;
-	maxShieldPoint = 100;
-	fee = 5;
-	name = "IceFire";
-	HealthPoint = 800;//初始血量为最大血量
-	BluePoint = 30;//初始蓝量为0
-	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 68;
-	magicPoint = 100;
-	speedAttack = 0.8f;
-	distanceAttack = 3;
-	blueAttack = maxBluePoint;
-	criticalChance = 0.25;
-	defencePhysics = 40;
-	defenceMagic = 40;
-	star = 2;
 }
 
 _2star_iceFire* _2star_iceFire::createhero() {
 	auto _2star_iceFire = _2star_iceFire::create();
-	_2star_iceFire->picturename = "";
-	_2star_iceFire->picturenum = 0;
+	auto temp = Sprite::create("iceFire.png");
+	temp->setScale(2.5);
+	_2star_iceFire->addChild(temp);
 	_2star_iceFire->autorelease();
 	return _2star_iceFire;
 }
 
 _3star_iceFire::_3star_iceFire() {
 	//填写三星英雄的属性
-	type = IceFire;
-	maxHealthPoint = 2592;
-	maxBluePoint = 75;
-	maxShieldPoint = 100;
-	fee = 5;
-	name = "IceFire";
-	HealthPoint = 800;//初始血量为最大血量
-	BluePoint = 30;//初始蓝量为0
-	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 101;
-	magicPoint = 100;
-	speedAttack = 0.8f;
-	distanceAttack = 3;
-	blueAttack = maxBluePoint;
-	criticalChance = 0.25;
-	defencePhysics = 40;
-	defenceMagic = 40;
-	star = 3;
 }
 
 _3star_iceFire* _3star_iceFire::createhero() {
 	auto _3star_iceFire = _3star_iceFire::create();
+	auto temp = Sprite::create("iceFire.png");
+	temp->setScale(2.5);
+	_3star_iceFire->addChild(temp);
 	_3star_iceFire->autorelease();
 	return _3star_iceFire;
 }

@@ -19,13 +19,12 @@ class littleHero :public Sprite {
 public:
 	//inline littleHero();
 	//inline littleHero(std::string picName);
-    littleHero* createLH(string picture_name);
 	bool haveNewHero = false; //判断是否有新棋子
 	littleHero* m_attackTarget = nullptr; //攻击对象指针
 	ccArray* m_playerArray = ccArrayNew(9); //玩家备战区的棋子数组
 	ccArray* m_fightArray = ccArrayNew(15); //玩家战斗区的棋子数组
 	int chessnumber[ChessNumber] = {};
-	int EXP_FOR_LEVEL[10] = { 2,2,6,10,20,36,48,64,76,80 };//每级升级所需经验值
+	int EXP_FOR_LEVEL[10] = { 2,2,6,10,20,36,48,84,76,80 };//每级升级所需经验值
 	chessInfo Used[5];
 
 	
@@ -34,7 +33,7 @@ public:
 	/*----------------------显示---------------------*/
 	string picturename;   //图片名字
 	int picturenum;       //图片张数
-	void LHAnimation(string picturename, const int picturenum, Sprite* sprite, const float speed, const int loop);
+	void LHAnimation(string picturename, const int picturenum, Sprite* sprite, Point location, const float speed, const int loop);
 	
 	//Sprite* bloodFrame = Sprite::create("BloodFrame.png");
 	//ProgressTimer* bloodBar = ProgressTimer::create(Sprite::create("Blood.png"));
@@ -71,7 +70,7 @@ public:
 	inline void delCoins(const int num) { this->m_coins -= num; CoinsIsChange = true;} //减少金币
 	inline void addExp(const int exp); //增加经验
 	inline bool isDead() { return this->m_blood <= 0; }
-	void win(); 
+	void win(); //战斗获胜函数
 	void lose(int hurt); //战斗失败函数
 	void reset(); //重置函数	
 	CREATE_FUNC(littleHero);

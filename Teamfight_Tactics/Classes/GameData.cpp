@@ -38,4 +38,4 @@ const chessInfo chess_store[OriginalChess] = { { Knight,"knightInShop.png",1 },{
 	{ Pitman,"pitmanInShop.png",1 },{ Ranger,"rangerInShop.png",2 },
 	{ Snowman,"snowmanInShop.png",1 },{ SnowMonster,"snowMonsterInShop.png",4 },
 	{ WildBoar,"wildBoarInShop.png",2 } };
-     //初步的棋子商店，后续可加上卡池功能
+//初步的棋子商店，后续可加上卡池功能

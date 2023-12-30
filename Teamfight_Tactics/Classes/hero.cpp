@@ -11,7 +11,7 @@ hero* hero::createhero(string picture_name)
 	return hero;
 }
 
-hero::hero()
+hero::hero() 
 {
 	picturenum = 0;
 	xtemp = x;
@@ -21,7 +21,7 @@ hero::hero()
 	bloodBar->setType(ProgressTimer::Type::BAR);
 	bloodBar->setMidpoint(Point(0, 1));
 	bloodBar->setScaleX(0.22);
-	bloodBar->setScaleY(0.6);
+    bloodBar->setScaleY(0.6);
 	bloodFrame->setScaleX(0.22);
 	bloodFrame->setScaleY(0.6);
 
@@ -242,7 +242,7 @@ void hero::attack(float dt)
 			* (attackTarget->getPosition().x - getPosition().x) +
 			(attackTarget->getPosition().y - getPosition().y)
 			* (attackTarget->getPosition().y - getPosition().y));
-		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
+		if (distance < distanceAttack*oneLattice*2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
 			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
@@ -258,6 +258,7 @@ void hero::attack(float dt)
 
 void hero::bloodUpdate(float dt)
 {
+
 	blueBar->setPosition(Vec2(0, this->_contentSize.height + 50));
 	blueFrame->setPosition(Vec2(0, this->_contentSize.height + 50));
 	bloodBar->setPosition(Vec2(0, this->_contentSize.height + 60));
@@ -329,8 +330,7 @@ void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
 	bullet->setScale(1);
 	bullet->setPosition(40, 30);
 
-	float moveTime = sqrt(deltaPos.dot(deltaPos)) / 300;//子弹移动时间
-	auto move = MoveBy::create(moveTime, deltaPos);
+	auto move = MoveBy::create(1.f, deltaPos);
 	auto back = MoveTo::create(0.f, Vec2(40, 30));
 	auto appear = FadeIn::create(0.f);
 	auto disappear = FadeOut::create(0.f);
@@ -339,6 +339,5 @@ void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
 	auto actionBack = Sequence::createWithTwoActions(disappear, back);
 	auto all = Sequence::createWithTwoActions(actionTo, actionBack);
 	bullet->runAction(Repeat::create(all, 1));
-	this->runAction(Sequence::create(DelayTime::create(moveTime), CallFunc::create([this]() {attackTarget->doDamage(this->physicsAttackPoint); }), nullptr));
-	//attackTarget->doDamage(this->physicsAttackPoint);
+	attackTarget->doDamage(this->physicsAttackPoint);
 }
