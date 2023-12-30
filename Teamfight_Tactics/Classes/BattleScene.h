@@ -48,7 +48,7 @@ public:
 
 private:
 	/**********计时器及Update**************/
-	RoundTimer* timer = RoundTimer::create(1000);
+	RoundTimer* timer = RoundTimer::create(10);
 	Sprite* infoFrame = Sprite::create("infoFrame.png");
 	Label* heroInfo = Label::createWithTTF("", "fonts/arial.ttf", 22);//英雄信息
 	Sprite* heroPicture = NULL;

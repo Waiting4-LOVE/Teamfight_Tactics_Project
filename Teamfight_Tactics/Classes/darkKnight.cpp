@@ -19,6 +19,7 @@ darkKnight::darkKnight() {
 	defencePhysics = 55;
 	defenceMagic = 55;
 	star = 1;
+	CoinsNeeded = 3;
 }
 
 darkKnight* darkKnight::createhero() {
@@ -33,7 +34,7 @@ darkKnight* darkKnight::createhero() {
 	darkKnight->bloodBar->setScaleX(0.22);
 	darkKnight->scheduleUpdate();
 	//darkKnight->addChild(hero1->bloodBar, 2);
-	//darkKnight->picturename = "hero1.png";
+	darkKnight->picturename = "darkKnight.png";
 	darkKnight->addChild(temp);
 
 	darkKnight->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

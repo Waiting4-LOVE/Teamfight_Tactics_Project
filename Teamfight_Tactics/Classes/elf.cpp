@@ -20,6 +20,7 @@ elf::elf() {
 	defencePhysics = 20;
 	defenceMagic = 20;
 	star = 1;
+	CoinsNeeded = 3;
 }
 
 elf* elf::createhero() {
@@ -34,7 +35,7 @@ elf* elf::createhero() {
 	elf->bloodBar->setScaleX(0.22);
 	elf->scheduleUpdate();
 	//elf->addChild(elf->bloodBar, 2);
-	//elf->picturename = "elf.png";
+	elf->picturename = "elf.png";
 	elf->addChild(temp);
 
 	elf->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

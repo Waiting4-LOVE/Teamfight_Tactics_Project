@@ -19,6 +19,7 @@ goldenMonster::goldenMonster() {
 	defencePhysics = 45;
 	defenceMagic = 45;
 	star = 1;
+	CoinsNeeded = 2;
 }
 
 goldenMonster* goldenMonster::createhero() {
@@ -33,7 +34,7 @@ goldenMonster* goldenMonster::createhero() {
 	goldenMonster->bloodBar->setScaleX(0.22);
 	goldenMonster->scheduleUpdate();
 	//goldenMonster->addChild(goldenMonster->bloodBar, 2);
-	//goldenMonster->picturename = "goldenMonster.png";
+	goldenMonster->picturename = "goldenMonster.png";
 	goldenMonster->addChild(temp);
 
 	goldenMonster->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

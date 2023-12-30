@@ -19,6 +19,7 @@ flyDragon::flyDragon() {
 	defencePhysics = 30;
 	defenceMagic = 30;
 	star = 1;
+	CoinsNeeded = 4;
 }
 
 flyDragon* flyDragon::createhero() {
@@ -33,7 +34,7 @@ flyDragon* flyDragon::createhero() {
 	flyDragon->bloodBar->setScaleX(0.22);
 	flyDragon->scheduleUpdate();
 	//flyDragon->addChild(flyDragon->bloodBar, 2);
-	//flyDragon->picturename = "flyDragon.png";
+	flyDragon->picturename = "flyDragon.png";
 	flyDragon->addChild(temp);
 
 	flyDragon->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

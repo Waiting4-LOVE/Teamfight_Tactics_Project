@@ -19,6 +19,7 @@ knight::knight() {
 	defencePhysics = 40;
 	defenceMagic = 40;
 	star = 1;
+	CoinsNeeded = 1;
 }
 
 knight* knight::createhero() {

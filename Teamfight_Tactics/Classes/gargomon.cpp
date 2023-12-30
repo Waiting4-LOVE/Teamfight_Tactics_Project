@@ -19,6 +19,7 @@ gargomon::gargomon() {
 	defencePhysics = 60;
 	defenceMagic = 60;
 	star = 1;
+	CoinsNeeded = 5;
 }
 
 gargomon* gargomon::createhero() {
@@ -33,7 +34,7 @@ gargomon* gargomon::createhero() {
 	gargomon->bloodBar->setScaleX(0.22);
 	gargomon->scheduleUpdate();
 	//gargomon->addChild(gargomon->bloodBar, 2);
-	//gargomon->picturename = "gargomon.png";
+	gargomon->picturename = "gargomon.png";
 	gargomon->addChild(temp);
 
 	gargomon->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

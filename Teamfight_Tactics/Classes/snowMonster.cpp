@@ -19,6 +19,7 @@ snowMonster::snowMonster() {
 	defencePhysics = 60;
 	defenceMagic = 60;
 	star = 1;
+	CoinsNeeded = 4;
 }
 
 snowMonster* snowMonster::createhero() {
@@ -33,7 +34,7 @@ snowMonster* snowMonster::createhero() {
 	snowMonster->bloodBar->setScaleX(0.22);
 	snowMonster->scheduleUpdate();
 	//snowMonster->addChild(snowMonster->bloodBar, 2);
-	//snowMonster->picturename = "snowMonster.png";
+	snowMonster->picturename = "snowMonster.png";
 	snowMonster->addChild(temp);
 
 	snowMonster->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

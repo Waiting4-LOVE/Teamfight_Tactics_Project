@@ -19,6 +19,7 @@ iceFire::iceFire() {
 	defencePhysics = 40;
 	defenceMagic = 40;
 	star = 1;
+	CoinsNeeded = 5;
 }
 
 iceFire* iceFire::createhero() {
@@ -33,7 +34,7 @@ iceFire* iceFire::createhero() {
 	iceFire->bloodBar->setScaleX(0.22);
 	iceFire->scheduleUpdate();
 	//iceFire->addChild(iceFire->bloodBar, 2);
-	//iceFire->picturename = "iceFire.png";
+	iceFire->picturename = "iceFire.png";
 	iceFire->addChild(temp);
 
 	iceFire->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

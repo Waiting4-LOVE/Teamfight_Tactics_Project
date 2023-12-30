@@ -19,6 +19,7 @@ master::master() {
 	defencePhysics = 20;
 	defenceMagic = 20;
 	star = 1;
+	CoinsNeeded = 3;
 }
 
 master* master::createhero() {
@@ -33,7 +34,7 @@ master* master::createhero() {
 	master->bloodBar->setScaleX(0.22);
 	master->scheduleUpdate();
 	//master->addChild(master->bloodBar, 2);
-	//master->picturename = "master.png";
+	master->picturename = "master.png";
 	master->addChild(temp);
 
 	master->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

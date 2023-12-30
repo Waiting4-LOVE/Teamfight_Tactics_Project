@@ -19,6 +19,7 @@ cannedPig::cannedPig() {
 	defencePhysics = 30;
 	defenceMagic = 30;
 	star = 1;
+	CoinsNeeded = 4;
 }
 
 cannedPig* cannedPig::createhero() {
@@ -33,7 +34,7 @@ cannedPig* cannedPig::createhero() {
 	cannedPig->bloodBar->setScaleX(0.22);
 	cannedPig->scheduleUpdate();
 	//cannedPig->addChild(cannedPig->bloodBar, 2);
-	//cannedPig->picturename = "cannedPig.png";
+	cannedPig->picturename = "cannedPig.png";
 	cannedPig->addChild(temp);
 
 	cannedPig->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

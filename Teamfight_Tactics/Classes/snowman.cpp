@@ -19,6 +19,7 @@ snowman::snowman() {
 	defencePhysics = 20;
 	defenceMagic = 20;
 	star = 1;
+	CoinsNeeded = 1;
 }
 
 snowman* snowman::createhero() {
@@ -33,7 +34,7 @@ snowman* snowman::createhero() {
 	snowman->bloodBar->setScaleX(0.22);
 	snowman->scheduleUpdate();
 	//snowman->addChild(snowman->bloodBar, 2);
-	//snowman->picturename = "snowman.png";
+	snowman->picturename = "snowman.png";
 	snowman->addChild(temp);
 
 	snowman->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

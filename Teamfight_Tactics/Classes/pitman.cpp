@@ -19,6 +19,7 @@ pitman::pitman() {
 	defencePhysics = 15;
 	defenceMagic = 15;
 	star = 1;
+	CoinsNeeded = 1;
 }
 
 pitman* pitman::createhero() {
@@ -33,7 +34,7 @@ pitman* pitman::createhero() {
 	pitman->bloodBar->setScaleX(0.22);
 	pitman->scheduleUpdate();
 	//pitman->addChild(pitman->bloodBar, 2);
-	//pitman->picturename = "pitman.png";
+	pitman->picturename = "pitman.png";
 	pitman->addChild(temp);
 
 	pitman->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

@@ -19,6 +19,7 @@ ranger::ranger() {
 	defencePhysics = 20;
 	defenceMagic = 20;
 	star = 1;
+	CoinsNeeded = 2;
 }
 
 ranger* ranger::createhero() {
@@ -33,7 +34,7 @@ ranger* ranger::createhero() {
 	ranger->bloodBar->setScaleX(0.22);
 	ranger->scheduleUpdate();
 	//ranger->addChild(hero1->bloodBar, 2);
-	//ranger->picturename = "ranger.png";
+	ranger->picturename = "ranger.png";
 	ranger->addChild(temp);
 
 	ranger->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

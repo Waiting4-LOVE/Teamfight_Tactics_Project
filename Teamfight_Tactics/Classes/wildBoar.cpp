@@ -19,6 +19,7 @@ wildBoar::wildBoar() {
 	defencePhysics = 45;
 	defenceMagic = 45;
 	star = 1;
+	CoinsNeeded = 2;
 }
 
 wildBoar* wildBoar::createhero() {
@@ -33,7 +34,7 @@ wildBoar* wildBoar::createhero() {
 	wildBoar->bloodBar->setScaleX(0.22);
 	wildBoar->scheduleUpdate();
 	//wildBoar->addChild(wildBoar->bloodBar, 2);
-	//wildBoar->picturename = "wildBoarpng";
+	wildBoar->picturename = "wildBoar.png";
 	wildBoar->addChild(temp);
 
 	wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);

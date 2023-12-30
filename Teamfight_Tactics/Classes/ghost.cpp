@@ -19,6 +19,7 @@ ghost::ghost() {
 	defencePhysics = 70;
 	defenceMagic = 70;
 	star = 1;
+	CoinsNeeded = 5;
 }
 
 ghost* ghost::createhero() {
@@ -33,7 +34,7 @@ ghost* ghost::createhero() {
 	ghost->bloodBar->setScaleX(0.22);
 	ghost->scheduleUpdate();
 	//ghost->addChild(ghost->bloodBar, 2);
-	//ghost->picturename = "ghost.png";
+	ghost->picturename = "ghost.png";
 	ghost->addChild(temp);
 
 	ghost->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
