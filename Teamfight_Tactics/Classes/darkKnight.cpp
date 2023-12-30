@@ -2,22 +2,23 @@
 
 darkKnight::darkKnight() {
 	type = DarkKnight;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 850;
+	maxBluePoint = 120;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 3;
+	name = "DarkKnight";
+	HealthPoint = 850;//初始血量为最大血量
+	BluePoint = 70;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 225;
+	physicsAttackPoint = 60;
+	magicPoint = 100;
+	speedAttack = 0.65f;
+	distanceAttack = 1;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 55;
+	defenceMagic = 55;
+	star = 1;
 }
 
 darkKnight* darkKnight::createhero() {
@@ -42,6 +43,27 @@ darkKnight* darkKnight::createhero() {
 	return darkKnight;
 }
 
+void darkKnight::attack(float dt)
+{
+	if (attackTarget != NULL && !die())
+	{
+		float  distance = sqrt((attackTarget->getPosition().x - getPosition().x)  //获得距离
+			* (attackTarget->getPosition().x - getPosition().x) +
+			(attackTarget->getPosition().y - getPosition().y)
+			* (attackTarget->getPosition().y - getPosition().y));
+		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
+		{
+			isMove = 0;
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			blueRecoverOnce();
+			skill();
+			if (attackTarget->die())
+			{
+				attackTarget = NULL;
+			}
+		}
+	}
+}
 
 void darkKnight::releaseSkill() {
 
@@ -49,6 +71,24 @@ void darkKnight::releaseSkill() {
 
 _2star_darkKnight::_2star_darkKnight() {
 	//填写二星英雄的属性
+	type = DarkKnight;
+	maxHealthPoint = 1530;
+	maxBluePoint = 120;
+	maxShieldPoint = 100;
+	fee = 3;
+	name = "DarkKnight";
+	HealthPoint = 850;//初始血量为最大血量
+	BluePoint = 70;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 90;
+	magicPoint = 100;
+	speedAttack = 0.65f;
+	distanceAttack = 1;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 55;
+	defenceMagic = 55;
+	star = 2;
 }
 
 _2star_darkKnight* _2star_darkKnight::createhero() {
@@ -61,6 +101,24 @@ _2star_darkKnight* _2star_darkKnight::createhero() {
 
 _3star_darkKnight::_3star_darkKnight() {
 	//填写三星英雄的属性
+	type = DarkKnight;
+	maxHealthPoint = 2754;
+	maxBluePoint = 120;
+	maxShieldPoint = 100;
+	fee = 3;
+	name = "DarkKnight";
+	HealthPoint = 850;//初始血量为最大血量
+	BluePoint = 70;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 135;
+	magicPoint = 100;
+	speedAttack = 0.65f;
+	distanceAttack = 1;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 55;
+	defenceMagic = 55;
+	star = 3;
 }
 
 _3star_darkKnight* _3star_darkKnight::createhero() {

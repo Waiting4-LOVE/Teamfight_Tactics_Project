@@ -10,6 +10,7 @@ class master :public hero
 {
 public:
 	master();
+	void attack(float dt);
 	static master* createhero();
 	void releaseSkill();
 	CREATE_FUNC(master);

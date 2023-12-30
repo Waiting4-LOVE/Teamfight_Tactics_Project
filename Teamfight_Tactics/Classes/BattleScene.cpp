@@ -25,6 +25,14 @@ bool BattleScene::init()
 	TurnInfoInit();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	//信息框初始化
+	infoFrame->setAnchorPoint(Vec2(0, 0.5));
+	infoFrame->setScale(1.5);
+	infoFrame->setPosition(10000, 10000);
+	infoFrame->addChild(heroInfo, 1);
+	heroInfo->setPosition(82, -7);
+	heroInfo->setColor(Color3B::WHITE);
+	heroInfo->setAnchorPoint(Vec2(0, 0));
 
 	/***********所需子Layer************/
 	this->addChild(map, 0);        //地图层
@@ -33,7 +41,7 @@ bool BattleScene::init()
 	this->addChild(timer, 2);        //计时器层
 	this->addChild(shopLayer, 3);   //商店层
 	this->addChild(heroLayer, 4);   //英雄层
-
+	this->addChild(infoFrame, 100);//信息层
 
 
 	/**********计时器及Update**************/
@@ -117,7 +125,7 @@ void BattleScene::TurnInfoInit()
 
 void BattleScene::ChessMoveInMouse()
 {
-	CCLOG("%d %d %d", MyLittleHero.getLevel(), MyLittleHero.m_fightArray->num, MyLittleHero.m_playerArray->num);
+	//CCLOG("%d %d %d", MyLittleHero.getLevel(), MyLittleHero.m_fightArray->num, MyLittleHero.m_playerArray->num);
 	auto MouseListener = EventListenerMouse::create();
 	MouseListener = EventListenerMouse::create();
 	MouseListener->onMouseMove = CC_CALLBACK_1(BattleScene::onMouseMove, this);
@@ -134,6 +142,42 @@ void BattleScene::onMouseScroll(Event* event)
 	e->getScrollX();
 	e->getScrollY();
 
+}
+
+void BattleScene::showInfo(hero* chess)//显示英雄信息
+{
+	infoFrame->setPosition(Vec2(0, 540));
+	string heroInformation = StringUtils::format("%s\n%d\n%d\n%d\n%d\n%.2f\n%d\n%d\n%d\n%d\n", chess->getname().c_str(), chess->getHealthPoint(), chess->getBluePoint(), chess->getPhysicalAttack(), chess->getMagicalPoint(), chess->getAttackSpeed(), chess->getAttackDistance(), chess->getCriticalChance() * 100, chess->getDefencePhysics(), chess->getDefenceMagic());
+	heroInfo->setString(heroInformation);
+	
+	if (heroPicture != NULL)
+	{
+		heroPicture->removeFromParent();
+		heroPicture->release();
+	}
+	heroPicture = Sprite::create(chess->picturename);
+	infoFrame->addChild(heroPicture, 1);
+	heroPicture->setPosition(90, 300);
+	//CCLOG("%s", chess->getname().c_str());
+	if (heroStar != NULL)
+	{
+		heroStar->removeFromParent();
+		heroStar->release();
+	}
+	if(chess->getHeroStar() == 1)
+		heroStar = Sprite::create("1star.png");
+	else if(chess->getHeroStar()==2)
+		heroStar = Sprite::create("2star.png");
+	else 
+		heroStar = Sprite::create("3star.png");
+	heroStar->setScale(0.15f);
+	infoFrame->addChild(heroStar, 1);
+	heroStar->setPosition(30, 300);
+}
+
+void BattleScene::hideInfo()//隐藏英雄信息
+{
+	infoFrame->setPosition(Vec2(10000, 10000));
 }
 
 void BattleScene::onMouseMove(Event* event)
@@ -294,6 +338,23 @@ void BattleScene::onMouseDown(Event* event)
 	{
 		if (FindMouseTarget(MyLittleHero.m_fightArray, e))       //在战斗区寻找目标
 			FindMouseTarget(MyLittleHero.m_playerArray, e);  //寻找不到则在备战区寻找
+	}
+	if (MouseToChess >= 0&&!infoIsShow)
+	{
+		if (MouseToChess >= MyLittleHero.m_fightArray->num)
+		{
+			showInfo((hero*)MyLittleHero.m_playerArray->arr[MouseToChess - MyLittleHero.m_fightArray->num]);
+		}
+		else
+		{
+			showInfo((hero*)MyLittleHero.m_fightArray->arr[MouseToChess]);
+		}
+		infoIsShow = 1;
+	}
+	else if(MouseToChess < 0 && infoIsShow)
+	{
+		hideInfo();
+		infoIsShow = 0;
 	}
 }
 
@@ -481,7 +542,6 @@ void BattleScene::Win()
 			}
 			_director->replaceScene(TransitionFade::create(1 / 8.0f, SelectScene::createScene()));
 		}
-		heroLayer->unscheduleUpdate();
 	}
 
 }

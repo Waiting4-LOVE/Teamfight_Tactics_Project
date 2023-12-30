@@ -10,6 +10,7 @@ class flyDragon :public hero
 {
 public:
 	flyDragon();
+	void attack(float dt);
 	static flyDragon* createhero();
 	void releaseSkill();
 	CREATE_FUNC(flyDragon);

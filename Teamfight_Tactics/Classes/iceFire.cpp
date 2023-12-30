@@ -2,22 +2,23 @@
 
 iceFire::iceFire() {
 	type = IceFire;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 800;
+	maxBluePoint = 75;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 5;
+	name = "IceFire";
+	HealthPoint = 800;//初始血量为最大血量
+	BluePoint = 30;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 10;
+	physicsAttackPoint = 45;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 3;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 40;
+	defenceMagic = 40;
+	star = 1;
 }
 
 iceFire* iceFire::createhero() {
@@ -42,6 +43,27 @@ iceFire* iceFire::createhero() {
 	return iceFire;
 }
 
+void iceFire::attack(float dt)
+{
+	if (attackTarget != NULL && !die())
+	{
+		float  distance = sqrt((attackTarget->getPosition().x - getPosition().x)  //获得距离
+			* (attackTarget->getPosition().x - getPosition().x) +
+			(attackTarget->getPosition().y - getPosition().y)
+			* (attackTarget->getPosition().y - getPosition().y));
+		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
+		{
+			isMove = 0;
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			blueRecoverOnce();
+			skill();
+			if (attackTarget->die())
+			{
+				attackTarget = NULL;
+			}
+		}
+	}
+}
 
 void iceFire::releaseSkill() {
 
@@ -49,6 +71,24 @@ void iceFire::releaseSkill() {
 
 _2star_iceFire::_2star_iceFire() {
 	//填写二星英雄的属性
+	type = IceFire;
+	maxHealthPoint = 1440;
+	maxBluePoint = 75;
+	maxShieldPoint = 100;
+	fee = 5;
+	name = "IceFire";
+	HealthPoint = 800;//初始血量为最大血量
+	BluePoint = 30;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 68;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 3;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 40;
+	defenceMagic = 40;
+	star = 2;
 }
 
 _2star_iceFire* _2star_iceFire::createhero() {
@@ -61,6 +101,24 @@ _2star_iceFire* _2star_iceFire::createhero() {
 
 _3star_iceFire::_3star_iceFire() {
 	//填写三星英雄的属性
+	type = IceFire;
+	maxHealthPoint = 2592;
+	maxBluePoint = 75;
+	maxShieldPoint = 100;
+	fee = 5;
+	name = "IceFire";
+	HealthPoint = 800;//初始血量为最大血量
+	BluePoint = 30;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 101;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 3;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 40;
+	defenceMagic = 40;
+	star = 3;
 }
 
 _3star_iceFire* _3star_iceFire::createhero() {

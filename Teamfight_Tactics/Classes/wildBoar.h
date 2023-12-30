@@ -10,6 +10,7 @@ class wildBoar :public hero
 {
 public:
 	wildBoar();
+	void attack(float dt);
 	static wildBoar* createhero();
 	void releaseSkill();
 	CREATE_FUNC(wildBoar);

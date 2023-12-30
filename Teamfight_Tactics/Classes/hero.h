@@ -6,6 +6,7 @@
 #include"database.h"
 #include "littleHero.h"
 #include"equipmentFile.h"
+#include"battleMap.h"
 
 using namespace cocos2d;
 using namespace heroConsts;
@@ -31,7 +32,7 @@ public:
 	int getHealthPoint();//返回英雄现在的血条
 	int getBluePoint();//返回英雄现在的蓝条
 	int getDefencePoint();//返回英雄现在的护盾
-	Point getTempPosition() { return Point(xtemp, ytemp);}
+	Point getTempPosition() { return Point(xtemp, ytemp); }
 	int getType() { return type; }
 	int getCoinsNeeded() { return CoinsNeeded; }
 	int getSoldCoins() { return SoldCoins; }
@@ -40,6 +41,13 @@ public:
 	Point getPosition() { return Point(x, y); }
 	float getAttackSpeed() { return speedAttack; }
 	int getAttackDistance() { return distanceAttack; }
+	int getPhysicalAttack() { return physicsAttackPoint; }
+	int getMagicalPoint() { return magicPoint; }
+	int getCriticalChance() { return criticalChance; }//暴击率
+	int getDefencePhysics() { return defencePhysics; }//物抗
+	int getDefenceMagic() { return defenceMagic; }//魔抗//魔抗
+	int getHeroStar() { return star; }
+	string getname() { return name; }
 	const cocos2d::Size getContentSize() { return Size(width, height); }   //获得图片长宽
 
 	/*set类型函数*/
@@ -59,10 +67,11 @@ public:
 	Sprite* blueFrame = Sprite::create("BloodFrame.png");
 	ProgressTimer* bloodBar = ProgressTimer::create(Sprite::create("Blood.png"));
 	ProgressTimer* blueBar = ProgressTimer::create(Sprite::create("Mana.png"));
-
+	Label* Star = Label::createWithTTF(to_string(star), "fonts/arial.ttf", 24);
 
 	float calculateDistance(Sprite* d_sprite);//计算本精灵与敌人距离函数
-	bool doDamage(int attackpoint);//我方收到伤害函数，这包括了我方护盾与血量的减少
+	void onDamageReceived(int damage, int type);
+	bool doDamage(int damage, int type = 0, bool damageVisible = 0);//我方收到伤害函数，这包括了我方护盾与血量的减少
 	bool blueClear();//释放技能要求蓝条满，释放技能之后蓝条清空
 	void healthRecover(int health_once, int lasting);//回血函数
 	void blueRocover();//回蓝函数
@@ -70,7 +79,7 @@ public:
 	void blueRecoverOnce();//回一次蓝
 	void EquipmentChange();
 	void hero::EquipToChess(Equipment* equ);
-	void attack(float dt);//攻击
+	virtual void attack(float dt);//攻击
 	void bloodUpdate(float dt);//更新英雄头上血条蓝条等信息
 	void skill();//放技能
 	bool die();
@@ -78,7 +87,7 @@ public:
 	void hero::shootbullet(string picturename, Point deltaPos, hero* mychess);
 	void reset();
 	bool isMove = 0;
-	hero* attackTarget=nullptr;//攻击目标
+	hero* attackTarget = nullptr;//攻击目标
 
 	CREATE_FUNC(hero);
 
@@ -106,7 +115,7 @@ protected:
 	int star = 1;//星级
 
 	/*英雄基本属性*/
-	
+
 	int fee;//英雄所需费用
 	std::string name;
 	int HealthPoint;//血条
@@ -132,6 +141,6 @@ protected:
 	int addCriticalChance;//增加的暴击率
 	int addDefencePhysics;//增加的物抗
 	int addDefenceMagic;//增加的魔抗
-	
-	
+
+
 };

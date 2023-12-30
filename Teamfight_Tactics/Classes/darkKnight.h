@@ -10,6 +10,7 @@ class darkKnight :public hero
 {
 public:
 	darkKnight();
+	void attack(float dt);
 	static darkKnight* createhero();
 	void releaseSkill();
 	CREATE_FUNC(darkKnight);

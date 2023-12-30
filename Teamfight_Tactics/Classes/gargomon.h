@@ -10,6 +10,7 @@ class gargomon :public hero
 {
 public:
 	gargomon();
+	void attack(float dt);
 	static gargomon* createhero();
 	void releaseSkill();
 	CREATE_FUNC(gargomon);

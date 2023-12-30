@@ -2,12 +2,12 @@
 #include"cocos2d.h"
 USING_NS_CC;
 
-void battleMapinit();
 int countLattice(Vec2 lat1, Vec2 lat2);
 std::pair<int, int> positionToLattice(Vec2 pos);
 Vec2 latticeToPosition(std::pair<int, int> lat);
 bool judgeExist(std::pair<int, int> lat);
 void setLatticeExist(std::pair<int, int> lat,int exist);
+Vec2 positionToEnemyPosition(Vec2 pos);
 
 extern const Vec2 battleLattice[6][7];
 extern const Vec2 waitLattice[2][9];

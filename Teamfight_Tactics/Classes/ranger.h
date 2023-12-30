@@ -10,6 +10,7 @@ class ranger :public hero
 {
 public:
 	ranger();
+	void attack(float dt);
 	static ranger* createhero();
 	void releaseSkill();
 	CREATE_FUNC(ranger);

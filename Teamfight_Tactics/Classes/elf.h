@@ -10,6 +10,7 @@ class elf :public hero
 {
 public:
 	elf();
+	void attack(float dt);
 	static elf* createhero();
 	void releaseSkill();
 	CREATE_FUNC(elf);

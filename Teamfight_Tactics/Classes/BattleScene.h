@@ -48,7 +48,12 @@ public:
 
 private:
 	/**********计时器及Update**************/
-	RoundTimer* timer = RoundTimer::create(5);
+	RoundTimer* timer = RoundTimer::create(1000);
+	Sprite* infoFrame = Sprite::create("infoFrame.png");
+	Label* heroInfo = Label::createWithTTF("", "fonts/arial.ttf", 22);//英雄信息
+	Sprite* heroPicture = NULL;
+	Sprite* heroStar = NULL;
+	bool infoIsShow = 0;
 	void update(float dt);
 	void TurnInfoInit();
 
@@ -59,6 +64,8 @@ private:
 	void onMouseMove(Event* event);
 	void onMouseUp(Event* event);
 	void onMouseDown(Event* event);
+	void showInfo(hero* chess);
+	void hideInfo();
 	void GameStartMouseInit();
 	//Point MapJudge(Point point);//判断鼠标是否在地图内
 	int MouseToChess = -1;//鼠标指向的棋子
@@ -67,7 +74,7 @@ private:
 	bool FindMouseTarget(ccArray* Array, EventMouse* e);
 	void soldHero(hero* temp, ccArray* Array, littleHero& playerdata);
 
-	void BattleScene::addChess(littleHero& littlehero, int playerinfo);
+	void addChess(littleHero& littlehero, int playerinfo);
 
 
 	void Win();  //判断打斗结束

@@ -1,13 +1,13 @@
 #include "battleMap.h"
 USING_NS_CC;
 
-void battleMapinit()
+/*void battleMapinit()
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	/*
+	
 	战斗格子位
-	*/
+	
 	float pieceX = 861.0f / 1920.0f * visibleSize.width / 15.0f;//六边形宽度（不是边长）的一半
 	oneLattice = pieceX / sqrt(3) * 2;//六边形边长
 	float pieceY = pieceX * sqrt(3);
@@ -25,6 +25,7 @@ void battleMapinit()
 				battleLattice[i][j] = { startPoint.x + pieceX * (i * 2), startPoint.y + pieceY * j };
 			}
 		}
+		
 		备战席：
 		总宽度与战斗格相同
 		共9格
@@ -34,8 +35,9 @@ void battleMapinit()
 		{
 			waitLattice[0][j] = { startPoint.x + pieceX * j * 2,startPoint.y };
 			waitLattice[1][j] = { origin.x + visibleSize.width - waitLattice[0][j].x,origin.y + visibleSize.height - waitLattice[0][j].y };
-        }*/
-}
+		}
+
+}*/
 
 int countLattice(Vec2 lat1, Vec2 lat2)
 {
@@ -109,6 +111,20 @@ bool judgeExist(std::pair<int, int> lat)
 		return battleLatticeExist[x][y];
 	}
 	return waitLatticeExist[x][y];
+}
+
+Vec2 positionToEnemyPosition(Vec2 pos)
+{
+	std::pair<int, int> lat = positionToLattice(pos);
+	if (lat.first == 0)
+	{
+		return waitLattice[0][8-lat.second];
+	}
+	else
+	{
+		lat.first--;
+		return battleLattice[5 - lat.first][8 - lat.second];
+	}
 }
 
 const Vec2 battleLattice[6][7] = {
