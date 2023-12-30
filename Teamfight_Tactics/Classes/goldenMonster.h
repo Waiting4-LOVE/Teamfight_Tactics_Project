@@ -26,6 +26,7 @@ public:
 
 class _3star_goldenMonster :public goldenMonster
 {
+public:
 	_3star_goldenMonster();
 	static _3star_goldenMonster* createhero();
 	CREATE_FUNC(_3star_goldenMonster);

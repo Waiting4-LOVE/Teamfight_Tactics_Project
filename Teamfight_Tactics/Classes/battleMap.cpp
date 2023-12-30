@@ -7,13 +7,13 @@ USING_NS_CC;
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	
 	战斗格子位
-
+	*/
 	float pieceX = 861.0f / 1920.0f * visibleSize.width / 15.0f;//六边形宽度（不是边长）的一半
 	oneLattice = pieceX / sqrt(3) * 2;//六边形边长
 	float pieceY = pieceX * sqrt(3);
 	Vec2 startPoint = { origin.x + (visibleSize.width - pieceX * 13) / 2, origin.y + (visibleSize.height - pieceY * 5) / 2 };//左下点位坐标
 
-	for (int i = 0; i < 6; i++)
+	/*for (int i = 0; i < 6; i++)
 		for (int j = 0; j < 7; j++)
 		{
 			if (i % 2 == 0)
@@ -29,7 +29,6 @@ USING_NS_CC;
 		备战席：
 		总宽度与战斗格相同
 		共9格
-
 		startPoint = { startPoint.x - pieceX / 6,startPoint.y - pieceY * 1.5f };
 		pieceX *= 5.0 / 6;
 		for (int j = 0; j < 9; j++)

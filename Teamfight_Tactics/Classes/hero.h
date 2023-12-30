@@ -15,7 +15,7 @@ using namespace std;
 class hero :public Sprite
 {
 private:
-	RoundTimer* test_timer = RoundTimer::create(5);
+
 public:
 
 	ccArray* equipment = ccArrayNew(5);

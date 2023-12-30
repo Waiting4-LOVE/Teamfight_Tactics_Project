@@ -1,9 +1,10 @@
 #include "SelecScene.h"
 #include "BattleScene.h"
 #include "Sources.h"
-
+#include "Definition.h"
 USING_NS_CC;
 
+PC_Player pc_player;
 cocos2d::Scene* BattleScene::createScene()
 {
 	return BattleScene::create();
@@ -49,13 +50,7 @@ bool BattleScene::init()
 	littleLayer->scheduleUpdate();
 	shopLayer->scheduleUpdate();
 	heroLayer->scheduleUpdate();
-	// 创建一个鼠标事件监听器
-	auto mouseListener = EventListenerMouse::create();
 
-	// 设置鼠标按下事件处理
-	scheduleUpdate();
-	// 添加监听器到事件分发器
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 	return true;
 }
 
@@ -75,93 +70,45 @@ void BattleScene::menuCloseCallback(Ref* pSender)
 void BattleScene::addChess(littleHero& littlehero, int playerinfo)
 {
 
-	if (littlehero.haveNewHero)                  //若有新棋子加入
-	{
-		bool flag = 1;
-		auto temp = ((hero*)(littlehero.m_playerArray->arr[littlehero.m_playerArray->num - 1]));
-		if (playerinfo == 0)
-		{
-			for (int i = 0; i < 8; i++)
-			{
-
-				if (ChessExist[i][0 + 9 * playerinfo] == 0)
-				{
-					littlehero.m_coins -= temp->getCoinsNeeded();
-					heroLayer->addChild(temp);
-					temp->setPosition(mapPosition[i][0 + 9 * playerinfo].x, mapPosition[i][0 + 9 * playerinfo].y);
-					temp->set(mapPosition[i][0 + 9 * playerinfo].x, mapPosition[i][0 + 9 * playerinfo].y);
-					temp->setTempPosition();
-					temp->retain();
-					littlehero.haveNewHero = 0;
-					//temp->setPlayer(0);
-					temp->setPlayer(playerinfo);
-					littlehero.heronumber[temp->getType()]++;     //记录其棋子升级信息
-					ChessExist[i][0 + 9 * playerinfo] = 1;        //添加成功
-					flag = 0;
-					littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
-					flag = 0;
-					break;
-
-				}
-			}
-		}
-		else
-		{
-			littlehero.m_coins -= temp->getCoinsNeeded();
-			heroLayer->addChild(temp);
-			temp->setPosition(10000, 10000);
-			temp->set(10000, 10000);
-			temp->setPlayer(playerinfo);
-			littlehero.heronumber[temp->getType()]++;
-			littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
-			flag = 0;
-			littlehero.haveNewHero = 0;        //防止莫名其妙的BUG
-			flag = 0;
-		}
-		if (flag)
-		{
-			ccArrayRemoveObject(littlehero.m_playerArray, temp);   //添加失败
-			littlehero.haveNewHero = 0;
-
-		}
-	}
+void BattleScene::GotoSelectScene(cocos2d::Ref* pSender)
+{
+	auto scene = SelectScene::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
 }*/
-
-
-
 
 void BattleScene::update(float dt)
 {
 	if (timer->pTime > 1e-6)
 	{
-		/*gamesprite->upgrade(player1data);             //监测是否可升级
-		gamesprite->upgrade(player2data);
-		addChess(player1data, 0);
+		//heroLayer->upgrade(MyLittleHero);             //监测是否可升级
+		//heroLayer->upgrade(player2data);
+		addChess(MyLittleHero, 0);
 		addChess(player2data, 1);
-		pc_player.pcJudgeMoneyUsage();*/
+		pc_player.pcJudgeMoneyUsage();
 	}
+	heroLayer->unscheduleUpdate();
 
 	addChess(MyLittleHero, 0);
-	//addChess(player2data, 1);
+	addChess(player2data, 1);
 
 	ChessMoveInMouse();
-	/*if (timer->pTime < -1e-2)
+	if (timer->pTime < -1e-2)
 	{
 		if (PC_ShowFlag)
 		{
 			pc_player.pcCreateBattleArray();
-			pc_player.pcEquip();
-			gamesprite->pcShowFightArray();  //显示电脑玩家信息
-			gamesprite->pcShowPlayerArray();
-			if (player2data.PlayerArray->num == 8)
-				SoldChess(pc_player.pcSoldChess(), player2data.PlayerArray, player2data);   //电脑卖棋子
+			//pc_player.pcEquipment();
+			heroLayer->pcShowFightArray();  //显示电脑玩家信息
+			heroLayer->pcShowPlayerArray();
+			if (player2data.m_playerArray->num == 9)
+				soldHero(pc_player.pcSoldHero(), player2data.m_playerArray, player2data);   //电脑卖棋子
 			PC_ShowFlag = 0;
 		}
 		GameStartMouseInit();   //取消对战斗区棋子的选取
 		timer->setPosition(10000, 10000);
-		gamesprite->scheduleUpdate();
+		heroLayer->scheduleUpdate();
 		Win();
-	}*/
+	}
 
 }
 
@@ -454,6 +401,20 @@ void BattleScene::soldHero(hero* temp, ccArray* Array, littleHero& playerdata)//
 
 }
 
+void BattleScene::GameStartMouseInit()
+{
+	if (timer->pTime < 1e-2 && timer->pTime > -1e-2)
+	{
+		if (MouseToChess < MyLittleHero.m_fightArray->num && MouseToChess != -1)
+		{
+			auto temp = (hero*)(MyLittleHero.m_fightArray->arr[MouseToChess]);
+			temp->setPosition(temp->getTempPosition());
+			temp->set(temp->getTempPosition());
+			MouseToChess = -1;
+		}
+	}
+}
+
 void BattleScene::addChess(littleHero& littlehero, int playerinfo)
 {
 	if (littlehero.haveNewHero)                  //若有新棋子加入
@@ -467,7 +428,7 @@ void BattleScene::addChess(littleHero& littlehero, int playerinfo)
 
 				if (waitLatticeExist[0 + playerinfo][i] == 0)//若备战区有空位
 				{
-					littlehero.delCoins(littlehero.Used[0].money);
+					littlehero.delCoins(temp->getCoinsNeeded());
 					temp->set(waitLattice[0 + playerinfo][i]);
 					temp->setTempPosition();
 					temp->setPosition(temp->getTempPosition());
@@ -475,7 +436,7 @@ void BattleScene::addChess(littleHero& littlehero, int playerinfo)
 					temp->retain();
 					littlehero.haveNewHero = 0;
 					temp->setPlayer(playerinfo);
-					littlehero.heronumber[temp->getType()]++;     //记录其棋子升级信息
+					littlehero.chessnumber[temp->getType()]++;     //记录其棋子升级信息
 					setLatticeExist({ 0 + playerinfo,i }, 1);//设置占位
 					flag = 0;
 					littlehero.haveNewHero = 0;
@@ -487,16 +448,28 @@ void BattleScene::addChess(littleHero& littlehero, int playerinfo)
 		}
 		else
 		{
-			littlehero.delCoins(temp->getCoinsNeeded());
-			heroLayer->addChild(temp);
-			temp->setPosition(10000, 10000);
-			temp->set(10000, 10000);
-			temp->setPlayer(playerinfo);
-			littlehero.heronumber[temp->getType()]++;
-			littlehero.haveNewHero = 0;
-			flag = 0;
-			littlehero.haveNewHero = 0;
-			flag = 0;
+			for (int i = 0; i < 9; i++)
+			{
+
+				if (waitLatticeExist[0 + playerinfo][i] == 0)//若备战区有空位
+				{
+					littlehero.delCoins(temp->getCoinsNeeded());
+					temp->set(waitLattice[0 + playerinfo][i]);
+					temp->setTempPosition();
+					temp->setPosition(temp->getTempPosition());
+					heroLayer->addChild(temp);
+					temp->retain();
+					littlehero.haveNewHero = 0;
+					temp->setPlayer(playerinfo);
+					littlehero.chessnumber[temp->getType()]++;     //记录其棋子升级信息
+					waitLatticeExist[0 + playerinfo][i] = 1;//设置占位
+					flag = 0;
+					littlehero.haveNewHero = 0;
+					flag = 0;
+					break;
+
+				}
+			}
 		}
 		if (flag)
 		{
@@ -504,6 +477,98 @@ void BattleScene::addChess(littleHero& littlehero, int playerinfo)
 			littlehero.haveNewHero = 0;
 
 		}
+	}
+}
+
+void BattleScene::Win()
+{
+	int sum[2] = { 0,0 };
+	JudgeWin(MyLittleHero, sum);
+	JudgeWin(player2data, sum);
+	if (sum[0] == 0 || sum[1] == 0)
+	{
+		if (sum[1] == 0)//我赢
+		{
+			MyLittleHero.win();
+			player2data.lose(2 + 2 * sum[0]);
+		}
+
+		else if (sum[0] == 0)//我输
+		{
+			player2data.win();
+			MyLittleHero.lose(2 + 2 * sum[1]);
+		}
+
+		WinRetain(MyLittleHero.m_playerArray);
+		WinRetain(player2data.m_playerArray);
+		WinRetain(MyLittleHero.m_fightArray);
+		WinRetain(player2data.m_fightArray);
+
+		heroLayer->unscheduleUpdate();
+		/*MyLittleHero.addCoins(5);
+		player2data.addCoins(5);*/
+		//装备栏移除(未实现)
+
+		if (MyLittleHero.getCurBlood() > 0 && player2data.getCurBlood() > 0)
+		{
+			_director->replaceScene(TransitionFade::create(1/8.0f, BattleScene::createScene()));
+		}
+
+		else
+		{
+			string name = MyLittleHero.getCurBlood() <= 0 ? "You Lose!" : "You Win!";
+			auto label = Label::createWithTTF(name, "fonts/Marker Felt.ttf", 78);
+			this->addChild(label);
+			label->setTextColor(Color4B::WHITE);
+			label->setPosition(800, 500);
+			auto move = FadeOut::create(5.0f);
+			label->runAction(move);
+			this->unscheduleUpdate();
+
+			MyLittleHero.reset();
+			player2data.reset();
+			for (int i = 0; i < 6; i++)
+			{
+				for (int j = 0; j < 7; j++)
+				{
+					battleLatticeExist[i][j] = 0;
+				}
+			}
+			for (int i = 0; i < 2; i++)
+			{
+				for (int j = 0; j < 9; j++)
+				{
+					waitLatticeExist[i][j] = 0;
+				}
+			}
+			_director->replaceScene(TransitionFade::create(1 / 8.0f, SelectScene::createScene()));
+		}
+		heroLayer->unscheduleUpdate();
+	}
+
+}
+
+void BattleScene::JudgeWin(littleHero& littlehero, int sum[])
+{
+	for (int i = 0; i < littlehero.m_fightArray->num; i++)
+	{
+		auto temp = (hero*)(littlehero.m_fightArray->arr[i]);
+		if (!temp->die())
+		{
+			sum[temp->getPlayer()]++;
+		}
+	}
+}
+
+void BattleScene::WinRetain(ccArray* Array)
+{
+	for (int i = 0; i < Array->num; i++)
+	{
+		auto temp = ((hero*)Array->arr[i]);
+
+		temp->retain();                    //保存
+		temp->removeFromParent();          //重新创建，因此先将其remove
+		temp->reset();                  //恢复原样
 	}
 }
 

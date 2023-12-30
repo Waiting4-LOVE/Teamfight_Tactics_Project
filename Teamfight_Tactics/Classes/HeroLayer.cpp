@@ -144,7 +144,6 @@ hero* CreateHero(int type) {
 	default:
 		break;
 	}
-
 }
 
 HeroLayer* HeroLayer::createHeroLayer() {
@@ -172,8 +171,8 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 			temp1->setPosition(temp->getTempPosition());
 			temp1->set(temp->getTempPosition());
 			temp1->setTempPosition();
-			temp1->setPosition(10000, 10000);
-			temp1->set(10000, 10000);
+			/*temp1->setPosition(10000, 10000);
+			temp1->set(10000, 10000*/
 		}
 		temp1->setPlayer(temp->getPlayer());
 		//temp1->EquipmentChange();
@@ -189,15 +188,13 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 bool HeroLayer::init() {
 	//auto sprite = hero1::createhero();
 	/*初始化的内容，后续需要放到其他位置*/
-
-
+	battleMapinit();
+	/*
 	auto temp = master::createhero();
-	temp->set(battleLattice[1][6]);
+	temp->set(1000,500);
 	temp->setTempPosition();
-/*
-	auto temp1 = darkKnight::createhero();
-	temp1->set(battleLattice[5][0]);
-	temp1->setTempPosition();
+
+
 
 	auto temp2 = cannedPig::createhero();
 	temp2->set(battleLattice[5][6]);
@@ -249,7 +246,7 @@ bool HeroLayer::init() {
 
 	auto temp14 = wildBoar::createhero();
 	temp14->set(800, 800);
-	temp14->setTempPosition();*/
+	temp14->setTempPosition();
 
 	ccArrayAppendObject(MyLittleHero.m_fightArray, temp);
 	/*
@@ -263,19 +260,39 @@ bool HeroLayer::init() {
 	ccArrayAppendObject(MyLittleHero.m_fightArray, temp13);
 	ccArrayAppendObject(MyLittleHero.m_fightArray, temp14);
 
-	ccArrayAppendObject(player2data.m_fightArray, temp7);
-	ccArrayAppendObject(player2data.m_fightArray, temp8);
-	ccArrayAppendObject(player2data.m_fightArray, temp1);
-	ccArrayAppendObject(player2data.m_fightArray, temp2);*/
-	ccArrayAppendObject(player2data.m_fightArray, temp5);
 
+	*/
+	/*auto temp1 = darkKnight::createhero();
+	temp1->set(waitLattice[1][0]);
+	temp1->setTempPosition();
 
+	auto temp2 = cannedPig::createhero();
+	temp2->set(waitLattice[1][1]);
+	temp2->setTempPosition();
+
+	auto temp5 = gargomon::createhero();
+	temp5->set(waitLattice[1][2]);
+	temp5->setTempPosition();
+
+	auto temp7 = goldenMonster::createhero();
+	temp7->set(waitLattice[1][3]);
+	temp7->setTempPosition();
+
+	auto temp8 = iceFire::createhero();
+	temp8->set(waitLattice[1][4]);
+	temp8->setTempPosition();
+
+	ccArrayAppendObject(player2data.m_playerArray, temp7);
+	ccArrayAppendObject(player2data.m_playerArray, temp8);
+	ccArrayAppendObject(player2data.m_playerArray, temp1);
+	ccArrayAppendObject(player2data.m_playerArray, temp2);
+	ccArrayAppendObject(player2data.m_playerArray, temp5);*/
 
 
 	PlayerArrayInit(MyLittleHero.m_playerArray, 0);
-	PlayerArrayInit(player2data.m_playerArray, 0);      //  电脑玩家信息暂不显示
+	PlayerArrayInit(player2data.m_playerArray, 1);      //  电脑玩家信息暂不显示
 	PlayerArrayInit(MyLittleHero.m_fightArray, 0);
-	PlayerArrayInit(player2data.m_fightArray, 0);
+	PlayerArrayInit(player2data.m_fightArray, 1);
 
 	return true;
 }
@@ -329,14 +346,6 @@ void HeroLayer::update(float dt)
 		((hero*)(MyLittleHero.m_fightArray->arr[i]))->die();
 		ChessMove((hero*)(MyLittleHero.m_fightArray->arr[i]), MyLittleHero, player2data);
 	}
-	/*if (MyLittleHero.haveNewHero)
-	{
-		MyLittleHero.haveNewHero = false;
-		auto temp = (hero*)(MyLittleHero.m_playerArray->arr[MyLittleHero.m_playerArray->num - 1]);
-		temp->setPosition(temp->getTempPosition());
-		CCLOG("%f,%f", temp->getTempPosition().x, temp->getTempPosition().y);
-		this->addChild(temp);
-	}*/
 	for (int i = 0; i < player2data.m_fightArray->num; i++)
 	{
 		((hero*)(player2data.m_fightArray->arr[i]))->die();
@@ -521,16 +530,28 @@ void HeroLayer::pcShowPlayerArray()
 	for (int i = 0; i < player2data.m_playerArray->num; i++)
 	{
 		hero* cur = (hero*)player2data.m_playerArray->arr[i];
-		cur->setPosition(Director::getInstance()->getVisibleOrigin() * 2 + Director::getInstance()->getVisibleSize() - cur->getPosition());
+		cur->setPosition(cur->getTempPosition());
 	}
 }
 void HeroLayer::pcShowFightArray()
 {
 	/*位置初始化*/
-	for (int i = 0; i < player2data.m_fightArray->num; i++)
+	for (int k = 0; k < player2data.m_fightArray->num; k++)
 	{
-		hero* cur = (hero*)player2data.m_fightArray->arr[i];
-		cur->setPosition(Director::getInstance()->getVisibleOrigin() * 2 + Director::getInstance()->getVisibleSize() - cur->getPosition());
+		hero* cur = (hero*)player2data.m_fightArray->arr[k];
+		for (int i = 3; i < 6; i++)
+		{
+			for (int j = 0; j < 7; j++)
+			{
+				if (battleLatticeExist[i][j] == 0)
+				{
+					cur->set(battleLattice[i][j]);
+					cur->setTempPosition();
+					cur->setPosition(cur->getTempPosition());
+				}
+				
+			}
+		}
 	}
 }
 

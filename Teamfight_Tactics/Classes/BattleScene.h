@@ -33,16 +33,19 @@
 #include "HeroLayer.h"
 #include "ShopLayer.h"
 #include "helpAndSetLayer.h"
+#include "PC_Player.h"
 class BattleScene : public cocos2d::Scene
 {
 public:
 	static cocos2d::Scene* createScene();
 
-	virtual bool init();
-	void menuCloseCallback(cocos2d::Ref* pSender);
-	// a selector callback
-	//void GotoGamescene(cocos2d::Ref* pSender);
-	// implement the "static create()" method manually
+    virtual bool init();
+    void menuCloseCallback(cocos2d::Ref* pSender);
+    void GotoSelectScene(cocos2d::Ref* pSender);
+    // a selector callback
+    //void GotoGamescene(cocos2d::Ref* pSender);
+    // implement the "static create()" method manually
+
 private:
 	/**********计时器及Update**************/
 	RoundTimer* timer = RoundTimer::create(1000);
@@ -75,9 +78,9 @@ private:
 
 
 	void Win();  //判断打斗结束
-	/* void JudgeWin(PlayerData& playerdata, int sum[]);
+   void JudgeWin(littleHero& littlehero, int sum[]);
 	 void WinRetain(ccArray* Array);
-
+    /*
 	 void ToFightArray(Chess* chess, PlayerData& playerdata);
 	 */
 	 /***********所需子Layer************/
@@ -92,6 +95,9 @@ private:
    /* Package* layerPackage = Package::createPackage();
 	bool EquipSearchChess(const float EquipX, const float EquipY, const int EquipIndex);
 	int MouseSelectedEquip = -1;*/
+
+	/***********电脑玩家相关************/
+	bool PC_ShowFlag = 1;
 
 	CREATE_FUNC(BattleScene);
 

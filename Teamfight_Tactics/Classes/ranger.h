@@ -26,6 +26,7 @@ public:
 
 class _3star_ranger :public ranger
 {
+public:
 	_3star_ranger();
 	static _3star_ranger* createhero();
 	CREATE_FUNC(_3star_ranger);
