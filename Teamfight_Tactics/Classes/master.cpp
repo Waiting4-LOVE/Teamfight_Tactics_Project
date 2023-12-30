@@ -94,8 +94,9 @@ _2star_master::_2star_master() {
 
 _2star_master* _2star_master::createhero() {
 	auto _2star_master = _2star_master::create();
-	_2star_master->picturename = "";
-	_2star_master->picturenum = 0;
+	auto temp = Sprite::create("master.png");
+	temp->setScale(2.5);
+	_2star_master->addChild(temp);
 	_2star_master->autorelease();
 	return _2star_master;
 }
@@ -124,6 +125,9 @@ _3star_master::_3star_master() {
 
 _3star_master* _3star_master::createhero() {
 	auto _3star_master = _3star_master::create();
+	auto temp = Sprite::create("master.png");
+	temp->setScale(2.5);
+	_3star_master->addChild(temp);
 	_3star_master->autorelease();
 	return _3star_master;
 }

@@ -91,8 +91,9 @@ _2star_knight::_2star_knight() {
 
 _2star_knight* _2star_knight::createhero() {
 	auto _2star_knight = _2star_knight::create();
-	_2star_knight->picturename = "";
-	_2star_knight->picturenum = 0;
+	auto temp = Sprite::create("knight.png");
+	temp->setScale(2.5);
+	_2star_knight->addChild(temp);
 	_2star_knight->autorelease();
 	return _2star_knight;
 }
@@ -121,6 +122,9 @@ _3star_knight::_3star_knight() {
 
 _3star_knight* _3star_knight::createhero() {
 	auto _3star_knight = _3star_knight::create();
+	auto temp = Sprite::create("knight.png");
+	temp->setScale(2.5);
+	_3star_knight->addChild(temp);
 	_3star_knight->autorelease();
 	return _3star_knight;
 }

@@ -93,8 +93,9 @@ _2star_gargomon::_2star_gargomon() {
 
 _2star_gargomon* _2star_gargomon::createhero() {
 	auto _2star_gargomon = _2star_gargomon::create();
-	_2star_gargomon->picturename = "";
-	_2star_gargomon->picturenum = 0;
+	auto temp = Sprite::create("gargomon.png");
+	temp->setScale(2.5);
+	_2star_gargomon->addChild(temp);
 	_2star_gargomon->autorelease();
 	return _2star_gargomon;
 }
@@ -123,6 +124,9 @@ _3star_gargomon::_3star_gargomon() {
 
 _3star_gargomon* _3star_gargomon::createhero() {
 	auto _3star_gargomon = _3star_gargomon::create();
+	auto temp = Sprite::create("gargomon.png");
+	temp->setScale(2.5);
+	_3star_gargomon->addChild(temp);
 	_3star_gargomon->autorelease();
 	return _3star_gargomon;
 }

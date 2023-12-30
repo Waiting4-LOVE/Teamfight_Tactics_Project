@@ -93,8 +93,9 @@ _2star_iceFire::_2star_iceFire() {
 
 _2star_iceFire* _2star_iceFire::createhero() {
 	auto _2star_iceFire = _2star_iceFire::create();
-	_2star_iceFire->picturename = "";
-	_2star_iceFire->picturenum = 0;
+	auto temp = Sprite::create("iceFire.png");
+	temp->setScale(2.5);
+	_2star_iceFire->addChild(temp);
 	_2star_iceFire->autorelease();
 	return _2star_iceFire;
 }
@@ -123,6 +124,9 @@ _3star_iceFire::_3star_iceFire() {
 
 _3star_iceFire* _3star_iceFire::createhero() {
 	auto _3star_iceFire = _3star_iceFire::create();
+	auto temp = Sprite::create("iceFire.png");
+	temp->setScale(2.5);
+	_3star_iceFire->addChild(temp);
 	_3star_iceFire->autorelease();
 	return _3star_iceFire;
 }

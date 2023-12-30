@@ -93,8 +93,9 @@ _2star_ghost::_2star_ghost() {
 
 _2star_ghost* _2star_ghost::createhero() {
 	auto _2star_ghost = _2star_ghost::create();
-	_2star_ghost->picturename = "";
-	_2star_ghost->picturenum = 0;
+	auto temp = Sprite::create("ghost.png");
+	temp->setScale(2.5);
+	_2star_ghost->addChild(temp);
 	_2star_ghost->autorelease();
 	return _2star_ghost;
 }
@@ -123,6 +124,9 @@ _3star_ghost::_3star_ghost() {
 
 _3star_ghost* _3star_ghost::createhero() {
 	auto _3star_ghost = _3star_ghost::create();
+	auto temp = Sprite::create("ghost.png");
+	temp->setScale(2.5);
+	_3star_ghost->addChild(temp);
 	_3star_ghost->autorelease();
 	return _3star_ghost;
 }

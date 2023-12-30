@@ -71,6 +71,24 @@ void snowMonster::releaseSkill() {
 }
 
 _2star_snowMonster::_2star_snowMonster() {
+	type = _2star_SnowMonster;
+	maxHealthPoint = 100;
+	maxBluePoint = 100;
+	maxShieldPoint = 100;
+	fee = 2;
+	name = "yao yao don't know";
+	HealthPoint = 100;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 10;
+	magicPoint = 0;
+	speedAttack = 0.7f;
+	distanceAttack = 5;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.05;
+	defencePhysics = 5;
+	defenceMagic = 5;
+	star = 2;
 	//填写二星英雄的属性
 	type = SnowMonster;
 	maxHealthPoint = 1980;
@@ -94,13 +112,32 @@ _2star_snowMonster::_2star_snowMonster() {
 
 _2star_snowMonster* _2star_snowMonster::createhero() {
 	auto _2star_snowMonster = _2star_snowMonster::create();
-	_2star_snowMonster->picturename = "";
-	_2star_snowMonster->picturenum = 0;
+	auto temp = Sprite::create("snowMonster.png");
+	temp->setScale(2.5);
+	_2star_snowMonster->addChild(temp);
 	_2star_snowMonster->autorelease();
 	return _2star_snowMonster;
 }
 
 _3star_snowMonster::_3star_snowMonster() {
+	type = _3star_SnowMonster;
+	maxHealthPoint = 100;
+	maxBluePoint = 100;
+	maxShieldPoint = 100;
+	fee = 2;
+	name = "yao yao don't know";
+	HealthPoint = 100;//初始血量为最大血量
+	BluePoint = 0;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 10;
+	magicPoint = 0;
+	speedAttack = 0.7f;
+	distanceAttack = 5;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.05;
+	defencePhysics = 5;
+	defenceMagic = 5;
+	star = 3;
 	//填写三星英雄的属性
 	type = SnowMonster;
 	maxHealthPoint = 3564;
@@ -124,6 +161,9 @@ _3star_snowMonster::_3star_snowMonster() {
 
 _3star_snowMonster* _3star_snowMonster::createhero() {
 	auto _3star_snowMonster = _3star_snowMonster::create();
+	auto temp = Sprite::create("snowMonster.png");
+	temp->setScale(2.5);
+	_3star_snowMonster->addChild(temp);
 	_3star_snowMonster->autorelease();
 	return _3star_snowMonster;
 }

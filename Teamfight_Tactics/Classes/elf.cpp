@@ -94,8 +94,9 @@ _2star_elf::_2star_elf() {
 
 _2star_elf* _2star_elf::createhero() {
 	auto _2star_elf = _2star_elf::create();
-	_2star_elf->picturename = "";
-	_2star_elf->picturenum = 0;
+	auto temp = Sprite::create("elf.png");
+	temp->setScale(2.5);
+	_2star_elf->addChild(temp);
 	_2star_elf->autorelease();
 	return _2star_elf;
 }
@@ -124,6 +125,9 @@ _3star_elf::_3star_elf() {
 
 _3star_elf* _3star_elf::createhero() {
 	auto _3star_elf = _3star_elf::create();
+	auto temp = Sprite::create("elf.png");
+	temp->setScale(2.5);
+	_3star_elf->addChild(temp);
 	_3star_elf->autorelease();
 	return _3star_elf;
 }

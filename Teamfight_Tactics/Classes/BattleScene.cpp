@@ -80,8 +80,8 @@ void BattleScene::update(float dt)
 {
 	if (timer->pTime > 1e-6)
 	{
-		//heroLayer->upgrade(MyLittleHero);             //监测是否可升级
-		//heroLayer->upgrade(player2data);
+		heroLayer->upgrade(MyLittleHero);             //监测是否可升级
+		heroLayer->upgrade(player2data);
 		addChess(MyLittleHero, 0);
 		addChess(player2data, 1);
 		pc_player.pcJudgeMoneyUsage();

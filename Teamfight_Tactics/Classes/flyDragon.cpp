@@ -93,8 +93,9 @@ _2star_flyDragon::_2star_flyDragon() {
 
 _2star_flyDragon* _2star_flyDragon::createhero() {
 	auto _2star_flyDragon = _2star_flyDragon::create();
-	_2star_flyDragon->picturename = "";
-	_2star_flyDragon->picturenum = 0;
+	auto temp = Sprite::create("flyDragon.png");
+	temp->setScale(2.5);
+	_2star_flyDragon->addChild(temp);
 	_2star_flyDragon->autorelease();
 	return _2star_flyDragon;
 }
@@ -123,6 +124,9 @@ _3star_flyDragon::_3star_flyDragon() {
 
 _3star_flyDragon* _3star_flyDragon::createhero() {
 	auto _3star_flyDragon = _3star_flyDragon::create();
+	auto temp = Sprite::create("flyDragon.png");
+	temp->setScale(2.5);
+	_3star_flyDragon->addChild(temp);
 	_3star_flyDragon->autorelease();
 	return _3star_flyDragon;
 }
