@@ -33,7 +33,7 @@ void littleHero::countNextUPExp() {
 	return lh;
 }*/
 
-void littleHero::LHAnimation(string picturename, const int picturenum, Sprite* sprite,const float speed, const int loop)
+void littleHero::LHAnimation(std::string picturename, const int picturenum, Sprite* sprite,const float speed, const int loop)
 {
 	Animation* animation = Animation::create();
 

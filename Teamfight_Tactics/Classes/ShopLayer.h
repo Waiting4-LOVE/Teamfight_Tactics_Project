@@ -49,7 +49,7 @@ public:
 	//刷新按钮
 	MenuItemImage* Refresh = MenuItemImage::create("Refresh.png", "Refresh.png", CC_CALLBACK_1(ShopLayer::refreshShop1, this));
 	
-	string HeroInShop[1] = { "Hero1InShop.png" };
+	std::string HeroInShop[1] = { "Hero1InShop.png" };
 	Vec2 HeroInShopPos[5] = { Vec2(730, 78),Vec2(915,78),Vec2(1106,78),Vec2(1298,78),Vec2(1483,78)};
 
 	/**************初始化***************/

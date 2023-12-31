@@ -3,6 +3,9 @@
 #include "BattleScene.h"
 #include "Sources.h"
 #include "Definition.h"
+#include "equipmentScene.h"
+#include "OnlineRoomScene.h"
+
 USING_NS_CC;
 cocos2d::Scene* SelectScene::createScene()
 {
@@ -45,10 +48,12 @@ bool SelectScene::init()
 		"single.png",
 		"singleselected.png",
 		CC_CALLBACK_1(SelectScene::menuCloseCallback, this));
+
 	auto multiItem = MenuItemImage::create(
 		"multiplayer.png",
 		"multiplayerselected.png",
-		CC_CALLBACK_1(SelectScene::menuCloseCallback, this));
+		CC_CALLBACK_1(SelectScene::GotoOnlineRoomScene, this));
+
 	if (singleItem == nullptr ||
 		singleItem->getContentSize().width <= 0 ||
 		singleItem->getContentSize().height <= 0)
@@ -57,7 +62,7 @@ bool SelectScene::init()
 	}
 	else
 	{
-		float x = origin.x + visibleSize.width / 2 - multiItem->getContentSize().width;
+		float x = origin.x + visibleSize.width / 2 - singleItem->getContentSize().width;
 		float y = origin.y + visibleSize.height / 2;
 		singleItem->setPosition(Vec2(x, y));
 	}
@@ -104,6 +109,20 @@ bool SelectScene::init()
 void SelectScene::GotoBattleScene(cocos2d::Ref* pSender)
 {
 	auto scene = BattleScene::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
+}
+
+void SelectScene::GotoEptScene(cocos2d::Ref* pSender)
+{
+	auto scene = EquipmentScene::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
+
+}
+
+void SelectScene::GotoOnlineRoomScene(cocos2d::Ref* pSender)
+{
+	global_data->isai = 0;
+	auto scene = OnlineRoomScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, scene));
 }
 

@@ -2,6 +2,7 @@
 
 littleHero MyLittleHero;
 littleHero player2data;
+littleHero enemydata;
 
 hero* CreateHero(int type) {
 	switch (type)
@@ -185,13 +186,17 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 	}
 }
 
-bool HeroLayer::init() {
+bool HeroLayer::init() 
+{
 	
 	PlayerArrayInit(MyLittleHero.m_playerArray, 0);
 	PlayerArrayInit(player2data.m_playerArray, 1);      //  电脑玩家信息暂不显示
 	PlayerArrayInit(MyLittleHero.m_fightArray, 0);
 	PlayerArrayInit(player2data.m_fightArray, 1);
-
+	if (!global_data->isai)
+	{
+		this->scheduleOnce(CC_SCHEDULE_SELECTOR(HeroLayer::OnlineArrayInit), 20.0f);
+	}
 	return true;
 }
 
@@ -321,6 +326,13 @@ void HeroLayer::upgrade(littleHero& littlehero)
 
 	}
 }
+
+void HeroLayer::OnlineArrayInit(float dt)
+{
+	PlayerArrayInit(player2data.m_playerArray, 1);
+	PlayerArrayInit(player2data.m_fightArray, 1);
+}
+
 
 hero* HeroLayer::upgradeChessCreate(int type)
 {

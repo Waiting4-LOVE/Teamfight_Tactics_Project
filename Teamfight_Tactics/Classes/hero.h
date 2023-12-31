@@ -10,7 +10,7 @@
 
 using namespace cocos2d;
 using namespace heroConsts;
-using namespace std;
+
 
 class hero :public Sprite
 {
@@ -19,9 +19,9 @@ private:
 public:
 
 	ccArray* equipment = ccArrayNew(5);
-	string picturename;//图片名字
+	std::string picturename;//图片名字
 	int picturenum;//图片数量
-	static hero* createhero(string picture_name);
+	static hero* createhero(std::string picture_name);
 	hero();
 
 	/*get类函数*/
@@ -47,7 +47,7 @@ public:
 	int getDefencePhysics() { return defencePhysics; }//物抗
 	int getDefenceMagic() { return defenceMagic; }//魔抗//魔抗
 	int getHeroStar() { return star; }
-	string getname() { return name; }
+	std::string getname() { return name; }
 	const cocos2d::Size getContentSize() { return Size(width, height); }   //获得图片长宽
 
 	/*set类型函数*/
@@ -67,7 +67,7 @@ public:
 	Sprite* blueFrame = Sprite::create("BloodFrame.png");
 	ProgressTimer* bloodBar = ProgressTimer::create(Sprite::create("Blood.png"));
 	ProgressTimer* blueBar = ProgressTimer::create(Sprite::create("Mana.png"));
-	Label* Star = Label::createWithTTF(to_string(star), "fonts/arial.ttf", 24);
+	Label* Star = Label::createWithTTF(std::to_string(star), "fonts/arial.ttf", 24);
 
 	float calculateDistance(Sprite* d_sprite);//计算本精灵与敌人距离函数
 	void onDamageReceived(int damage, int type);
@@ -84,7 +84,7 @@ public:
 	void skill();//放技能
 	bool die();
 	virtual void releaseSkill();
-	void hero::shootbullet(string picturename, Point deltaPos, hero* mychess);
+	void hero::shootbullet(std::string picturename, Point deltaPos, hero* mychess);
 	void reset();
 	bool isMove = 0;
 	hero* attackTarget = nullptr;//攻击目标

@@ -34,6 +34,13 @@
 #include "ShopLayer.h"
 #include "helpAndSetLayer.h"
 #include "PC_Player.h"
+#include "cocos-ext.h"
+#include "Client.h"
+#include "Server.h"
+
+USING_NS_CC;
+USING_NS_CC_EXT;
+
 class BattleScene : public cocos2d::Scene
 {
 public:
@@ -42,11 +49,15 @@ public:
     virtual bool init();
     void menuCloseCallback(cocos2d::Ref* pSender);
     void GotoSelectScene(cocos2d::Ref* pSender);
+	void GotoEptScene(cocos2d::Ref* pSender);
     // a selector callback
     //void GotoGamescene(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
 
 private:
+
+	void senddata(float dt);
+
 	/**********计时器及Update**************/
 	RoundTimer* timer = RoundTimer::create(20);
 	Sprite* infoFrame = Sprite::create("infoFrame.png");
@@ -56,7 +67,6 @@ private:
 	bool infoIsShow = 0;
 	void update(float dt);
 	void TurnInfoInit();
-
 
 	//备战期鼠标移动函数
 	void ChessMoveInMouse();

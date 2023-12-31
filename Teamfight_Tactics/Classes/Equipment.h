@@ -1,5 +1,4 @@
-#ifndef __BASE_EQUIPMENT_H__
-#define __BASE_EQUIPMENT_H__
+#pragma once
 #include "cocos2d.h"
 USING_NS_CC;
 
@@ -12,17 +11,7 @@ USING_NS_CC;
 #define TEARSOFTHEGODDESS 7
 #define USELESSSTICK 8
 
-enum class EquipmentType {
-	None,
-	stromSword,
-	crookedBow,
-	boxingGloves,
-	giantBelt,
-	hauberk,
-	negativeCape,
-	tearsOfTheGoddess,
-	uselessStick
-};
+
 
 class Equipment:public Sprite {
 public:
@@ -54,4 +43,3 @@ protected:
 private:
 	int searchDistance = 30;
 };
-#endif

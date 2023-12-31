@@ -253,8 +253,8 @@ void ShopLayer::refreshShop2(littleHero& lh) {
 		deter = rand() % 100 + 1;
 		for (int j = 0; j < 5; j++)
 		{
-			if (deter > PB[min(9, lh.getLevel()) - 1][j])
-				deter -= PB[min(9, lh.getLevel()) - 1][j];
+			if (deter > PB[std::min(9, lh.getLevel()) - 1][j])
+				deter -= PB[std::min(9, lh.getLevel()) - 1][j];
 			else
 			{
 				int temp = 0;

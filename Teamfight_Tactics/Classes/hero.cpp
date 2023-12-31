@@ -2,7 +2,7 @@
 #include"const.h"
 
 
-hero* hero::createhero(string picture_name)
+hero* hero::createhero(std::string picture_name)
 {
 	auto hero = hero::create();
 	auto temp = Sprite::create(picture_name);
@@ -183,12 +183,12 @@ bool hero::doDamage(int damage, int type, bool damageVisible) {
 		if (type == 0)
 		{
 			postDiscountDamage = damage / (1.0f + defencePhysics / 100.0f);
-			HealthPoint = max(HealthPoint - postDiscountDamage, 0.f);
+			HealthPoint = std::max(HealthPoint - postDiscountDamage, 0.f);
 		}
 		else if (type == 1)
 		{
 			postDiscountDamage = damage / (1.0f + defenceMagic / 100.0f);
-			HealthPoint = max(HealthPoint - postDiscountDamage, 0.f);
+			HealthPoint = std::max(HealthPoint - postDiscountDamage, 0.f);
 		}
 		if (damageVisible)onDamageReceived((int)postDiscountDamage, type);
 
@@ -267,7 +267,7 @@ void hero::bloodUpdate(float dt)
 	blueBar->setPercentage(float(BluePoint) / float(maxBluePoint) * 100);
 	blueBar->setTag(BluePoint);
 	Star->setPosition(Vec2(85, 50));
-	Star->setString(to_string(star));
+	Star->setString(std::to_string(star));
 }
 
 void hero::skill()
@@ -322,7 +322,7 @@ void hero::setPlayer(int player)
 	}
 }
 
-void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
+void hero::shootbullet(std::string picturename, Point deltaPos, hero* mychess)
 {
 	Sprite* bullet = Sprite::create(picturename);
 	this->getParent()->addChild(bullet);
@@ -339,6 +339,6 @@ void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
 	auto actionBack = Sequence::createWithTwoActions(disappear, back);
 	auto all = Sequence::createWithTwoActions(actionTo, actionBack);
 	bullet->runAction(Repeat::create(all, 1));
-	this->runAction(Sequence::create(DelayTime::create(moveTime), CallFunc::create([this]() {attackTarget->doDamage(this->physicsAttackPoint); }), nullptr));
+	this->runAction(Sequence::create(DelayTime::create(moveTime), CallFunc::create([this]() {attackTarget->doDamage(this->physicsAttackPoint,0,1); }), nullptr));
 	//attackTarget->doDamage(this->physicsAttackPoint);
 }

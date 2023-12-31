@@ -320,7 +320,7 @@ void PC_Player::refresh(littleHero& lh) {
 		int deter = 0;
 		deter = rand() % 100 + 1; //生成1-100随机数，随机选择英雄
 		for (int j = 0; j < 5; j++) {
-			if (deter > PB[min(9, player2data.m_level) - 1][j]) deter -= PB[min(9, player2data.m_level) - 1][j];
+			if (deter > PB[std::min(9, player2data.m_level) - 1][j]) deter -= PB[std::min(9, player2data.m_level) - 1][j];
 			else {
 				int temp = 0;
 				while (1) {

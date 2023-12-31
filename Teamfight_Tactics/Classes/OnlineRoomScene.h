@@ -1,3 +1,4 @@
+#pragma once
 /****************************************************************************
  Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
 
@@ -22,26 +23,26 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#ifndef __SELECT_SCENE_H__
-#define __SELECT_SCENE_H__
+#ifndef __ONLINEROOM_SCENE_H__
+#define __ONLINEROOM_SCENE_H__
 
 #include "cocos2d.h"
 
-class SelectScene : public cocos2d::Scene
+class OnlineRoomScene : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
 
     virtual bool init();
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    void GotoBattleScene(cocos2d::Ref* pSender);
-    void GotoEptScene(cocos2d::Ref* pSender);
-    void GotoOnlineRoomScene(cocos2d::Ref* pSender);
-    // a selector callback
-    //void GotoGamescene(cocos2d::Ref* pSender);
-    // implement the "static create()" method manually
-    CREATE_FUNC(SelectScene);
 
+    // a selector callback
+    void menuCloseCallback(cocos2d::Ref* pSender);
+
+    // implement the "static create()" method manually
+    CREATE_FUNC(OnlineRoomScene);
+private:
+    void hostroom(cocos2d::Ref* pSender);
+    void joinroom(cocos2d::Ref* pSender);
 };
 
-#endif // __SELECT_SCENE_H__
+#endif // __ONLINEROOM_SCENE_H__

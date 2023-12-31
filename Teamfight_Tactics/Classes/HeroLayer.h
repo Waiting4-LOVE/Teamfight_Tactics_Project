@@ -4,7 +4,7 @@
 #include"battleMap.h"
 
 USING_NS_CC;
-using namespace std;
+
 
 class HeroLayer :public Layer
 {
@@ -19,9 +19,11 @@ public:
 	void pcShowFightArray();
 	void ChessMove(hero* herocase, littleHero&playerdata, littleHero& AttackPlayer);
 	void upgrade(littleHero& littlehero);
+	void OnlineArrayInit(float dt);
 	hero* HeroLayer::upgradeChessCreate(int type);
 private:
 	friend class GameScene;
 	float CountDistance(hero* h1, hero* h2);
 	float CountDistance(Point p1, Point p2);
 };
+hero* CreateHero(int type);

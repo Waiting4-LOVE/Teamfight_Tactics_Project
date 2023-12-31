@@ -9,9 +9,7 @@ const Point BuyExpPos = Point(535, 115);
 LittleHeroLayer* LittleHeroLayer::createPlayer()
 {
     auto LittleHeroLayer = LittleHeroLayer::create();
-    //¾«Áé
 	
-
     return LittleHeroLayer;
 }
 

@@ -2,9 +2,13 @@
 #include "BattleScene.h"
 #include "Sources.h"
 #include "Definition.h"
+#include "equipmentScene.h"
 USING_NS_CC;
 
 PC_Player pc_player;
+Client client;
+Server server;
+
 cocos2d::Scene* BattleScene::createScene()
 {
 	return BattleScene::create();
@@ -22,6 +26,16 @@ bool BattleScene::init()
 	{
 		return false;
 	}
+	if (global_data->host)
+		server.init();
+	else
+		client.init();
+
+	if (!global_data->isai)
+	{
+	    this->scheduleOnce(CC_SCHEDULE_SELECTOR(BattleScene::senddata), 15.0f);
+	}
+
 	TurnInfoInit();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -49,7 +63,6 @@ bool BattleScene::init()
 	littleLayer->scheduleUpdate();
 	shopLayer->scheduleUpdate();
 	heroLayer->scheduleUpdate();
-
 	return true;
 }
 
@@ -65,6 +78,25 @@ void BattleScene::menuCloseCallback(Ref* pSender)
 
 
 }
+void BattleScene::GotoEptScene(cocos2d::Ref* pSender)
+{
+	auto scene = EquipmentScene::createScene();
+	Director::getInstance()->pushScene(scene);
+}
+void BattleScene::senddata(float dt)
+{
+	if (global_data->host)
+	{
+		server.receivedata();
+		server.changedata();
+	}
+	else if (global_data->isonline)
+	{
+		client.changedata();
+		client.receivedata();
+	}	
+}
+
 /*
 void BattleScene::addChess(littleHero& littlehero, int playerinfo)
 {
@@ -77,38 +109,58 @@ void BattleScene::GotoSelectScene(cocos2d::Ref* pSender)
 
 void BattleScene::update(float dt)
 {
-	if (timer->pTime > 1e-6)
+	if (global_data->isai)
 	{
-		
-		heroLayer->upgrade(MyLittleHero);             //监测是否可升级
-		heroLayer->upgrade(player2data);
+		if (timer->pTime > 1e-6)
+		{
+			heroLayer->upgrade(MyLittleHero);             //监测是否可升级
+			heroLayer->upgrade(player2data);
+			addChess(MyLittleHero, 0);
+			addChess(player2data, 1);
+			pc_player.pcJudgeMoneyUsage();
+		}
+		heroLayer->unscheduleUpdate();
 		addChess(MyLittleHero, 0);
 		addChess(player2data, 1);
-		pc_player.pcJudgeMoneyUsage();
-	}
-	heroLayer->unscheduleUpdate();
-	addChess(MyLittleHero, 0);
-	addChess(player2data, 1);
-	
-	ChessMoveInMouse();
-	if (timer->pTime < -1e-2)
-	{
-		if (PC_ShowFlag)
-		{
-			pc_player.pcCreateBattleArray();
-			//pc_player.pcEquipment();
-			heroLayer->pcShowFightArray();  //显示电脑玩家信息
-			heroLayer->pcShowPlayerArray();
-			if (player2data.m_playerArray->num == 9)
-				soldHero(pc_player.pcSoldHero(), player2data.m_playerArray, player2data);   //电脑卖棋子
-			PC_ShowFlag = 0;
-		}
-		GameStartMouseInit();   //取消对战斗区棋子的选取
-		timer->setPosition(10000, 10000);
-		heroLayer->scheduleUpdate();
-		Win();
-	}
 
+		ChessMoveInMouse();
+		if (timer->pTime < -1e-2)
+		{
+			if (PC_ShowFlag)
+			{
+				pc_player.pcCreateBattleArray();
+				//pc_player.pcEquipment();
+				heroLayer->pcShowFightArray();  //显示电脑玩家信息
+				heroLayer->pcShowPlayerArray();
+				if (player2data.m_playerArray->num == 9)
+					soldHero(pc_player.pcSoldHero(), player2data.m_playerArray, player2data);   //电脑卖棋子
+				PC_ShowFlag = 0;
+			}
+			GameStartMouseInit();   //取消对战斗区棋子的选取
+			timer->setPosition(10000, 10000);
+			heroLayer->scheduleUpdate();
+			Win();
+		}
+	}
+	else if (!global_data->isai)
+	{
+		if (timer->pTime > 1e-6)
+		{
+			heroLayer->upgrade(MyLittleHero);             //监测是否可升级
+			addChess(MyLittleHero, 0);
+		}
+		heroLayer->unscheduleUpdate();
+		addChess(MyLittleHero, 0);
+
+		ChessMoveInMouse();
+		if (timer->pTime < -1e-2)
+		{
+			GameStartMouseInit();   //取消对战斗区棋子的选取
+			timer->setPosition(10000, 10000);
+			heroLayer->scheduleUpdate();
+			Win();
+		}
+	}
 }
 
 void BattleScene::TurnInfoInit()
@@ -122,6 +174,10 @@ void BattleScene::TurnInfoInit()
 	turn_label->setString(mTurn);
 
 }
+
+
+
+
 
 void BattleScene::ChessMoveInMouse()
 {
@@ -149,7 +205,7 @@ void BattleScene::showInfo(hero* chess)//显示英雄信息
 	infoFrame->setPosition(Vec2(0, 540));
 	string heroInformation = StringUtils::format("%s\n%d\n%d\n%d\n%d\n%.2f\n%d\n%d\n%d\n%d\n", chess->getname().c_str(), chess->getHealthPoint(), chess->getBluePoint(), chess->getPhysicalAttack(), chess->getMagicalPoint(), chess->getAttackSpeed(), chess->getAttackDistance(), chess->getCriticalChance() * 100, chess->getDefencePhysics(), chess->getDefenceMagic());
 	heroInfo->setString(heroInformation);
-	
+
 	if (heroPicture != NULL)
 	{
 		heroPicture->removeFromParent();
@@ -164,11 +220,11 @@ void BattleScene::showInfo(hero* chess)//显示英雄信息
 		heroStar->removeFromParent();
 		heroStar->release();
 	}
-	if(chess->getHeroStar() == 1)
+	if (chess->getHeroStar() == 1)
 		heroStar = Sprite::create("1star.png");
-	else if(chess->getHeroStar()==2)
+	else if (chess->getHeroStar() == 2)
 		heroStar = Sprite::create("2star.png");
-	else 
+	else
 		heroStar = Sprite::create("3star.png");
 	heroStar->setScale(0.15f);
 	infoFrame->addChild(heroStar, 1);
@@ -339,7 +395,7 @@ void BattleScene::onMouseDown(Event* event)
 		if (FindMouseTarget(MyLittleHero.m_fightArray, e))       //在战斗区寻找目标
 			FindMouseTarget(MyLittleHero.m_playerArray, e);  //寻找不到则在备战区寻找
 	}
-	if (MouseToChess >= 0&&!infoIsShow)
+	if (MouseToChess >= 0 && !infoIsShow)
 	{
 		if (MouseToChess >= MyLittleHero.m_fightArray->num)
 		{
@@ -351,7 +407,7 @@ void BattleScene::onMouseDown(Event* event)
 		}
 		infoIsShow = 1;
 	}
-	else if(MouseToChess < 0 && infoIsShow)
+	else if (MouseToChess < 0 && infoIsShow)
 	{
 		hideInfo();
 		infoIsShow = 0;
@@ -509,7 +565,7 @@ void BattleScene::Win()
 
 		if (MyLittleHero.getCurBlood() > 0 && player2data.getCurBlood() > 0)
 		{
-			_director->replaceScene(TransitionFade::create(1/8.0f, BattleScene::createScene()));
+			_director->replaceScene(TransitionFade::create(1 / 8.0f, BattleScene::createScene()));
 		}
 
 		else
