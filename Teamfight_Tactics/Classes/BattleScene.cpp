@@ -26,10 +26,6 @@ bool BattleScene::init()
 	{
 		return false;
 	}
-	if (global_data->host)
-		server.init();
-	else
-		client.init();
 
 	if (!global_data->isai)
 	{
@@ -55,6 +51,7 @@ bool BattleScene::init()
 	this->addChild(timer, 2);        //计时器层
 	this->addChild(shopLayer, 3);   //商店层
 	this->addChild(heroLayer, 4);   //英雄层
+	this->addChild(eptLayer, 5); //选择装备层
 	this->addChild(infoFrame, 100);//信息层
 
 
@@ -109,58 +106,55 @@ void BattleScene::GotoSelectScene(cocos2d::Ref* pSender)
 
 void BattleScene::update(float dt)
 {
-	if (global_data->isai)
+	static int num = 0;
+	if (timer->pTime > 1e-6)
 	{
-		if (timer->pTime > 1e-6)
-		{
-			heroLayer->upgrade(MyLittleHero);             //监测是否可升级
-			heroLayer->upgrade(player2data);
-			addChess(MyLittleHero, 0);
-			addChess(player2data, 1);
-			pc_player.pcJudgeMoneyUsage();
+
+		if (MyLittleHero.haveNewEpt && num < 5) {
+			eptLayer->init();
+			num++;
+			MyLittleHero.haveNewEpt = 0;
 		}
-		heroLayer->unscheduleUpdate();
+		else if (MyLittleHero.haveNewEpt && num >= 5) {
+			std::string name = "Already get enough equipments!";
+			auto label = Label::createWithTTF(name, "fonts/Marker Felt.ttf", 40);
+			label->setTextColor(Color4B::WHITE);
+			label->setPosition(1600, 900);
+			auto move = FadeOut::create(3.0f);
+			label->runAction(move);
+			this->addChild(label, 1);
+			MyLittleHero.haveNewEpt = 0;
+		}
+
+		heroLayer->upgrade(MyLittleHero);             //监测是否可升级
+		heroLayer->upgrade(player2data);
 		addChess(MyLittleHero, 0);
 		addChess(player2data, 1);
-
-		ChessMoveInMouse();
-		if (timer->pTime < -1e-2)
-		{
-			if (PC_ShowFlag)
-			{
-				pc_player.pcCreateBattleArray();
-				//pc_player.pcEquipment();
-				heroLayer->pcShowFightArray();  //显示电脑玩家信息
-				heroLayer->pcShowPlayerArray();
-				if (player2data.m_playerArray->num == 9)
-					soldHero(pc_player.pcSoldHero(), player2data.m_playerArray, player2data);   //电脑卖棋子
-				PC_ShowFlag = 0;
-			}
-			GameStartMouseInit();   //取消对战斗区棋子的选取
-			timer->setPosition(10000, 10000);
-			heroLayer->scheduleUpdate();
-			Win();
-		}
+		pc_player.pcJudgeMoneyUsage();
 	}
-	else if (!global_data->isai)
+	heroLayer->unscheduleUpdate();
+	addChess(MyLittleHero, 0);
+	addChess(player2data, 1);
+
+	ChessMoveInMouse();
+	if (timer->pTime < -1e-2)
 	{
-		if (timer->pTime > 1e-6)
+		if (PC_ShowFlag)
 		{
-			heroLayer->upgrade(MyLittleHero);             //监测是否可升级
-			addChess(MyLittleHero, 0);
+			pc_player.pcCreateBattleArray();
+			//pc_player.pcEquipment();
+			heroLayer->pcShowFightArray();  //显示电脑玩家信息
+			heroLayer->pcShowPlayerArray();
+			if (player2data.m_playerArray->num == 9)
+				soldHero(pc_player.pcSoldHero(), player2data.m_playerArray, player2data);   //电脑卖棋子
+			PC_ShowFlag = 0;
 		}
-		heroLayer->unscheduleUpdate();
-		addChess(MyLittleHero, 0);
-
-		ChessMoveInMouse();
-		if (timer->pTime < -1e-2)
-		{
-			GameStartMouseInit();   //取消对战斗区棋子的选取
-			timer->setPosition(10000, 10000);
-			heroLayer->scheduleUpdate();
-			Win();
-		}
+		GameStartMouseInit();   //取消对战斗区棋子的选取
+		timer->setPosition(10000, 10000);
+		heroLayer->scheduleUpdate();
+		Win();
 	}
+
 }
 
 void BattleScene::TurnInfoInit()

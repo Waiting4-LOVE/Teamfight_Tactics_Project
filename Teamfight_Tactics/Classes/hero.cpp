@@ -139,7 +139,7 @@ int hero::getDefencePoint() {
 
 void hero::onDamageReceived(int damage, int type)
 {
-	auto damageText = Label::createWithTTF(std::to_string(damage), "fonts/arial.ttf", 16);
+	auto damageText = Label::createWithTTF(std::to_string(damage), "fonts/arial.ttf", 32);
 
 	// 根据伤害类型设置颜色
 	switch (type)
@@ -245,7 +245,7 @@ void hero::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this, 1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -322,11 +322,11 @@ void hero::setPlayer(int player)
 	}
 }
 
-void hero::shootbullet(std::string picturename, Point deltaPos, hero* mychess)
+void hero::shootbullet(std::string picturename, Point deltaPos, hero* mychess, int size, int damageType, bool isCanSee)
 {
 	Sprite* bullet = Sprite::create(picturename);
 	this->getParent()->addChild(bullet);
-	bullet->setScale(1);
+	bullet->setScale(size);
 	bullet->setPosition(this->getPosition());
 
 	float moveTime = sqrt(deltaPos.dot(deltaPos)) / 300;//子弹移动时间
@@ -339,6 +339,6 @@ void hero::shootbullet(std::string picturename, Point deltaPos, hero* mychess)
 	auto actionBack = Sequence::createWithTwoActions(disappear, back);
 	auto all = Sequence::createWithTwoActions(actionTo, actionBack);
 	bullet->runAction(Repeat::create(all, 1));
-	this->runAction(Sequence::create(DelayTime::create(moveTime), CallFunc::create([this]() {attackTarget->doDamage(this->physicsAttackPoint,0,1); }), nullptr));
+	this->runAction(Sequence::create(DelayTime::create(moveTime), CallFunc::create([this, damageType, isCanSee]() {attackTarget->doDamage(this->physicsAttackPoint, damageType, isCanSee); }), nullptr));
 	//attackTarget->doDamage(this->physicsAttackPoint);
 }

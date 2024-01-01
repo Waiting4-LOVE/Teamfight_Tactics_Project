@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __BASE_EQUIPMENT_H__
+#define __BASE_EQUIPMENT_H__
 #include "cocos2d.h"
 USING_NS_CC;
 
@@ -10,8 +11,6 @@ USING_NS_CC;
 #define NEGATIVECAPE 6
 #define TEARSOFTHEGODDESS 7
 #define USELESSSTICK 8
-
-
 
 class Equipment:public Sprite {
 public:
@@ -43,3 +42,4 @@ protected:
 private:
 	int searchDistance = 30;
 };
+#endif

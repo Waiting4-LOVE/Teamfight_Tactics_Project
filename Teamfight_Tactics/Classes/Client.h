@@ -23,4 +23,4 @@ public:
     void join();
     void waitstart();
 };
-
+extern Client client;

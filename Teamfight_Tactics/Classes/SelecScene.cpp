@@ -47,7 +47,7 @@ bool SelectScene::init()
 	auto singleItem = MenuItemImage::create(
 		"single.png",
 		"singleselected.png",
-		CC_CALLBACK_1(SelectScene::menuCloseCallback, this));
+		CC_CALLBACK_1(SelectScene::GotoBattleScene, this));
 
 	auto multiItem = MenuItemImage::create(
 		"multiplayer.png",
@@ -84,7 +84,7 @@ bool SelectScene::init()
 	this->addChild(menu2, 1);
 
 	//test°´Å¥
-	auto testItem = MenuItemImage::create(
+	/*auto testItem = MenuItemImage::create(
 		"test.png",
 		"test.png",
 		CC_CALLBACK_1(SelectScene::GotoBattleScene, this));
@@ -102,7 +102,7 @@ bool SelectScene::init()
 	}
 	auto testmenu = Menu::create(testItem, NULL);
 	testmenu->setPosition(Vec2::ZERO);
-	this->addChild(testmenu, 1);
+	this->addChild(testmenu, 1);*/
 	return true;
 }
 

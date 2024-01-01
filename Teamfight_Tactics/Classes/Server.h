@@ -23,3 +23,4 @@ public:
 	void waiting();
 	void start();
 };
+extern Server server;

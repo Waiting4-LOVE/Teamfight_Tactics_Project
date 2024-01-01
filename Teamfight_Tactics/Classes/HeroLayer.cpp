@@ -258,7 +258,6 @@ void HeroLayer::update(float dt)
 
 void HeroLayer::upgrade(littleHero& littlehero)
 {
-
 	for (int i = 0; i < 30; i++)
 	{
 		hero* temp[3] = { NULL,NULL,NULL };
@@ -438,29 +437,52 @@ hero* HeroLayer::upgradeChessCreate(int type)
 /*PC_Player相关*/
 void HeroLayer::pcShowPlayerArray()
 {
-	for (int i = 0; i < player2data.m_playerArray->num; i++)
+	/*for (int i = 0; i < player2data.m_playerArray->num; i++)
 	{
 		hero* cur = (hero*)player2data.m_playerArray->arr[i];
 		cur->setPosition(cur->getTempPosition());
+	}*/
+	for (int i = 0; i < player2data.m_playerArray->num; i++)
+	{
+		hero* cur = (hero*)player2data.m_playerArray->arr[i];
+		for (int j = 0; j < 9; j++) {
+			if (waitLatticeExist[1][j] == 0) {
+				cur->set(waitLattice[1][j]);
+				cur->setPosition(cur->getTempPosition());
+				cur->set(cur->getTempPosition());
+				waitLatticeExist[1][j] = 1;
+			}
+		}
 	}
 }
 void HeroLayer::pcShowFightArray()
 {
+	for (int i = 5; i >= 3; i--)
+	{
+		for (int j = 6; j >= 0; j--)
+		{
+			battleLatticeExist[i][j] = 0;
+		}
+	}
 	/*位置初始化*/
 	for (int k = 0; k < player2data.m_fightArray->num; k++)
 	{
 		hero* cur = (hero*)player2data.m_fightArray->arr[k];
-		for (int i = 3; i < 6; i++)
+		bool flag = false;
+
+		for (int i = 5; i >= 3 && !flag; i--)
 		{
-			for (int j = 0; j < 7; j++)
+			for (int j = 6; j >= 0; j--)
 			{
 				if (battleLatticeExist[i][j] == 0)
 				{
 					cur->set(battleLattice[i][j]);
 					cur->setTempPosition();
-					cur->setPosition(cur->getTempPosition());
+					cur->setPosition(cur->getPosition());
+					battleLatticeExist[i][j] = 1;
+					flag = true;
+					break;
 				}
-				
 			}
 		}
 	}

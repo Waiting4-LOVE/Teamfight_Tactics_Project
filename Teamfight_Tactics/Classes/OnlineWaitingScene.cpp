@@ -132,7 +132,6 @@ bool OnlineWaitingScene::init()
         lable1->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
         this->addChild(lable1, 1);
         client.waitstart();//接受服务器的开始信号
-        client.close();
     }
     
 

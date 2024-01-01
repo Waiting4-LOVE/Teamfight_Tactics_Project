@@ -64,8 +64,8 @@ void Server::communicate()
     int recvbuflen = 512;
     int recvResult = recv(clientSocket, recvbuf, recvbuflen, 0);
     if (recvResult > 0) {
-        std::cout << "Received message: " << recvbuf << std::endl;
-    }
+		std::cout << "Received message: " << recvbuf << std::endl;
+	}
 
     std::string sendbuf;
     std::cin >> sendbuf;

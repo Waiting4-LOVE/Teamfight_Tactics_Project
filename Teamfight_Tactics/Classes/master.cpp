@@ -56,7 +56,7 @@ void master::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("shroom.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("shroom.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -68,7 +68,7 @@ void master::attack(float dt)
 }
 
 void master::releaseSkill() {
-
+	shootbullet("shroom.png", attackTarget->getPosition() - this->getPosition(), this, 2,1,1);
 }
 
 _2star_master::_2star_master() {

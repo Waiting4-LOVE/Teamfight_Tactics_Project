@@ -55,7 +55,7 @@ void cannedPig::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("wind.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("wind.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -67,7 +67,7 @@ void cannedPig::attack(float dt)
 }
 
 void cannedPig::releaseSkill() {
-
+	shootbullet("wind.png", attackTarget->getPosition() - this->getPosition(), this, 2,0,1);
 }
 
 _2star_cannedPig::_2star_cannedPig() {

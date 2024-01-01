@@ -56,7 +56,7 @@ void ranger::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("spark.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("spark.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -68,7 +68,7 @@ void ranger::attack(float dt)
 }
 
 void ranger::releaseSkill() {
-
+	shootbullet("spark.png", attackTarget->getPosition() - this->getPosition(), this, 2,1,1);
 }
 
 _2star_ranger::_2star_ranger() {

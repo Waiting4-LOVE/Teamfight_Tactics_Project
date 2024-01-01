@@ -56,7 +56,7 @@ void pitman::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("earthball.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("earthball.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -68,7 +68,7 @@ void pitman::attack(float dt)
 }
 
 void pitman::releaseSkill() {
-
+	shootbullet("earthball.png", attackTarget->getPosition() - this->getPosition(), this, 2,0,1);
 }
 
 _2star_pitman::_2star_pitman() {

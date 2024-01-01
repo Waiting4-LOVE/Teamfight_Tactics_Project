@@ -19,7 +19,7 @@ class littleHero :public Sprite {
 public:
 	//inline littleHero();
 	//inline littleHero(std::string picName);
-	littleHero* createLH(std::string picture_name);
+	//littleHero* createLH(std::string picture_name);
 	bool haveNewHero = false; //判断是否有新棋子
 	littleHero* m_attackTarget = nullptr; //攻击对象指针
 	ccArray* m_playerArray = ccArrayNew(9); //玩家备战区的棋子数组
@@ -72,7 +72,7 @@ public:
 	bool CoinsIsChange = false;
 	inline void addCoins(const int num) { this->m_coins += num; CoinsIsChange = true; } //增加金币
 	inline void delCoins(const int num) { this->m_coins -= num; CoinsIsChange = true; } //减少金币
-	inline void addExp(const int exp); //增加经验
+	void addExp(const int exp); //增加经验
 	inline bool isDead() { return this->m_blood <= 0; }
 	void win();
 	void lose(int hurt); //战斗失败函数
@@ -99,7 +99,7 @@ protected:
 	int m_blood = this->m_maxBlood; //当前血量，初始为100,
 	const int m_moveSpeed = 500; //移动速度
 	int m_upExp = 10; //升级需要的经验值
-	int m_coins = 100; //金币
+	int m_coins = 10; //金币
 	int m_exp = 0; //经验值
 	int m_level = 1; //等级
 	//std::string m_picName = NULL; //图片名称

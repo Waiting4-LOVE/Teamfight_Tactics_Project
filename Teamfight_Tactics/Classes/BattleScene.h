@@ -33,6 +33,7 @@
 #include "HeroLayer.h"
 #include "ShopLayer.h"
 #include "helpAndSetLayer.h"
+#include "equipmentLayer.h"
 #include "PC_Player.h"
 #include "cocos-ext.h"
 #include "Client.h"
@@ -100,6 +101,7 @@ private:
 	HeroLayer* heroLayer = HeroLayer::createHeroLayer();
 	ShopLayer* shopLayer = ShopLayer::createShopLayer();
 	helpAndSetLayer* HSlayer = helpAndSetLayer::createLayer();
+	EquipmentLayer* eptLayer = EquipmentLayer::createSelectLayer();
 	int turn = 0;
 	/*装备系统*/
    /* Package* layerPackage = Package::createPackage();
