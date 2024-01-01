@@ -79,17 +79,17 @@ void BattleScene::update(float dt)
 {
 	if (timer->pTime > 1e-6)
 	{
+		
 		heroLayer->upgrade(MyLittleHero);             //¼à²âÊÇ·ñ¿ÉÉý¼¶
 		heroLayer->upgrade(player2data);
 		addChess(MyLittleHero, 0);
 		addChess(player2data, 1);
 		pc_player.pcJudgeMoneyUsage();
 	}
-	heroLayer->scheduleUpdate();
-
+	heroLayer->unscheduleUpdate();
 	addChess(MyLittleHero, 0);
 	addChess(player2data, 1);
-
+	
 	ChessMoveInMouse();
 	if (timer->pTime < -1e-2)
 	{

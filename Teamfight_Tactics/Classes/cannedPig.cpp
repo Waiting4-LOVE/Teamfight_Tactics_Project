@@ -78,7 +78,7 @@ _2star_cannedPig::_2star_cannedPig() {
 	maxShieldPoint = 100;
 	fee = 4;
 	name = "CannedPig";
-	HealthPoint = 700;//初始血量为最大血量
+	HealthPoint = 1260;//初始血量为最大血量
 	BluePoint = 30;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 68;
@@ -94,9 +94,19 @@ _2star_cannedPig::_2star_cannedPig() {
 
 _2star_cannedPig* _2star_cannedPig::createhero() {
 	auto _2star_cannedPig = _2star_cannedPig::create();
-	auto temp = Sprite::create("cannedPig.png");
+	auto temp = Sprite::create("wildBoar.png");
 	temp->setScale(2.5);
+	_2star_cannedPig->bloodBar->setBarChangeRate(Point(1, 0));
+	_2star_cannedPig->bloodBar->setType(ProgressTimer::Type::BAR);
+	_2star_cannedPig->bloodBar->setMidpoint(Point(0, 1));
+	_2star_cannedPig->bloodBar->setScaleX(0.22);
+	_2star_cannedPig->scheduleUpdate();
+	//wildBoar->addChild(wildBoar->bloodBar, 2);
+	_2star_cannedPig->picturename = "wildBoar.png";
 	_2star_cannedPig->addChild(temp);
+
+	_2star_cannedPig->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+	_2star_cannedPig->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _2star_cannedPig->speedAttack);
 	_2star_cannedPig->autorelease();
 	return _2star_cannedPig;
 }
@@ -109,7 +119,7 @@ _3star_cannedPig::_3star_cannedPig() {
 	maxShieldPoint = 100;
 	fee = 4;
 	name = "CannedPig";
-	HealthPoint = 700;//初始血量为最大血量
+	HealthPoint = 2268;//初始血量为最大血量
 	BluePoint = 30;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 101;
@@ -125,9 +135,19 @@ _3star_cannedPig::_3star_cannedPig() {
 
 _3star_cannedPig* _3star_cannedPig::createhero() {
 	auto _3star_cannedPig = _3star_cannedPig::create();
-	auto temp = Sprite::create("cannedPig.png");
+	auto temp = Sprite::create("wildBoar.png");
 	temp->setScale(2.5);
+	_3star_cannedPig->bloodBar->setBarChangeRate(Point(1, 0));
+	_3star_cannedPig->bloodBar->setType(ProgressTimer::Type::BAR);
+	_3star_cannedPig->bloodBar->setMidpoint(Point(0, 1));
+	_3star_cannedPig->bloodBar->setScaleX(0.22);
+	_3star_cannedPig->scheduleUpdate();
+	//wildBoar->addChild(wildBoar->bloodBar, 2);
+	_3star_cannedPig->picturename = "wildBoar.png";
 	_3star_cannedPig->addChild(temp);
+
+	_3star_cannedPig->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+	_3star_cannedPig->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _3star_cannedPig->speedAttack);
 	_3star_cannedPig->autorelease();
 	return _3star_cannedPig;
 }

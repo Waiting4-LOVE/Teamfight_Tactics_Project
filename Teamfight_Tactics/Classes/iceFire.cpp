@@ -71,26 +71,84 @@ void iceFire::releaseSkill() {
 
 _2star_iceFire::_2star_iceFire() {
 	//填写二星英雄的属性
+	type = _2star_IceFire;
+	maxHealthPoint = 1440;
+	maxBluePoint = 75;
+	maxShieldPoint = 100;
+	fee = 5;
+	name = "IceFire";
+	HealthPoint = 1440;//初始血量为最大血量
+	BluePoint = 30;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 68;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 3;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 40;
+	defenceMagic = 40;
+	star = 2;
 }
 
 _2star_iceFire* _2star_iceFire::createhero() {
 	auto _2star_iceFire = _2star_iceFire::create();
 	auto temp = Sprite::create("iceFire.png");
 	temp->setScale(2.5);
+	_2star_iceFire->bloodBar->setBarChangeRate(Point(1, 0));
+	_2star_iceFire->bloodBar->setType(ProgressTimer::Type::BAR);
+	_2star_iceFire->bloodBar->setMidpoint(Point(0, 1));
+	_2star_iceFire->bloodBar->setScaleX(0.22);
+	_2star_iceFire->scheduleUpdate();
+	//iceFire->addChild(iceFire->bloodBar, 2);
+	_2star_iceFire->picturename = "iceFire.png";
 	_2star_iceFire->addChild(temp);
+
+	_2star_iceFire->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+	_2star_iceFire->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _2star_iceFire->speedAttack);
 	_2star_iceFire->autorelease();
 	return _2star_iceFire;
 }
 
 _3star_iceFire::_3star_iceFire() {
 	//填写三星英雄的属性
+	type = _3star_IceFire;
+	maxHealthPoint = 2592;
+	maxBluePoint = 75;
+	maxShieldPoint = 100;
+	fee = 5;
+	name = "IceFire";
+	HealthPoint = 2592;//初始血量为最大血量
+	BluePoint = 30;//初始蓝量为0
+	shieldPoint = 0;//初始护盾值为0
+	physicsAttackPoint = 101;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 3;
+	blueAttack = maxBluePoint;
+	criticalChance = 0.25;
+	defencePhysics = 40;
+	defenceMagic = 40;
+	star = 3;
 }
 
 _3star_iceFire* _3star_iceFire::createhero() {
 	auto _3star_iceFire = _3star_iceFire::create();
 	auto temp = Sprite::create("iceFire.png");
 	temp->setScale(2.5);
+	_3star_iceFire->bloodBar->setBarChangeRate(Point(1, 0));
+	_3star_iceFire->bloodBar->setType(ProgressTimer::Type::BAR);
+	_3star_iceFire->bloodBar->setMidpoint(Point(0, 1));
+	_3star_iceFire->bloodBar->setScaleX(0.22);
+	_3star_iceFire->scheduleUpdate();
+	//iceFire->addChild(iceFire->bloodBar, 2);
+	_3star_iceFire->picturename = "iceFire.png";
 	_3star_iceFire->addChild(temp);
+
+	_3star_iceFire->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+	_3star_iceFire->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _3star_iceFire->speedAttack);
 	_3star_iceFire->autorelease();
 	return _3star_iceFire;
 }

@@ -71,14 +71,15 @@ void snowMonster::releaseSkill() {
 }
 
 _2star_snowMonster::_2star_snowMonster() {
+	//填写二星英雄的属性
 	type = _2star_SnowMonster;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 1980;
+	maxBluePoint = 130;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 4;
+	name = "SnowMonster";
+	HealthPoint = 1980;//初始血量为最大血量
+	BluePoint = 60;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 10;
 	magicPoint = 0;
@@ -96,20 +97,33 @@ _2star_snowMonster* _2star_snowMonster::createhero() {
 	auto _2star_snowMonster = _2star_snowMonster::create();
 	auto temp = Sprite::create("snowMonster.png");
 	temp->setScale(2.5);
+	_2star_snowMonster->bloodBar->setBarChangeRate(Point(1, 0));
+	_2star_snowMonster->bloodBar->setType(ProgressTimer::Type::BAR);
+	_2star_snowMonster->bloodBar->setMidpoint(Point(0, 1));
+	_2star_snowMonster->bloodBar->setScaleX(0.22);
+	_2star_snowMonster->scheduleUpdate();
+	//snowMonster->addChild(snowMonster->bloodBar, 2);
+	_2star_snowMonster->picturename = "snowMonster.png";
 	_2star_snowMonster->addChild(temp);
+
+	_2star_snowMonster->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+
+	_2star_snowMonster->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _2star_snowMonster->speedAttack);
 	_2star_snowMonster->autorelease();
 	return _2star_snowMonster;
 }
 
 _3star_snowMonster::_3star_snowMonster() {
+	//填写三星英雄的属性
 	type = _3star_SnowMonster;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 3564;
+	maxBluePoint = 130;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 4;
+	name = "SnowMonster";
+	HealthPoint = 3564;//初始血量为最大血量
+	BluePoint = 60;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 10;
 	magicPoint = 0;
@@ -127,7 +141,19 @@ _3star_snowMonster* _3star_snowMonster::createhero() {
 	auto _3star_snowMonster = _3star_snowMonster::create();
 	auto temp = Sprite::create("snowMonster.png");
 	temp->setScale(2.5);
+	_3star_snowMonster->bloodBar->setBarChangeRate(Point(1, 0));
+	_3star_snowMonster->bloodBar->setType(ProgressTimer::Type::BAR);
+	_3star_snowMonster->bloodBar->setMidpoint(Point(0, 1));
+	_3star_snowMonster->bloodBar->setScaleX(0.22);
+	_3star_snowMonster->scheduleUpdate();
+	//snowMonster->addChild(snowMonster->bloodBar, 2);
+	_3star_snowMonster->picturename = "snowMonster.png";
 	_3star_snowMonster->addChild(temp);
+
+	_3star_snowMonster->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+
+	_3star_snowMonster->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _3star_snowMonster->speedAttack);
 	_3star_snowMonster->autorelease();
 	return _3star_snowMonster;
 }

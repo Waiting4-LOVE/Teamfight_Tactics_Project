@@ -71,13 +71,14 @@ void snowman::releaseSkill() {
 }
 
 _2star_snowman::_2star_snowman() {
+	//填写二星英雄的属性
 	type = _2star_Snowman;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 810;
+	maxBluePoint = 50;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
+	fee = 1;
+	name = "Snowman";
+	HealthPoint = 810;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 10;
@@ -96,19 +97,32 @@ _2star_snowman* _2star_snowman::createhero() {
 	auto _2star_snowman = _2star_snowman::create();
 	auto temp = Sprite::create("snowman.png");
 	temp->setScale(2.5);
+	_2star_snowman->bloodBar->setBarChangeRate(Point(1, 0));
+	_2star_snowman->bloodBar->setType(ProgressTimer::Type::BAR);
+	_2star_snowman->bloodBar->setMidpoint(Point(0, 1));
+	_2star_snowman->bloodBar->setScaleX(0.22);
+	_2star_snowman->scheduleUpdate();
+	//snowman->addChild(snowman->bloodBar, 2);
+	_2star_snowman->picturename = "snowman.png";
 	_2star_snowman->addChild(temp);
+
+	_2star_snowman->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+
+	_2star_snowman->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _2star_snowman->speedAttack);
 	_2star_snowman->autorelease();
 	return _2star_snowman;
 }
 
 _3star_snowman::_3star_snowman() {
+	//填写三星英雄的属性
 	type = _3star_Snowman;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 1458;
+	maxBluePoint = 50;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
+	fee = 1;
+	name = "Snowman";
+	HealthPoint = 1458;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 10;
@@ -127,7 +141,19 @@ _3star_snowman* _3star_snowman::createhero() {
 	auto _3star_snowman = _3star_snowman::create();
 	auto temp = Sprite::create("snowman.png");
 	temp->setScale(2.5);
+	_3star_snowman->bloodBar->setBarChangeRate(Point(1, 0));
+	_3star_snowman->bloodBar->setType(ProgressTimer::Type::BAR);
+	_3star_snowman->bloodBar->setMidpoint(Point(0, 1));
+	_3star_snowman->bloodBar->setScaleX(0.22);
+	_3star_snowman->scheduleUpdate();
+	//snowman->addChild(snowman->bloodBar, 2);
+	_3star_snowman->picturename = "snowman.png";
 	_3star_snowman->addChild(temp);
+
+	_3star_snowman->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+
+	_3star_snowman->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _3star_snowman->speedAttack);
 	_3star_snowman->autorelease();
 	return _3star_snowman;
 }

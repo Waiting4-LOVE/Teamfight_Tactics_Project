@@ -71,14 +71,15 @@ void pitman::releaseSkill() {
 }
 
 _2star_pitman::_2star_pitman() {
+	//填写二星英雄的属性
 	type = _2star_Pitman;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 810;
+	maxBluePoint = 60;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100000;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 1;
+	name = "Pitman";
+	HealthPoint = 810;//初始血量为最大血量
+	BluePoint = 15;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 10;
 	magicPoint = 0;
@@ -96,20 +97,33 @@ _2star_pitman* _2star_pitman::createhero() {
 	auto _2star_pitman = _2star_pitman::create();
 	auto temp = Sprite::create("pitman.png");
 	temp->setScale(2.5);
+	_2star_pitman->bloodBar->setBarChangeRate(Point(1, 0));
+	_2star_pitman->bloodBar->setType(ProgressTimer::Type::BAR);
+	_2star_pitman->bloodBar->setMidpoint(Point(0, 1));
+	_2star_pitman->bloodBar->setScaleX(0.22);
+	_2star_pitman->scheduleUpdate();
+	//pitman->addChild(pitman->bloodBar, 2);
+	_2star_pitman->picturename = "pitman.png";
 	_2star_pitman->addChild(temp);
+
+	_2star_pitman->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+
+	_2star_pitman->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _2star_pitman->speedAttack);
 	_2star_pitman->autorelease();
 	return _2star_pitman;
 }
 
 _3star_pitman::_3star_pitman() {
+	//填写三星英雄的属性
 	type = _3star_Pitman;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 1458;
+	maxBluePoint = 60;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100000;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 1;
+	name = "Pitman";
+	HealthPoint = 1458;//初始血量为最大血量
+	BluePoint = 15;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 10;
 	magicPoint = 0;
@@ -127,7 +141,19 @@ _3star_pitman* _3star_pitman::createhero() {
 	auto _3star_pitman = _3star_pitman::create();
 	auto temp = Sprite::create("pitman.png");
 	temp->setScale(2.5);
+	_3star_pitman->bloodBar->setBarChangeRate(Point(1, 0));
+	_3star_pitman->bloodBar->setType(ProgressTimer::Type::BAR);
+	_3star_pitman->bloodBar->setMidpoint(Point(0, 1));
+	_3star_pitman->bloodBar->setScaleX(0.22);
+	_3star_pitman->scheduleUpdate();
+	//pitman->addChild(pitman->bloodBar, 2);
+	_3star_pitman->picturename = "pitman.png";
 	_3star_pitman->addChild(temp);
+
+	_3star_pitman->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+
+
+	_3star_pitman->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _3star_pitman->speedAttack);
 	_3star_pitman->autorelease();
 	return _3star_pitman;
 }

@@ -76,7 +76,7 @@ _2star_wildBoar::_2star_wildBoar() {
 	maxShieldPoint = 100;
 	fee = 2;
 	name = "WildBoar";
-	HealthPoint = 750;//初始血量为最大血量
+	HealthPoint = 1350;//初始血量为最大血量
 	BluePoint = 40;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 83;
@@ -94,7 +94,17 @@ _2star_wildBoar* _2star_wildBoar::createhero() {
 	auto _2star_wildBoar = _2star_wildBoar::create();
 	auto temp = Sprite::create("wildBoar.png");
 	temp->setScale(2.5);
+	_2star_wildBoar->bloodBar->setBarChangeRate(Point(1, 0));
+	_2star_wildBoar->bloodBar->setType(ProgressTimer::Type::BAR);
+	_2star_wildBoar->bloodBar->setMidpoint(Point(0, 1));
+	_2star_wildBoar->bloodBar->setScaleX(0.22);
+	_2star_wildBoar->scheduleUpdate();
+	//wildBoar->addChild(wildBoar->bloodBar, 2);
+	_2star_wildBoar->picturename = "wildBoar.png";
 	_2star_wildBoar->addChild(temp);
+
+	_2star_wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+	_2star_wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _2star_wildBoar->speedAttack);
 	_2star_wildBoar->autorelease();
 	return _2star_wildBoar;
 }
@@ -107,7 +117,7 @@ _3star_wildBoar::_3star_wildBoar() {
 	maxShieldPoint = 100;
 	fee = 2;
 	name = "WildBoar";
-	HealthPoint = 750;//初始血量为最大血量
+	HealthPoint = 2430;//初始血量为最大血量
 	BluePoint = 40;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 124;
@@ -125,7 +135,17 @@ _3star_wildBoar* _3star_wildBoar::createhero() {
 	auto _3star_wildBoar = _3star_wildBoar::create();
 	auto temp = Sprite::create("wildBoar.png");
 	temp->setScale(2.5);
+	_3star_wildBoar->bloodBar->setBarChangeRate(Point(1, 0));
+	_3star_wildBoar->bloodBar->setType(ProgressTimer::Type::BAR);
+	_3star_wildBoar->bloodBar->setMidpoint(Point(0, 1));
+	_3star_wildBoar->bloodBar->setScaleX(0.22);
+	_3star_wildBoar->scheduleUpdate();
+	//wildBoar->addChild(wildBoar->bloodBar, 2);
+	_3star_wildBoar->picturename = "wildBoar.png";
 	_3star_wildBoar->addChild(temp);
+
+	_3star_wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
+	_3star_wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / _3star_wildBoar->speedAttack);
 	_3star_wildBoar->autorelease();
 	return _3star_wildBoar;
 }
