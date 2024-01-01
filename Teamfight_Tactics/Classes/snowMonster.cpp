@@ -2,23 +2,24 @@
 
 snowMonster::snowMonster() {
 	type = SnowMonster;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 1100;
+	maxBluePoint = 130;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 4;
+	name = "SnowMonster";
+	HealthPoint = 1100;//初始血量为最大血量
+	BluePoint = 60;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 5;
+	physicsAttackPoint = 50;
+	magicPoint = 100;
+	speedAttack = 0.65f;
+	distanceAttack = 1;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 60;
+	defenceMagic = 60;
 	star = 1;
+	CoinsNeeded = 4;
 }
 
 snowMonster* snowMonster::createhero() {
@@ -33,7 +34,7 @@ snowMonster* snowMonster::createhero() {
 	snowMonster->bloodBar->setScaleX(0.22);
 	snowMonster->scheduleUpdate();
 	//snowMonster->addChild(snowMonster->bloodBar, 2);
-	//snowMonster->picturename = "snowMonster.png";
+	snowMonster->picturename = "snowMonster.png";
 	snowMonster->addChild(temp);
 
 	snowMonster->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -55,7 +56,7 @@ void snowMonster::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -67,7 +68,7 @@ void snowMonster::attack(float dt)
 }
 
 void snowMonster::releaseSkill() {
-
+	shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this, 2,0,1);
 }
 
 _2star_snowMonster::_2star_snowMonster() {
@@ -81,16 +82,15 @@ _2star_snowMonster::_2star_snowMonster() {
 	HealthPoint = 1980;//初始血量为最大血量
 	BluePoint = 60;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 5;
+	physicsAttackPoint = 75;
+	magicPoint = 100;
+	speedAttack = 0.65f;
+	distanceAttack = 1;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 60;
+	defenceMagic = 60;
 	star = 2;
-	//填写二星英雄的属性
 }
 
 _2star_snowMonster* _2star_snowMonster::createhero() {
@@ -125,16 +125,15 @@ _3star_snowMonster::_3star_snowMonster() {
 	HealthPoint = 3564;//初始血量为最大血量
 	BluePoint = 60;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 5;
+	physicsAttackPoint = 113;
+	magicPoint = 100;
+	speedAttack = 0.65f;
+	distanceAttack = 1;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 60;
+	defenceMagic = 60;
 	star = 3;
-	//填写三星英雄的属性
 }
 
 _3star_snowMonster* _3star_snowMonster::createhero() {

@@ -15,7 +15,7 @@ using namespace std;
 class hero :public Sprite
 {
 private:
-	RoundTimer* test_timer = RoundTimer::create(5);
+
 public:
 
 	ccArray* equipment = ccArrayNew(5);
@@ -32,7 +32,7 @@ public:
 	int getHealthPoint();//返回英雄现在的血条
 	int getBluePoint();//返回英雄现在的蓝条
 	int getDefencePoint();//返回英雄现在的护盾
-	Point getTempPosition() { return Point(xtemp, ytemp);}
+	Point getTempPosition() { return Point(xtemp, ytemp); }
 	int getType() { return type; }
 	int getCoinsNeeded() { return CoinsNeeded; }
 	int getSoldCoins() { return SoldCoins; }
@@ -84,10 +84,10 @@ public:
 	void skill();//放技能
 	bool die();
 	virtual void releaseSkill();
-	void hero::shootbullet(string picturename, Point deltaPos, hero* mychess);
+	void shootbullet(string picturename, Point deltaPos, hero* mychess, int size, int damageType = 0, bool isCanSee = 0);
 	void reset();
 	bool isMove = 0;
-	hero* attackTarget=nullptr;//攻击目标
+	hero* attackTarget = nullptr;//攻击目标
 
 	CREATE_FUNC(hero);
 
@@ -115,7 +115,7 @@ protected:
 	int star = 1;//星级
 
 	/*英雄基本属性*/
-	
+
 	int fee;//英雄所需费用
 	std::string name;
 	int HealthPoint;//血条
@@ -141,6 +141,6 @@ protected:
 	int addCriticalChance;//增加的暴击率
 	int addDefencePhysics;//增加的物抗
 	int addDefenceMagic;//增加的魔抗
-	
-	
+
+
 };

@@ -241,6 +241,107 @@ bool PC_Player::CheckHighFeeHero() {
 	return true;
 }
 
+hero* upgradeChessCreate(int type)
+{
+	switch (type + 15)
+	{
+	case _2star_DarkKnight:
+		return _2star_darkKnight::createhero();
+		break;
+	case _2star_Master:
+		return _2star_master::createhero();
+		break;
+	case _2star_CannedPig:
+		return _2star_cannedPig::createhero();
+		break;
+	case _2star_FlyDragon:
+		return _2star_flyDragon::createhero();
+		break;
+	case _2star_Ghost:
+		return _2star_ghost::createhero();
+		break;
+	case _2star_Gargomon:
+		return _2star_gargomon::createhero();
+		break;
+	case _2star_GoldenMonster:
+		return _2star_goldenMonster::createhero();
+		break;
+	case _2star_IceFire:
+		return _2star_iceFire::createhero();
+		break;
+	case _2star_Knight:
+		return _2star_knight::createhero();
+		break;
+	case _2star_Pitman:
+		return _2star_pitman::createhero();
+		break;
+	case _2star_Ranger:
+		return _2star_ranger::createhero();
+		break;
+	case _2star_Snowman:
+		return _2star_snowman::createhero();
+		break;
+	case _2star_Elf:
+		return _2star_elf::createhero();
+		break;
+	case _2star_WildBoar:
+		return _2star_wildBoar::createhero();
+		break;
+	case _2star_SnowMonster:
+		return _2star_snowMonster::createhero();
+		break;
+	case _3star_DarkKnight:
+		return _3star_darkKnight::createhero();
+		break;
+	case _3star_Master:
+		return _3star_master::createhero();
+		break;
+	case _3star_CannedPig:
+		return _3star_cannedPig::createhero();
+		break;
+	case _3star_FlyDragon:
+		return _3star_flyDragon::createhero();
+		break;
+	case _3star_Ghost:
+		return _3star_ghost::createhero();
+		break;
+	case _3star_Gargomon:
+		return _3star_gargomon::createhero();
+		break;
+	case _3star_GoldenMonster:
+		return _3star_goldenMonster::createhero();
+		break;
+	case _3star_IceFire:
+		return _3star_iceFire::createhero();
+		break;
+	case _3star_Knight:
+		return _3star_knight::createhero();
+		break;
+	case _3star_Pitman:
+		return _3star_pitman::createhero();
+		break;
+	case _3star_Ranger:
+		return _3star_ranger::createhero();
+		break;
+	case _3star_Snowman:
+		return _3star_snowman::createhero();
+		break;
+	case _3star_Elf:
+		return _3star_elf::createhero();
+		break;
+	case _3star_WildBoar:
+		return _3star_wildBoar::createhero();
+		break;
+	case _3star_SnowMonster:
+		return _3star_snowMonster::createhero();
+		break;
+		//二星与三星英雄
+
+	default:
+		break;
+	}
+}
+
 bool PC_Player::pcBuyHero(int selected) {
 	if (player2data.m_fightArray->num + player2data.m_playerArray->num <= player2data.m_level + 9) {
 		//保证不超过备战区的最大容量

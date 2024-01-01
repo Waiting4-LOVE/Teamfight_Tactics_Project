@@ -2,23 +2,24 @@
 
 ghost::ghost() {
 	type = Ghost;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
-	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	maxHealthPoint = 1100;
+	maxBluePoint = 150;
+	maxShieldPoint = 70;
+	fee = 5;
+	name = "Ghost";
+	HealthPoint = 1100;//初始血量为最大血量
+	BluePoint = 70;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 3;
+	physicsAttackPoint = 70;
+	magicPoint = 100;
+	speedAttack = 0.8f;
+	distanceAttack = 1;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 70;
+	defenceMagic = 70;
 	star = 1;
+	CoinsNeeded = 5;
 }
 
 ghost* ghost::createhero() {
@@ -33,7 +34,7 @@ ghost* ghost::createhero() {
 	ghost->bloodBar->setScaleX(0.22);
 	ghost->scheduleUpdate();
 	//ghost->addChild(ghost->bloodBar, 2);
-	//ghost->picturename = "ghost.png";
+	ghost->picturename = "ghost.png";
 	ghost->addChild(temp);
 
 	ghost->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -54,7 +55,7 @@ void ghost::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -66,7 +67,7 @@ void ghost::attack(float dt)
 }
 
 void ghost::releaseSkill() {
-
+	shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this, 2,0,1);
 }
 
 _2star_ghost::_2star_ghost() {

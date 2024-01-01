@@ -3,23 +3,24 @@
 
 elf::elf() {
 	type = Elf;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 700;
+	maxBluePoint = 75;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 3;
+	name = "Elf";
+	HealthPoint = 700;//初始血量为最大血量
+	BluePoint = 25;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
+	physicsAttackPoint = 40;
+	magicPoint = 100;
+	speedAttack = 0.75f;
 	distanceAttack = 3;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 20;
+	defenceMagic = 20;
 	star = 1;
+	CoinsNeeded = 3;
 }
 
 elf* elf::createhero() {
@@ -34,7 +35,7 @@ elf* elf::createhero() {
 	elf->bloodBar->setScaleX(0.22);
 	elf->scheduleUpdate();
 	//elf->addChild(elf->bloodBar, 2);
-	//elf->picturename = "elf.png";
+	elf->picturename = "elf.png";
 	elf->addChild(temp);
 
 	elf->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -55,7 +56,7 @@ void elf::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -67,7 +68,7 @@ void elf::attack(float dt)
 }
 
 void elf::releaseSkill() {
-
+	shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this, 2,1,1);
 }
 
 _2star_elf::_2star_elf() {

@@ -2,23 +2,24 @@
 
 darkKnight::darkKnight() {
 	type = DarkKnight;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 850;
+	maxBluePoint = 120;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
+	fee = 3;
+	name = "DarkKnight";
+	HealthPoint = 850;//初始血量为最大血量
+	BluePoint = 70;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 225;
+	physicsAttackPoint = 60;
+	magicPoint = 100;
+	speedAttack = 0.65f;
+	distanceAttack = 1;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 55;
+	defenceMagic = 55;
 	star = 1;
+	CoinsNeeded = 3;
 }
 
 darkKnight* darkKnight::createhero() {
@@ -33,7 +34,7 @@ darkKnight* darkKnight::createhero() {
 	darkKnight->bloodBar->setScaleX(0.22);
 	darkKnight->scheduleUpdate();
 	//darkKnight->addChild(hero1->bloodBar, 2);
-	//darkKnight->picturename = "hero1.png";
+	darkKnight->picturename = "darkKnight.png";
 	darkKnight->addChild(temp);
 	darkKnight->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 	darkKnight->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / darkKnight->speedAttack);
@@ -52,7 +53,7 @@ void darkKnight::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -64,7 +65,7 @@ void darkKnight::attack(float dt)
 }
 
 void darkKnight::releaseSkill() {
-
+	shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this, 2,0,1);
 }
 
 _2star_darkKnight::_2star_darkKnight() {

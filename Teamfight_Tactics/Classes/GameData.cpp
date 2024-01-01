@@ -38,4 +38,16 @@ const chessInfo chess_store[OriginalChess] = { { Knight,"knightInShop.png",1 },{
 	{ Pitman,"pitmanInShop.png",1 },{ Ranger,"rangerInShop.png",2 },
 	{ Snowman,"snowmanInShop.png",1 },{ SnowMonster,"snowMonsterInShop.png",4 },
 	{ WildBoar,"wildBoarInShop.png",2 } };
-//初步的棋子商店，后续可加上卡池功能
+     //初步的棋子商店，后续可加上卡池功能
+
+//全部装备信息
+const eptInfo allEptInfo[EptNum] = {
+	{StromSword,"stormSword.png",false},
+	{CrookedBow,"crookedBow.png",false},
+	{BoxingGloves,"boxingGloves.png",false},
+	{GiantBelt,"giantBelt.png",false},
+	{Hauberk,"hauberk.png",false},
+	{NegativeCape,"negativeCape.png",false},
+	{TearsOfTheGoddess,"tearsOfTheGoddess.png",false},
+	{UselessStick,"uselessStick.png",false}
+};

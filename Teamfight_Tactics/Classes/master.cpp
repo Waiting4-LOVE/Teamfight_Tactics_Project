@@ -2,23 +2,24 @@
 
 master::master() {
 	type = Master;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
-	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
+	maxHealthPoint = 650;
+	maxBluePoint = 40;
+	maxShieldPoint = 0;
+	fee = 3;
+	name = "Master";
+	HealthPoint = 650;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
+	physicsAttackPoint = 40;
+	magicPoint = 100;
 	speedAttack = 0.7f;
-	distanceAttack = 225;
+	distanceAttack = 3;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 20;
+	defenceMagic = 20;
 	star = 1;
+	CoinsNeeded = 3;
 }
 
 master* master::createhero() {
@@ -33,7 +34,7 @@ master* master::createhero() {
 	master->bloodBar->setScaleX(0.22);
 	master->scheduleUpdate();
 	//master->addChild(master->bloodBar, 2);
-	//master->picturename = "master.png";
+	master->picturename = "master.png";
 	master->addChild(temp);
 
 	master->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -55,7 +56,7 @@ void master::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("shroom.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("shroom.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -67,7 +68,7 @@ void master::attack(float dt)
 }
 
 void master::releaseSkill() {
-
+	shootbullet("shroom.png", attackTarget->getPosition() - this->getPosition(), this, 2,1,1);
 }
 
 _2star_master::_2star_master() {

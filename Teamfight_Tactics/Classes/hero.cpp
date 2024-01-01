@@ -11,7 +11,7 @@ hero* hero::createhero(string picture_name)
 	return hero;
 }
 
-hero::hero() 
+hero::hero()
 {
 	picturenum = 0;
 	xtemp = x;
@@ -21,7 +21,7 @@ hero::hero()
 	bloodBar->setType(ProgressTimer::Type::BAR);
 	bloodBar->setMidpoint(Point(0, 1));
 	bloodBar->setScaleX(0.22);
-    bloodBar->setScaleY(0.6);
+	bloodBar->setScaleY(0.6);
 	bloodFrame->setScaleX(0.22);
 	bloodFrame->setScaleY(0.6);
 
@@ -139,7 +139,7 @@ int hero::getDefencePoint() {
 
 void hero::onDamageReceived(int damage, int type)
 {
-	auto damageText = Label::createWithTTF(std::to_string(damage), "fonts/arial.ttf", 16);
+	auto damageText = Label::createWithTTF(std::to_string(damage), "fonts/arial.ttf", 32);
 
 	// 根据伤害类型设置颜色
 	switch (type)
@@ -242,10 +242,10 @@ void hero::attack(float dt)
 			* (attackTarget->getPosition().x - getPosition().x) +
 			(attackTarget->getPosition().y - getPosition().y)
 			* (attackTarget->getPosition().y - getPosition().y));
-		if (distance < distanceAttack*oneLattice*2)                           //小于攻击距离则开始攻击
+		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -258,7 +258,6 @@ void hero::attack(float dt)
 
 void hero::bloodUpdate(float dt)
 {
-
 	blueBar->setPosition(Vec2(0, this->_contentSize.height + 50));
 	blueFrame->setPosition(Vec2(0, this->_contentSize.height + 50));
 	bloodBar->setPosition(Vec2(0, this->_contentSize.height + 60));
@@ -323,14 +322,15 @@ void hero::setPlayer(int player)
 	}
 }
 
-void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
+void hero::shootbullet(string picturename, Point deltaPos, hero* mychess,int size,int damageType,bool isCanSee)
 {
 	Sprite* bullet = Sprite::create(picturename);
-	this->addChild(bullet);
-	bullet->setScale(1);
-	bullet->setPosition(40, 30);
+	this->getParent()->addChild(bullet);
+	bullet->setScale(size);
+	bullet->setPosition(this->getPosition());
 
-	auto move = MoveBy::create(1.f, deltaPos);
+	float moveTime = sqrt(deltaPos.dot(deltaPos)) / 300;//子弹移动时间
+	auto move = MoveBy::create(moveTime, deltaPos);
 	auto back = MoveTo::create(0.f, Vec2(40, 30));
 	auto appear = FadeIn::create(0.f);
 	auto disappear = FadeOut::create(0.f);
@@ -339,5 +339,6 @@ void hero::shootbullet(string picturename, Point deltaPos, hero* mychess)
 	auto actionBack = Sequence::createWithTwoActions(disappear, back);
 	auto all = Sequence::createWithTwoActions(actionTo, actionBack);
 	bullet->runAction(Repeat::create(all, 1));
-	attackTarget->doDamage(this->physicsAttackPoint);
+	this->runAction(Sequence::create(DelayTime::create(moveTime), CallFunc::create([this,damageType,isCanSee]() {attackTarget->doDamage(this->physicsAttackPoint,damageType,isCanSee); }), nullptr));
+	//attackTarget->doDamage(this->physicsAttackPoint);
 }

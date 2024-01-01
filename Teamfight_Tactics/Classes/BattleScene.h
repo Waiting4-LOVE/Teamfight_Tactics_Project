@@ -33,6 +33,7 @@
 #include "HeroLayer.h"
 #include "ShopLayer.h"
 #include "helpAndSetLayer.h"
+#include "equipmentLayer.h"
 #include "PC_Player.h"
 class BattleScene : public cocos2d::Scene
 {
@@ -74,7 +75,7 @@ private:
 	bool FindMouseTarget(ccArray* Array, EventMouse* e);
 	void soldHero(hero* temp, ccArray* Array, littleHero& playerdata);
 
-	void BattleScene::addChess(littleHero& littlehero, int playerinfo);
+	void addChess(littleHero& littlehero, int playerinfo);
 
 
 	void Win();  //判断打斗结束
@@ -90,6 +91,7 @@ private:
 	HeroLayer* heroLayer = HeroLayer::createHeroLayer();
 	ShopLayer* shopLayer = ShopLayer::createShopLayer();
 	helpAndSetLayer* HSlayer = helpAndSetLayer::createLayer();
+	EquipmentLayer* eptLayer = EquipmentLayer::createSelectLayer();
 	int turn = 0;
 	/*装备系统*/
    /* Package* layerPackage = Package::createPackage();

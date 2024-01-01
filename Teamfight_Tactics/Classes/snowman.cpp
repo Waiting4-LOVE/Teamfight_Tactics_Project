@@ -2,23 +2,24 @@
 
 snowman::snowman() {
 	type = Snowman;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 450;
+	maxBluePoint = 50;
 	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
+	fee = 1;
+	name = "Snowman";
+	HealthPoint = 450;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 2;
+	physicsAttackPoint = 40;
+	magicPoint = 100;
+	speedAttack = 0.65f;
+	distanceAttack = 3;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 20;
+	defenceMagic = 20;
 	star = 1;
+	CoinsNeeded = 1;
 }
 
 snowman* snowman::createhero() {
@@ -33,7 +34,7 @@ snowman* snowman::createhero() {
 	snowman->bloodBar->setScaleX(0.22);
 	snowman->scheduleUpdate();
 	//snowman->addChild(snowman->bloodBar, 2);
-	//snowman->picturename = "snowman.png";
+	snowman->picturename = "snowman.png";
 	snowman->addChild(temp);
 
 	snowman->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -55,7 +56,7 @@ void snowman::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -67,7 +68,7 @@ void snowman::attack(float dt)
 }
 
 void snowman::releaseSkill() {
-
+	shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this, 2,0,1);
 }
 
 _2star_snowman::_2star_snowman() {
@@ -81,16 +82,15 @@ _2star_snowman::_2star_snowman() {
 	HealthPoint = 810;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 2;
+	physicsAttackPoint = 60;
+	magicPoint = 100;
+	speedAttack = 0.65f;
+	distanceAttack = 3;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 20;
+	defenceMagic = 20;
 	star = 2;
-	//填写二星英雄的属性
 }
 
 _2star_snowman* _2star_snowman::createhero() {
@@ -125,16 +125,15 @@ _3star_snowman::_3star_snowman() {
 	HealthPoint = 1458;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 2;
+	physicsAttackPoint = 90;
+	magicPoint = 100;
+	speedAttack = 0.65f;
+	distanceAttack = 3;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 20;
+	defenceMagic = 20;
 	star = 3;
-	//填写三星英雄的属性
 }
 
 _3star_snowman* _3star_snowman::createhero() {

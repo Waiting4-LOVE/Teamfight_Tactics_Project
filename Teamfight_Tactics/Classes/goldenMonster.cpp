@@ -2,23 +2,24 @@
 
 goldenMonster::goldenMonster() {
 	type = GoldenMonster;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
+	maxHealthPoint = 750;
+	maxBluePoint = 60;
 	maxShieldPoint = 100;
 	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
+	name = "GoldenMonster";
+	HealthPoint = 750;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 2;
+	physicsAttackPoint = 55;
+	magicPoint = 100;
+	speedAttack = 0.6f;
+	distanceAttack = 1;
 	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
+	criticalChance = 0.25;
+	defencePhysics = 45;
+	defenceMagic = 45;
 	star = 1;
+	CoinsNeeded = 2;
 }
 
 goldenMonster* goldenMonster::createhero() {
@@ -33,7 +34,7 @@ goldenMonster* goldenMonster::createhero() {
 	goldenMonster->bloodBar->setScaleX(0.22);
 	goldenMonster->scheduleUpdate();
 	//goldenMonster->addChild(goldenMonster->bloodBar, 2);
-	//goldenMonster->picturename = "goldenMonster.png";
+	goldenMonster->picturename = "goldenMonster.png";
 	goldenMonster->addChild(temp);
 
 	goldenMonster->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -54,7 +55,7 @@ void goldenMonster::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this, 1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -66,7 +67,7 @@ void goldenMonster::attack(float dt)
 }
 
 void goldenMonster::releaseSkill() {
-
+	shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this, 2, 0, 1);
 }
 
 _2star_goldenMonster::_2star_goldenMonster() {

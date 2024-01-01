@@ -12,18 +12,6 @@ USING_NS_CC;
 #define TEARSOFTHEGODDESS 7
 #define USELESSSTICK 8
 
-enum class EquipmentType {
-	None,
-	stromSword,
-	crookedBow,
-	boxingGloves,
-	giantBelt,
-	hauberk,
-	negativeCape,
-	tearsOfTheGoddess,
-	uselessStick
-};
-
 class Equipment:public Sprite {
 public:
 	/*对棋子进行装备加成*/

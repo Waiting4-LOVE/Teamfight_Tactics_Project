@@ -34,8 +34,9 @@ wildBoar* wildBoar::createhero() {
 	wildBoar->bloodBar->setScaleX(0.22);
 	wildBoar->scheduleUpdate();
 	//wildBoar->addChild(wildBoar->bloodBar, 2);
-	wildBoar->picturename = "wildBoarpng";
+	wildBoar->picturename = "wildBoar.png";
 	wildBoar->addChild(temp);
+
 	wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 	wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / wildBoar->speedAttack);
 	wildBoar->autorelease();
@@ -53,7 +54,7 @@ void wildBoar::attack(float dt)
 		if (distance < distanceAttack * oneLattice * 2)                           //小于攻击距离则开始攻击
 		{
 			isMove = 0;
-			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this);
+			shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this,1);
 			blueRecoverOnce();
 			skill();
 			if (attackTarget->die())
@@ -65,7 +66,7 @@ void wildBoar::attack(float dt)
 }
 
 void wildBoar::releaseSkill() {
-
+	shootbullet("redlight.png", attackTarget->getPosition() - this->getPosition(), this, 2,1,1);
 }
 
 _2star_wildBoar::_2star_wildBoar() {

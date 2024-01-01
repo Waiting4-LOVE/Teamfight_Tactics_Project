@@ -41,6 +41,7 @@ bool BattleScene::init()
 	this->addChild(timer, 2);        //计时器层
 	this->addChild(shopLayer, 3);   //商店层
 	this->addChild(heroLayer, 4);   //英雄层
+	this->addChild(eptLayer, 5); //选择装备层
 	this->addChild(infoFrame, 100);//信息层
 
 
@@ -77,9 +78,26 @@ void BattleScene::GotoSelectScene(cocos2d::Ref* pSender)
 
 void BattleScene::update(float dt)
 {
+	static int num = 0;
 	if (timer->pTime > 1e-6)
 	{
 		
+		if (MyLittleHero.haveNewEpt && num < 5) {
+			eptLayer->init();
+			num++;
+			MyLittleHero.haveNewEpt = 0;
+		}
+		else if (MyLittleHero.haveNewEpt && num >= 5) {
+			std::string name = "Already get enough equipments!";
+			auto label = Label::createWithTTF(name, "fonts/Marker Felt.ttf", 40);
+			label->setTextColor(Color4B::WHITE);
+			label->setPosition(1600, 900);
+			auto move = FadeOut::create(3.0f);
+			label->runAction(move);
+			this->addChild(label, 1);
+			MyLittleHero.haveNewEpt = 0;
+		}
+
 		heroLayer->upgrade(MyLittleHero);             //监测是否可升级
 		heroLayer->upgrade(player2data);
 		addChess(MyLittleHero, 0);
@@ -125,7 +143,7 @@ void BattleScene::TurnInfoInit()
 
 void BattleScene::ChessMoveInMouse()
 {
-	CCLOG("%d %d %d", MyLittleHero.getLevel(), MyLittleHero.m_fightArray->num, MyLittleHero.m_playerArray->num);
+	//CCLOG("%d %d %d", MyLittleHero.getLevel(), MyLittleHero.m_fightArray->num, MyLittleHero.m_playerArray->num);
 	auto MouseListener = EventListenerMouse::create();
 	MouseListener = EventListenerMouse::create();
 	MouseListener->onMouseMove = CC_CALLBACK_1(BattleScene::onMouseMove, this);
@@ -149,7 +167,7 @@ void BattleScene::showInfo(hero* chess)//显示英雄信息
 	infoFrame->setPosition(Vec2(0, 540));
 	string heroInformation = StringUtils::format("%s\n%d\n%d\n%d\n%d\n%.2f\n%d\n%d\n%d\n%d\n", chess->getname().c_str(), chess->getHealthPoint(), chess->getBluePoint(), chess->getPhysicalAttack(), chess->getMagicalPoint(), chess->getAttackSpeed(), chess->getAttackDistance(), chess->getCriticalChance() * 100, chess->getDefencePhysics(), chess->getDefenceMagic());
 	heroInfo->setString(heroInformation);
-
+	
 	if (heroPicture != NULL)
 	{
 		heroPicture->removeFromParent();
@@ -164,11 +182,11 @@ void BattleScene::showInfo(hero* chess)//显示英雄信息
 		heroStar->removeFromParent();
 		heroStar->release();
 	}
-	if (chess->getHeroStar() == 1)
+	if(chess->getHeroStar() == 1)
 		heroStar = Sprite::create("1star.png");
-	else if (chess->getHeroStar() == 2)
+	else if(chess->getHeroStar()==2)
 		heroStar = Sprite::create("2star.png");
-	else
+	else 
 		heroStar = Sprite::create("3star.png");
 	heroStar->setScale(0.15f);
 	infoFrame->addChild(heroStar, 1);
@@ -339,7 +357,7 @@ void BattleScene::onMouseDown(Event* event)
 		if (FindMouseTarget(MyLittleHero.m_fightArray, e))       //在战斗区寻找目标
 			FindMouseTarget(MyLittleHero.m_playerArray, e);  //寻找不到则在备战区寻找
 	}
-	if (MouseToChess >= 0 && !infoIsShow)
+	if (MouseToChess >= 0&&!infoIsShow)
 	{
 		if (MouseToChess >= MyLittleHero.m_fightArray->num)
 		{
@@ -351,7 +369,7 @@ void BattleScene::onMouseDown(Event* event)
 		}
 		infoIsShow = 1;
 	}
-	else if (MouseToChess < 0 && infoIsShow)
+	else if(MouseToChess < 0 && infoIsShow)
 	{
 		hideInfo();
 		infoIsShow = 0;
@@ -488,7 +506,6 @@ void BattleScene::Win()
 	{
 		if (sum[1] == 0)//我赢
 		{
-
 			MyLittleHero.win();
 			player2data.lose(2 + 2 * sum[0]);
 		}
@@ -510,20 +527,20 @@ void BattleScene::Win()
 
 		if (MyLittleHero.getCurBlood() > 0 && player2data.getCurBlood() > 0)
 		{
-			auto newScene = BattleScene::createScene();
-			Director::getInstance()->pushScene(newScene);
+			_director->replaceScene(TransitionFade::create(1/8.0f, BattleScene::createScene()));
 		}
 
 		else
 		{
 			string name = MyLittleHero.getCurBlood() <= 0 ? "You Lose!" : "You Win!";
 			auto label = Label::createWithTTF(name, "fonts/Marker Felt.ttf", 78);
+			this->addChild(label);
 			label->setTextColor(Color4B::WHITE);
-			label->setPosition(800, 400);
+			label->setPosition(800, 500);
 			auto move = FadeOut::create(5.0f);
 			label->runAction(move);
-			this->addChild(label);
 			this->unscheduleUpdate();
+
 			MyLittleHero.reset();
 			player2data.reset();
 			for (int i = 0; i < 6; i++)
@@ -542,7 +559,6 @@ void BattleScene::Win()
 			}
 			_director->replaceScene(TransitionFade::create(1 / 8.0f, SelectScene::createScene()));
 		}
-
 	}
 
 }

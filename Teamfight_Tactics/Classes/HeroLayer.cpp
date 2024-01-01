@@ -186,107 +186,6 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 }
 
 bool HeroLayer::init() {
-	//auto sprite = hero1::createhero();
-	/*初始化的内容，后续需要放到其他位置*/
-	battleMapinit();
-	/*
-	auto temp = master::createhero();
-	temp->set(1000,500);
-	temp->setTempPosition();
-
-
-
-	auto temp2 = cannedPig::createhero();
-	temp2->set(battleLattice[5][6]);
-	temp2->setTempPosition();
-
-	auto temp3 = flyDragon::createhero();
-	temp3->set(battleLattice[0][6]);
-	temp3->setTempPosition();
-
-	auto temp4 = ghost::createhero();
-	temp4->set(800, 400);
-	temp4->setTempPosition();
-
-	auto temp5 = gargomon::createhero();
-	temp5->set(800, 800);
-	temp5->setTempPosition();
-
-	auto temp6 = elf::createhero();
-	temp6->set(1000, 500);
-	temp6->setTempPosition();
-
-	auto temp7 = goldenMonster::createhero();
-	temp7->set(1280, 800);
-	temp7->setTempPosition();
-
-	auto temp8 = iceFire::createhero();
-	temp8->set(1100, 900);
-	temp8->setTempPosition();
-
-	auto temp9 = knight::createhero();
-	temp9->set(1200, 400);
-	temp9->setTempPosition();
-
-	auto temp10 = pitman::createhero();
-	temp10->set(800, 400);
-	temp10->setTempPosition();
-
-	auto temp11 = ranger::createhero();
-	temp11->set(1000, 800);
-	temp11->setTempPosition();
-
-	auto temp12 = snowman::createhero();
-	temp12->set(1400, 400);
-	temp12->setTempPosition();
-
-	auto temp13 = snowMonster::createhero();
-	temp13->set(1000, 400);
-	temp13->setTempPosition();
-
-	auto temp14 = wildBoar::createhero();
-	temp14->set(800, 800);
-	temp14->setTempPosition();
-
-	ccArrayAppendObject(MyLittleHero.m_fightArray, temp);
-	ccArrayAppendObject(MyLittleHero.m_fightArray, temp3);
-	ccArrayAppendObject(MyLittleHero.m_fightArray, temp4);
-	//ccArrayAppendObject(MyLittleHero.m_fightArray, temp6);
-	ccArrayAppendObject(MyLittleHero.m_fightArray, temp9);
-	ccArrayAppendObject(MyLittleHero.m_fightArray, temp10);
-	ccArrayAppendObject(MyLittleHero.m_fightArray, temp11);
-	ccArrayAppendObject(MyLittleHero.m_fightArray, temp12);
-	ccArrayAppendObject(MyLittleHero.m_fightArray, temp13);
-	ccArrayAppendObject(MyLittleHero.m_fightArray, temp14);
-
-
-	*/
-	/*auto temp1 = darkKnight::createhero();
-	temp1->set(waitLattice[1][0]);
-	temp1->setTempPosition();
-
-	auto temp2 = cannedPig::createhero();
-	temp2->set(waitLattice[1][1]);
-	temp2->setTempPosition();
-
-	auto temp5 = gargomon::createhero();
-	temp5->set(waitLattice[1][2]);
-	temp5->setTempPosition();
-
-	auto temp7 = goldenMonster::createhero();
-	temp7->set(waitLattice[1][3]);
-	temp7->setTempPosition();
-
-	auto temp8 = iceFire::createhero();
-	temp8->set(waitLattice[1][4]);
-	temp8->setTempPosition();
-
-	ccArrayAppendObject(player2data.m_playerArray, temp7);
-	ccArrayAppendObject(player2data.m_playerArray, temp8);
-	ccArrayAppendObject(player2data.m_playerArray, temp1);
-	ccArrayAppendObject(player2data.m_playerArray, temp2);
-	ccArrayAppendObject(player2data.m_playerArray, temp5);*/
-
 
 	PlayerArrayInit(MyLittleHero.m_playerArray, 0);
 	PlayerArrayInit(player2data.m_playerArray, 1);      //  电脑玩家信息暂不显示
@@ -329,7 +228,7 @@ void HeroLayer::ChessMove(hero* herocase, littleHero& playerdata, littleHero& At
 	{
 		return;
 	}
-	if (distance >= herocase->getAttackDistance() * oneLattice && !herocase->attackTarget->die())    //距离大于射程且目标没死则移动
+	if (distance >= herocase->getAttackDistance() * oneLattice * 2 && !herocase->attackTarget->die())    //距离大于射程且目标没死则移动
 	{
 		herocase->setPosition(herocase->getPosition() + (herocase->attackTarget->getPosition() - herocase->getPosition()) / distance * heroConsts::move_speed);
 		herocase->set(herocase->getPosition() + (herocase->attackTarget->getPosition() - herocase->getPosition()) / distance * heroConsts::move_speed);  //将新位置传入类中
@@ -354,7 +253,6 @@ void HeroLayer::update(float dt)
 
 void HeroLayer::upgrade(littleHero& littlehero)
 {
-
 	for (int i = 0; i < 30; i++)
 	{
 		hero* temp[3] = { NULL,NULL,NULL };
@@ -399,6 +297,7 @@ void HeroLayer::upgrade(littleHero& littlehero)
 				&& temp[0]->getType() == i && temp[1]->getType() == i && temp[2]->getType() == i)  //防止Bug
 			{
 				auto upgrade_chess = upgradeChessCreate(i);
+
 				littlehero.chessnumber[i] -= 3;
 				for (int k = 0; k < 3; k++)
 				{
@@ -526,29 +425,52 @@ hero* HeroLayer::upgradeChessCreate(int type)
 /*PC_Player相关*/
 void HeroLayer::pcShowPlayerArray()
 {
-	for (int i = 0; i < player2data.m_playerArray->num; i++)
+	/*for (int i = 0; i < player2data.m_playerArray->num; i++)
 	{
 		hero* cur = (hero*)player2data.m_playerArray->arr[i];
 		cur->setPosition(cur->getTempPosition());
+	}*/
+	for (int i = 0; i < player2data.m_playerArray->num; i++)
+	{
+		hero* cur = (hero*)player2data.m_playerArray->arr[i];
+		for (int j = 0; j < 9; j++) {
+			if (waitLatticeExist[1][j] == 0) {
+				cur->set(waitLattice[1][j]);
+				cur->setPosition(cur->getTempPosition());
+				cur->set(cur->getTempPosition());
+				waitLatticeExist[1][j] = 1;
+			}
+		}
 	}
 }
 void HeroLayer::pcShowFightArray()
 {
+	for (int i = 5; i >= 3; i--)
+	{
+		for (int j = 6; j >= 0; j--)
+		{
+			battleLatticeExist[i][j] = 0;
+		}
+	}
 	/*位置初始化*/
 	for (int k = 0; k < player2data.m_fightArray->num; k++)
 	{
 		hero* cur = (hero*)player2data.m_fightArray->arr[k];
-		for (int i = 3; i < 6; i++)
+		bool flag = false;
+
+		for (int i = 5; i >= 3 && !flag; i--)
 		{
-			for (int j = 0; j < 7; j++)
+			for (int j = 6; j >= 0; j--)
 			{
 				if (battleLatticeExist[i][j] == 0)
 				{
 					cur->set(battleLattice[i][j]);
 					cur->setTempPosition();
-					cur->setPosition(cur->getTempPosition());
+					cur->setPosition(cur->getPosition());
+					battleLatticeExist[i][j] = 1;
+					flag = true;
+					break;
 				}
-				
 			}
 		}
 	}
