@@ -33,7 +33,7 @@ flyDragon* flyDragon::createhero() {
 	flyDragon->bloodBar->setScaleX(0.22);
 	flyDragon->scheduleUpdate();
 	//flyDragon->addChild(flyDragon->bloodBar, 2);
-	//flyDragon->picturename = "flyDragon.png";
+	flyDragon->picturename = "flyDragon.png";
 	flyDragon->addChild(temp);
 
 	flyDragon->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -77,7 +77,7 @@ _2star_flyDragon::_2star_flyDragon() {
 	maxShieldPoint = 100;
 	fee = 4;
 	name = "FlyDragon";
-	HealthPoint = 700;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 60;
@@ -108,7 +108,7 @@ _3star_flyDragon::_3star_flyDragon() {
 	maxShieldPoint = 100;
 	fee = 4;
 	name = "FlyDragon";
-	HealthPoint = 700;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 90;

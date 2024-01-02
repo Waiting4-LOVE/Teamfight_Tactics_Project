@@ -3,6 +3,8 @@
 #include "BattleScene.h"
 #include "Sources.h"
 #include "Definition.h"
+#include"SocketService.h"
+
 USING_NS_CC;
 cocos2d::Scene* SelectScene::createScene()
 {
@@ -27,6 +29,13 @@ bool SelectScene::init()
 
 
 	// add "HelloWorld" splash screen"
+	SocketService* mysocket = SocketService::getInstance();
+	mysocket->initSocket();
+
+	// 在此处添加你的逻辑，例如发送消息、处理接收到的消息等
+	mysocket->sendMessage("shit");
+	SocketService::deleteInstance();
+
 	auto sprite = Sprite::create("backpage.png");
 	if (sprite == nullptr)
 	{

@@ -33,7 +33,7 @@ iceFire* iceFire::createhero() {
 	iceFire->bloodBar->setScaleX(0.22);
 	iceFire->scheduleUpdate();
 	//iceFire->addChild(iceFire->bloodBar, 2);
-	//iceFire->picturename = "iceFire.png";
+	iceFire->picturename = "iceFire.png";
 	iceFire->addChild(temp);
 
 	iceFire->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -77,7 +77,7 @@ _2star_iceFire::_2star_iceFire() {
 	maxShieldPoint = 100;
 	fee = 5;
 	name = "IceFire";
-	HealthPoint = 800;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 30;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 68;
@@ -108,7 +108,7 @@ _3star_iceFire::_3star_iceFire() {
 	maxShieldPoint = 100;
 	fee = 5;
 	name = "IceFire";
-	HealthPoint = 800;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 30;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 101;

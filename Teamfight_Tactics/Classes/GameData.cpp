@@ -35,7 +35,7 @@ const chessInfo chess_store[OriginalChess] = { { Knight,"knight.png",1 },{ Canne
 	{ FlyDragon,"flyDragon.png",1 } ,{ Gargomon,"gargomon.png",1 } ,
 	{ Ghost,"ghost.png",1 } ,{ GoldenMonster,"goldenMonster.png",1 } ,
 	{ IceFire,"iceFire.png",1 } ,{ Master,"master.png",1 },
-	{ Pitman,"ritman.png",1 },{ Ranger,"ranger.png",1 },
+	{ Pitman,"pitman.png",1 },{ Ranger,"ranger.png",1 },
 	{ Snowman,"snowman.png",1 },{ SnowMonster,"snowMonster.png",1 },
 	{ WildBoar,"wildBoar.png",1 } };
      //初步的棋子商店，后续可加上卡池功能

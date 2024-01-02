@@ -33,7 +33,7 @@ master* master::createhero() {
 	master->bloodBar->setScaleX(0.22);
 	master->scheduleUpdate();
 	//master->addChild(master->bloodBar, 2);
-	//master->picturename = "master.png";
+	master->picturename = "master.png";
 	master->addChild(temp);
 
 	master->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -78,7 +78,7 @@ _2star_master::_2star_master() {
 	maxShieldPoint = 0;
 	fee = 3;
 	name = "Master";
-	HealthPoint = 650;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 60;
@@ -109,7 +109,7 @@ _3star_master::_3star_master() {
 	maxShieldPoint = 0;
 	fee = 3;
 	name = "Master";
-	HealthPoint = 650;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 90;

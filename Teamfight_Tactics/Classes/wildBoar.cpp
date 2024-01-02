@@ -33,7 +33,7 @@ wildBoar* wildBoar::createhero() {
 	wildBoar->bloodBar->setScaleX(0.22);
 	wildBoar->scheduleUpdate();
 	//wildBoar->addChild(wildBoar->bloodBar, 2);
-	//wildBoar->picturename = "wildBoarpng";
+	wildBoar->picturename = "wildBoar.png";
 	wildBoar->addChild(temp);
 	wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
 	wildBoar->schedule(CC_SCHEDULE_SELECTOR(hero::attack), 1 / wildBoar->speedAttack);
@@ -68,24 +68,6 @@ void wildBoar::releaseSkill() {
 }
 
 _2star_wildBoar::_2star_wildBoar() {
-	type = _2star_WildBoar;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
-	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
-	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 5;
-	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
-	star = 2;
 	//填写二星英雄的属性
 	type = WildBoar;
 	maxHealthPoint = 1350;
@@ -93,7 +75,7 @@ _2star_wildBoar::_2star_wildBoar() {
 	maxShieldPoint = 100;
 	fee = 2;
 	name = "WildBoar";
-	HealthPoint = 750;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 40;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 83;
@@ -117,24 +99,6 @@ _2star_wildBoar* _2star_wildBoar::createhero() {
 }
 
 _3star_wildBoar::_3star_wildBoar() {
-	type = _3star_WildBoar;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
-	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
-	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 5;
-	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
-	star = 3;
 	//填写三星英雄的属性
 	type = WildBoar;
 	maxHealthPoint = 2430;
@@ -142,7 +106,7 @@ _3star_wildBoar::_3star_wildBoar() {
 	maxShieldPoint = 100;
 	fee = 2;
 	name = "WildBoar";
-	HealthPoint = 750;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 40;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 124;

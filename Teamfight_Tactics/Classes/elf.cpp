@@ -34,7 +34,7 @@ elf* elf::createhero() {
 	elf->bloodBar->setScaleX(0.22);
 	elf->scheduleUpdate();
 	//elf->addChild(elf->bloodBar, 2);
-	//elf->picturename = "elf.png";
+	elf->picturename = "elf.png";
 	elf->addChild(temp);
 
 	elf->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -78,7 +78,7 @@ _2star_elf::_2star_elf() {
 	maxShieldPoint = 100;
 	fee = 3;
 	name = "Elf";
-	HealthPoint = 700;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 25;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 60;
@@ -109,7 +109,7 @@ _3star_elf::_3star_elf() {
 	maxShieldPoint = 100;
 	fee = 3;
 	name = "Elf";
-	HealthPoint = 700;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 25;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 90;

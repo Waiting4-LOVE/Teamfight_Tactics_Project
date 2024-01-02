@@ -33,7 +33,7 @@ ghost* ghost::createhero() {
 	ghost->bloodBar->setScaleX(0.22);
 	ghost->scheduleUpdate();
 	//ghost->addChild(ghost->bloodBar, 2);
-	//ghost->picturename = "ghost.png";
+	ghost->picturename = "ghost.png";
 	ghost->addChild(temp);
 
 	ghost->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -77,7 +77,7 @@ _2star_ghost::_2star_ghost() {
 	maxShieldPoint = 70;
 	fee = 5;
 	name = "Ghost";
-	HealthPoint = 1100;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 70;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 105;
@@ -108,7 +108,7 @@ _3star_ghost::_3star_ghost() {
 	maxShieldPoint = 70;
 	fee = 5;
 	name = "Ghost";
-	HealthPoint = 1100;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 70;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 158;

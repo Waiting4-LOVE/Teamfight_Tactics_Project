@@ -33,7 +33,7 @@ cannedPig* cannedPig::createhero() {
 	cannedPig->bloodBar->setScaleX(0.22);
 	cannedPig->scheduleUpdate();
 	//cannedPig->addChild(cannedPig->bloodBar, 2);
-	//cannedPig->picturename = "cannedPig.png";
+	cannedPig->picturename = "cannedPig.png";
 	cannedPig->addChild(temp);
 
 	cannedPig->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -77,7 +77,7 @@ _2star_cannedPig::_2star_cannedPig() {
 	maxShieldPoint = 100;
 	fee = 4;
 	name = "CannedPig";
-	HealthPoint = 700;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 30;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 68;
@@ -108,7 +108,7 @@ _3star_cannedPig::_3star_cannedPig() {
 	maxShieldPoint = 100;
 	fee = 4;
 	name = "CannedPig";
-	HealthPoint = 700;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 30;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 101;

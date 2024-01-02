@@ -77,7 +77,7 @@ _2star_darkKnight::_2star_darkKnight() {
 	maxShieldPoint = 100;
 	fee = 3;
 	name = "DarkKnight";
-	HealthPoint = 850;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 70;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 90;
@@ -108,7 +108,7 @@ _3star_darkKnight::_3star_darkKnight() {
 	maxShieldPoint = 100;
 	fee = 3;
 	name = "DarkKnight";
-	HealthPoint = 850;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 70;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 135;

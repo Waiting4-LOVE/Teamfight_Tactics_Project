@@ -75,7 +75,7 @@ _2star_knight::_2star_knight() {
 	maxShieldPoint = 0;
 	fee = 1;
 	name = "Knight";
-	HealthPoint = 650;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 50;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 83;
@@ -106,7 +106,7 @@ _3star_knight::_3star_knight() {
 	maxShieldPoint = 0;
 	fee = 1;
 	name = "Knight";
-	HealthPoint = 650;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 50;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 124;

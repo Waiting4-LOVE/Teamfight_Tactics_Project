@@ -33,7 +33,7 @@ goldenMonster* goldenMonster::createhero() {
 	goldenMonster->bloodBar->setScaleX(0.22);
 	goldenMonster->scheduleUpdate();
 	//goldenMonster->addChild(goldenMonster->bloodBar, 2);
-	//goldenMonster->picturename = "goldenMonster.png";
+	goldenMonster->picturename = "goldenMonster.png";
 	goldenMonster->addChild(temp);
 
 	goldenMonster->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -77,7 +77,7 @@ _2star_goldenMonster::_2star_goldenMonster() {
 	maxShieldPoint = 100;
 	fee = 2;
 	name = "GoldenMonster";
-	HealthPoint = 750;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 83;
@@ -108,7 +108,7 @@ _3star_goldenMonster::_3star_goldenMonster() {
 	maxShieldPoint = 100;
 	fee = 2;
 	name = "GoldenMonster";
-	HealthPoint = 750;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 124;

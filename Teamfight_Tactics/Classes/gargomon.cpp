@@ -33,7 +33,7 @@ gargomon* gargomon::createhero() {
 	gargomon->bloodBar->setScaleX(0.22);
 	gargomon->scheduleUpdate();
 	//gargomon->addChild(gargomon->bloodBar, 2);
-	//gargomon->picturename = "gargomon.png";
+	gargomon->picturename = "gargomon.png";
 	gargomon->addChild(temp);
 
 	gargomon->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -77,7 +77,7 @@ _2star_gargomon::_2star_gargomon() {
 	maxShieldPoint = 100;
 	fee = 5;
 	name = "Gargomon";
-	HealthPoint = 1050;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 60;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 132;
@@ -108,7 +108,7 @@ _3star_gargomon::_3star_gargomon() {
 	maxShieldPoint = 100;
 	fee = 5;
 	name = "Gargomon";
-	HealthPoint = 1050;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 60;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 198;

@@ -33,7 +33,7 @@ ranger* ranger::createhero() {
 	ranger->bloodBar->setScaleX(0.22);
 	ranger->scheduleUpdate();
 	//ranger->addChild(hero1->bloodBar, 2);
-	//ranger->picturename = "ranger.png";
+	ranger->picturename = "ranger.png";
 	ranger->addChild(temp);
 
 	ranger->schedule(CC_SCHEDULE_SELECTOR(hero::bloodUpdate), 1 / 60.0f);
@@ -71,24 +71,6 @@ void ranger::releaseSkill() {
 }
 
 _2star_ranger::_2star_ranger() {
-	type = _2star_Ranger;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
-	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
-	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 5;
-	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
-	star = 2;
 	//填写二星英雄的属性
 	type = Ranger;
 	maxHealthPoint = 1080;
@@ -96,7 +78,7 @@ _2star_ranger::_2star_ranger() {
 	maxShieldPoint = 0;
 	fee = 2;
 	name = "Ranger";
-	HealthPoint = 600;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 83;
@@ -120,24 +102,6 @@ _2star_ranger* _2star_ranger::createhero() {
 }
 
 _3star_ranger::_3star_ranger() {
-	type = _3star_Ranger;
-	maxHealthPoint = 100;
-	maxBluePoint = 100;
-	maxShieldPoint = 100;
-	fee = 2;
-	name = "yao yao don't know";
-	HealthPoint = 100;//初始血量为最大血量
-	BluePoint = 0;//初始蓝量为0
-	shieldPoint = 0;//初始护盾值为0
-	physicsAttackPoint = 10;
-	magicPoint = 0;
-	speedAttack = 0.7f;
-	distanceAttack = 5;
-	blueAttack = maxBluePoint;
-	criticalChance = 0.05;
-	defencePhysics = 5;
-	defenceMagic = 5;
-	star = 3;
 	//填写三星英雄的属性
 	type = Ranger;
 	maxHealthPoint = 1944;
@@ -145,7 +109,7 @@ _3star_ranger::_3star_ranger() {
 	maxShieldPoint = 0;
 	fee = 2;
 	name = "Ranger";
-	HealthPoint = 600;//初始血量为最大血量
+	HealthPoint = maxHealthPoint;//初始血量为最大血量
 	BluePoint = 0;//初始蓝量为0
 	shieldPoint = 0;//初始护盾值为0
 	physicsAttackPoint = 124;

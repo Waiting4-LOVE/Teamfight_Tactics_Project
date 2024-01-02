@@ -188,7 +188,7 @@ void HeroLayer::PlayerArrayInit(ccArray* Array, int playerinfo) {
 bool HeroLayer::init() {
 	//auto sprite = hero1::createhero();
 	/*初始化的内容，后续需要放到其他位置*/
-	battleMapinit();
+	//battleMapinit();
 	/*
 	auto temp = master::createhero();
 	temp->set(1000,500);
@@ -206,12 +206,12 @@ bool HeroLayer::init() {
 
 	auto temp4 = ghost::createhero();
 	temp4->set(800, 400);
-	temp4->setTempPosition();*/
-
+	temp4->setTempPosition();
+	
 	auto temp5 = elf::createhero();
 	temp5->set(battleLattice[5][0]);
 	temp5->setTempPosition();
-	/*
+	
 	auto temp6 = elf::createhero();
 	temp6->set(1000, 500);
 	temp6->setTempPosition();
@@ -249,7 +249,7 @@ bool HeroLayer::init() {
 	temp14->setTempPosition();
 
 	ccArrayAppendObject(MyLittleHero.m_fightArray, temp);
-	/*
+	
 	ccArrayAppendObject(MyLittleHero.m_fightArray, temp3);
 	ccArrayAppendObject(MyLittleHero.m_fightArray, temp4);
 	//ccArrayAppendObject(MyLittleHero.m_fightArray, temp6);
@@ -261,8 +261,8 @@ bool HeroLayer::init() {
 	ccArrayAppendObject(MyLittleHero.m_fightArray, temp14);
 
 
-	*/
-	/*auto temp1 = darkKnight::createhero();
+	
+	auto temp1 = darkKnight::createhero();
 	temp1->set(waitLattice[1][0]);
 	temp1->setTempPosition();
 
